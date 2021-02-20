@@ -1,74 +1,37 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.buildlog/
-.history
-.svn/
+# See https://dart.dev/guides/libraries/private-files
 
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
-**/doc/api/
+# Files and directories created by pub
 .dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
+.buildlog
 .packages
-.pub-cache/
+.project
 .pub/
 build/
+**/packages/
 
-# Android related
-**/android/**/gradle-wrapper.jar
-**/android/.gradle
-**/android/captures/
-**/android/gradlew
-**/android/gradlew.bat
-**/android/local.properties
-**/android/**/GeneratedPluginRegistrant.java
+# Files created by dart2js
+# (Most Dart developers will use pub build to compile Dart, use/modify these 
+#  rules if you intend to use dart2js directly
+#  Convention is to use extension '.dart.js' for Dart compiled to Javascript to
+#  differentiate from explicit Javascript files)
+*.dart.js
+*.part.js
+*.js.deps
+*.js.map
+*.info.json
 
-# iOS/XCode related
-**/ios/**/*.mode1v3
-**/ios/**/*.mode2v3
-**/ios/**/*.moved-aside
-**/ios/**/*.pbxuser
-**/ios/**/*.perspectivev3
-**/ios/**/*sync/
-**/ios/**/.sconsign.dblite
-**/ios/**/.tags*
-**/ios/**/.vagrant/
-**/ios/**/DerivedData/
-**/ios/**/Icon?
-**/ios/**/Pods/
-**/ios/**/.symlinks/
-**/ios/**/profile
-**/ios/**/xcuserdata
-**/ios/.generated/
-**/ios/Flutter/App.framework
-**/ios/Flutter/Flutter.framework
-**/ios/Flutter/Flutter.podspec
-**/ios/Flutter/Generated.xcconfig
-**/ios/Flutter/app.flx
-**/ios/Flutter/app.zip
-**/ios/Flutter/flutter_assets/
-**/ios/Flutter/flutter_export_environment.sh
-**/ios/ServiceDefinitions.json
-**/ios/Runner/GeneratedPluginRegistrant.*
+# Directory created by dartdoc
+doc/api/
 
-# Exceptions to above rules.
-!**/ios/**/default.mode1v3
-!**/ios/**/default.mode2v3
-!**/ios/**/default.pbxuser
-!**/ios/**/default.perspectivev3
+# Don't commit pubspec lock file 
+# (Library packages only! Remove pattern if developing an application package)
+pubspec.lock
+
+# Don’t commit files and directories created by other development environments.
+# For example, if your development environment creates any of the following files,
+# consider putting them in a global ignore file:
+*.iml         // IntelliJ
+*.ipr         // IntelliJ
+*.iws         // IntelliJ
+.idea/        // IntelliJ
+.DS_Store     // Mac
