@@ -81,11 +81,11 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 flutter_native_splash:
-  image: assets/images/splash.png
+  image: assets/images/splash2.png
   color: "#5b0101"
   fill: false
 
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/splash.png"
+  image_path: "assets/images/icon3.png"
