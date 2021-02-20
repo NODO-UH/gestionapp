@@ -1,0 +1,122 @@
+openapi: "3.0.2"
+info:
+  title: Gestion
+  version: "1.0"
+servers:
+  - url: https://localhost:8080
+  - url: https://10.6.141.52:8080
+paths:
+  # ==============
+  # AUTHENTICATION
+  # ==============
+  /auth/login:
+    post:
+      operationId: Login
+      tags:
+        - Auth
+      description: Send user identifier (email) and password, and returns access token and refresh token
+      requestBody:
+        description: "User name and password"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginData"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+        default:
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /auth/refresh:
+    post:
+      operationId: Refresh tokens
+      tags:
+        - Auth
+      description: Send refresh token and recive new pair of access and refresh tokens
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+        default:
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  # =====
+  # PROXY
+  # =====
+  /proxy/quota:
+    get:
+      security:
+        - bearerAuth: []
+      operationId: Proxy quota status
+      tags:
+        - "Proxy"
+      description: Get proxy quota status
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuotaResponse"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    LoginData:
+      description: Data required for login
+      required:
+        - "user"
+        - "password"
+      properties:
+        user:
+          description: User name
+          type: string
+        password:
+          description: User password
+          type: string
+    TokenResponse:
+      description: Access and refresh tokens
+      properties:
+        token:
+          type: string
+        tokenRefresh:
+          type: string
+    QuotaResponse:
+      description: Proxy Quota
+      properties:
+        quota:
+          type: integer
+        bonus:
+          type: integer
+        consumed:
+          type: integer
+    Error:
+      description: generic error
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
