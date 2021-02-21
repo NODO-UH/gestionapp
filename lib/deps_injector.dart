@@ -1,3 +1,4 @@
+import 'package:gestionuh/src/data/repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,6 +9,7 @@ import 'src/data/api/api.dart';
 final di = GetIt.instance;
 
 Future<void> init() async {
+  //Data Providers
   di.registerSingleton<GestionApi>(GestionApi());
 
   final sharedPrefs = await SharedPreferences.getInstance();
@@ -18,4 +20,14 @@ Future<void> init() async {
       prefs: di(),
     ),
   );
+
+  //Repositories
+  di.registerLazySingleton(
+    () => AuthRepository(
+      api: di(),
+      localStorage: di(),
+    ),
+  );
+
+  //Blocs
 }
