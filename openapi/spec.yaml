@@ -3,7 +3,8 @@ info:
   title: Gestion
   version: "1.0"
 servers:
-  - url: https://identity.sic.uh.cu:8080
+  - url: https://localhost:8080
+  - url: https://10.6.141.52:8080
 paths:
   # ==============
   # AUTHENTICATION
