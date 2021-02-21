@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'login.g.dart';
 
+@JsonSerializable()
 class Login extends BaseModel {
   String user;
   String password;
