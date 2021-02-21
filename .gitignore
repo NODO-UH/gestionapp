@@ -41,4 +41,4 @@ app.*.symbols
 app.*.map.json
 
 # Openapi java generator
-gestion_api/openapi-generator-cli.jar
+openapi/openapi-generator-cli.jar
