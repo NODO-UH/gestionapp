@@ -1,4 +1,5 @@
 import 'package:gestionuh/src/data/repository.dart';
+import 'package:gestionuh/src/presentation/blocs.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,7 +23,7 @@ Future<void> init() async {
   );
 
   //Repositories
-  di.registerLazySingleton(
+  di.registerLazySingleton<AuthRepository>(
     () => AuthRepository(
       api: di(),
       localStorage: di(),
@@ -30,4 +31,9 @@ Future<void> init() async {
   );
 
   //Blocs
+  di.registerFactory<LoginBloc>(
+    () => LoginBloc(
+      authRepository: di(),
+    ),
+  );
 }
