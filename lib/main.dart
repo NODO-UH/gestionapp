@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:openapi/api.dart';
-import 'package:openapi/model/login_data.dart';
 import 'src/constants.dart';
 
 void main() {
