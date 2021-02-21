@@ -24,6 +24,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_secure_storage: ^3.3.5
+
   openapi:
     path: ./openapi
 
