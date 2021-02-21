@@ -1,4 +1,0 @@
-# Config options for the dart-dio generator
-pubName: openapi
-pubVersion: 0.0.1
-pubDescription: "Gestion Uh Api"
