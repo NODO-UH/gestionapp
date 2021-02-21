@@ -4,14 +4,19 @@ import 'src/presentation/pages.dart';
 import 'src/presentation/theme.dart';
 import 'src/utils/constants.dart';
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class GestionUhApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: Constants.appName,
       theme: gestionuhLightTheme,
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: LoginPage(title: 'Flutter Demo Home Page'),
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          default:
+            return MaterialPageRoute(builder: (_) => LoginPage());
+        }
+      },
     );
   }
 }
