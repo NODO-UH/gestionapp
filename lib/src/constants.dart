@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'models/token.dart';
 
 class Constants {
   static const appName = "Gestion UH";
@@ -23,5 +24,5 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX""";
   static const userQuota = 3670016000;
   static const userBonus = 3670016000;
-  static const userQuotaConsumed = 71093682;
+  static const userConsumedQuota = 71093682;
 }
