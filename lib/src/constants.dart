@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'models/token.dart';
+import 'models/auth.dart';
 
 class Constants {
   static const appName = "Gestion UH";
