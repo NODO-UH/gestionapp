@@ -1,10 +1,10 @@
+import 'package:gestionuh/src/data/models/BaseModel.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'quota.g.dart';
 
 @JsonSerializable()
-
-class Quota {
+class Quota extends BaseModel {
   int quota;
   int bonus;
   int consumed;
