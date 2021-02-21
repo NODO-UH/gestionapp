@@ -5,10 +5,10 @@ class LoginState extends Equatable {
   List<Object> get props => [];
 }
 
-class LoginAttempInitial extends LoginState {
+class LoginAttemptInitial extends LoginState {
   final String error;
 
-  LoginAttempInitial({this.error});
+  LoginAttemptInitial({this.error});
 
   @override
   List<Object> get props => [error];
