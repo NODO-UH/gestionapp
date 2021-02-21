@@ -2,8 +2,8 @@ import '../../utils/constants.dart';
 import '../models.dart';
 
 class GestionApi {
-  Future<Token> getTokens() async {
-    return Token(
+  Future<Auth> getTokens() async {
+    return Auth(
         token: SampleData.authToken, tokenRefresh: SampleData.refreshToken);
   }
 
@@ -11,6 +11,6 @@ class GestionApi {
     return Quota(
         quota: SampleData.userQuota,
         bonus: SampleData.userBonus,
-        cosumed: SampleData.userConsumedQuota);
+        consumed: SampleData.userConsumedQuota);
   }
 }

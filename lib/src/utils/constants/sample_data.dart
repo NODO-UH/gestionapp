@@ -15,3 +15,4 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX""";
   static const userQuota = 3670016000;
   static const userBonus = 3670016000;
   static const userConsumedQuota = 71093682;
+}
