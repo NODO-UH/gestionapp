@@ -25,7 +25,7 @@ final _defaultInterceptors = [
 
 class Openapi {
 
-    static const String basePath = r'https://identity.sic.uh.cu:8080';
+    static const String basePath = r'https://identity.sic.uh.cu:443';
 
     final Dio dio;
 
