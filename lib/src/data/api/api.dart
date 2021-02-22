@@ -14,7 +14,9 @@ class GestionApi {
   Future<Auth> getTokens() async {
     if (Constants.TestMode)
       return Auth(
-          token: SampleData.authToken, tokenRefresh: SampleData.refreshToken);
+        token: SampleData.authToken,
+        tokenRefresh: SampleData.refreshToken,
+      );
 
     Auth response = Auth();
 
@@ -32,6 +34,7 @@ class GestionApi {
       result = await dio.post<String>(Constants.authUrl, data: login);
     } catch (error) {
       response.error = error.toString();
+      return response;
     }
 
     response = Auth.fromJson(jsonDecode(result.data));
