@@ -18,6 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         title: Text('Mi Cuenta'),
       ),
+      drawer: ProfilePageDrawer(),
       body: BlocConsumer(
         listener: (context, state) {},
         builder: (context, state) {
@@ -33,6 +34,32 @@ class _ProfilePageState extends State<ProfilePage> {
                     Text('Consumed: ${state.quota?.consumed}'),
                     Text('Total: ${state.quota?.quota}'),
                     Text('Bonus: ${state.quota?.bonus}'),
+                  ],
+                ),
+              ),
+            );
+          }
+          if (state is ProfileLoadedFailure) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding:
+                    EdgeInsets.only(top: 30, bottom: 9, left: 18, right: 18),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('${state.error}'),
+                    Padding(
+                      padding: EdgeInsets.all(5),
+                      child: GestionUhDefaultButton(
+                        text: 'Reintentar',
+                        onPressed: () {
+                          context.bloc<ProfileBloc>().add(
+                                ProfileInitialized(),
+                              );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
