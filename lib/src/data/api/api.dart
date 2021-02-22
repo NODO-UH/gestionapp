@@ -67,6 +67,7 @@ class GestionApi {
       response = await dio.get(Constants.quotaUrl);
     } catch (error) {
       quota.error = error.toString();
+      return quota;
     }
 
     quota = Quota.fromJson(jsonDecode(response.data));
