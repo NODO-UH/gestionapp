@@ -24,6 +24,13 @@ class GestionUhApp extends StatelessWidget {
                 child: LoginPage(),
               ),
             );
+          case PROFILE_ROUTE_NAME:
+            return MaterialPageRoute(
+              builder: (_) => BlocProvider<ProfileBloc>(
+                create: (_) => di(),
+                child: ProfilePage(),
+              ),
+            );
           default:
             return MaterialPageRoute(
               builder: (_) => BlocProvider<LoginBloc>(

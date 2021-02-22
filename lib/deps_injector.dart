@@ -42,4 +42,10 @@ Future<void> init() async {
       authRepository: di(),
     ),
   );
+
+  di.registerFactory<ProfileBloc>(
+    () => ProfileBloc(
+      quotasRepository: di(),
+    ),
+  );
 }
