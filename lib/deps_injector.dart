@@ -30,6 +30,12 @@ Future<void> init() async {
     ),
   );
 
+  di.registerLazySingleton<QuotasRepository>(
+    () => QuotasRepository(
+      api: di(),
+    ),
+  );
+
   //Blocs
   di.registerFactory<LoginBloc>(
     () => LoginBloc(
