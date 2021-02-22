@@ -24,11 +24,11 @@ class GestionUhApp extends StatelessWidget {
                 child: LoginPage(),
               ),
             );
-          case PROFILE_ROUTE_NAME:
+          case QUOTA_ROUTE_NAME:
             return MaterialPageRoute(
-              builder: (_) => BlocProvider<ProfileBloc>(
-                create: (_) => di()..add(ProfileInitialized()),
-                child: ProfilePage(),
+              builder: (_) => BlocProvider<QuotaBloc>(
+                create: (_) => di()..add(QuotaInitialized()),
+                child: QuotaPage(),
               ),
             );
           default:

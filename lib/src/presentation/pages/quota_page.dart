@@ -4,25 +4,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/presentation/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets.dart';
 
-class ProfilePage extends StatefulWidget {
-  ProfilePage({Key key}) : super(key: key);
+class QuotaPage extends StatefulWidget {
+  QuotaPage({Key key}) : super(key: key);
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _QuotaPageState createState() => _QuotaPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _QuotaPageState extends State<QuotaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mi Cuenta'),
+        title: Text('Mi Cuota'),
       ),
-      drawer: ProfilePageDrawer(),
-      body: BlocConsumer<ProfileBloc, ProfileState>(
+      drawer: DefaultDrawer(),
+      body: BlocConsumer<QuotaBloc, QuotaState>(
         listener: (context, state) {},
         builder: (context, state) {
-          if (state is ProfileLoadedSuccess) {
+          if (state is QuotaLoadedSuccess) {
             return SingleChildScrollView(
               child: Padding(
                 padding:
@@ -39,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             );
           }
-          if (state is ProfileLoadedFailure) {
+          if (state is QuotaLoadedFailure) {
             return SingleChildScrollView(
               child: Padding(
                 padding:
@@ -54,8 +54,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: GestionUhDefaultButton(
                         text: 'Reintentar',
                         onPressed: () {
-                          context.bloc<ProfileBloc>().add(
-                                ProfileInitialized(),
+                          context.bloc<QuotaBloc>().add(
+                                QuotaInitialized(),
                               );
                         },
                       ),

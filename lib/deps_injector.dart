@@ -43,8 +43,8 @@ Future<void> init() async {
     ),
   );
 
-  di.registerFactory<ProfileBloc>(
-    () => ProfileBloc(
+  di.registerFactory<QuotaBloc>(
+    () => QuotaBloc(
       quotasRepository: di(),
     ),
   );

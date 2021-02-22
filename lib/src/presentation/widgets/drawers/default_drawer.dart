@@ -4,7 +4,7 @@ import 'package:gestionuh/deps_injector.dart';
 import 'package:gestionuh/src/data/repository.dart';
 import 'package:gestionuh/src/utils/constants/routes.dart';
 
-class ProfilePageDrawer extends Drawer {
+class DefaultDrawer extends Drawer {
   @override
   Widget build(BuildContext context) {
     var authRepo = di<AuthRepository>();
@@ -12,6 +12,16 @@ class ProfilePageDrawer extends Drawer {
       key: key == null ? UniqueKey() : key,
       child: ListView(
         children: [
+          _buildDrawerItem(
+            context: context,
+            text: 'Mi Cuota',
+            icon: Icons.data_usage,
+            onTap: () {
+              Navigator.of(context)
+                ..pop()
+                ..pushReplacementNamed(QUOTA_ROUTE_NAME);
+            },
+          ),
           _buildDrawerItem(
             context: context,
             text: 'Cerrar Sesión',

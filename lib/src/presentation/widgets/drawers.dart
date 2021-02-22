@@ -1,1 +1,1 @@
-export 'drawers/profile_drawer.dart';
+export 'drawers/default_drawer.dart';

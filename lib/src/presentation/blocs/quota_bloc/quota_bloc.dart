@@ -4,40 +4,39 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/data/models.dart';
 import 'package:gestionuh/src/data/repository.dart';
 
-part 'profile_event.dart';
-part 'profile_state.dart';
+part 'quota_event.dart';
+part 'quota_state.dart';
 
-class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
+class QuotaBloc extends Bloc<QuotaEvent, QuotaState> {
   final QuotasRepository quotasRepository;
 
-  ProfileBloc({
+  QuotaBloc({
     this.quotasRepository,
   });
 
   @override
-  ProfileState get initialState => ProfileInitial();
+  QuotaState get initialState => QuotaInitial();
 
   @override
-  Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
-    if (event is ProfileInitialized) {
+  Stream<QuotaState> mapEventToState(QuotaEvent event) async* {
+    if (event is QuotaInitialized) {
       yield* handleProfileInitialized(event);
     }
   }
 
-  Stream<ProfileState> handleProfileInitialized(
-      ProfileInitialized event) async* {
-    yield ProfileLoadInProgress();
+  Stream<QuotaState> handleProfileInitialized(QuotaInitialized event) async* {
+    yield QuotaLoadInProgress();
     var result = await quotasRepository.getQuota();
     if (result == null) {
-      yield ProfileLoadedFailure(
+      yield QuotaLoadedFailure(
         error: 'Ha ocurrido un error inesperado.',
       );
     } else if (result.error != null) {
-      yield ProfileLoadedFailure(
+      yield QuotaLoadedFailure(
         error: result.error,
       );
     } else {
-      yield ProfileLoadedSuccess(
+      yield QuotaLoadedSuccess(
         quota: result,
       );
     }
