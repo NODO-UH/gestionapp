@@ -31,9 +31,14 @@ class _QuotaPageState extends State<QuotaPage> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Consumed: ${state.quota?.consumed}'),
-                    Text('Total: ${state.quota?.quota}'),
-                    Text('Bonus: ${state.quota?.bonus}'),
+                    Center(
+                      child: QuotaGraph(
+                        quota: state.quota,
+                      ),
+                    ),
+                    // Text('Consumed: ${state.quota?.consumed}'),
+                    // Text('Total: ${state.quota?.quota}'),
+                    // Text('Bonus: ${state.quota?.bonus}'),
                   ],
                 ),
               ),
