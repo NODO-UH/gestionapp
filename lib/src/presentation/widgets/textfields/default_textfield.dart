@@ -7,6 +7,7 @@ class GestionUhDefaultTextField extends StatefulWidget {
   final BorderRadius borderRadius;
   final void Function(String) onChanged;
   final String Function(String) validator;
+  final AutovalidateMode autovalidateMode;
   final TextInputType keyboardType;
   final TextStyle style, labelStyle, hintStyle;
   final Function onTap;
@@ -23,6 +24,7 @@ class GestionUhDefaultTextField extends StatefulWidget {
     this.borderRadius,
     this.onChanged,
     this.validator,
+    this.autovalidateMode,
     this.onTap,
     this.keyboardType,
     this.inputFormatters,
@@ -53,12 +55,14 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           child: TextFormField(
             validator: widget.validator,
             inputFormatters: widget.inputFormatters ?? [],
-            autovalidateMode: AutovalidateMode.onUserInteraction,
+            autovalidateMode:
+                widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
             autofocus: false,
             style: widget.style ??
                 TextStyle(
