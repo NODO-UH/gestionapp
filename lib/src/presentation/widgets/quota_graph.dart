@@ -18,19 +18,19 @@ class QuotaGraph extends StatelessWidget {
           id: 0,
           title: 'Restantes',
           cant: leftQuota,
-          color: charts.Color(a: 254, r: 0, g: 254, b: 0),
+          color: charts.Color(a: 152, r: 23, g: 102, b: 0),
         ),
         QuotaPart(
           id: 1,
-          title: 'Bonus',
+          title: 'Bono',
           cant: leftBonus,
-          color: charts.Color(a: 254, r: 0, g: 0, b: 254),
+          color: charts.Color(a: 152, r: 0, g: 82, b: 153),
         ),
         QuotaPart(
           id: 2,
           title: 'Consumido',
           cant: consumed,
-          color: charts.Color(a: 254, r: 254, g: 0, b: 0),
+          color: charts.Color(a: 152, r: 153, g: 0, b: 0),
         ),
       ];
 
@@ -47,12 +47,11 @@ class QuotaGraph extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Consumo (en Mb)',
+          'Consumo (en MB)',
           style: Theme.of(context).textTheme.subtitle2,
         ),
         Container(
-          height: 300,
-          width: 300,
+          height: 340,
           child: charts.PieChart(
             _buildData(),
             animate: animate,
@@ -60,17 +59,13 @@ class QuotaGraph extends StatelessWidget {
               arcWidth: 40,
             ),
             behaviors: [
-              new charts.DatumLegend(
+              charts.DatumLegend(
                 position: charts.BehaviorPosition.bottom,
-                outsideJustification: charts.OutsideJustification.middle,
-                horizontalFirst: true,
-                desiredMaxRows: 3,
-                cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
-                entryTextStyle: charts.TextStyleSpec(
-                  color: charts.MaterialPalette.black,
-                  fontFamily: 'Georgia',
-                  fontSize: 11,
-                ),
+                cellPadding: EdgeInsets.all(10),
+                showMeasures: true,
+                legendDefaultMeasure: charts.LegendDefaultMeasure.firstValue,
+                measureFormatter: (measure) => '$measure MB',
+                desiredMaxColumns: 1,
               ),
             ],
           ),

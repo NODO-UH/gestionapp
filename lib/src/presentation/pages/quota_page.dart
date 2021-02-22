@@ -23,23 +23,28 @@ class _QuotaPageState extends State<QuotaPage> {
         listener: (context, state) {},
         builder: (context, state) {
           if (state is QuotaLoadedSuccess) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding:
-                    EdgeInsets.only(top: 30, bottom: 9, left: 18, right: 18),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: QuotaGraph(
-                        quota: state.quota,
+            return RefreshIndicator(
+              onRefresh: () async {
+                context.bloc<QuotaBloc>().add(QuotaInitialized());
+              },
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding:
+                      EdgeInsets.only(top: 30, bottom: 9, left: 18, right: 18),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: QuotaGraph(
+                          quota: state.quota,
+                        ),
                       ),
-                    ),
-                    // Text('Consumed: ${state.quota?.consumed}'),
-                    // Text('Total: ${state.quota?.quota}'),
-                    // Text('Bonus: ${state.quota?.bonus}'),
-                  ],
+                      // Text('Consumed: ${state.quota?.consumed}'),
+                      // Text('Total: ${state.quota?.quota}'),
+                      // Text('Bonus: ${state.quota?.bonus}'),
+                    ],
+                  ),
                 ),
               ),
             );
