@@ -27,52 +27,53 @@ class _QuotaPageState extends State<QuotaPage> {
               onRefresh: () async {
                 context.bloc<QuotaBloc>().add(QuotaInitialized());
               },
-              child: SingleChildScrollView(
+              child: ListView(
                 physics: AlwaysScrollableScrollPhysics(),
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(top: 30, bottom: 9, left: 18, right: 18),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: QuotaGraph(
-                          quota: state.quota,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: 30, bottom: 9, left: 18, right: 18),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: QuotaGraph(
+                            quota: state.quota,
+                          ),
                         ),
-                      ),
-                      // Text('Consumed: ${state.quota?.consumed}'),
-                      // Text('Total: ${state.quota?.quota}'),
-                      // Text('Bonus: ${state.quota?.bonus}'),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
             );
           }
           if (state is QuotaLoadedFailure) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding:
-                    EdgeInsets.only(top: 30, bottom: 9, left: 18, right: 18),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('${state.error}'),
-                    Padding(
-                      padding: EdgeInsets.all(5),
-                      child: GestionUhDefaultButton(
-                        text: 'Reintentar',
-                        onPressed: () {
-                          context.bloc<QuotaBloc>().add(
-                                QuotaInitialized(),
-                              );
-                        },
+            return ListView(
+              children: [
+                Padding(
+                  padding:
+                      EdgeInsets.only(top: 30, bottom: 9, left: 18, right: 18),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('${state.error}'),
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: GestionUhDefaultButton(
+                          text: 'Reintentar',
+                          onPressed: () {
+                            context.bloc<QuotaBloc>().add(
+                                  QuotaInitialized(),
+                                );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+              ],
             );
           }
           return Center(

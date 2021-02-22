@@ -8,10 +8,10 @@ import 'package:gestionuh/src/data/models.dart';
 class QuotaGraph extends StatelessWidget {
   final Quota quota;
   final bool animate;
-  double get consumed => _bytesToMegaBytes(quota.consumed.toDouble());
-  double get leftBonus =>
+  int get consumed => _bytesToMegaBytes(quota.consumed.toDouble());
+  int get leftBonus =>
       _bytesToMegaBytes(max(quota.bonus - quota.consumed, 0).toDouble());
-  double get leftQuota => _bytesToMegaBytes(
+  int get leftQuota => _bytesToMegaBytes(
       min(quota.quota + quota.bonus - quota.consumed, quota.quota).toDouble());
   List<QuotaPart> get data => [
         QuotaPart(
@@ -91,7 +91,7 @@ class QuotaGraph extends StatelessWidget {
 class QuotaPart {
   int id;
   String title;
-  double cant;
+  int cant;
   charts.Color color;
 
   QuotaPart({
@@ -102,6 +102,6 @@ class QuotaPart {
   });
 }
 
-double _bytesToMegaBytes(double bytes) {
-  return double.parse((bytes / 1048576).toStringAsFixed(4));
+int _bytesToMegaBytes(double bytes) {
+  return (bytes / 1048576).toInt();
 }
