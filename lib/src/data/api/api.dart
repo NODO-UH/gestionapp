@@ -75,6 +75,34 @@ class GestionApi {
     return quota;
   }
 
+  Future<Status> resetPassword(String newPassw) async {
+    if (Constants.TestMode) return Status(status: true);
+
+    Auth tokens = await getTokens();
+
+    Status response = new Status();
+
+    if (tokens.error != null) {
+      response.error = tokens.error;
+      return response;
+    }
+
+    var headers = {'Authorization': 'Bearer ${tokens.token}'};
+
+    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
+
+    PassReset credentials = new PassReset(this.password, newPassw);
+
+    try {
+      await dio.post(Constants.resetPasswordUrld, data: credentials.toJson());
+    } catch (error) {
+      response.error = error.toString();
+      return response;
+    }
+
+    return Status(status: true);
+  }
+
   void setLogin(String userName, String password) {
     this.userName = userName;
     this.password = password;
