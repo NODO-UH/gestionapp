@@ -1,11 +1,11 @@
-import 'package:gestionuh/src/data/repository.dart';
-import 'package:gestionuh/src/presentation/blocs.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:gestionuh/src/data/local.dart';
-
 import 'src/data/api/api.dart';
+import 'src/data/local.dart';
+import 'src/data/repository.dart';
+import 'src/presentation/blocs.dart';
+import 'src/presentation/blocs/reset_password_bloc/resetpassword_bloc.dart';
 
 final di = GetIt.instance;
 
@@ -46,6 +46,12 @@ Future<void> init() async {
   di.registerFactory<QuotaBloc>(
     () => QuotaBloc(
       quotasRepository: di(),
+    ),
+  );
+
+  di.registerFactory<ResetPasswordBloc>(
+    () => ResetPasswordBloc(
+      authRepository: di(),
     ),
   );
 }

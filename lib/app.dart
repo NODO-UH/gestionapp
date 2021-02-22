@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestionuh/src/data/repository/auth_repository/auth_repository.dart';
-
-import 'package:gestionuh/src/presentation/blocs.dart';
 
 import 'deps_injector.dart';
+import 'src/data/repository/auth_repository/auth_repository.dart';
+import 'src/presentation/blocs.dart';
+import 'src/presentation/blocs/reset_password_bloc/resetpassword_bloc.dart';
 import 'src/presentation/pages.dart';
 import 'src/presentation/theme.dart';
 import 'src/utils/constants.dart';
+import 'src/utils/constants/routes.dart';
 
 class GestionUhApp extends StatelessWidget {
   @override
@@ -38,6 +39,13 @@ class GestionUhApp extends StatelessWidget {
               builder: (_) => BlocProvider<QuotaBloc>(
                 create: (_) => di()..add(QuotaInitialized()),
                 child: QuotaPage(),
+              ),
+            );
+          case RESET_PASSWORD_ROUTE_NAME:
+            return MaterialPageRoute(
+              builder: (_) => BlocProvider<ResetPasswordBloc>(
+                create: (_) => di(),
+                child: ResetPasswordPage(),
               ),
             );
           default:
