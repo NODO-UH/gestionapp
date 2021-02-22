@@ -93,7 +93,7 @@ final ThemeData gestionuhLightTheme = light.copyWith(
     shadowColor: Colors.transparent,
     brightness: Brightness.light,
     iconTheme: light.iconTheme.copyWith(
-      color: primaryBrandColor,
+      color: Colors.white,
     ),
   ),
   floatingActionButtonTheme: light.floatingActionButtonTheme.copyWith(

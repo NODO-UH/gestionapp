@@ -19,7 +19,7 @@ class _ProfilePageState extends State<ProfilePage> {
         title: Text('Mi Cuenta'),
       ),
       drawer: ProfilePageDrawer(),
-      body: BlocConsumer(
+      body: BlocConsumer<ProfileBloc, ProfileState>(
         listener: (context, state) {},
         builder: (context, state) {
           if (state is ProfileLoadedSuccess) {
@@ -65,7 +65,14 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             );
           }
-          return GestionUhLoadingIndicator();
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                GestionUhLoadingIndicator(),
+              ],
+            ),
+          );
         },
       ),
     );
