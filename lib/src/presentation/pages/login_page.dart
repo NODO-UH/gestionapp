@@ -2,8 +2,11 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:gestionuh/deps_injector.dart';
+import 'package:gestionuh/src/data/repository.dart';
 import 'package:gestionuh/src/presentation/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets.dart';
+import 'package:gestionuh/src/utils/constants/routes.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -34,12 +37,16 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    var authRepo = di<AuthRepository>();
     return Scaffold(
       appBar: AppBar(
         title: Text('Iniciar Sesión'),
       ),
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
+          if (authRepo.logged) {
+            Navigator.of(context).pushReplacementNamed(QUOTA_ROUTE_NAME);
+          }
           if (state is LoginAttemptInitial) {
             if (state.error != null) {
               _showCenterFlash(
