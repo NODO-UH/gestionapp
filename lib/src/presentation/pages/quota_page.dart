@@ -28,11 +28,11 @@ class _QuotaPageState extends State<QuotaPage> {
                 context.bloc<QuotaBloc>().add(QuotaInitialized());
               },
               child: SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
                 child: Padding(
                   padding:
                       EdgeInsets.only(top: 30, bottom: 9, left: 18, right: 18),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Center(
