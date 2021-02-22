@@ -22,8 +22,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield* handleLoginAttempted(event);
     }
   }
-}
 
-Stream<LoginState> handleLoginAttempted(LoginAttempted event) async* {
-  yield LoginAttemptInProgress();
+  Stream<LoginState> handleLoginAttempted(LoginAttempted event) async* {
+    yield LoginAttemptInProgress();
+    var result = await authRepository.login(
+      event.username,
+      event.password,
+    );
+    if (result == null) {
+      yield LoginAttemptInitial(
+        error: 'Ha ocurrido un error inesperado.',
+      );
+    } else if (result.error != null) {
+      yield LoginAttemptInitial(
+        error: result.error,
+      );
+    } else {
+      yield LoginAttemptSuccess();
+    }
+  }
 }

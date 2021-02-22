@@ -1,3 +1,4 @@
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,7 +39,17 @@ class _LoginPageState extends State<LoginPage> {
         title: Text('Iniciar Sesión'),
       ),
       body: BlocConsumer<LoginBloc, LoginState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is LoginAttemptInitial) {
+            if (state.error != null) {
+              _showCenterFlash(
+                error: state.error,
+                position: FlashPosition.top,
+                style: FlashStyle.floating,
+              );
+            }
+          }
+        },
         builder: (context, state) {
           if (state is LoginAttemptInitial) {
             return SingleChildScrollView(
@@ -102,6 +113,40 @@ class _LoginPageState extends State<LoginPage> {
           );
         },
       ),
+    );
+  }
+
+  void _showCenterFlash({
+    String error,
+    FlashPosition position,
+    FlashStyle style,
+    Alignment alignment,
+  }) {
+    showFlash(
+      context: context,
+      duration: Duration(seconds: 5),
+      builder: (_, controller) {
+        return Flash(
+          controller: controller,
+          backgroundColor: Colors.black87,
+          borderRadius: BorderRadius.circular(8.0),
+          borderColor: Colors.blue,
+          position: position,
+          style: style,
+          alignment: alignment,
+          enableDrag: false,
+          onTap: () => controller.dismiss(),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: DefaultTextStyle(
+              style: TextStyle(color: Colors.white),
+              child: Text(
+                error,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

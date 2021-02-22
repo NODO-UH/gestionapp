@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:gestionuh/src/data/api/api.dart';
 import 'package:gestionuh/src/data/local/local_storage.dart';
+
+import 'package:gestionuh/src/data/models.dart';
 
 class AuthRepository {
   final GestionApi api;
@@ -10,7 +14,32 @@ class AuthRepository {
     this.localStorage,
   });
 
-  void login(String username, String password) {}
+  bool get logged => localStorage.isLogged();
 
-  void logout() {}
+  Future<Auth> login(String username, String password) async {
+    Auth result;
+    api.setLogin(username, password);
+    try {
+      result = await api.getTokens();
+      if (result.error != null) {
+        log(result.error.toString());
+        api.logout();
+      } else {
+        await localStorage.updateCredentials(
+          userName: username,
+          password: password,
+          isLoggedInto: true,
+        );
+      }
+      return result;
+    } catch (e) {
+      log(e.toString());
+    }
+    return null;
+  }
+
+  Future<void> logout() async {
+    api.logout();
+    await localStorage.invalidateCredentials();
+  }
 }
