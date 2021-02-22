@@ -14,7 +14,7 @@ class GestionUhApp extends StatelessWidget {
     return MaterialApp(
       title: Constants.appName,
       theme: gestionuhLightTheme,
-      // home: LoginPage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: Constants.TestMode,
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case LOGIN_ROUTE_NAME:

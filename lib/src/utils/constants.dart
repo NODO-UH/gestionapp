@@ -4,5 +4,5 @@ export 'constants/routes.dart';
 
 class Constants {
   static const appName = "Gestion UH";
-  static const TestMode = false;
+  static const TestMode = true;
 }
