@@ -12,6 +12,14 @@ class DefaultDrawer extends Drawer {
       key: key == null ? UniqueKey() : key,
       child: ListView(
         children: [
+          DrawerHeader(
+            child: Container(
+              child: Image.asset(
+                "assets/images/splash.png",
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ),
           _buildDrawerItem(
             context: context,
             text: 'Mi Cuota',
@@ -20,6 +28,16 @@ class DefaultDrawer extends Drawer {
               Navigator.of(context)
                 ..pop()
                 ..pushReplacementNamed(QUOTA_ROUTE_NAME);
+            },
+          ),
+          _buildDrawerItem(
+            context: context,
+            text: 'Cambiar Contraseña',
+            icon: Icons.security_rounded,
+            onTap: () {
+              Navigator.of(context)
+                ..pop()
+                ..pushNamed(RESET_PASSWORD_ROUTE_NAME);
             },
           ),
           _buildDrawerItem(
