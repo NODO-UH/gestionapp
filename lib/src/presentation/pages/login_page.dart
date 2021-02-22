@@ -67,6 +67,17 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      child: Image.asset(
+                        "assets/images/splash.png",
+                      ),
+                    ),
+                    SizedBox(
+                      height: 60,
+                    ),
                     Container(
                       height: 40,
                       child: Row(
