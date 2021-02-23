@@ -2,6 +2,8 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../utils/constants.dart';
+
 class AboutInformationPage extends StatelessWidget {
   const AboutInformationPage({Key key}) : super(key: key);
 
@@ -39,7 +41,26 @@ class AboutInformationPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Acerca de GestiónUH'),
       ),
-      // bottomSheet: GestionUHBottomSheet(),
+      bottomSheet: Center(
+        heightFactor: 1,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'TODOS LOS DERECHOS RESERVADOS',
+              textAlign: TextAlign.center,
+              style:
+                  Theme.of(context).textTheme.headline6.copyWith(fontSize: 11),
+            ),
+            Text(
+              '\u00a9 2021' + Constants.copyRight,
+              textAlign: TextAlign.center,
+              style:
+                  Theme.of(context).textTheme.headline6.copyWith(fontSize: 12),
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
@@ -58,7 +79,7 @@ class AboutInformationPage extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .headline6
-                      .copyWith(fontSize: 15, color: Colors.black45)),
+                      .copyWith(fontSize: 15, color: Colors.black38)),
               SizedBox(
                 height: 80,
               ),
@@ -77,14 +98,14 @@ class AboutInformationPage extends StatelessWidget {
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline6
-                                          .copyWith(fontSize: 15),
+                                          .copyWith(fontSize: 14),
                                     ),
                                     subtitle: Text(
                                       e.role,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyText1
-                                          .copyWith(fontSize: 15),
+                                          .copyWith(fontSize: 12),
                                     ),
                                     onTap: e.link == null
                                         ? null
@@ -106,13 +127,25 @@ class AboutInformationPage extends StatelessWidget {
                         ))
                     .toList(),
               ),
-              // Text(
-              //   'Agradecimientos para:',
-              //   style: Theme.of(context)
-              //       .textTheme
-              //       .bodyText2
-              //       .copyWith(fontSize: 13, letterSpacing: 1.2),
-              // )
+              SizedBox(height: 50),
+              Text(
+                'Agradecimientos',
+                style: Theme.of(context).textTheme.headline5.copyWith(),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
+                child: Text(
+                  'lorem damus ipsum nostra damus nostra damus lorem damus ipsum lorem damus ipsum lorem damus ipsum ipsum lorem ',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(fontSize: 13),
+                ),
+              ),
+              SizedBox(height: 40),
             ],
           ),
         ),
