@@ -58,7 +58,7 @@ class DefaultDrawer extends Drawer {
           Divider(),
           _buildDrawerItem(
             context: context,
-            text: 'Información',
+            text: 'Acerca de',
             icon: Icons.info_outline_rounded,
             onTap: () {
               Navigator.of(context)
