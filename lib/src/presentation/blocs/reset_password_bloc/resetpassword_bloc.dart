@@ -11,12 +11,9 @@ part 'resetpassword_state.dart';
 class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   final AuthRepository authRepository;
 
-  @override
-  ResetPasswordState get initialState => ResetPasswordInitial();
-
   ResetPasswordBloc({
     this.authRepository,
-  }) : super();
+  }) : super(ResetPasswordInitial());
 
   @override
   Stream<ResetPasswordState> mapEventToState(

@@ -12,10 +12,7 @@ class QuotaBloc extends Bloc<QuotaEvent, QuotaState> {
 
   QuotaBloc({
     this.quotasRepository,
-  });
-
-  @override
-  QuotaState get initialState => QuotaInitial();
+  }) : super(QuotaInitial());
 
   @override
   Stream<QuotaState> mapEventToState(QuotaEvent event) async* {

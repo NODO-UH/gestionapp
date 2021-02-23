@@ -25,7 +25,7 @@ dependencies:
     sdk: flutter
   
   # bloc
-  flutter_bloc: ^4.0.0
+  flutter_bloc: ^6.1.0
   
   # data
   json_annotation: ^3.1.1
