@@ -1,3 +1,8 @@
+class About {
+  static const shortDescription =
+      '''Aplicación desarrollada para la gestión de los recursos digitales en la Universidad de La Habana.''';
+}
+
 class Developers {
   static const Map<String, List<DeveloperInfo>> teams = {
     'Nodo Central de Red - UH': <DeveloperInfo>[
