@@ -2,11 +2,12 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:gestionuh/deps_injector.dart';
-import 'package:gestionuh/src/data/repository.dart';
-import 'package:gestionuh/src/presentation/blocs.dart';
-import 'package:gestionuh/src/presentation/widgets.dart';
-import 'package:gestionuh/src/utils/constants/routes.dart';
+import '../../../deps_injector.dart';
+import '../../data/repository.dart';
+import '../../utils/constants/routes.dart';
+import '../blocs.dart';
+import '../widgets.dart';
+import '../widgets/bottom_sheet.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -42,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: Text('Iniciar Sesión'),
       ),
+      bottomSheet: GestionUHBottomSheet(),
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (authRepo.logged) {

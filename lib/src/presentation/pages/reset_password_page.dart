@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../utils/validators.dart';
 import '../blocs/reset_password_bloc/resetpassword_bloc.dart';
 import '../widgets.dart';
+import '../widgets/bottom_sheet.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   ResetPasswordPage({Key key}) : super(key: key);
@@ -33,6 +34,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         appBar: AppBar(
           title: Text('Cambiar Contraseña'),
         ),
+        bottomSheet: GestionUHBottomSheet(),
         body: BlocConsumer<ResetPasswordBloc, ResetPasswordState>(
           listener: (context, state) {
             if (state is ResetPasswordInitial && state.error != null) {
