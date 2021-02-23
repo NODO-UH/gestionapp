@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gestionuh/src/utils/constants.dart';
 
 class GestionUHBottomSheet extends StatelessWidget {
   const GestionUHBottomSheet({
@@ -16,7 +17,7 @@ class GestionUHBottomSheet extends StatelessWidget {
           children: [
             TextSpan(text: '\u00a9 2021'),
             TextSpan(
-                text: ' GestiónUH version 1.0',
+                text: Constants.copyRight,
                 style: Theme.of(context).textTheme.bodyText1.copyWith(
                       fontSize: 11,
                       color: Theme.of(context).primaryColor,
