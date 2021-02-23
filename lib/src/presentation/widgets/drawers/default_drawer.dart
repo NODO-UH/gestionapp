@@ -55,6 +55,17 @@ class DefaultDrawer extends Drawer {
                 ..pushReplacementNamed(LOGIN_ROUTE_NAME);
             },
           ),
+          Divider(),
+          _buildDrawerItem(
+            context: context,
+            text: 'Información',
+            icon: Icons.info_outline_rounded,
+            onTap: () {
+              Navigator.of(context)
+                ..pop()
+                ..pushNamed(ABOUT_ROUTE_NAME);
+            },
+          ),
         ],
       ),
     );
