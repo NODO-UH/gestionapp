@@ -7,34 +7,6 @@ import '../../utils/constants.dart';
 class AboutInformationPage extends StatelessWidget {
   const AboutInformationPage({Key key}) : super(key: key);
 
-  static Map<String, List<DeveloperInfo>> teams = {
-    'NODO CENTRAL DE RED - UH': <DeveloperInfo>[],
-    'GRS - UH': <DeveloperInfo>[
-      DeveloperInfo(
-        name: 'Roberto Martí Cedeño',
-        role: 'Team Leader',
-        link: null,
-      ),
-    ],
-    'MATCOM - UH': <DeveloperInfo>[
-      DeveloperInfo(
-        name: 'Carlos Bermúdez Porto',
-        role: 'Flutter Developer',
-        link: 'https://t.me/cbermudez97',
-      ),
-      DeveloperInfo(
-        name: 'Leonel Alejandro García López',
-        role: 'Flutter Developer',
-        link: 'https://t.me/lagcleaner',
-      ),
-      DeveloperInfo(
-        name: 'Roberto Martí Cedeño',
-        role: 'Team Leader',
-        link: 'https://t.me/rmarticedeno',
-      ),
-    ]
-  };
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,10 +60,10 @@ class AboutInformationPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline5.copyWith(),
               ),
               Column(
-                children: teams.keys
+                children: Developers.teams.keys
                     .map((key) => ExpansionTile(
                           title: Text(key),
-                          children: teams[key]
+                          children: Developers.teams[key]
                               .map((e) => ListTile(
                                     title: Text(
                                       e.name,
@@ -121,7 +93,7 @@ class AboutInformationPage extends StatelessWidget {
                                           },
                                     trailing: Icon(e.link == null
                                         ? Icons.link_off_outlined
-                                        : Icons.link_outlined),
+                                        : Icons.info),
                                   ))
                               .toList(),
                         ))

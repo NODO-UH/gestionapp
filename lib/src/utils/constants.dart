@@ -1,6 +1,7 @@
 export 'constants/sample_data.dart';
 export 'constants/storage_keys.dart';
 export 'constants/routes.dart';
+export 'constants/developers_info.dart';
 
 class Constants {
   static const appName = "Gestion UH";
