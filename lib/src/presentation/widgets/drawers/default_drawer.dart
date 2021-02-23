@@ -15,7 +15,7 @@ class DefaultDrawer extends Drawer {
           DrawerHeader(
             child: Container(
               child: Image.asset(
-                "assets/images/splash.png",
+                "assets/images/logo-uh.png",
                 color: Theme.of(context).primaryColor,
               ),
             ),
