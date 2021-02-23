@@ -9,4 +9,5 @@ class Constants {
   static const quotaUrl = "/proxy/quota";
   static const resetPasswordUrld = "/user/changepassword";
   static const baseUrl = "https://identity.sic.uh.cu";
+  static const copyRight = " GestiónUH version 1.0 Pre-Alpha";
 }
