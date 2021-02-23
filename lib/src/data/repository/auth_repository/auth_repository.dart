@@ -1,9 +1,10 @@
 import 'dart:developer';
 
-import 'package:gestionuh/src/data/api/api.dart';
-import 'package:gestionuh/src/data/local/local_storage.dart';
-
-import 'package:gestionuh/src/data/models.dart';
+import '../../../utils/constants/storage_keys.dart';
+import '../../api/api.dart';
+import '../../local/local_storage.dart';
+import '../../models.dart';
+import '../../models/status.dart';
 
 class AuthRepository {
   final GestionApi api;
@@ -41,5 +42,25 @@ class AuthRepository {
   Future<void> logout() async {
     api.logout();
     await localStorage.invalidateCredentials();
+  }
+
+  Future<Status> resetPassword(String password) async {
+    Status status;
+    try {
+      status = await api.resetPassword(password);
+      if (status.status == false) return status;
+
+      final credentials = await localStorage.getCredentials();
+
+      // save new password
+      api.setLogin(credentials[USER_NAME], password);
+      localStorage.updateCredentials(
+        userName: credentials[USER_NAME],
+        password: password,
+      );
+    } catch (e) {
+      log(e.toString());
+    }
+    return status ?? Status(status: false);
   }
 }
