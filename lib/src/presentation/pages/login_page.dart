@@ -19,13 +19,13 @@ class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  void _loginAction(context) {
-    context.watch<LoginBloc>().add(
-          LoginAttempted(
-            username: _usernameController.text,
-            password: _passwordController.text,
-          ),
-        );
+  void _loginAction(BuildContext context) {
+    BlocProvider.of<LoginBloc>(context).add(
+      LoginAttempted(
+        username: _usernameController.text,
+        password: _passwordController.text,
+      ),
+    );
   }
 
   @override
