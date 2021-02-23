@@ -25,7 +25,7 @@ class _QuotaPageState extends State<QuotaPage> {
           if (state is QuotaLoadedSuccess) {
             return RefreshIndicator(
               onRefresh: () async {
-                context.watch<QuotaBloc>().add(QuotaInitialized());
+                context.read<QuotaBloc>().add(QuotaInitialized());
               },
               child: ListView(
                 physics: AlwaysScrollableScrollPhysics(),
@@ -64,7 +64,7 @@ class _QuotaPageState extends State<QuotaPage> {
                         child: GestionUhDefaultButton(
                           text: 'Reintentar',
                           onPressed: () {
-                            context.watch<QuotaBloc>().add(
+                            context.read<QuotaBloc>().add(
                                   QuotaInitialized(),
                                 );
                           },
