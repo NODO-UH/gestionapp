@@ -7,34 +7,6 @@ import '../../utils/constants.dart';
 class AboutInformationPage extends StatelessWidget {
   const AboutInformationPage({Key key}) : super(key: key);
 
-  static Map<String, List<DeveloperInfo>> teams = {
-    'NODO CENTRAL DE RED - UH': <DeveloperInfo>[],
-    'GRS - UH': <DeveloperInfo>[
-      DeveloperInfo(
-        name: 'Roberto Martí Cedeño',
-        role: 'Team Leader',
-        link: null,
-      ),
-    ],
-    'MATCOM - UH': <DeveloperInfo>[
-      DeveloperInfo(
-        name: 'Carlos Bermúdez Porto',
-        role: 'Flutter Developer',
-        link: 'https://t.me/cbermudez97',
-      ),
-      DeveloperInfo(
-        name: 'Leonel Alejandro García López',
-        role: 'Flutter Developer',
-        link: 'https://t.me/lagcleaner',
-      ),
-      DeveloperInfo(
-        name: 'Roberto Martí Cedeño',
-        role: 'Team Leader',
-        link: 'https://t.me/rmarticedeno',
-      ),
-    ]
-  };
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,12 +18,6 @@ class AboutInformationPage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              'TODOS LOS DERECHOS RESERVADOS',
-              textAlign: TextAlign.center,
-              style:
-                  Theme.of(context).textTheme.headline6.copyWith(fontSize: 11),
-            ),
             Text(
               '\u00a9 2021' + Constants.copyRight,
               textAlign: TextAlign.center,
@@ -68,30 +34,40 @@ class AboutInformationPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(
+                height: 20,
+              ),
               Center(
                 child: Container(
                   child: Image.asset(
-                    "assets/images/splash.png",
+                    "assets/images/logo-uh.png",
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ),
-              Text('Aplicación desarrollada para...',
+              SizedBox(
+                height: 20,
+              ),
+              Text(About.shortDescription,
                   style: Theme.of(context)
                       .textTheme
                       .headline6
                       .copyWith(fontSize: 15, color: Colors.black38)),
               SizedBox(
-                height: 80,
+                height: 50,
               ),
               Text(
-                'Desarrollado por',
+                'Equipo de desarrollo:',
                 style: Theme.of(context).textTheme.headline5.copyWith(),
               ),
+              SizedBox(
+                height: 30,
+              ),
               Column(
-                children: teams.keys
+                children: Developers.teams.keys
                     .map((key) => ExpansionTile(
                           title: Text(key),
-                          children: teams[key]
+                          children: Developers.teams[key]
                               .map((e) => ListTile(
                                     title: Text(
                                       e.name,
@@ -119,9 +95,9 @@ class AboutInformationPage extends StatelessWidget {
                                                     'No puede acceder a ${e.link}',
                                               );
                                           },
-                                    trailing: Icon(e.link == null
-                                        ? Icons.link_off_outlined
-                                        : Icons.link_outlined),
+                                    trailing: e.link != null
+                                        ? Icon(Icons.link_off_outlined)
+                                        : null,
                                   ))
                               .toList(),
                         ))
@@ -129,23 +105,57 @@ class AboutInformationPage extends StatelessWidget {
               ),
               SizedBox(height: 50),
               Text(
-                'Agradecimientos',
-                style: Theme.of(context).textTheme.headline5.copyWith(),
+                'Nodo Central de Red - UH',
+                style: Theme.of(context).textTheme.headline6.copyWith(),
               ),
               SizedBox(height: 10),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
-                child: Text(
-                  'lorem damus ipsum nostra damus nostra damus lorem damus ipsum lorem damus ipsum lorem damus ipsum ipsum lorem ',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(fontSize: 13),
-                ),
+              Text(
+                'MATCOM - UH',
+                style: Theme.of(context).textTheme.headline6.copyWith(),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 10),
+              Text(
+                'GRS - UH',
+                style: Theme.of(context).textTheme.headline6.copyWith(),
+              ),
+              GestureDetector(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Copyright 2021',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
+                      Container(padding: EdgeInsets.all(2)),
+                      Icon(
+                        Icons.copyright,
+                        color: Theme.of(context).textTheme.subtitle2.color,
+                      ),
+                      Container(padding: EdgeInsets.all(2)),
+                      Text(
+                        'GPL-3.0',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
+                    ],
+                  ),
+                ),
+                onTap: () async {
+                  const url =
+                      'https://raw.githubusercontent.com/covid19cuba/covid19cuba-app/master/LICENSE';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    _showCenterFlash(
+                      context,
+                      error: 'No puede acceder a ${url}',
+                    );
+                  }
+                },
+              )
             ],
           ),
         ),
