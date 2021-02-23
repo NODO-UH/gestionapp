@@ -1,13 +1,11 @@
-import 'dart:io';
-
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutInformationPage extends StatelessWidget {
-  AboutInformationPage({Key key}) : super(key: key);
+  const AboutInformationPage({Key key}) : super(key: key);
 
-  Map<String, List<DeveloperInfo>> teams = {
+  static Map<String, List<DeveloperInfo>> teams = {
     'NODO CENTRAL DE RED - UH': <DeveloperInfo>[],
     'GRS - UH': <DeveloperInfo>[
       DeveloperInfo(
@@ -42,79 +40,81 @@ class AboutInformationPage extends StatelessWidget {
         title: Text('Acerca de GestiónUH'),
       ),
       // bottomSheet: GestionUHBottomSheet(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(
-              child: Container(
-                child: Image.asset(
-                  "assets/images/splash.png",
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: Container(
+                  child: Image.asset(
+                    "assets/images/splash.png",
+                  ),
                 ),
               ),
-            ),
-            Text('Aplicación desarrollada para...',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    .copyWith(fontSize: 15, color: Colors.black45)),
-            SizedBox(
-              height: 80,
-            ),
-            Text(
-              'Desarrollado por',
-              style: Theme.of(context).textTheme.headline5.copyWith(),
-            ),
-            Column(
-              children: teams.keys
-                  .map((key) => ExpansionTile(
-                        title: Text(key),
-                        children: teams[key]
-                            .map((e) => ListTile(
-                                  title: Text(
-                                    e.name,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6
-                                        .copyWith(fontSize: 15),
-                                  ),
-                                  subtitle: Text(
-                                    e.role,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        .copyWith(fontSize: 15),
-                                  ),
-                                  onTap: e.link == null
-                                      ? null
-                                      : () async {
-                                          if (await canLaunch(e.link))
-                                            await launch(e.link);
-                                          else
-                                            _showCenterFlash(
-                                              context,
-                                              error:
-                                                  'No puede acceder a ${e.link}',
-                                            );
-                                        },
-                                  trailing: Icon(e.link == null
-                                      ? Icons.link_off_outlined
-                                      : Icons.link_outlined),
-                                ))
-                            .toList(),
-                      ))
-                  .toList(),
-            ),
-            // Text(
-            //   'Agradecimientos para:',
-            //   style: Theme.of(context)
-            //       .textTheme
-            //       .bodyText2
-            //       .copyWith(fontSize: 13, letterSpacing: 1.2),
-            // )
-          ],
+              Text('Aplicación desarrollada para...',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      .copyWith(fontSize: 15, color: Colors.black45)),
+              SizedBox(
+                height: 80,
+              ),
+              Text(
+                'Desarrollado por',
+                style: Theme.of(context).textTheme.headline5.copyWith(),
+              ),
+              Column(
+                children: teams.keys
+                    .map((key) => ExpansionTile(
+                          title: Text(key),
+                          children: teams[key]
+                              .map((e) => ListTile(
+                                    title: Text(
+                                      e.name,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline6
+                                          .copyWith(fontSize: 15),
+                                    ),
+                                    subtitle: Text(
+                                      e.role,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1
+                                          .copyWith(fontSize: 15),
+                                    ),
+                                    onTap: e.link == null
+                                        ? null
+                                        : () async {
+                                            if (await canLaunch(e.link))
+                                              await launch(e.link);
+                                            else
+                                              _showCenterFlash(
+                                                context,
+                                                error:
+                                                    'No puede acceder a ${e.link}',
+                                              );
+                                          },
+                                    trailing: Icon(e.link == null
+                                        ? Icons.link_off_outlined
+                                        : Icons.link_outlined),
+                                  ))
+                              .toList(),
+                        ))
+                    .toList(),
+              ),
+              // Text(
+              //   'Agradecimientos para:',
+              //   style: Theme.of(context)
+              //       .textTheme
+              //       .bodyText2
+              //       .copyWith(fontSize: 13, letterSpacing: 1.2),
+              // )
+            ],
+          ),
         ),
       ),
     );
