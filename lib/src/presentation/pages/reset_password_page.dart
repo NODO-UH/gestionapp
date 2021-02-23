@@ -21,6 +21,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   GlobalKey<FormState> _formPasswordKey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    _passwordFirstController.dispose();
+    _passwordSecondController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -30,7 +37,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           listener: (context, state) {
             if (state is ResetPasswordInitial && state.error != null) {
               _showCenterFlash(
-                error: state.error,
+                message: state.error,
+                borderColor: Colors.red,
+              );
+            }
+            if (state is ResetPasswordSuccess) {
+              _showCenterFlash(
+                message: 'Operación Completada.',
+                borderColor: Colors.green,
               );
             }
           },
@@ -150,10 +164,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   }
 
   void _showCenterFlash({
-    String error,
+    String message,
     FlashPosition position = FlashPosition.top,
     FlashStyle style = FlashStyle.floating,
     Alignment alignment,
+    Color borderColor,
   }) {
     showFlash(
       context: context,
@@ -163,7 +178,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           controller: controller,
           backgroundColor: Colors.black87,
           borderRadius: BorderRadius.circular(8.0),
-          borderColor: Colors.black,
+          borderColor: borderColor ?? Colors.black,
           position: position,
           style: style,
           alignment: alignment,
@@ -174,7 +189,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             child: DefaultTextStyle(
               style: TextStyle(color: Colors.white),
               child: Text(
-                error,
+                message,
               ),
             ),
           ),
