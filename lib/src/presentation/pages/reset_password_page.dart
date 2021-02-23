@@ -142,7 +142,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       String passwordSecond = _passwordSecondController.text;
       log("Password 1 $passwordFirst");
       log("Password 2 $passwordSecond");
-      context.bloc<ResetPasswordBloc>().add(
+      context.read<ResetPasswordBloc>().add(
             ResetPasswordAttempted(
                 passwordFirst: passwordFirst, passwordSecond: passwordSecond),
           );
