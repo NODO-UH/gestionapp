@@ -8,12 +8,14 @@ class LoginEvent extends Equatable {
 class LoginAttempted extends LoginEvent {
   final String username;
   final String password;
+  final bool rememberMe;
 
   LoginAttempted({
     this.username,
     this.password,
+    this.rememberMe,
   });
 
   @override
-  List<Object> get props => [username, password];
+  List<Object> get props => [username, password, rememberMe];
 }

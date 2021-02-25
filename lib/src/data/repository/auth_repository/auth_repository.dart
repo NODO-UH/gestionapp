@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import '../../../utils/constants/storage_keys.dart';
 import '../../api/api.dart';
@@ -15,9 +16,21 @@ class AuthRepository {
     this.localStorage,
   });
 
+  Future<void> initialize() async {
+    await localStorage.loadSession();
+    if (logged) {
+      var credentials = await localStorage.getCredentials();
+      api.setLogin(credentials[USER_NAME], credentials[USER_PASSWORD]);
+    }
+  }
+
   bool get logged => localStorage.isLogged();
 
-  Future<Auth> login(String username, String password) async {
+  Future<Auth> login(
+    String username,
+    String password, [
+    bool remmemberMe = false,
+  ]) async {
     Auth result;
     api.setLogin(username, password);
     try {
@@ -30,6 +43,7 @@ class AuthRepository {
           userName: username,
           password: password,
           isLoggedInto: true,
+          persist: remmemberMe,
         );
       }
       return result;
@@ -57,6 +71,8 @@ class AuthRepository {
       localStorage.updateCredentials(
         userName: credentials[USER_NAME],
         password: password,
+        isLoggedInto: true,
+        persist: credentials[USER_REMEMBERME],
       );
     } catch (e) {
       log(e.toString());

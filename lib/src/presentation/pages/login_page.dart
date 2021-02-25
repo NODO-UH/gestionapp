@@ -1,4 +1,5 @@
 import 'package:flash/flash.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,12 +20,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _rememberMe = false;
 
   void _loginAction(BuildContext context) {
     context.read<LoginBloc>().add(
           LoginAttempted(
             username: _usernameController.text,
             password: _passwordController.text,
+            rememberMe: _rememberMe,
           ),
         );
   }
@@ -110,6 +113,12 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(
                       height: 20,
+                    ),
+                    CheckboxListTile(
+                      value: _rememberMe,
+                      title: Text('Desea recordar la sesión?'),
+                      activeColor: Theme.of(context).primaryColor,
+                      onChanged: (value) => setState(() => _rememberMe = value),
                     ),
                     SizedBox(
                       height: 5,
