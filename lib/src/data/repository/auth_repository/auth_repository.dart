@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import '../../../utils/constants/storage_keys.dart';
 import '../../api/api.dart';
@@ -14,6 +15,14 @@ class AuthRepository {
     this.api,
     this.localStorage,
   });
+
+  Future<void> initialize() async {
+    await localStorage.loadSession();
+    if (logged) {
+      var credentials = await localStorage.getCredentials();
+      api.setLogin(credentials[USER_NAME], credentials[USER_PASSWORD]);
+    }
+  }
 
   bool get logged => localStorage.isLogged();
 

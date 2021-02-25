@@ -7,9 +7,9 @@ import 'app.dart';
 import 'deps_injector.dart';
 
 void main() async {
-  await initialize();
-
-  runApp(GestionUhApp());
+  await initialize().whenComplete(
+    () => runApp(GestionUhApp()),
+  );
 }
 
 Future<void> initialize() async {
@@ -17,10 +17,6 @@ Future<void> initialize() async {
 
   await init();
 
-  //Update user credentials
-  var authRepo = di<AuthRepository>();
-  if (authRepo.logged) {
-    var credentials = await authRepo.localStorage.getCredentials();
-    authRepo.api.setLogin(credentials[USER_NAME], credentials[USER_PASSWORD]);
-  }
+  // Load user credentials
+  await di<AuthRepository>().initialize();
 }

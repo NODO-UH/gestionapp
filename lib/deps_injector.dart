@@ -1,3 +1,4 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,9 +17,14 @@ Future<void> init() async {
   final sharedPrefs = await SharedPreferences.getInstance();
   di.registerSingleton<SharedPreferences>(sharedPrefs);
 
+  di.registerLazySingleton(
+    () => FlutterSecureStorage(),
+  );
+
   di.registerLazySingleton<ILocalStorage>(
     () => LocalStorage(
       prefs: di(),
+      secureStorage: di(),
     ),
   );
 
