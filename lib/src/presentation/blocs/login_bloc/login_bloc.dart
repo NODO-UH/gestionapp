@@ -25,6 +25,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     var result = await authRepository.login(
       event.username,
       event.password,
+      event.rememberMe,
     );
     if (result == null) {
       yield LoginAttemptInitial(

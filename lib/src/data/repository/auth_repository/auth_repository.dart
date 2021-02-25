@@ -17,7 +17,11 @@ class AuthRepository {
 
   bool get logged => localStorage.isLogged();
 
-  Future<Auth> login(String username, String password) async {
+  Future<Auth> login(
+    String username,
+    String password, [
+    bool remmemberMe = false,
+  ]) async {
     Auth result;
     api.setLogin(username, password);
     try {
@@ -30,6 +34,7 @@ class AuthRepository {
           userName: username,
           password: password,
           isLoggedInto: true,
+          persist: remmemberMe,
         );
       }
       return result;
@@ -57,6 +62,8 @@ class AuthRepository {
       localStorage.updateCredentials(
         userName: credentials[USER_NAME],
         password: password,
+        isLoggedInto: true,
+        persist: credentials[USER_REMEMBERME],
       );
     } catch (e) {
       log(e.toString());
