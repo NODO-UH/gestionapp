@@ -147,6 +147,38 @@ class GestionApi {
     return userData;
   }
 
+  Future<AllSecurityQuestions> getAllSecurityQuestions() async {
+    if (Constants.TestMode)
+      return AllSecurityQuestions(
+        questions: SampleData.securityQuestions,
+      );
+
+    Auth tokens = await getTokens();
+    AllSecurityQuestions questions = new AllSecurityQuestions();
+
+    if (tokens.error != null) {
+      questions.error = tokens.error;
+      return questions;
+    }
+
+    var headers = {'Authorization': 'Bearer ${tokens.token}'};
+
+    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
+
+    Response<String> response;
+
+    try {
+      response = await dio.get(Constants.allSecurityQuestionsUrl);
+    } catch (error) {
+      questions.error = error.toString();
+      return questions;
+    }
+
+    questions = AllSecurityQuestions.fromJson(jsonDecode(response.data));
+
+    return questions;
+  }
+
   Future<Status> resetPassword(String newPassw) async {
     if (Constants.TestMode) return Status(status: true);
 

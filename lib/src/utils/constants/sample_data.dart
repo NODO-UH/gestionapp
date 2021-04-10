@@ -23,4 +23,15 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX""";
   static const userConsumedQuota = 70000000;
   static const mailQuota = 50000000;
   static const mailConsumedQuota = 20000000;
+  static const securityQuestions = [
+    "Pregunta 1",
+    "Pregunta 2",
+    "Pregunta 3",
+    "Pregunta 4",
+    "Pregunta 5",
+    "Pregunta 6",
+    "Pregunta 7",
+    "Pregunta 8",
+    "Pregunta 9",
+  ];
 }
