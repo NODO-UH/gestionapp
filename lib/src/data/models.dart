@@ -4,3 +4,4 @@ export 'models/login.dart';
 export 'models/passReset.dart';
 export 'models/status.dart';
 export 'models/mailQuota.dart';
+export 'models/userData.dart';
