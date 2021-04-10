@@ -2,6 +2,12 @@ class SampleData {
   static const user = "user";
   static const userMail = "user@uh.cu";
   static const userPassword = "password";
+  static const userHasCloud = true;
+  static const userHasMail = true;
+  static const userHasInternet = true;
+  static const userPosition = "student";
+  static const userObjectClass = "extern";
+  static const userCareer = "Computer Science";
   static const authToken = """
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
