@@ -75,6 +75,39 @@ class GestionApi {
     return quota;
   }
 
+  Future<MailQuota> getMailQuota() async {
+    if (Constants.TestMode)
+      return MailQuota(
+        quota: SampleData.mailQuota,
+        consumed: SampleData.mailConsumedQuota,
+      );
+
+    Auth tokens = await getTokens();
+    MailQuota mailQuota = new MailQuota();
+
+    if (tokens.error != null) {
+      mailQuota.error = tokens.error;
+      return mailQuota;
+    }
+
+    var headers = {'Authorization': 'Bearer ${tokens.token}'};
+
+    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
+
+    Response<String> response;
+
+    try {
+      response = await dio.get(Constants.mailQuotaUrl);
+    } catch (error) {
+      mailQuota.error = error.toString();
+      return mailQuota;
+    }
+
+    mailQuota = MailQuota.fromJson(jsonDecode(response.data));
+
+    return mailQuota;
+  }
+
   Future<Status> resetPassword(String newPassw) async {
     if (Constants.TestMode) return Status(status: true);
 
