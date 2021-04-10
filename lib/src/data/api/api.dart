@@ -108,6 +108,45 @@ class GestionApi {
     return mailQuota;
   }
 
+  Future<UserData> getUserData() async {
+    if (Constants.TestMode)
+      return UserData(
+        careerName: SampleData.userCareer,
+        email: SampleData.userMail,
+        hasCloud: SampleData.userHasCloud,
+        hasEmail: SampleData.userHasMail,
+        hasInternet: SampleData.userHasInternet,
+        name: SampleData.user,
+        objectClass: SampleData.userObjectClass,
+        position: SampleData.userPosition,
+      );
+
+    Auth tokens = await getTokens();
+    UserData userData = new UserData();
+
+    if (tokens.error != null) {
+      userData.error = tokens.error;
+      return userData;
+    }
+
+    var headers = {'Authorization': 'Bearer ${tokens.token}'};
+
+    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
+
+    Response<String> response;
+
+    try {
+      response = await dio.get(Constants.userDataUrl);
+    } catch (error) {
+      userData.error = error.toString();
+      return userData;
+    }
+
+    userData = UserData.fromJson(jsonDecode(response.data));
+
+    return userData;
+  }
+
   Future<Status> resetPassword(String newPassw) async {
     if (Constants.TestMode) return Status(status: true);
 
