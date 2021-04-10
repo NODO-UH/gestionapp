@@ -8,7 +8,7 @@ class MailQuota extends BaseModel {
   int quota;
   int consumed;
 
-  MailQuota(this.quota, this.consumed);
+  MailQuota({this.quota, this.consumed});
 
   factory MailQuota.fromJson(Map<String, dynamic> json) =>
       _$MailQuotaFromJson(json);
