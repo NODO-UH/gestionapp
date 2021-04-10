@@ -6,3 +6,5 @@ export 'models/status.dart';
 export 'models/mailQuota.dart';
 export 'models/userData.dart';
 export 'models/allSecurityQuestions.dart';
+export 'models/signUpData.dart';
+export 'models/signUpUserId.dart';

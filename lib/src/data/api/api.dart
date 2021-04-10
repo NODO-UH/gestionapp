@@ -207,6 +207,39 @@ class GestionApi {
     return Status(status: true);
   }
 
+  Future<SignUpUserId> signUp(SignUpData data) async {
+    if (Constants.TestMode)
+      return SignUpUserId(
+        userID: SampleData.userMail,
+      );
+
+    Auth tokens = await getTokens();
+
+    SignUpUserId user = new SignUpUserId();
+
+    if (tokens.error != null) {
+      user.error = tokens.error;
+      return user;
+    }
+
+    var headers = {'Authorization': 'Bearer ${tokens.token}'};
+
+    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
+
+    Response<String> response;
+
+    try {
+      response = await dio.post(Constants.signUpUrl, data: data.toJson());
+    } catch (error) {
+      user.error = error.toString();
+      return user;
+    }
+
+    user = SignUpUserId.fromJson(jsonDecode(response.data));
+
+    return user;
+  }
+
   void setLogin(String userName, String password) {
     this.userName = userName;
     this.password = password;
