@@ -103,5 +103,5 @@ class QuotaPart {
 }
 
 int _bytesToMegaBytes(double bytes) {
-  return (bytes / 1048576).toInt();
+  return (bytes / 1000000).toInt();
 }
