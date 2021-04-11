@@ -42,6 +42,12 @@ Future<void> init() async {
     ),
   );
 
+  di.registerLazySingleton<MailQuotasRepository>(
+    () => MailQuotasRepository(
+      api: di(),
+    ),
+  );
+
   //Blocs
   di.registerFactory<LoginBloc>(
     () => LoginBloc(
