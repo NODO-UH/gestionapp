@@ -1,4 +1,4 @@
-import 'package:gestionuh/src/data/models/BaseModel.dart';
+import 'package:gestionuh/src/data/models/base_model.dart';
 
 class Status extends BaseModel {
   bool? status;

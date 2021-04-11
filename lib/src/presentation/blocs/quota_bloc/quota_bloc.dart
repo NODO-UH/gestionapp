@@ -22,7 +22,7 @@ class QuotaBloc extends Bloc<QuotaEvent, QuotaState> {
 
   Stream<QuotaState> handleProfileInitialized(QuotaInitialized event) async* {
     yield QuotaLoadInProgress();
-    var result = await quotasRepository.getQuota();
+    final result = await quotasRepository.getQuota();
     if (result == null) {
       yield QuotaLoadedFailure(
         error: 'Ha ocurrido un error inesperado.',

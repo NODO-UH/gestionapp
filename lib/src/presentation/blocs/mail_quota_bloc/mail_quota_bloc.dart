@@ -23,7 +23,7 @@ class MailQuotaBloc extends Bloc<MailQuotaEvent, MailQuotaState> {
   Stream<MailQuotaState> handleProfileInitialized(
       MailQuotaInitialized event) async* {
     yield MailQuotaLoadInProgress();
-    var result = await mailQuotasRepository.getQuota();
+    final result = await mailQuotasRepository.getQuota();
     if (result == null) {
       yield MailQuotaLoadedFailure(
         error: 'Ha ocurrido un error inesperado.',

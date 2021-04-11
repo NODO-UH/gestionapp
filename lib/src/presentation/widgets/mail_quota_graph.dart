@@ -11,7 +11,7 @@ class MailQuotaGraph extends StatelessWidget {
   const MailQuotaGraph({
     Key? key,
     required this.quota,
-    this.animate: true,
+    this.animate = true,
   }) : super(key: key);
 
   int get consumed => _bytesToMegaBytes(quota.consumed!.toDouble());
@@ -24,13 +24,13 @@ class MailQuotaGraph extends StatelessWidget {
           id: 0,
           title: 'Restantes',
           cant: leftQuota,
-          color: Color.fromARGB(152, 23, 102, 0),
+          color: const Color.fromARGB(152, 23, 102, 0),
         ),
         MailQuotaPart(
           id: 2,
           title: 'Ocupado',
           cant: consumed,
-          color: Color.fromARGB(152, 153, 0, 0),
+          color: const Color.fromARGB(152, 153, 0, 0),
         ),
       ];
 
@@ -45,7 +45,7 @@ class MailQuotaGraph extends StatelessWidget {
           style: Theme.of(context).textTheme.subtitle2,
         ),
         Container(
-          margin: EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
           height: 250,
           child: PieChart(
             PieChartData(

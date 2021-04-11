@@ -23,7 +23,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Stream<ProfileState> handleProfileInitialized(
       ProfileInitialized event) async* {
     yield ProfileLoadInProgress();
-    var result = await profileRepository.getUserData();
+    final result = await profileRepository.getUserData();
     if (result == null) {
       yield ProfileLoadedFailure(
         error: 'Ha ocurrido un error inesperado.',

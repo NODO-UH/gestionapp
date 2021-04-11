@@ -6,7 +6,7 @@ import '../widgets.dart';
 import '../widgets/bottom_sheet.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -17,9 +17,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perfil'),
+        title: const Text('Perfil'),
       ),
-      bottomSheet: GestionUHBottomSheet(),
+      bottomSheet: const GestionUHBottomSheet(),
       drawer: DefaultDrawer(),
       body: BlocConsumer<ProfileBloc, ProfileState>(
         listener: (context, state) {},
@@ -30,10 +30,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 context.read<ProfileBloc>().add(ProfileInitialized());
               },
               child: ListView(
-                physics: AlwaysScrollableScrollPhysics(),
+                physics: const AlwaysScrollableScrollPhysics(),
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                         top: 30, bottom: 9, left: 18, right: 18),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -50,15 +50,15 @@ class _ProfilePageState extends State<ProfilePage> {
             return ListView(
               children: [
                 Padding(
-                  padding:
-                      EdgeInsets.only(top: 30, bottom: 9, left: 18, right: 18),
+                  padding: const EdgeInsets.only(
+                      top: 30, bottom: 9, left: 18, right: 18),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('${state.error}'),
+                      Text(state.error),
                       Padding(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         child: GestionUhDefaultButton(
                           text: 'Reintentar',
                           onPressed: () {
@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+              children: const [
                 GestionUhLoadingIndicator(),
               ],
             ),

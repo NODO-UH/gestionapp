@@ -18,7 +18,7 @@ Future<void> init() async {
   di.registerSingleton<SharedPreferences>(sharedPrefs);
 
   di.registerLazySingleton(
-    () => FlutterSecureStorage(),
+    () => const FlutterSecureStorage(),
   );
 
   di.registerLazySingleton<ILocalStorage>(

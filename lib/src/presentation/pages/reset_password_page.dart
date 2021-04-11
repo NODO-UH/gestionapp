@@ -10,16 +10,16 @@ import '../widgets.dart';
 import '../widgets/bottom_sheet.dart';
 
 class ResetPasswordPage extends StatefulWidget {
-  ResetPasswordPage({Key? key}) : super(key: key);
+  const ResetPasswordPage({Key? key}) : super(key: key);
 
   @override
   _ResetPasswordPageState createState() => _ResetPasswordPageState();
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
-  TextEditingController _passwordFirstController = TextEditingController();
-  TextEditingController _passwordSecondController = TextEditingController();
-  GlobalKey<FormState> _formPasswordKey = GlobalKey<FormState>();
+  final _passwordFirstController = TextEditingController();
+  final _passwordSecondController = TextEditingController();
+  final _formPasswordKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -32,9 +32,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Cambiar Contraseña'),
+          title: const Text('Cambiar Contraseña'),
         ),
-        bottomSheet: GestionUHBottomSheet(),
+        bottomSheet: const GestionUHBottomSheet(),
         body: BlocConsumer<ResetPasswordBloc, ResetPasswordState>(
           listener: (context, state) {
             if (state is ResetPasswordInitial) {
@@ -53,16 +53,17 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           builder: (context, state) {
             return SingleChildScrollView(
               child: Padding(
-                padding:
-                    EdgeInsets.only(top: 30, bottom: 9, left: 18, right: 18),
+                padding: const EdgeInsets.only(
+                    top: 30, bottom: 9, left: 18, right: 18),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     // Hints Area
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 5.0, vertical: 16.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 5.0,
+                        vertical: 16.0,
+                      ),
                       child: RichText(
                         text: TextSpan(
                             style: Theme.of(context)
@@ -74,20 +75,20 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                 text: 'Su nueva contraseña debe tener:\n',
                                 style: Theme.of(context).textTheme.headline6,
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: '(1) Más de 8 caracteres.\n',
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: '(2) Al menos una minúscula.\n',
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: '(3) Al menos una mayúscula.\n',
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text:
                                     '(4) Al menos un caracter especial, Ej. !\$@+.\n',
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: '(5) Al menos un número.\n',
                               ),
                             ]),
@@ -99,7 +100,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       key: _formPasswordKey,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -109,13 +109,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               validator: safetyPasswordValidator,
                               autovalidateMode: AutovalidateMode.disabled,
                               keyboardType: TextInputType.visiblePassword,
-                              borderRadius: BorderRadius.only(
-                                topLeft: const Radius.circular(5),
-                                bottomLeft: const Radius.circular(5),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Padding(
@@ -126,16 +126,16 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               validator: safetyPasswordValidator,
                               autovalidateMode: AutovalidateMode.disabled,
                               keyboardType: TextInputType.visiblePassword,
-                              borderRadius: BorderRadius.only(
-                                topLeft: const Radius.circular(5),
-                                bottomLeft: const Radius.circular(5),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                     GestionUhDefaultButton(
@@ -154,8 +154,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   void _resetPassword(BuildContext context) {
     if (_formPasswordKey.currentState!.validate()) {
-      String passwordFirst = _passwordFirstController.text;
-      String passwordSecond = _passwordSecondController.text;
+      final String passwordFirst = _passwordFirstController.text;
+      final String passwordSecond = _passwordSecondController.text;
       log("Password 1 $passwordFirst");
       log("Password 2 $passwordSecond");
       context.read<ResetPasswordBloc>().add(
@@ -174,7 +174,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   }) {
     showFlash(
       context: context,
-      duration: Duration(seconds: 5),
+      duration: const Duration(seconds: 5),
       builder: (_, controller) {
         return Flash(
           controller: controller,
@@ -189,7 +189,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: DefaultTextStyle(
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               child: Text(
                 message,
               ),

@@ -1,9 +1,9 @@
-import 'package:gestionuh/src/data/models/BaseModel.dart';
+import 'package:gestionuh/src/data/models/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'signUpData.g.dart';
+part 'sign_up_data.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class SignUpData extends BaseModel {
   List<String>? answers;
   String? ci;
@@ -12,7 +12,7 @@ class SignUpData extends BaseModel {
 
   SignUpData({this.answers, this.ci, this.password, this.questions});
 
-  factory SignUpData.fromJson(Map<String, dynamic> json) =>
+  static SignUpData fromJson(Map<String, dynamic> json) =>
       _$SignUpDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$SignUpDataToJson(this);

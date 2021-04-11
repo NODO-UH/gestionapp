@@ -21,16 +21,17 @@ class _RegisterPageState extends State<RegisterPage> {
   late List<Pair<String, int>> questions;
   late List<int> questionsTaken;
 
-  //
   late List<TextEditingController> answersTextControllers;
   TextEditingController ciController = TextEditingController();
   TextEditingController passwordFirstController = TextEditingController();
   TextEditingController passwordSecondController = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    answersTextControllers.forEach((element) => element.dispose());
+    for (final element in answersTextControllers) {
+      element.dispose();
+    }
     ciController.dispose();
     passwordFirstController.dispose();
     passwordSecondController.dispose();
@@ -48,22 +49,24 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  _onRegisterAction() {
-    if (!(_formKey.currentState?.validate() ?? false)) return false;
+  void _onRegisterAction() {
+    if (!(_formKey.currentState?.validate() ?? false)) return;
     if (questionsTaken.where((element) => element != -1).length !=
-        NUMBER_OF_SECURITY_QUESTIONS_NEEDED) return false;
-    var _questions =
+        NUMBER_OF_SECURITY_QUESTIONS_NEEDED) return;
+    final _questions =
         questions.map((e) => questionsTaken[e.second] >= 0 ? e : null).toList();
     _questions.removeWhere((element) => element == null);
     _questions.sort((e1, e2) =>
         questionsTaken[e1!.second].compareTo(questionsTaken[e2!.second]));
-    return context.read<RegisterBloc>().add(FormsEnteredRegister(
-          ci: ciController.text,
-          passwordFirst: passwordFirstController.text,
-          passwordSecond: passwordSecondController.text,
-          questions: _questions.map((e) => e!.first).toList(),
-          answers: answersTextControllers.map((e) => e.text).toList(),
-        ));
+    context.read<RegisterBloc>().add(
+          FormsEnteredRegister(
+            ci: ciController.text,
+            passwordFirst: passwordFirstController.text,
+            passwordSecond: passwordSecondController.text,
+            questions: _questions.map((e) => e!.first).toList(),
+            answers: answersTextControllers.map((e) => e.text).toList(),
+          ),
+        );
   }
 
   @override
@@ -74,9 +77,9 @@ class _RegisterPageState extends State<RegisterPage> {
         .copyWith(color: Theme.of(context).primaryColor, fontSize: 16);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Registrar'),
+        title: const Text('Registrar'),
       ),
-      bottomSheet: GestionUHBottomSheet(),
+      bottomSheet: const GestionUHBottomSheet(),
       body: BlocConsumer<RegisterBloc, RegisterState>(
         listener: (context, state) async {
           if (state is RegisterUserFailure) {
@@ -86,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
             );
           } else if (state is LoadInitialDataFailure) {
             Future.delayed(
-              Duration(seconds: 2),
+              const Duration(seconds: 2),
               () => context
                   .read<RegisterBloc>()
                   .add(QuestionsRequestedRegister()),
@@ -98,14 +101,14 @@ class _RegisterPageState extends State<RegisterPage> {
               borderColor: Colors.green,
             );
             Future.delayed(
-                Duration(seconds: 4),
+                const Duration(seconds: 4),
                 () => Navigator.of(context)
                   ..popUntil((_) => Navigator.of(context).canPop())
                   ..pushNamed(LOGIN_ROUTE_NAME));
           }
         },
         builder: (context, state) {
-          if (state is LoadInitialDataSuccess && questions.length == 0) {
+          if (state is LoadInitialDataSuccess && questions.isEmpty) {
             int i = 0;
             questions = state.questions
                 .map((e) => Pair(first: e, second: i++))
@@ -114,25 +117,23 @@ class _RegisterPageState extends State<RegisterPage> {
           }
           return SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(top: 30, bottom: 9, left: 18, right: 18),
+              padding: const EdgeInsets.only(
+                  top: 30, bottom: 9, left: 18, right: 18),
               child: Form(
                 key: _formKey,
                 autovalidateMode: AutovalidateMode.disabled,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      child: Text(
-                        'Todos los campos son obligatorios.*',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(fontSize: 14, color: Colors.black45),
-                        textAlign: TextAlign.center,
-                      ),
+                    Text(
+                      'Todos los campos son obligatorios.*',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6!
+                          .copyWith(fontSize: 14, color: Colors.black45),
+                      textAlign: TextAlign.center,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Column(
@@ -150,7 +151,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             keyboardType: TextInputType.number,
                           ),
                         ]),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Column(
@@ -166,13 +167,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             controller: passwordFirstController,
                             validator: safetyPasswordValidator,
                             keyboardType: TextInputType.visiblePassword,
-                            borderRadius: BorderRadius.only(
-                              topLeft: const Radius.circular(5),
-                              bottomLeft: const Radius.circular(5),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
                             ),
                           ),
                         ]),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Column(
@@ -188,13 +189,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             controller: passwordSecondController,
                             validator: safetyPasswordValidator,
                             keyboardType: TextInputType.visiblePassword,
-                            borderRadius: BorderRadius.only(
-                              topLeft: const Radius.circular(5),
-                              bottomLeft: const Radius.circular(5),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
                             ),
                           ),
                         ]),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Text(
@@ -208,7 +209,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: () {
-                        var childrenQuest = <Widget>[];
+                        final childrenQuest = <Widget>[];
                         for (int i = 0;
                             i < NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
                             i++) {
@@ -217,12 +218,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         return childrenQuest;
                       }(),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     GestionUhDefaultButton(
                       text: 'Registrar',
                       onPressed: _onRegisterAction,
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                   ],
                 ),
               ),
@@ -247,13 +248,13 @@ class _RegisterPageState extends State<RegisterPage> {
         .headline6!
         .copyWith(color: Theme.of(context).primaryColor, fontSize: 16);
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 5),
-      padding: EdgeInsets.symmetric(vertical: 15),
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           DropdownButton(
-            icon: Icon(Icons.add_box_outlined),
+            icon: const Icon(Icons.add_box_outlined),
             isDense: true,
             isExpanded: true,
             hint: Text(
@@ -263,22 +264,22 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             items: questions
                 .map((option) => DropdownMenuItem<Pair<String, int>>(
+                      value: option,
                       child: Text(
                         option.first,
                         maxLines: 3,
                         style: headlineTextsTheme,
                       ),
-                      value: option,
                     ))
                 .toList(),
-            value: questionsTaken.indexOf(index) != -1
+            value: questionsTaken.contains(index)
                 ? questions[questionsTaken.indexOf(index)]
                 : getFirstQuestionNotOccupeid(index),
             onChanged: (Pair<String, int>? value) {
               setState(() {
-                if (questionsTaken.indexOf(index) != -1) {
+                if (questionsTaken.contains(index)) {
                   // clean text boxs
-                  var oldIndex = questionsTaken.indexOf(index);
+                  final oldIndex = questionsTaken.indexOf(index);
                   questionsTaken[oldIndex] = -1;
                   answersTextControllers[oldIndex].clear();
                 }
@@ -287,13 +288,14 @@ class _RegisterPageState extends State<RegisterPage> {
               });
             },
           ),
-          questionsTaken.indexOf(index) != -1
-              ? GestionUhDefaultTextField(
-                  hintText: 'Respuesta No.${index + 1}',
-                  validator: answerValidator,
-                  controller: answersTextControllers[index],
-                )
-              : Container(),
+          if (questionsTaken.contains(index))
+            GestionUhDefaultTextField(
+              hintText: 'Respuesta No.${index + 1}',
+              validator: answerValidator,
+              controller: answersTextControllers[index],
+            )
+          else
+            Container(),
         ],
       ),
     );
@@ -308,7 +310,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }) {
     showFlash(
       context: context,
-      duration: Duration(seconds: 5),
+      duration: const Duration(seconds: 5),
       builder: (_, controller) {
         return Flash(
           controller: controller,
@@ -323,7 +325,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: DefaultTextStyle(
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               child: Text(
                 message,
               ),
@@ -335,8 +337,8 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Pair<String, int>? getFirstQuestionNotOccupeid(int index) {
-    if (questions.length == 0) return null;
-    var qFree = questions.firstWhereOrNull(
+    if (questions.isEmpty) return null;
+    final qFree = questions.firstWhereOrNull(
       (e) => questionsTaken[e.second] == -1,
     );
     if (qFree == null) return null;

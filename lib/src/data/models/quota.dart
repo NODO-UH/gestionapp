@@ -1,9 +1,9 @@
-import 'package:gestionuh/src/data/models/BaseModel.dart';
+import 'package:gestionuh/src/data/models/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'quota.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Quota extends BaseModel {
   int? quota;
   int? bonus;
@@ -11,7 +11,7 @@ class Quota extends BaseModel {
 
   Quota({this.quota, this.bonus, this.consumed});
 
-  factory Quota.fromJson(Map<String, dynamic> json) => _$QuotaFromJson(json);
+  static Quota fromJson(Map<String, dynamic> json) => _$QuotaFromJson(json);
 
   Map<String, dynamic> toJson() => _$QuotaToJson(this);
 }

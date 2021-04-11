@@ -6,17 +6,15 @@ import 'package:gestionuh/src/utils/constants/routes.dart';
 class DefaultDrawer extends Drawer {
   @override
   Widget build(BuildContext context) {
-    AuthRepository? authRepo = di<AuthRepository>();
+    final authRepo = di<AuthRepository>();
     return Drawer(
-      key: key == null ? UniqueKey() : key,
+      key: key ?? UniqueKey(),
       child: ListView(
         children: [
           DrawerHeader(
-            child: Container(
-              child: Image.asset(
-                "assets/images/logo-uh.png",
-                color: Theme.of(context).primaryColor,
-              ),
+            child: Image.asset(
+              "assets/images/logo-uh.png",
+              color: Theme.of(context).primaryColor,
             ),
           ),
           _buildDrawerItem(
@@ -73,7 +71,7 @@ class DefaultDrawer extends Drawer {
                 ..pushReplacementNamed(LOGIN_ROUTE_NAME);
             },
           ),
-          Divider(),
+          const Divider(),
           _buildDrawerItem(
             context: context,
             text: 'Acerca de',

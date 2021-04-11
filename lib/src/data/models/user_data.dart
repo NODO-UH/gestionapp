@@ -1,9 +1,9 @@
-import 'package:gestionuh/src/data/models/BaseModel.dart';
+import 'package:gestionuh/src/data/models/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'userData.g.dart';
+part 'user_data.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class UserData extends BaseModel {
   String? careerName;
   String? email;
@@ -25,7 +25,7 @@ class UserData extends BaseModel {
     this.position,
   });
 
-  factory UserData.fromJson(Map<String, dynamic> json) =>
+  static UserData fromJson(Map<String, dynamic> json) =>
       _$UserDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserDataToJson(this);

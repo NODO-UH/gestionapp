@@ -13,7 +13,7 @@ class GestionUhDefaultTextField extends StatefulWidget {
   final Function? onTap;
   final List<TextInputFormatter>? inputFormatters;
 
-  GestionUhDefaultTextField({
+  const GestionUhDefaultTextField({
     Key? key,
     this.controller,
     this.style,
@@ -42,8 +42,11 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
   @override
   void initState() {
     super.initState();
-    _obscureText =
-        widget.keyboardType == TextInputType.visiblePassword ? true : false;
+    if (widget.keyboardType != TextInputType.visiblePassword) {
+      _obscureText = false;
+    } else {
+      _obscureText = true;
+    }
   }
 
   void _toggleVisible() {
@@ -63,11 +66,7 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
             inputFormatters: widget.inputFormatters ?? [],
             autovalidateMode:
                 widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
-            autofocus: false,
-            style: widget.style ??
-                TextStyle(
-                  fontSize: 17,
-                ),
+            style: widget.style ?? const TextStyle(fontSize: 17),
             onChanged: widget.onChanged,
             onTap: widget.onTap as void Function()?,
             controller: widget.controller,
@@ -80,7 +79,7 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
             decoration: InputDecoration(
               fillColor: Theme.of(context).cardColor,
               filled: true,
-              contentPadding: EdgeInsets.only(left: 10),
+              contentPadding: const EdgeInsets.only(left: 10),
               labelStyle: widget.labelStyle ??
                   Theme.of(context)
                       .textTheme
@@ -89,33 +88,33 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
               hintStyle:
                   widget.hintStyle ?? Theme.of(context).textTheme.bodyText1,
               enabledBorder: OutlineInputBorder(
-                borderRadius:
-                    widget.borderRadius ?? BorderRadius.all(Radius.circular(5)),
+                borderRadius: widget.borderRadius ??
+                    const BorderRadius.all(Radius.circular(5)),
                 borderSide: BorderSide(
-                  style: BorderStyle.solid,
                   color: Colors.grey[300]!,
                 ),
               ),
               border: OutlineInputBorder(
-                borderRadius:
-                    widget.borderRadius ?? BorderRadius.all(Radius.circular(5)),
+                borderRadius: widget.borderRadius ??
+                    const BorderRadius.all(
+                      Radius.circular(5),
+                    ),
                 borderSide: BorderSide(
-                  style: BorderStyle.solid,
                   color: Colors.grey[300]!,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius:
-                    widget.borderRadius ?? BorderRadius.all(Radius.circular(5)),
-                borderSide: BorderSide(
-                  style: BorderStyle.solid,
-                ),
+                borderRadius: widget.borderRadius ??
+                    const BorderRadius.all(
+                      Radius.circular(5),
+                    ),
               ),
               errorBorder: OutlineInputBorder(
-                borderRadius:
-                    widget.borderRadius ?? BorderRadius.all(Radius.circular(5)),
+                borderRadius: widget.borderRadius ??
+                    const BorderRadius.all(
+                      Radius.circular(5),
+                    ),
                 borderSide: BorderSide(
-                  style: BorderStyle.solid,
                   color: Colors.red.withOpacity(.5),
                 ),
               ),
@@ -130,6 +129,12 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
             child: Material(
               color: Theme.of(context).primaryColor,
               clipBehavior: Clip.antiAlias,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(5),
+                  bottomRight: Radius.circular(20),
+                ),
+              ),
               child: IconButton(
                 color: Colors.red,
                 icon: Icon(
@@ -137,12 +142,6 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
                   color: Theme.of(context).cardColor,
                 ),
                 onPressed: _toggleVisible,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(5),
-                  bottomRight: Radius.circular(20),
-                ),
               ),
             ),
           ),

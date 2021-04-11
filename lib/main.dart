@@ -4,7 +4,7 @@ import 'app.dart';
 import 'deps_injector.dart';
 import 'src/data/repository/auth_repository/auth_repository.dart';
 
-void main() async {
+Future<void> main() async {
   await initialize();
   runApp(GestionUhApp());
 }

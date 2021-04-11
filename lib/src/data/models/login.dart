@@ -1,16 +1,16 @@
-import 'package:gestionuh/src/data/models/BaseModel.dart';
+import 'package:gestionuh/src/data/models/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'login.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Login extends BaseModel {
   String? user;
   String? password;
 
   Login(this.user, this.password);
 
-  factory Login.fromJson(Map<String, dynamic> json) => _$LoginFromJson(json);
+  static Login fromJson(Map<String, dynamic> json) => _$LoginFromJson(json);
 
   Map<String, dynamic> toJson() => _$LoginToJson(this);
 }

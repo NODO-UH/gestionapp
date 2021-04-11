@@ -24,8 +24,6 @@ class LocalStorage implements ILocalStorage {
   final SessionData sessionData = SessionData(
     userName: '',
     password: '',
-    isLoggedInto: false,
-    rememberMe: false,
   );
   final SharedPreferences prefs;
   final FlutterSecureStorage secureStorage;
@@ -35,10 +33,11 @@ class LocalStorage implements ILocalStorage {
     required this.secureStorage,
   });
 
+  @override
   Future<void> loadSession() async {
     if (prefs.containsKey(USER_LOGGED_INTO) &&
         prefs.getBool(USER_LOGGED_INTO)!) {
-      var info = await secureStorage.readAll();
+      final info = await secureStorage.readAll();
       sessionData.rememberMe = prefs.containsKey(USER_LOGGED_INTO) &&
           prefs.getBool(USER_LOGGED_INTO)!;
       sessionData.isLoggedInto = true;
@@ -50,12 +49,13 @@ class LocalStorage implements ILocalStorage {
   //Account-Credentials
   @override
   Future<Map<String, dynamic>?> getCredentials() async {
-    if (sessionData.isLoggedInto)
+    if (sessionData.isLoggedInto) {
       return {
         USER_NAME: sessionData.userName,
         USER_PASSWORD: sessionData.password,
         USER_REMEMBERME: sessionData.rememberMe,
       };
+    }
     return null;
   }
 
@@ -88,11 +88,12 @@ class LocalStorage implements ILocalStorage {
   Future<void> invalidateCredentials() async {
     await prefs.setBool(USER_LOGGED_INTO, false);
     await prefs.setBool(USER_REMEMBERME, false);
-    if (await secureStorage.containsKey(key: USER_NAME))
+    if (await secureStorage.containsKey(key: USER_NAME)) {
       await secureStorage.delete(key: USER_NAME);
-    if (await secureStorage.containsKey(key: USER_PASSWORD))
+    }
+    if (await secureStorage.containsKey(key: USER_PASSWORD)) {
       await secureStorage.delete(key: USER_PASSWORD);
-    //
+    }
     sessionData.isLoggedInto = false;
     sessionData.rememberMe = false;
   }

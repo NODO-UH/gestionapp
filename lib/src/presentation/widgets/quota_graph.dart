@@ -11,7 +11,7 @@ class QuotaGraph extends StatelessWidget {
   const QuotaGraph({
     Key? key,
     required this.quota,
-    this.animate: true,
+    this.animate = true,
   }) : super(key: key);
 
   int get consumed => _bytesToMegaBytes(quota.consumed!.toDouble());
@@ -28,19 +28,19 @@ class QuotaGraph extends StatelessWidget {
           id: 0,
           title: 'Restantes',
           cant: leftQuota,
-          color: Color.fromARGB(152, 23, 102, 0),
+          color: const Color.fromARGB(152, 23, 102, 0),
         ),
         QuotaPart(
           id: 1,
           title: 'Bono',
           cant: leftBonus,
-          color: Color.fromARGB(152, 0, 82, 153),
+          color: const Color.fromARGB(152, 0, 82, 153),
         ),
         QuotaPart(
           id: 2,
           title: 'Consumido',
           cant: consumed,
-          color: Color.fromARGB(152, 153, 0, 0),
+          color: const Color.fromARGB(152, 153, 0, 0),
         ),
       ];
 
@@ -55,7 +55,7 @@ class QuotaGraph extends StatelessWidget {
           style: Theme.of(context).textTheme.subtitle2,
         ),
         Container(
-          margin: EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
           height: 250,
           child: PieChart(
             PieChartData(

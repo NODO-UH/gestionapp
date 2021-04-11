@@ -10,7 +10,7 @@ class GestionUhDefaultButton extends StatelessWidget {
   final String? text;
   final IconData? icon;
 
-  GestionUhDefaultButton({
+  const GestionUhDefaultButton({
     this.child,
     this.shape,
     this.isSecundary = false,
@@ -26,31 +26,34 @@ class GestionUhDefaultButton extends StatelessWidget {
       height: 40,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary:
-                isSecundary ? Theme.of(context).cardColor : primaryBrandColor,
-            animationDuration: Duration(microseconds: 300),
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-            shape: shape as OutlinedBorder? ??
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                )),
+          primary:
+              isSecundary ? Theme.of(context).cardColor : primaryBrandColor,
+          animationDuration: const Duration(microseconds: 300),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+          shape: shape as OutlinedBorder? ??
+              const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ),
+        ),
         onPressed: onPressed,
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (this.text == null && this.icon == null) child!,
-              if (this.text != null)
-                Text(this.text!,
+              if (text == null && icon == null) child!,
+              if (text != null)
+                Text(text!,
                     textScaleFactor: 1.25,
                     style: isSecundary
                         ? Theme.of(context).textTheme.bodyText2
                         : Theme.of(context).primaryTextTheme.button),
-              if (this.text != null && this.icon != null)
-                SizedBox(
+              if (text != null && icon != null)
+                const SizedBox(
                   width: 5,
                 ),
-              if (this.icon != null)
+              if (icon != null)
                 if (onPressed == null)
                   Icon(icon, color: Theme.of(context).cardColor)
                 else

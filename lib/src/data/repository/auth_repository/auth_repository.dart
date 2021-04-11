@@ -18,9 +18,10 @@ class AuthRepository {
   Future<void> initialize() async {
     await localStorage.loadSession();
     if (logged) {
-      var credentials = await localStorage.getCredentials();
+      final credentials = await localStorage.getCredentials();
       if (credentials != null) {
-        api.setLogin(credentials[USER_NAME], credentials[USER_PASSWORD]);
+        api.setLogin(credentials[USER_NAME] as String,
+            credentials[USER_PASSWORD] as String);
       }
     }
   }
@@ -43,7 +44,6 @@ class AuthRepository {
         await localStorage.updateCredentials(
           userName: username,
           password: password,
-          isLoggedInto: true,
           persist: remmemberMe,
         );
       }
@@ -73,12 +73,11 @@ class AuthRepository {
       }
 
       // save new password
-      api.setLogin(credentials[USER_NAME], password);
+      api.setLogin(credentials[USER_NAME] as String, password);
       localStorage.updateCredentials(
-        userName: credentials[USER_NAME],
+        userName: credentials[USER_NAME] as String,
         password: password,
-        isLoggedInto: true,
-        persist: credentials[USER_REMEMBERME],
+        persist: credentials[USER_REMEMBERME] as bool,
       );
 
       return status;
@@ -89,10 +88,8 @@ class AuthRepository {
   }
 
   Future<AllSecurityQuestions> getSecurityQuestions() async {
-    AllSecurityQuestions secQuestions;
     try {
-      secQuestions = await api.getAllSecurityQuestions();
-      return secQuestions;
+      return await api.getAllSecurityQuestions();
     } catch (e) {
       log(e.toString());
       return AllSecurityQuestions()..error = e.toString();
@@ -100,10 +97,8 @@ class AuthRepository {
   }
 
   Future<SignUpUserId> sendRegistration(SignUpData regData) async {
-    SignUpUserId userId;
     try {
-      userId = await api.signUp(regData);
-      return userId;
+      return await api.signUp(regData);
     } catch (e) {
       log(e.toString());
       return SignUpUserId()..error = e.toString();

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'mailQuota.dart';
+part of 'mail_quota.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

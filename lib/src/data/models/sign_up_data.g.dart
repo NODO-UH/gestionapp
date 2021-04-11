@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'signUpData.dart';
+part of 'sign_up_data.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -8,10 +8,12 @@ part of 'signUpData.dart';
 
 SignUpData _$SignUpDataFromJson(Map<String, dynamic> json) {
   return SignUpData(
-    answers: (json['answers'] as List?)?.map((e) => e as String).toList(),
+    answers:
+        (json['answers'] as List<dynamic>?)?.map((e) => e as String).toList(),
     ci: json['ci'] as String?,
     password: json['password'] as String?,
-    questions: (json['questions'] as List?)?.map((e) => e as String).toList(),
+    questions:
+        (json['questions'] as List<dynamic>?)?.map((e) => e as String).toList(),
   );
 }
 

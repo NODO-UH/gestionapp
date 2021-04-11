@@ -6,7 +6,7 @@ import '../widgets.dart';
 import '../widgets/bottom_sheet.dart';
 
 class QuotaPage extends StatefulWidget {
-  QuotaPage({Key? key}) : super(key: key);
+  const QuotaPage({Key? key}) : super(key: key);
 
   @override
   _QuotaPageState createState() => _QuotaPageState();
@@ -17,9 +17,9 @@ class _QuotaPageState extends State<QuotaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mi Cuota'),
+        title: const Text('Mi Cuota'),
       ),
-      bottomSheet: GestionUHBottomSheet(),
+      bottomSheet: const GestionUHBottomSheet(),
       drawer: DefaultDrawer(),
       body: BlocConsumer<QuotaBloc, QuotaState>(
         listener: (context, state) {},
@@ -30,10 +30,10 @@ class _QuotaPageState extends State<QuotaPage> {
                 context.read<QuotaBloc>().add(QuotaInitialized());
               },
               child: ListView(
-                physics: AlwaysScrollableScrollPhysics(),
+                physics: const AlwaysScrollableScrollPhysics(),
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                         top: 30, bottom: 9, left: 18, right: 18),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -54,15 +54,15 @@ class _QuotaPageState extends State<QuotaPage> {
             return ListView(
               children: [
                 Padding(
-                  padding:
-                      EdgeInsets.only(top: 30, bottom: 9, left: 18, right: 18),
+                  padding: const EdgeInsets.only(
+                      top: 30, bottom: 9, left: 18, right: 18),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('${state.error}'),
+                      Text(state.error),
                       Padding(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         child: GestionUhDefaultButton(
                           text: 'Reintentar',
                           onPressed: () {
@@ -81,7 +81,7 @@ class _QuotaPageState extends State<QuotaPage> {
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+              children: const [
                 GestionUhLoadingIndicator(),
               ],
             ),
