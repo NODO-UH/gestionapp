@@ -42,6 +42,12 @@ Future<void> init() async {
     ),
   );
 
+  di.registerLazySingleton<MailQuotasRepository>(
+    () => MailQuotasRepository(
+      api: di(),
+    ),
+  );
+
   //Blocs
   di.registerFactory<LoginBloc>(
     () => LoginBloc(
@@ -58,6 +64,12 @@ Future<void> init() async {
   di.registerFactory<ResetPasswordBloc>(
     () => ResetPasswordBloc(
       authRepository: di(),
+    ),
+  );
+
+  di.registerFactory<MailQuotaBloc>(
+    () => MailQuotaBloc(
+      mailQuotasRepository: di(),
     ),
   );
 }

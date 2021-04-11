@@ -5,36 +5,28 @@ import 'package:charts_flutter/flutter.dart' as charts;
 
 import 'package:gestionuh/src/data/models.dart';
 
-class QuotaGraph extends StatelessWidget {
-  final Quota quota;
+class MailQuotaGraph extends StatelessWidget {
+  final MailQuota quota;
   final bool animate;
   int get consumed => _bytesToMegaBytes(quota.consumed.toDouble());
-  int get leftBonus =>
-      _bytesToMegaBytes(max(quota.bonus - quota.consumed, 0).toDouble());
   int get leftQuota => _bytesToMegaBytes(
-      min(quota.quota + quota.bonus - quota.consumed, quota.quota).toDouble());
-  List<QuotaPart> get data => [
-        QuotaPart(
+      min(quota.quota - quota.consumed, quota.quota).toDouble());
+  List<MailQuotaPart> get data => [
+        MailQuotaPart(
           id: 0,
           title: 'Restantes',
           cant: leftQuota,
           color: charts.Color(a: 152, r: 23, g: 102, b: 0),
         ),
-        QuotaPart(
-          id: 1,
-          title: 'Bono',
-          cant: leftBonus,
-          color: charts.Color(a: 152, r: 0, g: 82, b: 153),
-        ),
-        QuotaPart(
+        MailQuotaPart(
           id: 2,
-          title: 'Consumido',
+          title: 'Ocupado',
           cant: consumed,
           color: charts.Color(a: 152, r: 153, g: 0, b: 0),
         ),
       ];
 
-  const QuotaGraph({
+  const MailQuotaGraph({
     Key key,
     this.quota,
     this.animate: true,
@@ -74,9 +66,9 @@ class QuotaGraph extends StatelessWidget {
     );
   }
 
-  List<charts.Series<QuotaPart, String>> _buildData() {
+  List<charts.Series<MailQuotaPart, String>> _buildData() {
     return [
-      charts.Series<QuotaPart, String>(
+      charts.Series<MailQuotaPart, String>(
         id: 'Consumo (mb)',
         data: data,
         domainFn: (datum, index) => datum.title,
@@ -88,13 +80,13 @@ class QuotaGraph extends StatelessWidget {
   }
 }
 
-class QuotaPart {
+class MailQuotaPart {
   int id;
   String title;
   int cant;
   charts.Color color;
 
-  QuotaPart({
+  MailQuotaPart({
     this.id,
     this.title,
     this.cant,
@@ -103,5 +95,5 @@ class QuotaPart {
 }
 
 int _bytesToMegaBytes(double bytes) {
-  return (bytes / 1048576).toInt();
+  return bytes ~/ 1048576;
 }

@@ -31,6 +31,15 @@ class DefaultDrawer extends Drawer {
             },
           ),
           _buildDrawerItem(
+              context: context,
+              text: 'Correo',
+              icon: Icons.mail,
+              onTap: () {
+                Navigator.of(context)
+                  ..pop()
+                  ..pushReplacementNamed(MAIL_ROUTE_NAME);
+              }),
+          _buildDrawerItem(
             context: context,
             text: 'Cambiar Contraseña',
             icon: Icons.security_rounded,

@@ -42,6 +42,13 @@ class GestionUhApp extends StatelessWidget {
                 child: QuotaPage(),
               ),
             );
+          case MAIL_ROUTE_NAME:
+            return MaterialPageRoute(
+              builder: (_) => BlocProvider<MailQuotaBloc>(
+                create: (_) => di()..add(MailQuotaInitialized()),
+                child: MailQuotaPage(),
+              ),
+            );
           case RESET_PASSWORD_ROUTE_NAME:
             return MaterialPageRoute(
               builder: (_) => BlocProvider<ResetPasswordBloc>(
