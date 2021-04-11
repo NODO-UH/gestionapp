@@ -1,5 +1,4 @@
 import 'package:flash/flash.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,6 +29,10 @@ class _LoginPageState extends State<LoginPage> {
             rememberMe: _rememberMe,
           ),
         );
+  }
+
+  void _registerAction(BuildContext context) {
+    Navigator.of(context).pushNamed(REGISTER_ROUTE_NAME);
   }
 
   @override
@@ -126,6 +129,13 @@ class _LoginPageState extends State<LoginPage> {
                     GestionUhDefaultButton(
                       text: 'Iniciar Sesión',
                       onPressed: () => _loginAction(context),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    GestionUhDefaultButton(
+                      text: 'Registrar',
+                      onPressed: () => _registerAction(context),
                     ),
                   ],
                 ),
