@@ -1,44 +1,47 @@
 import 'dart:math';
 
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
-
 import 'package:gestionuh/src/data/models.dart';
 
 class QuotaGraph extends StatelessWidget {
   final Quota quota;
   final bool animate;
-  int get consumed => _bytesToMegaBytes(quota.consumed.toDouble());
-  int get leftBonus =>
-      _bytesToMegaBytes(max(quota.bonus - quota.consumed, 0).toDouble());
-  int get leftQuota => _bytesToMegaBytes(
-      min(quota.quota + quota.bonus - quota.consumed, quota.quota).toDouble());
-  List<QuotaPart> get data => [
-        QuotaPart(
-          id: 0,
-          title: 'Restantes',
-          cant: leftQuota,
-          color: charts.Color(a: 152, r: 23, g: 102, b: 0),
-        ),
-        QuotaPart(
-          id: 1,
-          title: 'Bono',
-          cant: leftBonus,
-          color: charts.Color(a: 152, r: 0, g: 82, b: 153),
-        ),
-        QuotaPart(
-          id: 2,
-          title: 'Consumido',
-          cant: consumed,
-          color: charts.Color(a: 152, r: 153, g: 0, b: 0),
-        ),
-      ];
 
   const QuotaGraph({
     Key key,
     this.quota,
     this.animate: true,
   }) : super(key: key);
+
+  int get consumed => _bytesToMegaBytes(quota.consumed.toDouble());
+
+  int get leftBonus =>
+      _bytesToMegaBytes(max(quota.bonus - quota.consumed, 0).toDouble());
+
+  int get leftQuota => _bytesToMegaBytes(
+      min(quota.quota + quota.bonus - quota.consumed, quota.quota).toDouble());
+
+  List<QuotaPart> get data => [
+        QuotaPart(
+          id: 0,
+          title: 'Restantes',
+          cant: leftQuota,
+          color: Color.fromARGB(152, 23, 102, 0),
+        ),
+        QuotaPart(
+          id: 1,
+          title: 'Bono',
+          cant: leftBonus,
+          color: Color.fromARGB(152, 0, 82, 153),
+        ),
+        QuotaPart(
+          id: 2,
+          title: 'Consumido',
+          cant: consumed,
+          color: Color.fromARGB(152, 153, 0, 0),
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -51,40 +54,42 @@ class QuotaGraph extends StatelessWidget {
           style: Theme.of(context).textTheme.subtitle2,
         ),
         Container(
-          height: 340,
-          child: charts.PieChart(
-            _buildData(),
-            animate: animate,
-            defaultRenderer: charts.ArcRendererConfig(
-              arcWidth: 40,
-            ),
-            behaviors: [
-              charts.DatumLegend(
-                position: charts.BehaviorPosition.bottom,
-                cellPadding: EdgeInsets.all(10),
-                showMeasures: true,
-                legendDefaultMeasure: charts.LegendDefaultMeasure.firstValue,
-                measureFormatter: (measure) => '$measure MB',
-                desiredMaxColumns: 1,
+          margin: EdgeInsets.all(20),
+          height: 250,
+          child: PieChart(
+            PieChartData(
+              borderData: FlBorderData(show: false),
+              sectionsSpace: 0,
+              centerSpaceRadius: MediaQuery.of(context).size.width / 6,
+              sections: List.generate(
+                data.length,
+                (i) => PieChartSectionData(
+                  radius: 50,
+                  color: data[i].color,
+                  value: data[i].cant.toDouble(),
+                  showTitle: false,
+                ),
               ),
-            ],
+            ),
           ),
         ),
+        for (var item in data)
+          ListTile(
+            leading: Icon(
+              Icons.circle,
+              color: item.color,
+            ),
+            title: Text(
+              item.title,
+              style: Theme.of(context).textTheme.subtitle2,
+            ),
+            trailing: Text(
+              '${item.cant} MB',
+              style: Theme.of(context).textTheme.subtitle2,
+            ),
+          ),
       ],
     );
-  }
-
-  List<charts.Series<QuotaPart, String>> _buildData() {
-    return [
-      charts.Series<QuotaPart, String>(
-        id: 'Consumo (mb)',
-        data: data,
-        domainFn: (datum, index) => datum.title,
-        measureFn: (datum, index) => datum.cant,
-        colorFn: (datum, index) => datum.color,
-        labelAccessorFn: (datum, index) => '${datum.title}',
-      ),
-    ];
   }
 }
 
@@ -92,7 +97,7 @@ class QuotaPart {
   int id;
   String title;
   int cant;
-  charts.Color color;
+  Color color;
 
   QuotaPart({
     this.id,
@@ -103,5 +108,5 @@ class QuotaPart {
 }
 
 int _bytesToMegaBytes(double bytes) {
-  return (bytes / 1048576).toInt();
+  return bytes ~/ 1048576;
 }
