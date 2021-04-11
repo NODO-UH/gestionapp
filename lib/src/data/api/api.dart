@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+
 import '../../utils/constants.dart';
 import '../models.dart';
 
@@ -202,7 +203,7 @@ class GestionApi {
   Future<SignUpUserId> signUp(SignUpData data) async {
     if (Constants.TestMode)
       return SignUpUserId(
-        UserID: SampleData.userMail,
+        userID: SampleData.userMail,
       );
 
     SignUpUserId user = new SignUpUserId();

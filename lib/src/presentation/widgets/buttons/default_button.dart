@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:gestionuh/src/presentation/theme.dart';
 
 class GestionUhDefaultButton extends StatelessWidget {
@@ -25,11 +24,16 @@ class GestionUhDefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 40,
-      child: RaisedButton(
-        color: isSecundary ? Theme.of(context).cardColor : primaryBrandColor,
-        splashColor: Theme.of(context).highlightColor,
-        animationDuration: Duration(microseconds: 300),
-        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            primary:
+                isSecundary ? Theme.of(context).cardColor : primaryBrandColor,
+            animationDuration: Duration(microseconds: 300),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+            shape: shape ??
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                )),
         onPressed: onPressed,
         child: Center(
           child: Row(
@@ -54,10 +58,6 @@ class GestionUhDefaultButton extends StatelessWidget {
             ],
           ),
         ),
-        shape: shape ??
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-            ),
       ),
     );
   }

@@ -5,9 +5,9 @@ part 'signUpUserId.g.dart';
 
 @JsonSerializable()
 class SignUpUserId extends BaseModel {
-  String UserID;
+  String userID;
 
-  SignUpUserId({this.UserID});
+  SignUpUserId({this.userID});
 
   factory SignUpUserId.fromJson(Map<String, dynamic> json) =>
       _$SignUpUserIdFromJson(json);

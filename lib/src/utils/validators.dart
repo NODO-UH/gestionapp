@@ -19,9 +19,11 @@ String identityNumberCIValidator(String value) {
     return 'Faltan dígitos de su número de Carnet de Identidad';
   else if (value.length > 11)
     return 'Sobran dígitos de su número de Carnet de Identidad';
+  return null;
 }
 
 String answerValidator(String value) {
   print(value);
   if (value.length == 0) return 'Debe responder la pregunta seleccionada.';
+  return null;
 }

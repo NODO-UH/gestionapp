@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:gestionuh/src/utils/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ILocalStorage {
   //Account-Credentials
@@ -56,6 +55,7 @@ class LocalStorage implements ILocalStorage {
         USER_PASSWORD: _sessionData.password,
         USER_REMEMBERME: _sessionData.rememberMe,
       };
+    return null;
   }
 
   @override

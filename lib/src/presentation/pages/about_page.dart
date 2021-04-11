@@ -151,7 +151,7 @@ class AboutInformationPage extends StatelessWidget {
                   } else {
                     _showCenterFlash(
                       context,
-                      error: 'No puede acceder a ${url}',
+                      error: 'No puede acceder a $url',
                     );
                   }
                 },

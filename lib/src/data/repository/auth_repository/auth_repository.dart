@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ffi';
 
 import '../../../utils/constants/storage_keys.dart';
 import '../../api/api.dart';

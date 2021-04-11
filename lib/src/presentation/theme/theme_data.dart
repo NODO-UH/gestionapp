@@ -55,7 +55,11 @@ final ThemeData gestionuhLightTheme = light.copyWith(
   highlightColor: highlightColor,
   scaffoldBackgroundColor: backgroundColor,
   canvasColor: backgroundColor,
-  cursorColor: primaryBrandColor,
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: primaryBrandColor,
+    selectionColor: primaryBrandColor,
+    selectionHandleColor: primaryBrandColor,
+  ),
   backgroundColor: backgroundColor,
   buttonTheme: light.buttonTheme.copyWith(
       buttonColor: primaryBrandColor,

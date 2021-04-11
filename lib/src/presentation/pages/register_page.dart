@@ -2,7 +2,6 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/models/signUpData.dart';
 import '../../utils/constants.dart';
 import '../../utils/pair.dart';
 import '../../utils/validators.dart';
@@ -72,11 +71,6 @@ class _RegisterPageState extends State<RegisterPage> {
         .textTheme
         .headline6
         .copyWith(color: Theme.of(context).primaryColor, fontSize: 16);
-
-    final TextStyle dataTextsTheme = Theme.of(context)
-        .textTheme
-        .headline6
-        .copyWith(color: Theme.of(context).primaryColor, fontSize: 14);
     return Scaffold(
       appBar: AppBar(
         title: Text('Registrar'),
@@ -251,11 +245,6 @@ class _RegisterPageState extends State<RegisterPage> {
         .textTheme
         .headline6
         .copyWith(color: Theme.of(context).primaryColor, fontSize: 16);
-
-    final TextStyle dataTextsTheme = Theme.of(context)
-        .textTheme
-        .headline6
-        .copyWith(color: Theme.of(context).primaryColor, fontSize: 14);
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
       padding: EdgeInsets.symmetric(vertical: 15),
