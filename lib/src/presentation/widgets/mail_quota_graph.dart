@@ -95,5 +95,5 @@ class MailQuotaPart {
 }
 
 int _bytesToMegaBytes(double bytes) {
-  return bytes ~/ 1000000;
+  return bytes ~/ 1048576;
 }
