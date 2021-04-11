@@ -11,3 +11,12 @@ String safetyPasswordValidator(String value) {
     return 'Debe contener al menos una minúscula';
   return null;
 }
+
+String identityNumberCIValidator(String value) {
+  if (value.length == 0) return 'Debe introducir su número de identificación.';
+}
+
+String answerValidator(String value) {
+  print(value);
+  if (value.length == 0) return 'Debe responder la pregunta seleccionada.';
+}

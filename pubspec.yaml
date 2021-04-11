@@ -3,7 +3,7 @@ description: A UH managment app
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -23,19 +23,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+
   # bloc
   flutter_bloc: ^6.1.0
-  
+
   # data
   json_annotation: ^3.1.1
   get_it: ^5.0.0
   equatable: ^1.2.5
-  
+
   # storage
   flutter_secure_storage: ^3.3.5
   shared_preferences: ^0.5.6
-  
+
   # connection
   dio: ^3.0.10
   url_launcher: ^5.7.10
@@ -63,7 +63,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

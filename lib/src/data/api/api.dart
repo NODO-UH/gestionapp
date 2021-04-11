@@ -153,17 +153,9 @@ class GestionApi {
         questions: SampleData.securityQuestions,
       );
 
-    Auth tokens = await getTokens();
     AllSecurityQuestions questions = new AllSecurityQuestions();
 
-    if (tokens.error != null) {
-      questions.error = tokens.error;
-      return questions;
-    }
-
-    var headers = {'Authorization': 'Bearer ${tokens.token}'};
-
-    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
+    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl));
 
     Response<String> response;
 
@@ -210,21 +202,12 @@ class GestionApi {
   Future<SignUpUserId> signUp(SignUpData data) async {
     if (Constants.TestMode)
       return SignUpUserId(
-        userID: SampleData.userMail,
+        UserID: SampleData.userMail,
       );
-
-    Auth tokens = await getTokens();
 
     SignUpUserId user = new SignUpUserId();
 
-    if (tokens.error != null) {
-      user.error = tokens.error;
-      return user;
-    }
-
-    var headers = {'Authorization': 'Bearer ${tokens.token}'};
-
-    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
+    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl));
 
     Response<String> response;
 
