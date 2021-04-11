@@ -203,7 +203,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       height: 20,
                     ),
                     Text(
-                      'Introduzca respuesta para las preguntas de seguridad de su preferencia',
+                      'Introduzca respuesta para las preguntas de seguridad de su preferencia.',
                       style: Theme.of(context)
                           .textTheme
                           .headline6
