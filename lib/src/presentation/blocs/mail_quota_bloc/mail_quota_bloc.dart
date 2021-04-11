@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:gestionuh/src/data/models.dart';
 import 'package:gestionuh/src/data/repository.dart';
 
@@ -11,7 +10,7 @@ class MailQuotaBloc extends Bloc<MailQuotaEvent, MailQuotaState> {
   final MailQuotasRepository mailQuotasRepository;
 
   MailQuotaBloc({
-    this.mailQuotasRepository,
+    required this.mailQuotasRepository,
   }) : super(MailQuotaInitial());
 
   @override
@@ -24,7 +23,7 @@ class MailQuotaBloc extends Bloc<MailQuotaEvent, MailQuotaState> {
   Stream<MailQuotaState> handleProfileInitialized(
       MailQuotaInitialized event) async* {
     yield MailQuotaLoadInProgress();
-    var result = await mailQuotasRepository.getQuota();
+    final result = await mailQuotasRepository.getQuota();
     if (result == null) {
       yield MailQuotaLoadedFailure(
         error: 'Ha ocurrido un error inesperado.',

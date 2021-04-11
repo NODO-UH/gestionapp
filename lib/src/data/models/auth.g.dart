@@ -8,8 +8,8 @@ part of 'auth.dart';
 
 Auth _$AuthFromJson(Map<String, dynamic> json) {
   return Auth(
-    token: json['token'] as String,
-    tokenRefresh: json['tokenRefresh'] as String,
+    token: json['token'] as String?,
+    tokenRefresh: json['tokenRefresh'] as String?,
   );
 }
 

@@ -12,7 +12,7 @@ class ResetPasswordAttempted extends ResetPasswordEvent {
   final String passwordSecond;
 
   const ResetPasswordAttempted({
-    this.passwordFirst,
-    this.passwordSecond,
+    required this.passwordFirst,
+    required this.passwordSecond,
   });
 }

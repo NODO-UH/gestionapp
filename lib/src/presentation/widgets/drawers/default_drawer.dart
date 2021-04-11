@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:gestionuh/deps_injector.dart';
 import 'package:gestionuh/src/data/repository.dart';
 import 'package:gestionuh/src/utils/constants/routes.dart';
@@ -7,18 +6,26 @@ import 'package:gestionuh/src/utils/constants/routes.dart';
 class DefaultDrawer extends Drawer {
   @override
   Widget build(BuildContext context) {
-    var authRepo = di<AuthRepository>();
+    final authRepo = di<AuthRepository>();
     return Drawer(
-      key: key == null ? UniqueKey() : key,
+      key: key ?? UniqueKey(),
       child: ListView(
         children: [
           DrawerHeader(
-            child: Container(
-              child: Image.asset(
-                "assets/images/logo-uh.png",
-                color: Theme.of(context).primaryColor,
-              ),
+            child: Image.asset(
+              'assets/images/logo-uh.png',
+              color: Theme.of(context).primaryColor,
             ),
+          ),
+          _buildDrawerItem(
+            context: context,
+            text: 'Perfil',
+            icon: Icons.person,
+            onTap: () {
+              Navigator.of(context)
+                ..pop()
+                ..pushReplacementNamed(PROFILE_ROUTE_NAME);
+            },
           ),
           _buildDrawerItem(
             context: context,
@@ -64,7 +71,7 @@ class DefaultDrawer extends Drawer {
                 ..pushReplacementNamed(LOGIN_ROUTE_NAME);
             },
           ),
-          Divider(),
+          const Divider(),
           _buildDrawerItem(
             context: context,
             text: 'Acerca de',
@@ -81,13 +88,16 @@ class DefaultDrawer extends Drawer {
   }
 
   Widget _buildDrawerItem(
-          {BuildContext context, String text, IconData icon, Function onTap}) =>
+          {required BuildContext context,
+          required String text,
+          IconData? icon,
+          Function? onTap}) =>
       ListTile(
         leading: Icon(icon),
         title: Text(
           text,
           style: Theme.of(context).textTheme.subtitle2,
         ),
-        onTap: onTap,
+        onTap: onTap as void Function()?,
       );
 }

@@ -10,7 +10,7 @@ abstract class ResetPasswordState extends Equatable {
 class ResetPasswordInitial extends ResetPasswordState {
   final String error;
 
-  ResetPasswordInitial({this.error}) : super();
+  const ResetPasswordInitial({required this.error}) : super();
 
   @override
   List<Object> get props => [error];

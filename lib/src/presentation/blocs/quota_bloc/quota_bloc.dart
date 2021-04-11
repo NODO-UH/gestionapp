@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:gestionuh/src/data/models.dart';
 import 'package:gestionuh/src/data/repository.dart';
 
@@ -11,7 +10,7 @@ class QuotaBloc extends Bloc<QuotaEvent, QuotaState> {
   final QuotasRepository quotasRepository;
 
   QuotaBloc({
-    this.quotasRepository,
+    required this.quotasRepository,
   }) : super(QuotaInitial());
 
   @override
@@ -23,14 +22,14 @@ class QuotaBloc extends Bloc<QuotaEvent, QuotaState> {
 
   Stream<QuotaState> handleProfileInitialized(QuotaInitialized event) async* {
     yield QuotaLoadInProgress();
-    var result = await quotasRepository.getQuota();
+    final result = await quotasRepository.getQuota();
     if (result == null) {
       yield QuotaLoadedFailure(
         error: 'Ha ocurrido un error inesperado.',
       );
     } else if (result.error != null) {
       yield QuotaLoadedFailure(
-        error: result.error,
+        error: result.error!,
       );
     } else {
       yield QuotaLoadedSuccess(

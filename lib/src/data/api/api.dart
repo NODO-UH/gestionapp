@@ -1,33 +1,35 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+
 import '../../utils/constants.dart';
 import '../models.dart';
 
 class GestionApi {
-  String userName;
-  String password;
+  String? userName;
+  String? password;
   String apiUrl = Constants.baseUrl;
 
   GestionApi();
 
   Future<Auth> getTokens() async {
-    if (Constants.TestMode)
+    if (Constants.testMode) {
       return Auth(
         token: SampleData.authToken,
         tokenRefresh: SampleData.refreshToken,
       );
+    }
 
     Auth response = Auth();
 
-    if (this.userName == null || this.password == null) {
-      response.error = "Missing User Name or Password";
+    if (userName == null || password == null) {
+      response.error = 'Missing User Name or Password';
       return response;
     }
 
-    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl));
+    final dio = Dio(BaseOptions(baseUrl: apiUrl));
 
-    var login = Login(this.userName, this.password).toJson();
+    final login = Login(userName, password).toJson();
 
     Response<String> result;
     try {
@@ -37,29 +39,30 @@ class GestionApi {
       return response;
     }
 
-    response = Auth.fromJson(jsonDecode(result.data));
-
-    return response;
+    return response =
+        Auth.fromJson(jsonDecode(result.data!) as Map<String, dynamic>);
   }
 
   Future<Quota> getQuota() async {
-    if (Constants.TestMode)
+    if (Constants.testMode) {
       return Quota(
-          quota: SampleData.userQuota,
-          bonus: SampleData.userBonus,
-          consumed: SampleData.userConsumedQuota);
+        quota: SampleData.userQuota,
+        bonus: SampleData.userBonus,
+        consumed: SampleData.userConsumedQuota,
+      );
+    }
 
-    Auth tokens = await getTokens();
-    Quota quota = new Quota();
+    final tokens = await getTokens();
+    var quota = Quota();
 
     if (tokens.error != null) {
       quota.error = tokens.error;
       return quota;
     }
 
-    var headers = {'Authorization': 'Bearer ${tokens.token}'};
+    final headers = {'Authorization': 'Bearer ${tokens.token}'};
 
-    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
+    final dio = Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
 
     Response<String> response;
 
@@ -70,29 +73,29 @@ class GestionApi {
       return quota;
     }
 
-    quota = Quota.fromJson(jsonDecode(response.data));
-
-    return quota;
+    return quota =
+        Quota.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
   }
 
   Future<MailQuota> getMailQuota() async {
-    if (Constants.TestMode)
+    if (Constants.testMode) {
       return MailQuota(
         quota: SampleData.mailQuota,
         consumed: SampleData.mailConsumedQuota,
       );
+    }
 
-    Auth tokens = await getTokens();
-    MailQuota mailQuota = new MailQuota();
+    final tokens = await getTokens();
+    var mailQuota = MailQuota();
 
     if (tokens.error != null) {
       mailQuota.error = tokens.error;
       return mailQuota;
     }
 
-    var headers = {'Authorization': 'Bearer ${tokens.token}'};
+    final headers = {'Authorization': 'Bearer ${tokens.token}'};
 
-    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
+    final dio = Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
 
     Response<String> response;
 
@@ -103,13 +106,12 @@ class GestionApi {
       return mailQuota;
     }
 
-    mailQuota = MailQuota.fromJson(jsonDecode(response.data));
-
-    return mailQuota;
+    return mailQuota =
+        MailQuota.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
   }
 
   Future<UserData> getUserData() async {
-    if (Constants.TestMode)
+    if (Constants.testMode) {
       return UserData(
         careerName: SampleData.userCareer,
         email: SampleData.userMail,
@@ -120,18 +122,19 @@ class GestionApi {
         objectClass: SampleData.userObjectClass,
         position: SampleData.userPosition,
       );
+    }
 
-    Auth tokens = await getTokens();
-    UserData userData = new UserData();
+    final tokens = await getTokens();
+    UserData userData = UserData();
 
     if (tokens.error != null) {
       userData.error = tokens.error;
       return userData;
     }
 
-    var headers = {'Authorization': 'Bearer ${tokens.token}'};
+    final headers = {'Authorization': 'Bearer ${tokens.token}'};
 
-    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
+    final dio = Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
 
     Response<String> response;
 
@@ -142,20 +145,20 @@ class GestionApi {
       return userData;
     }
 
-    userData = UserData.fromJson(jsonDecode(response.data));
-
-    return userData;
+    return userData =
+        UserData.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
   }
 
   Future<AllSecurityQuestions> getAllSecurityQuestions() async {
-    if (Constants.TestMode)
+    if (Constants.testMode) {
       return AllSecurityQuestions(
         questions: SampleData.securityQuestions,
       );
+    }
 
-    AllSecurityQuestions questions = new AllSecurityQuestions();
+    AllSecurityQuestions questions = AllSecurityQuestions();
 
-    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl));
+    final dio = Dio(BaseOptions(baseUrl: apiUrl));
 
     Response<String> response;
 
@@ -166,28 +169,27 @@ class GestionApi {
       return questions;
     }
 
-    questions = AllSecurityQuestions.fromJson(jsonDecode(response.data));
-
-    return questions;
+    return questions = AllSecurityQuestions.fromJson(
+        jsonDecode(response.data!) as Map<String, dynamic>);
   }
 
   Future<Status> resetPassword(String newPassw) async {
-    if (Constants.TestMode) return Status(status: true);
+    if (Constants.testMode) return Status(status: true);
 
-    Auth tokens = await getTokens();
+    final tokens = await getTokens();
 
-    Status response = new Status();
+    final response = Status();
 
     if (tokens.error != null) {
       response.error = tokens.error;
       return response;
     }
 
-    var headers = {'Authorization': 'Bearer ${tokens.token}'};
+    final headers = {'Authorization': 'Bearer ${tokens.token}'};
 
-    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
+    final dio = Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
 
-    PassReset credentials = new PassReset(this.password, newPassw);
+    final credentials = PassReset(password, newPassw);
 
     try {
       await dio.post(Constants.resetPasswordUrld, data: credentials.toJson());
@@ -200,14 +202,15 @@ class GestionApi {
   }
 
   Future<SignUpUserId> signUp(SignUpData data) async {
-    if (Constants.TestMode)
+    if (Constants.testMode) {
       return SignUpUserId(
-        UserID: SampleData.userMail,
+        userID: SampleData.userMail,
       );
+    }
 
-    SignUpUserId user = new SignUpUserId();
+    SignUpUserId user = SignUpUserId();
 
-    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl));
+    final dio = Dio(BaseOptions(baseUrl: apiUrl));
 
     Response<String> response;
 
@@ -218,9 +221,8 @@ class GestionApi {
       return user;
     }
 
-    user = SignUpUserId.fromJson(jsonDecode(response.data));
-
-    return user;
+    return user = SignUpUserId.fromJson(
+        jsonDecode(response.data!) as Map<String, dynamic>);
   }
 
   void setLogin(String userName, String password) {
@@ -229,7 +231,7 @@ class GestionApi {
   }
 
   void logout() {
-    this.userName = null;
-    this.password = null;
+    userName = null;
+    password = null;
   }
 }

@@ -12,31 +12,32 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   final AuthRepository authRepository;
 
   ResetPasswordBloc({
-    this.authRepository,
-  }) : super(ResetPasswordInitial());
+    required this.authRepository,
+  }) : super(const ResetPasswordInitial(error: ''));
 
   @override
   Stream<ResetPasswordState> mapEventToState(
     ResetPasswordEvent event,
   ) async* {
-    if (event is ResetPasswordAttempted)
+    if (event is ResetPasswordAttempted) {
       yield* resetPasswordAttemptedHandler(event);
+    }
   }
 
   Stream<ResetPasswordState> resetPasswordAttemptedHandler(
       ResetPasswordAttempted event) async* {
-    assert(event.passwordFirst != null && event.passwordSecond != null);
     yield ResetPasswordInProgress();
     if (event.passwordFirst != event.passwordSecond) {
-      yield ResetPasswordInitial(error: 'Las contraseñas no coinciden.');
+      yield const ResetPasswordInitial(error: 'Las contraseñas no coinciden.');
       return;
     }
     final status = await authRepository.resetPassword(event.passwordFirst);
-    if (status?.status ?? false)
+    if (status.status ?? false) {
       yield ResetPasswordSuccess();
-    else
+    } else {
       yield ResetPasswordInitial(
-        error: status?.error ?? 'Ocurrió un error, intente de nuevo.',
+        error: status.error ?? 'Ocurrió un error, intente de nuevo.',
       );
+    }
   }
 }

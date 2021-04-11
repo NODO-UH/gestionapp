@@ -15,7 +15,7 @@ class LoadInitialDataFailure extends RegisterState {
   final String error;
 
   const LoadInitialDataFailure({
-    this.error,
+    required this.error,
   });
 
   @override
@@ -26,7 +26,7 @@ class LoadInitialDataSuccess extends RegisterState {
   final List<String> questions;
 
   const LoadInitialDataSuccess({
-    this.questions,
+    required this.questions,
   });
   @override
   List<Object> get props => [questions];
@@ -38,7 +38,7 @@ class RegisterUserFailure extends RegisterState {
   final String error;
 
   const RegisterUserFailure({
-    this.error,
+    required this.error,
   });
 
   @override
@@ -49,7 +49,7 @@ class RegisterUserSuccess extends RegisterState {
   final String userEmail;
 
   const RegisterUserSuccess({
-    this.userEmail,
+    required this.userEmail,
   });
   @override
   List<Object> get props => [userEmail];

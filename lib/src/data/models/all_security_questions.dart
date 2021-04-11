@@ -1,15 +1,15 @@
-import 'package:gestionuh/src/data/models/BaseModel.dart';
+import 'package:gestionuh/src/data/models/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'allSecurityQuestions.g.dart';
+part 'all_security_questions.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class AllSecurityQuestions extends BaseModel {
-  List<String> questions;
+  List<String>? questions;
 
   AllSecurityQuestions({this.questions});
 
-  factory AllSecurityQuestions.fromJson(Map<String, dynamic> json) =>
+  static AllSecurityQuestions fromJson(Map<String, dynamic> json) =>
       _$AllSecurityQuestionsFromJson(json);
 
   Map<String, dynamic> toJson() => _$AllSecurityQuestionsToJson(this);

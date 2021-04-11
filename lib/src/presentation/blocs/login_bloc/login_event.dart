@@ -11,9 +11,9 @@ class LoginAttempted extends LoginEvent {
   final bool rememberMe;
 
   LoginAttempted({
-    this.username,
-    this.password,
-    this.rememberMe,
+    required this.username,
+    required this.password,
+    required this.rememberMe,
   });
 
   @override

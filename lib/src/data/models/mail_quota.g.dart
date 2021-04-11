@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'mailQuota.dart';
+part of 'mail_quota.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -8,8 +8,8 @@ part of 'mailQuota.dart';
 
 MailQuota _$MailQuotaFromJson(Map<String, dynamic> json) {
   return MailQuota(
-    quota: json['quota'] as int,
-    consumed: json['consumed'] as int,
+    quota: json['quota'] as int?,
+    consumed: json['consumed'] as int?,
   );
 }
 

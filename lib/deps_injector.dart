@@ -18,7 +18,7 @@ Future<void> init() async {
   di.registerSingleton<SharedPreferences>(sharedPrefs);
 
   di.registerLazySingleton(
-    () => FlutterSecureStorage(),
+    () => const FlutterSecureStorage(),
   );
 
   di.registerLazySingleton<ILocalStorage>(
@@ -44,6 +44,12 @@ Future<void> init() async {
 
   di.registerLazySingleton<MailQuotasRepository>(
     () => MailQuotasRepository(
+      api: di(),
+    ),
+  );
+
+  di.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepository(
       api: di(),
     ),
   );
@@ -79,5 +85,9 @@ Future<void> init() async {
     ),
   );
 
-
+  di.registerFactory<ProfileBloc>(
+    () => ProfileBloc(
+      profileRepository: di(),
+    ),
+  );
 }

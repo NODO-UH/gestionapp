@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../data/models/signUpData.dart';
+import '../../../data/models/sign_up_data.dart';
 import '../../../data/repository/auth_repository/auth_repository.dart';
 
 part 'register_event.dart';
@@ -12,27 +12,29 @@ part 'register_state.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final AuthRepository repository;
 
-  RegisterBloc({this.repository}) : super(RegisterInitial());
+  RegisterBloc({required this.repository}) : super(RegisterInitial());
 
   @override
   Stream<RegisterState> mapEventToState(
     RegisterEvent event,
   ) async* {
-    if (event is QuestionsRequestedRegister)
+    if (event is QuestionsRequestedRegister) {
       yield* questionsRequestedRegisterHandler(event);
-
-    if (event is FormsEnteredRegister)
+    }
+    if (event is FormsEnteredRegister) {
       yield* formsEnteredRegisterHandler(event);
+    }
   }
 
   Stream<RegisterState> questionsRequestedRegisterHandler(
       QuestionsRequestedRegister event) async* {
     yield LoadInitialDataInProgress();
     final questions = await repository.getSecurityQuestions();
-    if (questions.error != null)
-      yield LoadInitialDataFailure(error: questions.error);
-    else
-      yield LoadInitialDataSuccess(questions: questions.questions);
+    if (questions.error != null) {
+      yield LoadInitialDataFailure(error: questions.error!);
+    } else {
+      yield LoadInitialDataSuccess(questions: questions.questions!);
+    }
     //
   }
 
@@ -40,7 +42,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       FormsEnteredRegister event) async* {
     yield RegisterUserInProgress();
     if (event.passwordFirst != event.passwordSecond) {
-      yield RegisterUserFailure(error: 'Las contraseñas no coinciden.');
+      yield const RegisterUserFailure(error: 'Las contraseñas no coinciden.');
       return;
     }
     final userId = await repository.sendRegistration(SignUpData(
@@ -49,10 +51,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       password: event.passwordFirst,
       questions: event.questions,
     ));
-    if (userId.error != null)
-      yield RegisterUserFailure(error: userId.error);
-    else
-      yield RegisterUserSuccess(userEmail: userId.UserID);
+    if (userId.error != null) {
+      yield RegisterUserFailure(error: userId.error!);
+    } else {
+      yield RegisterUserSuccess(userEmail: userId.userID!);
+    }
 
     //
   }

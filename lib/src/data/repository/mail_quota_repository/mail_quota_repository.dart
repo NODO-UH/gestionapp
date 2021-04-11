@@ -7,15 +7,15 @@ class MailQuotasRepository {
   final GestionApi api;
 
   MailQuotasRepository({
-    this.api,
+    required this.api,
   });
 
-  Future<MailQuota> getQuota() async {
+  Future<MailQuota?> getQuota() async {
     MailQuota result;
     try {
       result = await api.getMailQuota();
       if (result.error != null) {
-        log(result.error);
+        log(result.error!);
       }
       return result;
     } catch (e) {
