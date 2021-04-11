@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:gestionuh/src/data/repository/auth_repository/auth_repository.dart';
-import 'package:gestionuh/src/utils/constants.dart';
-
 import 'app.dart';
 import 'deps_injector.dart';
+import 'src/data/repository/auth_repository/auth_repository.dart';
 
 void main() async {
   await initialize().whenComplete(
