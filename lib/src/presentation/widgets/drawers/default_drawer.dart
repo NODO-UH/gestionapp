@@ -22,6 +22,16 @@ class DefaultDrawer extends Drawer {
           ),
           _buildDrawerItem(
             context: context,
+            text: 'Perfil',
+            icon: Icons.person,
+            onTap: () {
+              Navigator.of(context)
+                ..pop()
+                ..pushReplacementNamed(PROFILE_ROUTE_NAME);
+            },
+          ),
+          _buildDrawerItem(
+            context: context,
             text: 'Mi Cuota',
             icon: Icons.data_usage,
             onTap: () {

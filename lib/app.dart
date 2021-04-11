@@ -43,6 +43,13 @@ class GestionUhApp extends StatelessWidget {
                 child: QuotaPage(),
               ),
             );
+          case PROFILE_ROUTE_NAME:
+            return MaterialPageRoute(
+              builder: (_) => BlocProvider<ProfileBloc>(
+                create: (_) => di()..add(ProfileInitialized()),
+                child: ProfilePage(),
+              ),
+            );
           case MAIL_ROUTE_NAME:
             return MaterialPageRoute(
               builder: (_) => BlocProvider<MailQuotaBloc>(
@@ -72,9 +79,9 @@ class GestionUhApp extends StatelessWidget {
             var authRepo = di<AuthRepository>();
             if (authRepo.logged)
               return MaterialPageRoute(
-                builder: (_) => BlocProvider<QuotaBloc>(
-                  create: (_) => di()..add(QuotaInitialized()),
-                  child: QuotaPage(),
+                builder: (_) => BlocProvider<ProfileBloc>(
+                  create: (_) => di()..add(ProfileInitialized()),
+                  child: ProfilePage(),
                 ),
               );
             return MaterialPageRoute(
