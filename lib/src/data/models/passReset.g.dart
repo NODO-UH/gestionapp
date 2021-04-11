@@ -8,8 +8,8 @@ part of 'passReset.dart';
 
 PassReset _$PassResetFromJson(Map<String, dynamic> json) {
   return PassReset(
-    json['oldPassword'] as String,
-    json['newPassword'] as String,
+    json['oldPassword'] as String?,
+    json['newPassword'] as String?,
   );
 }
 

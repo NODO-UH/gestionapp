@@ -6,7 +6,7 @@ import '../widgets.dart';
 import '../widgets/bottom_sheet.dart';
 
 class QuotaPage extends StatefulWidget {
-  QuotaPage({Key key}) : super(key: key);
+  QuotaPage({Key? key}) : super(key: key);
 
   @override
   _QuotaPageState createState() => _QuotaPageState();

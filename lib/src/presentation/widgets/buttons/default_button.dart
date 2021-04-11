@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:gestionuh/src/presentation/theme.dart';
 
 class GestionUhDefaultButton extends StatelessWidget {
-  final Widget child;
-  final ShapeBorder shape;
+  final Widget? child;
+  final ShapeBorder? shape;
   final bool isSecundary;
-  final VoidCallback onPressed;
-  final String text;
-  final IconData icon;
+  final VoidCallback? onPressed;
+  final String? text;
+  final IconData? icon;
 
   GestionUhDefaultButton({
     this.child,
@@ -17,7 +17,7 @@ class GestionUhDefaultButton extends StatelessWidget {
     this.text,
     this.onPressed,
     this.icon,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -30,7 +30,7 @@ class GestionUhDefaultButton extends StatelessWidget {
                 isSecundary ? Theme.of(context).cardColor : primaryBrandColor,
             animationDuration: Duration(microseconds: 300),
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-            shape: shape ??
+            shape: shape as OutlinedBorder? ??
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 )),
@@ -39,9 +39,9 @@ class GestionUhDefaultButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (this.text == null && this.icon == null) child,
+              if (this.text == null && this.icon == null) child!,
               if (this.text != null)
-                Text(this.text,
+                Text(this.text!,
                     textScaleFactor: 1.25,
                     style: isSecundary
                         ? Theme.of(context).textTheme.bodyText2

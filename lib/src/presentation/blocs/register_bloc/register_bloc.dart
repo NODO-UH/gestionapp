@@ -12,7 +12,7 @@ part 'register_state.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final AuthRepository repository;
 
-  RegisterBloc({this.repository}) : super(RegisterInitial());
+  RegisterBloc({required this.repository}) : super(RegisterInitial());
 
   @override
   Stream<RegisterState> mapEventToState(
@@ -30,9 +30,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     yield LoadInitialDataInProgress();
     final questions = await repository.getSecurityQuestions();
     if (questions.error != null)
-      yield LoadInitialDataFailure(error: questions.error);
+      yield LoadInitialDataFailure(error: questions.error!);
     else
-      yield LoadInitialDataSuccess(questions: questions.questions);
+      yield LoadInitialDataSuccess(questions: questions.questions!);
     //
   }
 
@@ -50,9 +50,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       questions: event.questions,
     ));
     if (userId.error != null)
-      yield RegisterUserFailure(error: userId.error);
+      yield RegisterUserFailure(error: userId.error!);
     else
-      yield RegisterUserSuccess(userEmail: userId.userID);
+      yield RegisterUserSuccess(userEmail: userId.userID!);
 
     //
   }

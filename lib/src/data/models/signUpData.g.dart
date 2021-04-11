@@ -8,10 +8,10 @@ part of 'signUpData.dart';
 
 SignUpData _$SignUpDataFromJson(Map<String, dynamic> json) {
   return SignUpData(
-    answers: (json['answers'] as List)?.map((e) => e as String)?.toList(),
-    ci: json['ci'] as String,
-    password: json['password'] as String,
-    questions: (json['questions'] as List)?.map((e) => e as String)?.toList(),
+    answers: (json['answers'] as List?)?.map((e) => e as String).toList(),
+    ci: json['ci'] as String?,
+    password: json['password'] as String?,
+    questions: (json['questions'] as List?)?.map((e) => e as String).toList(),
   );
 }
 

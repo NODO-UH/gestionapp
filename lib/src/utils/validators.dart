@@ -1,5 +1,5 @@
-String safetyPasswordValidator(String value) {
-  if (value.length < 8)
+String? safetyPasswordValidator(String? value) {
+  if (value == null || value.length < 8)
     return 'Debe contener al menos 8 caracteres';
   else if (!value.contains(RegExp(r'[!#$@\[\]\\.,%&*+/=?^_`{|}~-]')))
     return 'Debe contener al menos un caracter especial';
@@ -12,8 +12,8 @@ String safetyPasswordValidator(String value) {
   return null;
 }
 
-String identityNumberCIValidator(String value) {
-  if (int.tryParse(value) == null)
+String? identityNumberCIValidator(String? value) {
+  if (value == null || int.tryParse(value) == null)
     return 'Su número de Carnet de identidad solo puede contener dígitos';
   else if (value.length < 11)
     return 'Faltan dígitos de su número de Carnet de Identidad';
@@ -22,8 +22,9 @@ String identityNumberCIValidator(String value) {
   return null;
 }
 
-String answerValidator(String value) {
+String? answerValidator(String? value) {
   print(value);
-  if (value.length == 0) return 'Debe responder la pregunta seleccionada.';
+  if (value == null || value.length == 0)
+    return 'Debe responder la pregunta seleccionada.';
   return null;
 }

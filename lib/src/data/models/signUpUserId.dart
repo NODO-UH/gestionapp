@@ -5,7 +5,7 @@ part 'signUpUserId.g.dart';
 
 @JsonSerializable()
 class SignUpUserId extends BaseModel {
-  String userID;
+  String? userID;
 
   SignUpUserId({this.userID});
 

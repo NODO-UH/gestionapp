@@ -9,18 +9,19 @@ class QuotaGraph extends StatelessWidget {
   final bool animate;
 
   const QuotaGraph({
-    Key key,
-    this.quota,
+    Key? key,
+    required this.quota,
     this.animate: true,
   }) : super(key: key);
 
-  int get consumed => _bytesToMegaBytes(quota.consumed.toDouble());
+  int get consumed => _bytesToMegaBytes(quota.consumed!.toDouble());
 
   int get leftBonus =>
-      _bytesToMegaBytes(max(quota.bonus - quota.consumed, 0).toDouble());
+      _bytesToMegaBytes(max(quota.bonus! - quota.consumed!, 0).toDouble());
 
   int get leftQuota => _bytesToMegaBytes(
-      min(quota.quota + quota.bonus - quota.consumed, quota.quota).toDouble());
+      min(quota.quota! + quota.bonus! - quota.consumed!, quota.quota!)
+          .toDouble());
 
   List<QuotaPart> get data => [
         QuotaPart(
@@ -100,10 +101,10 @@ class QuotaPart {
   Color color;
 
   QuotaPart({
-    this.id,
-    this.title,
-    this.cant,
-    this.color,
+    required this.id,
+    required this.title,
+    required this.cant,
+    required this.color,
   });
 }
 

@@ -5,14 +5,14 @@ part 'userData.g.dart';
 
 @JsonSerializable()
 class UserData extends BaseModel {
-  String careerName;
-  String email;
-  bool hasCloud;
-  bool hasEmail;
-  bool hasInternet;
-  String name;
-  String objectClass;
-  String position;
+  String? careerName;
+  String? email;
+  bool? hasCloud;
+  bool? hasEmail;
+  bool? hasInternet;
+  String? name;
+  String? objectClass;
+  String? position;
 
   UserData({
     this.careerName,

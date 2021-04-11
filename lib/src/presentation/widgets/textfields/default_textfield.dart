@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class GestionUhDefaultTextField extends StatefulWidget {
-  final TextEditingController controller;
-  final String labelText, hintText;
-  final BorderRadius borderRadius;
-  final void Function(String) onChanged;
-  final String Function(String) validator;
-  final AutovalidateMode autovalidateMode;
-  final TextInputType keyboardType;
-  final TextStyle style, labelStyle, hintStyle;
-  final Function onTap;
-  final List<TextInputFormatter> inputFormatters;
+  final TextEditingController? controller;
+  final String? labelText, hintText;
+  final BorderRadius? borderRadius;
+  final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
+  final AutovalidateMode? autovalidateMode;
+  final TextInputType? keyboardType;
+  final TextStyle? style, labelStyle, hintStyle;
+  final Function? onTap;
+  final List<TextInputFormatter>? inputFormatters;
 
   GestionUhDefaultTextField({
-    Key key,
+    Key? key,
     this.controller,
     this.style,
     this.labelText,
@@ -69,7 +69,7 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
                   fontSize: 17,
                 ),
             onChanged: widget.onChanged,
-            onTap: widget.onTap,
+            onTap: widget.onTap as void Function()?,
             controller: widget.controller,
             keyboardType: widget.keyboardType,
             textAlignVertical: TextAlignVertical.center,
@@ -84,7 +84,7 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
               labelStyle: widget.labelStyle ??
                   Theme.of(context)
                       .textTheme
-                      .bodyText1
+                      .bodyText1!
                       .copyWith(color: Theme.of(context).primaryColor),
               hintStyle:
                   widget.hintStyle ?? Theme.of(context).textTheme.bodyText1,
@@ -93,7 +93,7 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
                     widget.borderRadius ?? BorderRadius.all(Radius.circular(5)),
                 borderSide: BorderSide(
                   style: BorderStyle.solid,
-                  color: Colors.grey[300],
+                  color: Colors.grey[300]!,
                 ),
               ),
               border: OutlineInputBorder(
@@ -101,7 +101,7 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
                     widget.borderRadius ?? BorderRadius.all(Radius.circular(5)),
                 borderSide: BorderSide(
                   style: BorderStyle.solid,
-                  color: Colors.grey[300],
+                  color: Colors.grey[300]!,
                 ),
               ),
               focusedBorder: OutlineInputBorder(

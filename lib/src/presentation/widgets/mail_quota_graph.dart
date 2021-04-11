@@ -9,15 +9,15 @@ class MailQuotaGraph extends StatelessWidget {
   final bool animate;
 
   const MailQuotaGraph({
-    Key key,
-    this.quota,
+    Key? key,
+    required this.quota,
     this.animate: true,
   }) : super(key: key);
 
-  int get consumed => _bytesToMegaBytes(quota.consumed.toDouble());
+  int get consumed => _bytesToMegaBytes(quota.consumed!.toDouble());
 
   int get leftQuota => _bytesToMegaBytes(
-      min(quota.quota - quota.consumed, quota.quota).toDouble());
+      min(quota.quota! - quota.consumed!, quota.quota!).toDouble());
 
   List<MailQuotaPart> get data => [
         MailQuotaPart(
@@ -91,10 +91,10 @@ class MailQuotaPart {
   Color color;
 
   MailQuotaPart({
-    this.id,
-    this.title,
-    this.cant,
-    this.color,
+    required this.id,
+    required this.title,
+    required this.cant,
+    required this.color,
   });
 }
 

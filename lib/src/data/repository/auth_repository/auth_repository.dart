@@ -11,21 +11,23 @@ class AuthRepository {
   final ILocalStorage localStorage;
 
   AuthRepository({
-    this.api,
-    this.localStorage,
+    required this.api,
+    required this.localStorage,
   });
 
   Future<void> initialize() async {
     await localStorage.loadSession();
     if (logged) {
       var credentials = await localStorage.getCredentials();
-      api.setLogin(credentials[USER_NAME], credentials[USER_PASSWORD]);
+      if (credentials != null) {
+        api.setLogin(credentials[USER_NAME], credentials[USER_PASSWORD]);
+      }
     }
   }
 
   bool get logged => localStorage.isLogged();
 
-  Future<Auth> login(
+  Future<Auth?> login(
     String username,
     String password, [
     bool remmemberMe = false,
@@ -58,12 +60,17 @@ class AuthRepository {
   }
 
   Future<Status> resetPassword(String password) async {
-    Status status;
     try {
-      status = await api.resetPassword(password);
-      if (status.status == false) return status;
+      final status = await api.resetPassword(password);
+      if (status.status == false) {
+        return status;
+      }
 
       final credentials = await localStorage.getCredentials();
+
+      if (credentials == null) {
+        throw Exception('Credentials is null.');
+      }
 
       // save new password
       api.setLogin(credentials[USER_NAME], password);
@@ -73,10 +80,12 @@ class AuthRepository {
         isLoggedInto: true,
         persist: credentials[USER_REMEMBERME],
       );
+
+      return status;
     } catch (e) {
       log(e.toString());
+      return Status(status: false);
     }
-    return status ?? Status(status: false);
   }
 
   Future<AllSecurityQuestions> getSecurityQuestions() async {

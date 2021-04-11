@@ -5,10 +5,10 @@ part 'signUpData.g.dart';
 
 @JsonSerializable()
 class SignUpData extends BaseModel {
-  List<String> answers;
-  String ci;
-  String password;
-  List<String> questions;
+  List<String>? answers;
+  String? ci;
+  String? password;
+  List<String>? questions;
 
   SignUpData({this.answers, this.ci, this.password, this.questions});
 

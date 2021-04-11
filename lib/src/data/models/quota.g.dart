@@ -8,9 +8,9 @@ part of 'quota.dart';
 
 Quota _$QuotaFromJson(Map<String, dynamic> json) {
   return Quota(
-    quota: json['quota'] as int,
-    bonus: json['bonus'] as int,
-    consumed: json['consumed'] as int,
+    quota: json['quota'] as int?,
+    bonus: json['bonus'] as int?,
+    consumed: json['consumed'] as int?,
   );
 }
 

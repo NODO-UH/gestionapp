@@ -8,7 +8,7 @@ part of 'signUpUserId.dart';
 
 SignUpUserId _$SignUpUserIdFromJson(Map<String, dynamic> json) {
   return SignUpUserId(
-    userID: json['UserID'] as String,
+    userID: json['UserID'] as String?,
   );
 }
 

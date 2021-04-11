@@ -6,7 +6,7 @@ import '../widgets.dart';
 import '../widgets/bottom_sheet.dart';
 
 class MailQuotaPage extends StatefulWidget {
-  MailQuotaPage({Key key}) : super(key: key);
+  MailQuotaPage({Key? key}) : super(key: key);
 
   @override
   _MailQuotaPageState createState() => _MailQuotaPageState();
@@ -40,7 +40,7 @@ class _MailQuotaPageState extends State<MailQuotaPage> {
                       children: [
                         Center(
                           child: MailQuotaGraph(
-                            quota: state.quota,
+                            quota: state.quota!,
                           ),
                         ),
                       ],

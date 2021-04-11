@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:gestionuh/src/data/models.dart';
 import 'package:gestionuh/src/data/repository.dart';
 
@@ -11,7 +10,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileRepository profileRepository;
 
   ProfileBloc({
-    this.profileRepository,
+    required this.profileRepository,
   }) : super(ProfileInitial());
 
   @override
@@ -31,7 +30,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
     } else if (result.error != null) {
       yield ProfileLoadedFailure(
-        error: result.error,
+        error: result.error!,
       );
     } else {
       yield ProfileLoadedSuccess(

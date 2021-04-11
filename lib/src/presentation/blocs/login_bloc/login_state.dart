@@ -8,7 +8,7 @@ class LoginState extends Equatable {
 class LoginAttemptInitial extends LoginState {
   final String error;
 
-  LoginAttemptInitial({this.error});
+  LoginAttemptInitial({required this.error});
 
   @override
   List<Object> get props => [error];

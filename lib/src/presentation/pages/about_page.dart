@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../utils/constants.dart';
 
 class AboutInformationPage extends StatelessWidget {
-  const AboutInformationPage({Key key}) : super(key: key);
+  const AboutInformationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class AboutInformationPage extends StatelessWidget {
               '\u00a9 2021' + Constants.copyRight,
               textAlign: TextAlign.center,
               style:
-                  Theme.of(context).textTheme.headline6.copyWith(fontSize: 12),
+                  Theme.of(context).textTheme.headline6!.copyWith(fontSize: 12),
             ),
           ],
         ),
@@ -51,14 +51,14 @@ class AboutInformationPage extends StatelessWidget {
               Text(About.shortDescription,
                   style: Theme.of(context)
                       .textTheme
-                      .headline6
+                      .headline6!
                       .copyWith(fontSize: 15, color: Colors.black38)),
               SizedBox(
                 height: 50,
               ),
               Text(
                 'Equipo de desarrollo:',
-                style: Theme.of(context).textTheme.headline5.copyWith(),
+                style: Theme.of(context).textTheme.headline5!.copyWith(),
               ),
               SizedBox(
                 height: 30,
@@ -67,27 +67,27 @@ class AboutInformationPage extends StatelessWidget {
                 children: Developers.teams.keys
                     .map((key) => ExpansionTile(
                           title: Text(key),
-                          children: Developers.teams[key]
+                          children: Developers.teams[key]!
                               .map((e) => ListTile(
                                     title: Text(
                                       e.name,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headline6
+                                          .headline6!
                                           .copyWith(fontSize: 14),
                                     ),
                                     subtitle: Text(
                                       e.role,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText1
+                                          .bodyText1!
                                           .copyWith(fontSize: 12),
                                     ),
                                     onTap: e.link == null
                                         ? null
                                         : () async {
-                                            if (await canLaunch(e.link))
-                                              await launch(e.link);
+                                            if (await canLaunch(e.link!))
+                                              await launch(e.link!);
                                             else
                                               _showCenterFlash(
                                                 context,
@@ -106,17 +106,17 @@ class AboutInformationPage extends StatelessWidget {
               SizedBox(height: 50),
               Text(
                 'Nodo Central de Red - UH',
-                style: Theme.of(context).textTheme.headline6.copyWith(),
+                style: Theme.of(context).textTheme.headline6!.copyWith(),
               ),
               SizedBox(height: 10),
               Text(
                 'MATCOM - UH',
-                style: Theme.of(context).textTheme.headline6.copyWith(),
+                style: Theme.of(context).textTheme.headline6!.copyWith(),
               ),
               SizedBox(height: 10),
               Text(
                 'GRS - UH',
-                style: Theme.of(context).textTheme.headline6.copyWith(),
+                style: Theme.of(context).textTheme.headline6!.copyWith(),
               ),
               GestureDetector(
                 child: Container(
@@ -132,7 +132,7 @@ class AboutInformationPage extends StatelessWidget {
                       Container(padding: EdgeInsets.all(2)),
                       Icon(
                         Icons.copyright,
-                        color: Theme.of(context).textTheme.subtitle2.color,
+                        color: Theme.of(context).textTheme.subtitle2!.color,
                       ),
                       Container(padding: EdgeInsets.all(2)),
                       Text(
@@ -165,10 +165,10 @@ class AboutInformationPage extends StatelessWidget {
 
   void _showCenterFlash(
     BuildContext context, {
-    String error,
+    String? error,
     FlashPosition position = FlashPosition.top,
     FlashStyle style = FlashStyle.floating,
-    Alignment alignment,
+    Alignment? alignment,
   }) {
     showFlash(
       context: context,
@@ -189,7 +189,7 @@ class AboutInformationPage extends StatelessWidget {
             child: DefaultTextStyle(
               style: TextStyle(color: Colors.white),
               child: Text(
-                error,
+                error!,
               ),
             ),
           ),
@@ -200,9 +200,9 @@ class AboutInformationPage extends StatelessWidget {
 }
 
 class DeveloperInfo {
-  final String name;
-  final String role;
-  final String link;
+  final String? name;
+  final String? role;
+  final String? link;
 
   const DeveloperInfo({
     this.name,

@@ -6,8 +6,8 @@ import '../../utils/constants.dart';
 import '../models.dart';
 
 class GestionApi {
-  String userName;
-  String password;
+  String? userName;
+  String? password;
   String apiUrl = Constants.baseUrl;
 
   GestionApi();
@@ -38,7 +38,7 @@ class GestionApi {
       return response;
     }
 
-    response = Auth.fromJson(jsonDecode(result.data));
+    response = Auth.fromJson(jsonDecode(result.data!));
 
     return response;
   }
@@ -71,7 +71,7 @@ class GestionApi {
       return quota;
     }
 
-    quota = Quota.fromJson(jsonDecode(response.data));
+    quota = Quota.fromJson(jsonDecode(response.data!));
 
     return quota;
   }
@@ -104,7 +104,7 @@ class GestionApi {
       return mailQuota;
     }
 
-    mailQuota = MailQuota.fromJson(jsonDecode(response.data));
+    mailQuota = MailQuota.fromJson(jsonDecode(response.data!));
 
     return mailQuota;
   }
@@ -143,7 +143,7 @@ class GestionApi {
       return userData;
     }
 
-    userData = UserData.fromJson(jsonDecode(response.data));
+    userData = UserData.fromJson(jsonDecode(response.data!));
 
     return userData;
   }
@@ -167,7 +167,7 @@ class GestionApi {
       return questions;
     }
 
-    questions = AllSecurityQuestions.fromJson(jsonDecode(response.data));
+    questions = AllSecurityQuestions.fromJson(jsonDecode(response.data!));
 
     return questions;
   }
@@ -219,7 +219,7 @@ class GestionApi {
       return user;
     }
 
-    user = SignUpUserId.fromJson(jsonDecode(response.data));
+    user = SignUpUserId.fromJson(jsonDecode(response.data!));
 
     return user;
   }

@@ -8,7 +8,7 @@ part of 'allSecurityQuestions.dart';
 
 AllSecurityQuestions _$AllSecurityQuestionsFromJson(Map<String, dynamic> json) {
   return AllSecurityQuestions(
-    questions: (json['questions'] as List)?.map((e) => e as String)?.toList(),
+    questions: (json['questions'] as List?)?.map((e) => e as String).toList(),
   );
 }
 

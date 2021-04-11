@@ -5,9 +5,9 @@ part 'quota.g.dart';
 
 @JsonSerializable()
 class Quota extends BaseModel {
-  int quota;
-  int bonus;
-  int consumed;
+  int? quota;
+  int? bonus;
+  int? consumed;
 
   Quota({this.quota, this.bonus, this.consumed});
 

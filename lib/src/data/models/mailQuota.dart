@@ -5,8 +5,8 @@ part 'mailQuota.g.dart';
 
 @JsonSerializable()
 class MailQuota extends BaseModel {
-  int quota;
-  int consumed;
+  int? quota;
+  int? consumed;
 
   MailQuota({this.quota, this.consumed});
 

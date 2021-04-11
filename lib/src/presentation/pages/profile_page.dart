@@ -6,7 +6,7 @@ import '../widgets.dart';
 import '../widgets/bottom_sheet.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key key}) : super(key: key);
+  ProfilePage({Key? key}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -38,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(state.profile.name),
+                        Text(state.profile.name!),
                       ],
                     ),
                   ),

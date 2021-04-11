@@ -62,11 +62,11 @@ class Developers {
 class DeveloperInfo {
   final String name;
   final String role;
-  final String link;
+  final String? link;
 
   const DeveloperInfo({
-    this.name,
-    this.role,
+    required this.name,
+    required this.role,
     this.link,
   });
 }

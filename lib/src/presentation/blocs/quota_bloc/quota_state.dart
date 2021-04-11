@@ -13,7 +13,7 @@ class QuotaLoadedSuccess extends QuotaState {
   final Quota quota;
 
   QuotaLoadedSuccess({
-    this.quota,
+    required this.quota,
   });
 
   @override
@@ -24,7 +24,7 @@ class QuotaLoadedFailure extends QuotaState {
   final String error;
 
   QuotaLoadedFailure({
-    this.error,
+    required this.error,
   });
 
   @override

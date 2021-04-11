@@ -5,8 +5,8 @@ part 'login.g.dart';
 
 @JsonSerializable()
 class Login extends BaseModel {
-  String user;
-  String password;
+  String? user;
+  String? password;
 
   Login(this.user, this.password);
 

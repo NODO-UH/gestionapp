@@ -13,7 +13,7 @@ class ProfileLoadedSuccess extends ProfileState {
   final UserData profile;
 
   ProfileLoadedSuccess({
-    this.profile,
+    required this.profile,
   });
 
   @override
@@ -24,7 +24,7 @@ class ProfileLoadedFailure extends ProfileState {
   final String error;
 
   ProfileLoadedFailure({
-    this.error,
+    required this.error,
   });
 
   @override

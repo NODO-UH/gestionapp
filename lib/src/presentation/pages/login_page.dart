@@ -10,7 +10,7 @@ import '../widgets.dart';
 import '../widgets/bottom_sheet.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    var authRepo = di<AuthRepository>();
+    AuthRepository? authRepo = di<AuthRepository>();
     return Scaffold(
       appBar: AppBar(
         title: Text('Iniciar Sesión'),
@@ -56,13 +56,11 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).pushReplacementNamed(PROFILE_ROUTE_NAME);
           }
           if (state is LoginAttemptInitial) {
-            if (state.error != null) {
-              _showCenterFlash(
-                error: state.error,
-                position: FlashPosition.top,
-                style: FlashStyle.floating,
-              );
-            }
+            _showCenterFlash(
+              error: state.error,
+              position: FlashPosition.top,
+              style: FlashStyle.floating,
+            );
           }
         },
         builder: (context, state) {
@@ -121,7 +119,8 @@ class _LoginPageState extends State<LoginPage> {
                       value: _rememberMe,
                       title: Text('Desea recordar la sesión?'),
                       activeColor: Theme.of(context).primaryColor,
-                      onChanged: (value) => setState(() => _rememberMe = value),
+                      onChanged: (value) =>
+                          setState(() => _rememberMe = value!),
                     ),
                     SizedBox(
                       height: 5,
@@ -156,10 +155,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _showCenterFlash({
-    String error,
-    FlashPosition position,
-    FlashStyle style,
-    Alignment alignment,
+    required String error,
+    FlashPosition? position,
+    FlashStyle? style,
+    Alignment? alignment,
   }) {
     showFlash(
       context: context,

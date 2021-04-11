@@ -10,7 +10,7 @@ import '../widgets.dart';
 import '../widgets/bottom_sheet.dart';
 
 class ResetPasswordPage extends StatefulWidget {
-  ResetPasswordPage({Key key}) : super(key: key);
+  ResetPasswordPage({Key? key}) : super(key: key);
 
   @override
   _ResetPasswordPageState createState() => _ResetPasswordPageState();
@@ -37,7 +37,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         bottomSheet: GestionUHBottomSheet(),
         body: BlocConsumer<ResetPasswordBloc, ResetPasswordState>(
           listener: (context, state) {
-            if (state is ResetPasswordInitial && state.error != null) {
+            if (state is ResetPasswordInitial) {
               _showCenterFlash(
                 message: state.error,
                 borderColor: Colors.red,
@@ -67,7 +67,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         text: TextSpan(
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText1
+                                .bodyText1!
                                 .copyWith(height: 1.4),
                             children: [
                               TextSpan(
@@ -153,7 +153,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   }
 
   void _resetPassword(BuildContext context) {
-    if (_formPasswordKey.currentState.validate()) {
+    if (_formPasswordKey.currentState!.validate()) {
       String passwordFirst = _passwordFirstController.text;
       String passwordSecond = _passwordSecondController.text;
       log("Password 1 $passwordFirst");
@@ -166,11 +166,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   }
 
   void _showCenterFlash({
-    String message,
+    required String message,
     FlashPosition position = FlashPosition.top,
     FlashStyle style = FlashStyle.floating,
-    Alignment alignment,
-    Color borderColor,
+    Alignment? alignment,
+    Color? borderColor,
   }) {
     showFlash(
       context: context,

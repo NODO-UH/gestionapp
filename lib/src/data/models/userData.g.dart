@@ -8,14 +8,14 @@ part of 'userData.dart';
 
 UserData _$UserDataFromJson(Map<String, dynamic> json) {
   return UserData(
-    careerName: json['careerName'] as String,
-    email: json['email'] as String,
-    hasCloud: json['hasCloud'] as bool,
-    hasEmail: json['hasEmail'] as bool,
-    hasInternet: json['hasInternet'] as bool,
-    name: json['name'] as String,
-    objectClass: json['objectClass'] as String,
-    position: json['position'] as String,
+    careerName: json['careerName'] as String?,
+    email: json['email'] as String?,
+    hasCloud: json['hasCloud'] as bool?,
+    hasEmail: json['hasEmail'] as bool?,
+    hasInternet: json['hasInternet'] as bool?,
+    name: json['name'] as String?,
+    objectClass: json['objectClass'] as String?,
+    position: json['position'] as String?,
   );
 }
 

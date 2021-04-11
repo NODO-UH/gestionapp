@@ -10,8 +10,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository authRepository;
 
   LoginBloc({
-    this.authRepository,
-  }) : super(LoginAttemptInitial());
+    required this.authRepository,
+  }) : super(LoginAttemptInitial(error: ''));
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
@@ -33,7 +33,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
     } else if (result.error != null) {
       yield LoginAttemptInitial(
-        error: result.error,
+        error: result.error!,
       );
     } else {
       yield LoginAttemptSuccess();

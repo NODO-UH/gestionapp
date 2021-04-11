@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:gestionuh/deps_injector.dart';
 import 'package:gestionuh/src/data/repository.dart';
 import 'package:gestionuh/src/utils/constants/routes.dart';
@@ -7,7 +6,7 @@ import 'package:gestionuh/src/utils/constants/routes.dart';
 class DefaultDrawer extends Drawer {
   @override
   Widget build(BuildContext context) {
-    var authRepo = di<AuthRepository>();
+    AuthRepository? authRepo = di<AuthRepository>();
     return Drawer(
       key: key == null ? UniqueKey() : key,
       child: ListView(
@@ -91,13 +90,16 @@ class DefaultDrawer extends Drawer {
   }
 
   Widget _buildDrawerItem(
-          {BuildContext context, String text, IconData icon, Function onTap}) =>
+          {required BuildContext context,
+          required String text,
+          IconData? icon,
+          Function? onTap}) =>
       ListTile(
         leading: Icon(icon),
         title: Text(
           text,
           style: Theme.of(context).textTheme.subtitle2,
         ),
-        onTap: onTap,
+        onTap: onTap as void Function()?,
       );
 }

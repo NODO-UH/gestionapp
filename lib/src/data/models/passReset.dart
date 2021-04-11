@@ -5,8 +5,8 @@ part 'passReset.g.dart';
 
 @JsonSerializable()
 class PassReset extends BaseModel {
-  String oldPassword;
-  String newPassword;
+  String? oldPassword;
+  String? newPassword;
 
   PassReset(this.oldPassword, this.newPassword);
 

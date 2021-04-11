@@ -5,8 +5,8 @@ part 'auth.g.dart';
 
 @JsonSerializable()
 class Auth extends BaseModel {
-  String token;
-  String tokenRefresh;
+  String? token;
+  String? tokenRefresh;
 
   Auth({this.token, this.tokenRefresh});
 

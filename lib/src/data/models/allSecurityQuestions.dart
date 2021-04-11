@@ -5,7 +5,7 @@ part 'allSecurityQuestions.g.dart';
 
 @JsonSerializable()
 class AllSecurityQuestions extends BaseModel {
-  List<String> questions;
+  List<String>? questions;
 
   AllSecurityQuestions({this.questions});
 

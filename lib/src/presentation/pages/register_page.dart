@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,18 +11,18 @@ import '../widgets.dart';
 import '../widgets/bottom_sheet.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key key}) : super(key: key);
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  List<Pair<String, int>> questions;
-  List<int> questionsTaken;
+  late List<Pair<String, int>> questions;
+  late List<int> questionsTaken;
 
   //
-  List<TextEditingController> answersTextControllers;
+  late List<TextEditingController> answersTextControllers;
   TextEditingController ciController = TextEditingController();
   TextEditingController passwordFirstController = TextEditingController();
   TextEditingController passwordSecondController = TextEditingController();
@@ -55,12 +56,12 @@ class _RegisterPageState extends State<RegisterPage> {
         questions.map((e) => questionsTaken[e.second] >= 0 ? e : null).toList();
     _questions.removeWhere((element) => element == null);
     _questions.sort((e1, e2) =>
-        questionsTaken[e1.second].compareTo(questionsTaken[e2.second]));
+        questionsTaken[e1!.second].compareTo(questionsTaken[e2!.second]));
     return context.read<RegisterBloc>().add(FormsEnteredRegister(
           ci: ciController.text,
           passwordFirst: passwordFirstController.text,
           passwordSecond: passwordSecondController.text,
-          questions: _questions.map((e) => e.first).toList(),
+          questions: _questions.map((e) => e!.first).toList(),
           answers: answersTextControllers.map((e) => e.text).toList(),
         ));
   }
@@ -69,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     final TextStyle headlineTextsTheme = Theme.of(context)
         .textTheme
-        .headline6
+        .headline6!
         .copyWith(color: Theme.of(context).primaryColor, fontSize: 16);
     return Scaffold(
       appBar: AppBar(
@@ -78,7 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
       bottomSheet: GestionUHBottomSheet(),
       body: BlocConsumer<RegisterBloc, RegisterState>(
         listener: (context, state) async {
-          if (state is RegisterUserFailure && state.error != null) {
+          if (state is RegisterUserFailure) {
             _showCenterFlash(
               message: state.error,
               borderColor: Colors.red,
@@ -126,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         'Todos los campos son obligatorios.*',
                         style: Theme.of(context)
                             .textTheme
-                            .headline6
+                            .headline6!
                             .copyWith(fontSize: 14, color: Colors.black45),
                         textAlign: TextAlign.center,
                       ),
@@ -200,7 +201,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       'Introduzca respuesta para las preguntas de seguridad de su preferencia.',
                       style: Theme.of(context)
                           .textTheme
-                          .headline6
+                          .headline6!
                           .copyWith(fontSize: 14, color: Colors.black45),
                       textAlign: TextAlign.center,
                     ),
@@ -243,7 +244,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget buildQuestionZone(int index) {
     final TextStyle headlineTextsTheme = Theme.of(context)
         .textTheme
-        .headline6
+        .headline6!
         .copyWith(color: Theme.of(context).primaryColor, fontSize: 16);
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
@@ -273,7 +274,7 @@ class _RegisterPageState extends State<RegisterPage> {
             value: questionsTaken.indexOf(index) != -1
                 ? questions[questionsTaken.indexOf(index)]
                 : getFirstQuestionNotOccupeid(index),
-            onChanged: (Pair<String, int> value) {
+            onChanged: (Pair<String, int>? value) {
               setState(() {
                 if (questionsTaken.indexOf(index) != -1) {
                   // clean text boxs
@@ -281,7 +282,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   questionsTaken[oldIndex] = -1;
                   answersTextControllers[oldIndex].clear();
                 }
-                questionsTaken[value.second] = index;
+                questionsTaken[value!.second] = index;
                 answersTextControllers[index].clear();
               });
             },
@@ -299,11 +300,11 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _showCenterFlash({
-    String message,
+    required String message,
     FlashPosition position = FlashPosition.top,
     FlashStyle style = FlashStyle.floating,
-    Alignment alignment,
-    Color borderColor,
+    Alignment? alignment,
+    Color? borderColor,
   }) {
     showFlash(
       context: context,
@@ -333,11 +334,10 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Pair<String, int> getFirstQuestionNotOccupeid(int index) {
+  Pair<String, int>? getFirstQuestionNotOccupeid(int index) {
     if (questions.length == 0) return null;
-    var qFree = questions.firstWhere(
+    var qFree = questions.firstWhereOrNull(
       (e) => questionsTaken[e.second] == -1,
-      orElse: () => null,
     );
     if (qFree == null) return null;
     questionsTaken[qFree.second] = index;
