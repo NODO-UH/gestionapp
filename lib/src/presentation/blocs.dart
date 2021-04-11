@@ -1,2 +1,4 @@
 export 'blocs/login_bloc/login_bloc.dart';
 export 'blocs/quota_bloc/quota_bloc.dart';
+export 'blocs/register_bloc/register_bloc.dart';
+export 'blocs/reset_password_bloc/resetpassword_bloc.dart';

@@ -7,6 +7,7 @@ import 'src/presentation/blocs.dart';
 import 'src/presentation/blocs/reset_password_bloc/resetpassword_bloc.dart';
 import 'src/presentation/pages.dart';
 import 'src/presentation/pages/about_page.dart';
+import 'src/presentation/pages/register_page.dart';
 import 'src/presentation/theme.dart';
 import 'src/utils/constants.dart';
 import 'src/utils/constants/routes.dart';
@@ -47,6 +48,13 @@ class GestionUhApp extends StatelessWidget {
               builder: (_) => BlocProvider<ResetPasswordBloc>(
                 create: (_) => di(),
                 child: ResetPasswordPage(),
+              ),
+            );
+          case REGISTER_ROUTE_NAME:
+            return MaterialPageRoute(
+              builder: (_) => BlocProvider<RegisterBloc>(
+                create: (_) => di()..add(QuestionsRequestedRegister()),
+                child: RegisterPage(),
               ),
             );
           case ABOUT_ROUTE_NAME:

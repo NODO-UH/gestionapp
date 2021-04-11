@@ -60,4 +60,10 @@ Future<void> init() async {
       authRepository: di(),
     ),
   );
+
+  di.registerFactory<RegisterBloc>(
+    () => RegisterBloc(
+      repository: di(),
+    ),
+  );
 }
