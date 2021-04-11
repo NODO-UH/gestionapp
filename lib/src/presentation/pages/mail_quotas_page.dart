@@ -18,6 +18,7 @@ class _MailQuotaPageState extends State<MailQuotaPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Correo'),
+        centerTitle: true,
       ),
       bottomSheet: const GestionUHBottomSheet(),
       drawer: DefaultDrawer(),

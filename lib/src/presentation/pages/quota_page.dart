@@ -18,6 +18,7 @@ class _QuotaPageState extends State<QuotaPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mi Cuota'),
+        centerTitle: true,
       ),
       bottomSheet: const GestionUHBottomSheet(),
       drawer: DefaultDrawer(),

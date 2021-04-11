@@ -12,6 +12,7 @@ class AboutInformationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Acerca de GestiónUH'),
+        centerTitle: true,
       ),
       bottomSheet: Center(
         heightFactor: 1,

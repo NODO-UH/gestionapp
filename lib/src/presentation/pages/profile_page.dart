@@ -18,6 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Perfil'),
+        centerTitle: true,
       ),
       bottomSheet: const GestionUHBottomSheet(),
       drawer: DefaultDrawer(),

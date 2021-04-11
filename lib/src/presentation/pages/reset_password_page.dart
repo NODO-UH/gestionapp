@@ -33,6 +33,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Cambiar Contraseña'),
+          centerTitle: true,
         ),
         bottomSheet: const GestionUHBottomSheet(),
         body: BlocConsumer<ResetPasswordBloc, ResetPasswordState>(

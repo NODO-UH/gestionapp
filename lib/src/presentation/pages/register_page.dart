@@ -78,6 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registrar'),
+        centerTitle: true,
       ),
       bottomSheet: const GestionUHBottomSheet(),
       body: BlocConsumer<RegisterBloc, RegisterState>(
