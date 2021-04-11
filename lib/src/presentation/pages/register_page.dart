@@ -24,14 +24,16 @@ class _RegisterPageState extends State<RegisterPage> {
   //
   List<TextEditingController> answersTextControllers;
   TextEditingController ciController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordFirstController = TextEditingController();
+  TextEditingController passwordSecondController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     answersTextControllers.forEach((element) => element.dispose());
     ciController.dispose();
-    passwordController.dispose();
+    passwordFirstController.dispose();
+    passwordSecondController.dispose();
     super.dispose();
   }
 
@@ -48,7 +50,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _onRegisterAction() {
     if (!(_formKey.currentState?.validate() ?? false)) return false;
-    if (answersTextControllers.any((e) => e.text == '')) return false;
     if (questionsTaken.where((element) => element != -1).length !=
         NUMBER_OF_SECURITY_QUESTIONS_NEEDED) return false;
     var _questions =
@@ -57,12 +58,12 @@ class _RegisterPageState extends State<RegisterPage> {
     _questions.sort((e1, e2) =>
         questionsTaken[e1.second].compareTo(questionsTaken[e2.second]));
     return context.read<RegisterBloc>().add(FormsEnteredRegister(
-            data: SignUpData(
           ci: ciController.text,
-          password: passwordController.text,
+          passwordFirst: passwordFirstController.text,
+          passwordSecond: passwordSecondController.text,
           questions: _questions.map((e) => e.first).toList(),
           answers: answersTextControllers.map((e) => e.text).toList(),
-        )));
+        ));
   }
 
   @override

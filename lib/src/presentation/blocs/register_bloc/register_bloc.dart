@@ -39,7 +39,16 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Stream<RegisterState> formsEnteredRegisterHandler(
       FormsEnteredRegister event) async* {
     yield RegisterUserInProgress();
-    final userId = await repository.sendRegistration(event.data);
+    if (event.passwordFirst != event.passwordSecond) {
+      yield RegisterUserFailure(error: 'Las contraseñas no coinciden.');
+      return;
+    }
+    final userId = await repository.sendRegistration(SignUpData(
+      answers: event.answers,
+      ci: event.ci,
+      password: event.passwordFirst,
+      questions: event.questions,
+    ));
     if (userId.error != null)
       yield RegisterUserFailure(error: userId.error);
     else
