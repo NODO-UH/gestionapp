@@ -48,6 +48,12 @@ Future<void> init() async {
     ),
   );
 
+  di.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepository(
+      api: di(),
+    ),
+  );
+
   //Blocs
   di.registerFactory<LoginBloc>(
     () => LoginBloc(
@@ -78,6 +84,4 @@ Future<void> init() async {
       repository: di(),
     ),
   );
-
-
 }
