@@ -87,8 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
           if (state is RegisterUserFailure && state.error != null) {
             _showCenterFlash(
               message: state.error,
-              position: FlashPosition.top,
-              style: FlashStyle.floating,
+              borderColor: Colors.red,
             );
           } else if (state is LoadInitialDataFailure) {
             Future.delayed(
@@ -100,9 +99,8 @@ class _RegisterPageState extends State<RegisterPage> {
           } else if (state is RegisterUserSuccess) {
             _showCenterFlash(
               message:
-                  'Se ha registrado correctamente, su correo electrónico es ${state.userEmail}.',
-              position: FlashPosition.top,
-              style: FlashStyle.floating,
+                  'Operación Completada. Su correo electrónico es ${state.userEmail}.',
+              borderColor: Colors.green,
             );
             Future.delayed(
                 Duration(seconds: 4),
@@ -291,9 +289,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _showCenterFlash({
     String message,
-    FlashPosition position,
-    FlashStyle style,
+    FlashPosition position = FlashPosition.top,
+    FlashStyle style = FlashStyle.floating,
     Alignment alignment,
+    Color borderColor,
   }) {
     showFlash(
       context: context,
@@ -303,7 +302,7 @@ class _RegisterPageState extends State<RegisterPage> {
           controller: controller,
           backgroundColor: Colors.black87,
           borderRadius: BorderRadius.circular(8.0),
-          borderColor: Colors.blue,
+          borderColor: borderColor ?? Colors.black,
           position: position,
           style: style,
           alignment: alignment,
