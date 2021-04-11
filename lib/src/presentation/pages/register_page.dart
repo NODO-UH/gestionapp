@@ -168,7 +168,29 @@ class _RegisterPageState extends State<RegisterPage> {
                           GestionUhDefaultTextField(
                             hintText: '********',
                             autovalidateMode: AutovalidateMode.disabled,
-                            controller: passwordController,
+                            controller: passwordFirstController,
+                            validator: safetyPasswordValidator,
+                            keyboardType: TextInputType.visiblePassword,
+                            borderRadius: BorderRadius.only(
+                              topLeft: const Radius.circular(5),
+                              bottomLeft: const Radius.circular(5),
+                            ),
+                          ),
+                        ]),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Repetir Contraseña',
+                            style: headlineTextsTheme,
+                          ),
+                          GestionUhDefaultTextField(
+                            hintText: '********',
+                            autovalidateMode: AutovalidateMode.disabled,
+                            controller: passwordSecondController,
                             validator: safetyPasswordValidator,
                             keyboardType: TextInputType.visiblePassword,
                             borderRadius: BorderRadius.only(
@@ -261,7 +283,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 .toList(),
             value: questionsTaken.indexOf(index) != -1
                 ? questions[questionsTaken.indexOf(index)]
-                : null,
+                : getFirstQuestionNotOccupeid(index),
             onChanged: (Pair<String, int> value) {
               setState(() {
                 if (questionsTaken.indexOf(index) != -1) {
@@ -320,5 +342,17 @@ class _RegisterPageState extends State<RegisterPage> {
         );
       },
     );
+  }
+
+  Pair<String, int> getFirstQuestionNotOccupeid(int index) {
+    if (questions.length == 0) return null;
+    var qFree = questions.firstWhere(
+      (e) => questionsTaken[e.second] == -1,
+      orElse: () => null,
+    );
+    if (qFree == null) return null;
+    questionsTaken[qFree.second] = index;
+    answersTextControllers[index].clear();
+    return qFree;
   }
 }
