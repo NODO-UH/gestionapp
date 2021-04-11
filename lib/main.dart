@@ -7,9 +7,8 @@ import 'app.dart';
 import 'deps_injector.dart';
 
 void main() async {
-  await initialize().whenComplete(
-    () => runApp(GestionUhApp()),
-  );
+  await initialize();
+  runApp(GestionUhApp());
 }
 
 Future<void> initialize() async {
