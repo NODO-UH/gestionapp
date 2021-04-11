@@ -79,4 +79,26 @@ class AuthRepository {
     }
     return status ?? Status(status: false);
   }
+
+  Future<AllSecurityQuestions> getSecurityQuestions() async {
+    AllSecurityQuestions secQuestions;
+    try {
+      secQuestions = await api.getAllSecurityQuestions();
+      return secQuestions;
+    } catch (e) {
+      log(e.toString());
+      return AllSecurityQuestions()..error = e.toString();
+    }
+  }
+
+  Future<SignUpUserId> sendRegistration(SignUpData regData) async {
+    SignUpUserId userId;
+    try {
+      userId = await api.signUp(regData);
+      return userId;
+    } catch (e) {
+      log(e.toString());
+      return SignUpUserId()..error = e.toString();
+    }
+  }
 }
