@@ -15,6 +15,13 @@ String safetyPasswordValidator(String value) {
 String identityNumberCIValidator(String value) {
   if (int.tryParse(value) == null)
     return 'Su número de Carnet de identidad no puede contener letras, espacios o símbolos';
-  else if (value.length != 11)
+  else if (value.length < 11)
     return 'Faltan dígitos de su número de Carnet de Identidad';
+  else if (value.length > 11)
+    return 'Sobran dígitos de su número de Carnet de Identidad';
+}
+
+String answerValidator(String value) {
+  print(value);
+  if (value.length == 0) return 'Debe responder la pregunta seleccionada';
 }
