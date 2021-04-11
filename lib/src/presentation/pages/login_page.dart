@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (authRepo.logged) {
-            Navigator.of(context).pushReplacementNamed(QUOTA_ROUTE_NAME);
+            Navigator.of(context).pushReplacementNamed(PROFILE_ROUTE_NAME);
           }
           if (state is LoginAttemptInitial) {
             if (state.error != null) {
