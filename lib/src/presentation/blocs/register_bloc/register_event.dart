@@ -10,12 +10,21 @@ abstract class RegisterEvent extends Equatable {
 class QuestionsRequestedRegister extends RegisterEvent {}
 
 class FormsEnteredRegister extends RegisterEvent {
-  final SignUpData data;
+  final List<String> answers;
+  final String ci;
+  final String passwordFirst;
+  final String passwordSecond;
+  final List<String> questions;
 
   const FormsEnteredRegister({
-    this.data,
+    this.answers,
+    this.ci,
+    this.passwordFirst,
+    this.passwordSecond,
+    this.questions,
   });
 
   @override
-  List<Object> get props => [data];
+  List<Object> get props =>
+      [answers, ci, passwordFirst, passwordSecond, questions];
 }

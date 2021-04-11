@@ -24,14 +24,16 @@ class _RegisterPageState extends State<RegisterPage> {
   //
   List<TextEditingController> answersTextControllers;
   TextEditingController ciController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordFirstController = TextEditingController();
+  TextEditingController passwordSecondController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     answersTextControllers.forEach((element) => element.dispose());
     ciController.dispose();
-    passwordController.dispose();
+    passwordFirstController.dispose();
+    passwordSecondController.dispose();
     super.dispose();
   }
 
@@ -48,7 +50,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _onRegisterAction() {
     if (!(_formKey.currentState?.validate() ?? false)) return false;
-    if (answersTextControllers.any((e) => e.text == '')) return false;
     if (questionsTaken.where((element) => element != -1).length !=
         NUMBER_OF_SECURITY_QUESTIONS_NEEDED) return false;
     var _questions =
@@ -57,12 +58,12 @@ class _RegisterPageState extends State<RegisterPage> {
     _questions.sort((e1, e2) =>
         questionsTaken[e1.second].compareTo(questionsTaken[e2.second]));
     return context.read<RegisterBloc>().add(FormsEnteredRegister(
-            data: SignUpData(
           ci: ciController.text,
-          password: passwordController.text,
+          passwordFirst: passwordFirstController.text,
+          passwordSecond: passwordSecondController.text,
           questions: _questions.map((e) => e.first).toList(),
           answers: answersTextControllers.map((e) => e.text).toList(),
-        )));
+        ));
   }
 
   @override
@@ -86,8 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
           if (state is RegisterUserFailure && state.error != null) {
             _showCenterFlash(
               message: state.error,
-              position: FlashPosition.top,
-              style: FlashStyle.floating,
+              borderColor: Colors.red,
             );
           } else if (state is LoadInitialDataFailure) {
             Future.delayed(
@@ -99,9 +99,8 @@ class _RegisterPageState extends State<RegisterPage> {
           } else if (state is RegisterUserSuccess) {
             _showCenterFlash(
               message:
-                  'Se ha registrado correctamente, su correo electrónico es ${state.userEmail}.',
-              position: FlashPosition.top,
-              style: FlashStyle.floating,
+                  'Operación Completada. Su correo electrónico es ${state.userEmail}.',
+              borderColor: Colors.green,
             );
             Future.delayed(
                 Duration(seconds: 4),
@@ -169,7 +168,29 @@ class _RegisterPageState extends State<RegisterPage> {
                           GestionUhDefaultTextField(
                             hintText: '********',
                             autovalidateMode: AutovalidateMode.disabled,
-                            controller: passwordController,
+                            controller: passwordFirstController,
+                            validator: safetyPasswordValidator,
+                            keyboardType: TextInputType.visiblePassword,
+                            borderRadius: BorderRadius.only(
+                              topLeft: const Radius.circular(5),
+                              bottomLeft: const Radius.circular(5),
+                            ),
+                          ),
+                        ]),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Repetir Contraseña',
+                            style: headlineTextsTheme,
+                          ),
+                          GestionUhDefaultTextField(
+                            hintText: '********',
+                            autovalidateMode: AutovalidateMode.disabled,
+                            controller: passwordSecondController,
                             validator: safetyPasswordValidator,
                             keyboardType: TextInputType.visiblePassword,
                             borderRadius: BorderRadius.only(
@@ -262,7 +283,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 .toList(),
             value: questionsTaken.indexOf(index) != -1
                 ? questions[questionsTaken.indexOf(index)]
-                : null,
+                : getFirstQuestionNotOccupeid(index),
             onChanged: (Pair<String, int> value) {
               setState(() {
                 if (questionsTaken.indexOf(index) != -1) {
@@ -290,9 +311,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _showCenterFlash({
     String message,
-    FlashPosition position,
-    FlashStyle style,
+    FlashPosition position = FlashPosition.top,
+    FlashStyle style = FlashStyle.floating,
     Alignment alignment,
+    Color borderColor,
   }) {
     showFlash(
       context: context,
@@ -302,7 +324,7 @@ class _RegisterPageState extends State<RegisterPage> {
           controller: controller,
           backgroundColor: Colors.black87,
           borderRadius: BorderRadius.circular(8.0),
-          borderColor: Colors.blue,
+          borderColor: borderColor ?? Colors.black,
           position: position,
           style: style,
           alignment: alignment,
@@ -320,5 +342,17 @@ class _RegisterPageState extends State<RegisterPage> {
         );
       },
     );
+  }
+
+  Pair<String, int> getFirstQuestionNotOccupeid(int index) {
+    if (questions.length == 0) return null;
+    var qFree = questions.firstWhere(
+      (e) => questionsTaken[e.second] == -1,
+      orElse: () => null,
+    );
+    if (qFree == null) return null;
+    questionsTaken[qFree.second] = index;
+    answersTextControllers[index].clear();
+    return qFree;
   }
 }
