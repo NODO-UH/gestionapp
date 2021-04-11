@@ -5,9 +5,8 @@ import 'deps_injector.dart';
 import 'src/data/repository/auth_repository/auth_repository.dart';
 
 void main() async {
-  await initialize().whenComplete(
-    () => runApp(GestionUhApp()),
-  );
+  await initialize();
+  runApp(GestionUhApp());
 }
 
 Future<void> initialize() async {
