@@ -8,11 +8,11 @@ part of 'signUpUserId.dart';
 
 SignUpUserId _$SignUpUserIdFromJson(Map<String, dynamic> json) {
   return SignUpUserId(
-    userID: json['userID'] as String,
+    UserID: json['UserID'] as String,
   );
 }
 
 Map<String, dynamic> _$SignUpUserIdToJson(SignUpUserId instance) =>
     <String, dynamic>{
-      'userID': instance.userID,
+      'userID': instance.UserID,
     };
