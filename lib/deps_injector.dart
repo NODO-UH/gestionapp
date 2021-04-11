@@ -84,4 +84,10 @@ Future<void> init() async {
       repository: di(),
     ),
   );
+
+  di.registerFactory<ProfileBloc>(
+    () => ProfileBloc(
+      profileRepository: di(),
+    ),
+  );
 }
