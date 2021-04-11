@@ -5,3 +5,4 @@ linter:
     avoid_classes_with_only_static_members: false
     avoid_positional_boolean_parameters: false
     constant_identifier_names: false
+    prefer_single_quotes: true

@@ -39,10 +39,10 @@ flutter:
 
 flutter_native_splash:
   image: assets/images/splash2.png
-  color: "#5b0101"
+  color: '#5b0101'
   fill: false
 
 flutter_icons:
-  android: "launcher_icon"
+  android: 'launcher_icon'
   ios: true
-  image_path: "assets/images/ico.png"
+  image_path: 'assets/images/ico.png'

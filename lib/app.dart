@@ -18,7 +18,7 @@ class GestionUhApp extends StatelessWidget {
     return MaterialApp(
       title: Constants.appName,
       theme: gestionuhLightTheme,
-      debugShowCheckedModeBanner: Constants.TestMode,
+      debugShowCheckedModeBanner: Constants.testMode,
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case LOGIN_ROUTE_NAME:

@@ -18,11 +18,11 @@ const backgroundSecundaryColor = Color(0xfff6ddb4);
 final ThemeData light = ThemeData.light();
 
 const titleTextStyle = TextStyle(
-    fontFamily: "Enriqueta",
+    fontFamily: 'Enriqueta',
     color: titlesAndParagraphsColor,
     fontWeight: FontWeight.bold);
 
-const bodyTextStyle = TextStyle(fontFamily: "Vegur", color: subtitlesColor);
+const bodyTextStyle = TextStyle(fontFamily: 'Vegur', color: subtitlesColor);
 
 final TextTheme textTheme = light.textTheme.copyWith(
     headline4: titleTextStyle.copyWith(fontSize: 24),

@@ -13,7 +13,7 @@ class DefaultDrawer extends Drawer {
         children: [
           DrawerHeader(
             child: Image.asset(
-              "assets/images/logo-uh.png",
+              'assets/images/logo-uh.png',
               color: Theme.of(context).primaryColor,
             ),
           ),

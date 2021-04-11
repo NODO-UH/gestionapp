@@ -156,8 +156,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     if (_formPasswordKey.currentState!.validate()) {
       final String passwordFirst = _passwordFirstController.text;
       final String passwordSecond = _passwordSecondController.text;
-      log("Password 1 $passwordFirst");
-      log("Password 2 $passwordSecond");
+      log('Password 1 $passwordFirst');
+      log('Password 2 $passwordSecond');
       context.read<ResetPasswordBloc>().add(
             ResetPasswordAttempted(
                 passwordFirst: passwordFirst, passwordSecond: passwordSecond),

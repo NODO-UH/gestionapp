@@ -13,7 +13,7 @@ class GestionApi {
   GestionApi();
 
   Future<Auth> getTokens() async {
-    if (Constants.TestMode) {
+    if (Constants.testMode) {
       return Auth(
         token: SampleData.authToken,
         tokenRefresh: SampleData.refreshToken,
@@ -23,7 +23,7 @@ class GestionApi {
     Auth response = Auth();
 
     if (userName == null || password == null) {
-      response.error = "Missing User Name or Password";
+      response.error = 'Missing User Name or Password';
       return response;
     }
 
@@ -44,7 +44,7 @@ class GestionApi {
   }
 
   Future<Quota> getQuota() async {
-    if (Constants.TestMode) {
+    if (Constants.testMode) {
       return Quota(
         quota: SampleData.userQuota,
         bonus: SampleData.userBonus,
@@ -78,7 +78,7 @@ class GestionApi {
   }
 
   Future<MailQuota> getMailQuota() async {
-    if (Constants.TestMode) {
+    if (Constants.testMode) {
       return MailQuota(
         quota: SampleData.mailQuota,
         consumed: SampleData.mailConsumedQuota,
@@ -111,7 +111,7 @@ class GestionApi {
   }
 
   Future<UserData> getUserData() async {
-    if (Constants.TestMode) {
+    if (Constants.testMode) {
       return UserData(
         careerName: SampleData.userCareer,
         email: SampleData.userMail,
@@ -150,7 +150,7 @@ class GestionApi {
   }
 
   Future<AllSecurityQuestions> getAllSecurityQuestions() async {
-    if (Constants.TestMode) {
+    if (Constants.testMode) {
       return AllSecurityQuestions(
         questions: SampleData.securityQuestions,
       );
@@ -174,7 +174,7 @@ class GestionApi {
   }
 
   Future<Status> resetPassword(String newPassw) async {
-    if (Constants.TestMode) return Status(status: true);
+    if (Constants.testMode) return Status(status: true);
 
     final tokens = await getTokens();
 
@@ -202,7 +202,7 @@ class GestionApi {
   }
 
   Future<SignUpUserId> signUp(SignUpData data) async {
-    if (Constants.TestMode) {
+    if (Constants.testMode) {
       return SignUpUserId(
         userID: SampleData.userMail,
       );
