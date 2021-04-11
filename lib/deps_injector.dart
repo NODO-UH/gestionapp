@@ -66,4 +66,10 @@ Future<void> init() async {
       authRepository: di(),
     ),
   );
+
+  di.registerFactory<MailQuotaBloc>(
+    () => MailQuotaBloc(
+      mailQuotasRepository: di(),
+    ),
+  );
 }
