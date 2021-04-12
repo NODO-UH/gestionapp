@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 //general
-const primaryBrandColor = Color.fromARGB(255, 91, 1, 1);
-const secondaryBrandColor = Color.fromARGB(160, 91, 1, 1);
+const primaryBrandColor = Color.fromARGB(255, 46, 172, 220);
+const secondaryBrandColor = Color.fromARGB(255, 105, 187, 229);
 const highlightColor = Color(0xff18396c);
 const alternativeHighlightColor = Color(0xff8eadca);
 //per texts
