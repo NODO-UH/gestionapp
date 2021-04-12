@@ -39,7 +39,31 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(state.profile.name!),
+                        buildProfileField(
+                          title: 'Nombre',
+                          body: state.profile.name ?? '',
+                        ),
+                        buildProfileField(
+                          title: 'Correo',
+                          body: state.profile.email ?? '',
+                        ),
+                        buildProfileField(
+                          title: 'Carrera',
+                          body: state.profile.careerName ?? '',
+                        ),
+                        buildProfileField(
+                          title: 'Ocupación',
+                          body: state.profile.position ?? '',
+                        ),
+                        buildProfileField(
+                          title: 'Clase',
+                          body: state.profile.objectClass ?? '',
+                        ),
+                        buildAccessFields(
+                          mail: state.profile.hasEmail ?? false,
+                          cloud: state.profile.hasCloud ?? false,
+                          internet: state.profile.hasInternet ?? false,
+                        ),
                       ],
                     ),
                   ),
@@ -85,6 +109,108 @@ class _ProfilePageState extends State<ProfilePage> {
           );
         },
       ),
+    );
+  }
+
+  Widget buildProfileField({
+    required String title,
+    required String body,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 5,
+        horizontal: 10,
+      ),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title),
+              const SizedBox(
+                height: 3,
+              ),
+              Text(
+                body,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildAccessFields({
+    required bool mail,
+    required bool cloud,
+    required bool internet,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 10,
+      ),
+      child: Column(
+        children: [
+          buildToogleFiled(
+            icon: Icons.mail,
+            text: 'Acceso a Correo',
+            value: mail,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          buildToogleFiled(
+            icon: Icons.cloud,
+            text: 'Acceso a Nube',
+            value: cloud,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          buildToogleFiled(
+            icon: Icons.wifi,
+            text: 'Acceso a Internet',
+            value: internet,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildToogleFiled({
+    required IconData icon,
+    required String text,
+    required bool value,
+  }) {
+    return Row(
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.5,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                text,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Icon(
+                icon,
+                color: value ? Colors.green : Colors.red,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
