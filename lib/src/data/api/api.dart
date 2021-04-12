@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:gestionuh/src/data/models/userCi.dart';
 
 import '../../utils/constants.dart';
 import '../models.dart';
