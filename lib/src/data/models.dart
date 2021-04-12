@@ -8,3 +8,4 @@ export 'models/passwordEditData.dart';
 export 'models/userId.dart';
 export 'models/status.dart';
 export 'models/user_data.dart';
+export 'models/userCi.dart';
