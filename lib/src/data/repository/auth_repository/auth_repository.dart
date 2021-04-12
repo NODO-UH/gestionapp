@@ -96,7 +96,7 @@ class AuthRepository {
     }
   }
 
-  Future<UserId> sendRegistration(SignUpData regData) async {
+  Future<UserId> sendRegistration(PasswordEditData regData) async {
     try {
       return await api.signUp(regData);
     } catch (e) {

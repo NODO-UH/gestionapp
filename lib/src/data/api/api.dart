@@ -201,7 +201,7 @@ class GestionApi {
     return Status(status: true);
   }
 
-  Future<UserId> signUp(SignUpData data) async {
+  Future<UserId> signUp(PasswordEditData data) async {
     if (Constants.testMode) {
       return UserId(
         userID: SampleData.userMail,

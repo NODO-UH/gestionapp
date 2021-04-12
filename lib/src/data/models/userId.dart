@@ -9,8 +9,7 @@ class UserId extends BaseModel {
 
   UserId({this.userID});
 
-  static UserId fromJson(Map<String, dynamic> json) =>
-      _$SignUpUserIdFromJson(json);
+  static UserId fromJson(Map<String, dynamic> json) => _$UserIdFromJson(json);
 
-  Map<String, dynamic> toJson() => _$SignUpUserIdToJson(this);
+  Map<String, dynamic> toJson() => _$UserIdToJson(this);
 }

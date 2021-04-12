@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sign_up_data.dart';
+part of 'passwordEditData.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SignUpData _$SignUpDataFromJson(Map<String, dynamic> json) {
-  return SignUpData(
+PasswordEditData _$PasswordEditDataFromJson(Map<String, dynamic> json) {
+  return PasswordEditData(
     answers:
         (json['answers'] as List<dynamic>?)?.map((e) => e as String).toList(),
     ci: json['ci'] as String?,
@@ -17,7 +17,7 @@ SignUpData _$SignUpDataFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$SignUpDataToJson(SignUpData instance) =>
+Map<String, dynamic> _$PasswordEditDataToJson(PasswordEditData instance) =>
     <String, dynamic>{
       'answers': instance.answers,
       'ci': instance.ci,

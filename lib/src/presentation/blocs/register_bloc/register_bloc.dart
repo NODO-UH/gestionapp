@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../data/models/sign_up_data.dart';
+import '../../../data/models/passwordEditData.dart';
 import '../../../data/repository/auth_repository/auth_repository.dart';
 
 part 'register_event.dart';
@@ -45,7 +45,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       yield const RegisterUserFailure(error: 'Las contraseñas no coinciden.');
       return;
     }
-    final userId = await repository.sendRegistration(SignUpData(
+    final userId = await repository.sendRegistration(PasswordEditData(
       answers: event.answers,
       ci: event.ci,
       password: event.passwordFirst,
