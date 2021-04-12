@@ -253,6 +253,31 @@ class GestionApi {
         UserId.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
   }
 
+  Future<UserId> passwordRecovery(PasswordEditData data) async {
+    if (Constants.testMode) {
+      return UserId(
+        userID: SampleData.userMail,
+      );
+    }
+
+    UserId user = UserId();
+
+    final dio = Dio(BaseOptions(baseUrl: apiUrl));
+
+    Response<String> response;
+
+    try {
+      response =
+          await dio.post(Constants.passwordRecoveryUrl, data: data.toJson());
+    } catch (error) {
+      user.error = error.toString();
+      return user;
+    }
+
+    return user =
+        UserId.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
+  }
+
   void setLogin(String userName, String password) {
     this.userName = userName;
     this.password = password;
