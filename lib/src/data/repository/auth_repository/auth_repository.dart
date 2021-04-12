@@ -87,12 +87,12 @@ class AuthRepository {
     }
   }
 
-  Future<AllSecurityQuestions> getSecurityQuestions() async {
+  Future<SecurityQuestions> getSecurityQuestions() async {
     try {
       return await api.getAllSecurityQuestions();
     } catch (e) {
       log(e.toString());
-      return AllSecurityQuestions()..error = e.toString();
+      return SecurityQuestions()..error = e.toString();
     }
   }
 

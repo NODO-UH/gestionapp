@@ -149,14 +149,14 @@ class GestionApi {
         UserData.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
   }
 
-  Future<AllSecurityQuestions> getAllSecurityQuestions() async {
+  Future<SecurityQuestions> getAllSecurityQuestions() async {
     if (Constants.testMode) {
-      return AllSecurityQuestions(
+      return SecurityQuestions(
         questions: SampleData.securityQuestions,
       );
     }
 
-    AllSecurityQuestions questions = AllSecurityQuestions();
+    SecurityQuestions questions = SecurityQuestions();
 
     final dio = Dio(BaseOptions(baseUrl: apiUrl));
 
@@ -169,7 +169,7 @@ class GestionApi {
       return questions;
     }
 
-    return questions = AllSecurityQuestions.fromJson(
+    return questions = SecurityQuestions.fromJson(
         jsonDecode(response.data!) as Map<String, dynamic>);
   }
 

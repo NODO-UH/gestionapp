@@ -1,4 +1,4 @@
-export 'models/all_security_questions.dart';
+export 'models/security_questions.dart';
 export 'models/auth.dart';
 export 'models/login.dart';
 export 'models/mail_quota.dart';
