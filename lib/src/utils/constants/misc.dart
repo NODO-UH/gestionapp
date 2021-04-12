@@ -8,6 +8,8 @@ class Constants {
   static const userDataUrl = '/user/me';
   static const allSecurityQuestionsUrl = '/securityquestions';
   static const signUpUrl = '/auth/signup';
+  static const passwordRecoveryUrl = '/auth/resetpassword';
+  static const userSecurityQuestionsUrl = '/user/securityquestions';
   static const baseUrl = 'https://identity.sic.uh.cu';
   static const copyRight = ' GestiónUH version 1.0 Pre-Alpha';
 }
