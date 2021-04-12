@@ -34,4 +34,9 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX''';
     'Pregunta 8',
     'Pregunta 9',
   ];
+  static const userSecurityQuestions = [
+    'Pregunta 1',
+    'Pregunta 2',
+    'Pregunta 3',
+  ];
 }

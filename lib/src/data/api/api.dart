@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:gestionuh/src/data/models/userCi.dart';
 
 import '../../utils/constants.dart';
 import '../models.dart';
@@ -164,6 +165,33 @@ class GestionApi {
 
     try {
       response = await dio.get(Constants.allSecurityQuestionsUrl);
+    } catch (error) {
+      questions.error = error.toString();
+      return questions;
+    }
+
+    return questions = SecurityQuestions.fromJson(
+        jsonDecode(response.data!) as Map<String, dynamic>);
+  }
+
+  Future<SecurityQuestions> getUserSecurityQuestions(String ci) async {
+    if (Constants.testMode) {
+      return SecurityQuestions(
+        questions: SampleData.userSecurityQuestions,
+      );
+    }
+
+    UserCi user = UserCi(ci: ci);
+
+    SecurityQuestions questions = SecurityQuestions();
+
+    final dio = Dio(BaseOptions(baseUrl: apiUrl));
+
+    Response<String> response;
+
+    //TODO: set get body.
+    try {
+      response = await dio.get(Constants.userSecurityQuestionsUrl);
     } catch (error) {
       questions.error = error.toString();
       return questions;
