@@ -96,12 +96,12 @@ class AuthRepository {
     }
   }
 
-  Future<SignUpUserId> sendRegistration(SignUpData regData) async {
+  Future<UserId> sendRegistration(SignUpData regData) async {
     try {
       return await api.signUp(regData);
     } catch (e) {
       log(e.toString());
-      return SignUpUserId()..error = e.toString();
+      return UserId()..error = e.toString();
     }
   }
 }

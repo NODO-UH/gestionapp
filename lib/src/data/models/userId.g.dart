@@ -1,18 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sign_up_user_id.dart';
+part of 'userId.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SignUpUserId _$SignUpUserIdFromJson(Map<String, dynamic> json) {
-  return SignUpUserId(
+UserId _$SignUpUserIdFromJson(Map<String, dynamic> json) {
+  return UserId(
     userID: json['userID'] as String?,
   );
 }
 
-Map<String, dynamic> _$SignUpUserIdToJson(SignUpUserId instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$SignUpUserIdToJson(UserId instance) => <String, dynamic>{
       'userID': instance.userID,
     };

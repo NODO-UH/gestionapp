@@ -201,14 +201,14 @@ class GestionApi {
     return Status(status: true);
   }
 
-  Future<SignUpUserId> signUp(SignUpData data) async {
+  Future<UserId> signUp(SignUpData data) async {
     if (Constants.testMode) {
-      return SignUpUserId(
+      return UserId(
         userID: SampleData.userMail,
       );
     }
 
-    SignUpUserId user = SignUpUserId();
+    UserId user = UserId();
 
     final dio = Dio(BaseOptions(baseUrl: apiUrl));
 
@@ -221,8 +221,8 @@ class GestionApi {
       return user;
     }
 
-    return user = SignUpUserId.fromJson(
-        jsonDecode(response.data!) as Map<String, dynamic>);
+    return user =
+        UserId.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
   }
 
   void setLogin(String userName, String password) {
