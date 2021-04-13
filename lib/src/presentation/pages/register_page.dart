@@ -49,6 +49,17 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  Pair<String, int>? getFirstQuestionNotOccupeid(int index) {
+    if (questions.isEmpty) return null;
+    final qFree = questions.firstWhereOrNull(
+      (e) => questionsTaken[e.second] == -1,
+    );
+    if (qFree == null) return null;
+    questionsTaken[qFree.second] = index;
+    answersTextControllers[index].clear();
+    return qFree;
+  }
+
   void _onRegisterAction() {
     if (!(_formKey.currentState?.validate() ?? false)) return;
     if (questionsTaken.where((element) => element != -1).length !=
@@ -256,8 +267,8 @@ class _RegisterPageState extends State<RegisterPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           DropdownButton(
+            underline: Container(),
             icon: const Icon(Icons.add_box_outlined),
-            isDense: true,
             isExpanded: true,
             hint: Text(
               'Seleccione una pregunta',
@@ -336,16 +347,5 @@ class _RegisterPageState extends State<RegisterPage> {
         );
       },
     );
-  }
-
-  Pair<String, int>? getFirstQuestionNotOccupeid(int index) {
-    if (questions.isEmpty) return null;
-    final qFree = questions.firstWhereOrNull(
-      (e) => questionsTaken[e.second] == -1,
-    );
-    if (qFree == null) return null;
-    questionsTaken[qFree.second] = index;
-    answersTextControllers[index].clear();
-    return qFree;
   }
 }
