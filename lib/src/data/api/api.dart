@@ -88,7 +88,7 @@ class GestionApi {
       );
     }
 
-    UserData response = await apiRequest<UserData, UserData>(
+    final UserData response = await apiRequest<UserData, UserData>(
       Constants.userDataUrl,
       () => UserData(),
       null,
@@ -208,11 +208,10 @@ class GestionApi {
     ClassBuilder<T>? builder, {
     String method = 'GET',
     bool auth = false,
-    String apiUrl = Constants.baseUrl,
   }) async {
     final dio = Dio(BaseOptions(baseUrl: apiUrl));
 
-    T target = initializer();
+    final T target = initializer();
 
     Auth tokens;
 

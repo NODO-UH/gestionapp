@@ -11,5 +11,6 @@ class UserId extends BaseModel {
 
   static UserId fromJson(Map<String, dynamic> json) => _$UserIdFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$UserIdToJson(this);
 }
