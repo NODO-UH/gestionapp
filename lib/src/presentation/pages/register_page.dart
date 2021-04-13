@@ -77,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
         .copyWith(color: Theme.of(context).primaryColor, fontSize: 16);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Registrar'),
+        title: const Text('Registrarse'),
         centerTitle: true,
       ),
       bottomSheet: const GestionUHBottomSheet(),
@@ -221,7 +221,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 10),
                     GestionUhDefaultButton(
-                      text: 'Registrar',
+                      text: 'Finalizar',
                       onPressed: _onRegisterAction,
                     ),
                     const SizedBox(height: 30),
