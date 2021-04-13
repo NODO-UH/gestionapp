@@ -13,5 +13,5 @@ UserId _$UserIdFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$UserIdToJson(UserId instance) => <String, dynamic>{
-      'userID': instance.UserID,
+      'UserID': instance.UserID,
     };
