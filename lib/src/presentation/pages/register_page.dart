@@ -222,18 +222,18 @@ class _RegisterPageState extends State<RegisterPage> {
                           .copyWith(fontSize: 14, color: Colors.black45),
                       textAlign: TextAlign.center,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: () {
-                        var childrenQuest = <Widget>[];
-                        for (int i = 0;
-                            i < NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
-                            i++) {
-                          childrenQuest.add(buildQuestionZone(i));
-                        }
-                        return childrenQuest;
-                      }(),
-                    ),
+                    Builder(builder: (context) {
+                      var childrenQuest = <Widget>[];
+                      for (int i = 0;
+                          i < NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
+                          i++) {
+                        childrenQuest.add(buildQuestionZone(i));
+                      }
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: childrenQuest,
+                      );
+                    }),
                     SizedBox(height: 10),
                     GestionUhDefaultButton(
                       text: 'Registrar',
