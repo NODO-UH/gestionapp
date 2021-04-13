@@ -275,8 +275,8 @@ class _RegisterPageState extends State<RegisterPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           DropdownButton(
+            underline: Container(),
             icon: Icon(Icons.add_box_outlined),
-            isDense: true,
             isExpanded: true,
             hint: Text(
               'Seleccione una pregunta',
@@ -356,15 +356,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Pair<String, int> getFirstQuestionNotOccupeid(int index) {
-    if (questions.length == 0) return null;
-    var qFree = questions.firstWhere(
-      (e) => questionsTaken[e.second] == -1,
-      orElse: () => null,
     );
-    if (qFree == null) return null;
-    questionsTaken[qFree.second] = index;
-    answersTextControllers[index].clear();
-    return qFree;
   }
 }
