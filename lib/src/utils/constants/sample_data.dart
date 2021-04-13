@@ -2,7 +2,7 @@ class SampleData {
   static const user = 'user';
   static const userMail = 'user@uh.cu';
   static const userPassword = 'password';
-  static const userHasCloud = true;
+  static const userHasCloud = false;
   static const userHasMail = true;
   static const userHasInternet = true;
   static const userPosition = 'student';

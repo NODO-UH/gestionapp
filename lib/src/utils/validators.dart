@@ -17,7 +17,7 @@ String? safetyPasswordValidator(String? value) {
 
 String? identityNumberCIValidator(String? value) {
   if (value == null || int.tryParse(value) == null) {
-    return 'Su número de Carnet de identidad solo puede contener dígitos';
+    return 'Sólo se admiten dígitos';
   } else if (value.length < 11) {
     return 'Faltan dígitos de su número de Carnet de Identidad';
   } else if (value.length > 11) {

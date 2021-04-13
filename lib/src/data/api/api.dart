@@ -145,8 +145,13 @@ class GestionApi {
       return userData;
     }
 
-    return userData =
+    userData =
         UserData.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
+
+    userData.objectClass =
+        Constants.objectClassTranslations[userData.objectClass];
+
+    return userData;
   }
 
   Future<SecurityQuestions> getAllSecurityQuestions() async {
@@ -186,9 +191,9 @@ class GestionApi {
 
     Response<String> response;
 
-    //TODO: set get body.
     try {
-      response = await dio.get(Constants.userSecurityQuestionsUrl);
+      response = await dio.request(Constants.userSecurityQuestionsUrl,
+          data: user.toJson(), options: Options(method: 'GET'));
     } catch (error) {
       questions.error = error.toString();
       return questions;
