@@ -48,6 +48,18 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  Pair<String, int> getFirstQuestionNotOccupeid(int index) {
+    if (questions.length == 0) return null;
+    var qFree = questions.firstWhere(
+      (e) => questionsTaken[e.second] == -1,
+      orElse: () => null,
+    );
+    if (qFree == null) return null;
+    questionsTaken[qFree.second] = index;
+    answersTextControllers[index].clear();
+    return qFree;
+  }
+
   _onRegisterAction() {
     if (!(_formKey.currentState?.validate() ?? false)) return false;
     if (questionsTaken.where((element) => element != -1).length !=
