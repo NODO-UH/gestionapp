@@ -62,15 +62,15 @@ class QuotaGraph extends StatelessWidget {
               borderData: FlBorderData(show: false),
               sectionsSpace: 0,
               centerSpaceRadius: MediaQuery.of(context).size.width / 6,
-              sections: List.generate(
-                data.length,
-                (i) => PieChartSectionData(
-                  radius: 50,
-                  color: data[i].color,
-                  value: data[i].cant.toDouble(),
-                  showTitle: false,
-                ),
-              ),
+              sections: data
+                  .where((x) => x.cant != 0)
+                  .map((item) => PieChartSectionData(
+                        radius: 50,
+                        color: item.color,
+                        value: item.cant.toDouble(),
+                        showTitle: false,
+                      ))
+                  .toList(),
             ),
           ),
         ),

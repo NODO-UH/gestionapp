@@ -1,9 +1,6 @@
 part of 'mail_quota_bloc.dart';
 
-class MailQuotaState extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
+abstract class MailQuotaState {}
 
 class MailQuotaInitial extends MailQuotaState {}
 
@@ -15,9 +12,6 @@ class MailQuotaLoadedSuccess extends MailQuotaState {
   MailQuotaLoadedSuccess({
     this.quota,
   });
-
-  @override
-  List<Object?> get props => [quota];
 }
 
 class MailQuotaLoadedFailure extends MailQuotaState {
@@ -26,7 +20,4 @@ class MailQuotaLoadedFailure extends MailQuotaState {
   MailQuotaLoadedFailure({
     this.error,
   });
-
-  @override
-  List<Object?> get props => [error];
 }

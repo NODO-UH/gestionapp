@@ -185,8 +185,6 @@ class GestionApi {
       );
     }
 
-    UserCi user = UserCi(ci: ci);
-
     SecurityQuestions questions = SecurityQuestions();
 
     final dio = Dio(BaseOptions(baseUrl: apiUrl));

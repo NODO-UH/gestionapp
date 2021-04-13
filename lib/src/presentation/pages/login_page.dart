@@ -31,6 +31,10 @@ class _LoginPageState extends State<LoginPage> {
         );
   }
 
+  void _recoverAction(BuildContext context) {
+    Navigator.of(context).pushNamed(RECOVER_PASSWORD_ROUTE_NAME);
+  }
+
   void _registerAction(BuildContext context) {
     Navigator.of(context).pushNamed(REGISTER_ROUTE_NAME);
   }
@@ -113,12 +117,35 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    CheckboxListTile(
-                      value: _rememberMe,
-                      title: const Text('Desea recordar la sesión?'),
-                      activeColor: Theme.of(context).primaryColor,
-                      onChanged: (value) =>
-                          setState(() => _rememberMe = value!),
+                    GestureDetector(
+                      onTap: () => setState(() => _rememberMe = !_rememberMe),
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '¿Desea recordar la sesión?',
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
+                            ),
+                            Text(
+                              'No',
+                              style: Theme.of(context).textTheme.subtitle1,
+                            ),
+                            Switch(
+                              value: _rememberMe,
+                              activeColor: Theme.of(context).primaryColor,
+                              onChanged: (value) =>
+                                  setState(() => _rememberMe = value),
+                            ),
+                            Text(
+                              'Si',
+                              style: Theme.of(context).textTheme.subtitle1,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 5,
@@ -126,6 +153,13 @@ class _LoginPageState extends State<LoginPage> {
                     GestionUhDefaultButton(
                       text: 'Iniciar Sesión',
                       onPressed: () => _loginAction(context),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    GestionUhDefaultButton(
+                      text: 'Recuperar Contraseña',
+                      onPressed: () => _recoverAction(context),
                     ),
                     const SizedBox(
                       height: 5,
