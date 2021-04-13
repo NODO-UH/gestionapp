@@ -35,7 +35,12 @@ class GestionApi {
     final login = Login(userName, password);
 
     return apiRequest<Auth, Login>(
-        Constants.authUrl, () => Auth(), login, (json) => Auth.fromJson(json));
+      Constants.authUrl,
+      () => Auth(),
+      login,
+      (json) => Auth.fromJson(json),
+      method: 'POST',
+    );
   }
 
   Future<Quota> getQuota() async {
@@ -48,8 +53,12 @@ class GestionApi {
     }
 
     return apiRequest<Quota, Quota>(
-        Constants.quotaUrl, () => Quota(), null, (json) => Quota.fromJson(json),
-        auth: true);
+      Constants.quotaUrl,
+      () => Quota(),
+      null,
+      (json) => Quota.fromJson(json),
+      auth: true,
+    );
   }
 
   Future<MailQuota> getMailQuota() async {
@@ -79,9 +88,20 @@ class GestionApi {
       );
     }
 
-    return apiRequest<UserData, UserData>(Constants.userDataUrl,
-        () => UserData(), null, (json) => UserData.fromJson(json),
-        auth: true);
+    UserData response = await apiRequest<UserData, UserData>(
+      Constants.userDataUrl,
+      () => UserData(),
+      null,
+      (json) => UserData.fromJson(json),
+      auth: true,
+    );
+
+    if (response.error == null) {
+      response.objectClass =
+          Constants.objectClassTranslations[response.objectClass];
+    }
+
+    return response;
   }
 
   Future<SecurityQuestions> getAllSecurityQuestions() async {
@@ -92,10 +112,11 @@ class GestionApi {
     }
 
     return apiRequest<SecurityQuestions, SecurityQuestions>(
-        Constants.allSecurityQuestionsUrl,
-        () => SecurityQuestions(),
-        null,
-        (json) => SecurityQuestions.fromJson(json));
+      Constants.allSecurityQuestionsUrl,
+      () => SecurityQuestions(),
+      null,
+      (json) => SecurityQuestions.fromJson(json),
+    );
   }
 
   Future<SecurityQuestions> getUserSecurityQuestions(String ci) async {
@@ -108,10 +129,11 @@ class GestionApi {
     final UserCi user = UserCi(ci: ci);
 
     return apiRequest<SecurityQuestions, UserCi>(
-        Constants.userSecurityQuestionsUrl,
-        () => SecurityQuestions(),
-        user,
-        (json) => SecurityQuestions.fromJson(json));
+      Constants.userSecurityQuestionsUrl,
+      () => SecurityQuestions(),
+      user,
+      (json) => SecurityQuestions.fromJson(json),
+    );
   }
 
   Future<Status> resetPassword(String newPassw) async {
@@ -122,8 +144,13 @@ class GestionApi {
     final credentials = PassReset(password, newPassw);
 
     response = await apiRequest<Status, PassReset>(
-        Constants.resetPasswordUrld, () => Status(), credentials, null,
-        method: 'POST', auth: true);
+      Constants.resetPasswordUrld,
+      () => Status(),
+      credentials,
+      null,
+      method: 'POST',
+      auth: true,
+    );
 
     if (response.error == null) {
       response.status = true;
@@ -139,9 +166,13 @@ class GestionApi {
       );
     }
 
-    return apiRequest<UserId, PasswordEditData>(Constants.signUpUrl,
-        () => UserId(), data, (json) => UserId.fromJson(json),
-        method: 'POST');
+    return apiRequest<UserId, PasswordEditData>(
+      Constants.signUpUrl,
+      () => UserId(),
+      data,
+      (json) => UserId.fromJson(json),
+      method: 'POST',
+    );
   }
 
   Future<UserId> passwordRecovery(PasswordEditData data) async {
@@ -151,9 +182,13 @@ class GestionApi {
       );
     }
 
-    return apiRequest(Constants.passwordRecoveryUrl, () => UserId(), data,
-        (json) => UserId.fromJson(json),
-        method: 'POST');
+    return apiRequest(
+      Constants.passwordRecoveryUrl,
+      () => UserId(),
+      data,
+      (json) => UserId.fromJson(json),
+      method: 'POST',
+    );
   }
 
   void setLogin(String userName, String password) {
@@ -200,7 +235,7 @@ class GestionApi {
       response = await dio.request(url,
           data: data?.toJson(),
           options: Options(
-            method: 'GET',
+            method: method,
             validateStatus: (status) {
               if (status != null) {
                 return status < 500;
