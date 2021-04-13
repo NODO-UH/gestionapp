@@ -145,8 +145,13 @@ class GestionApi {
       return userData;
     }
 
-    return userData =
+    userData =
         UserData.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
+
+    userData.objectClass =
+        Constants.objectClassTranslations[userData.objectClass];
+
+    return userData;
   }
 
   Future<SecurityQuestions> getAllSecurityQuestions() async {

@@ -12,4 +12,8 @@ class Constants {
   static const userSecurityQuestionsUrl = '/user/securityquestions';
   static const baseUrl = 'https://identity.sic.uh.cu';
   static const copyRight = ' GestiónUH version 1.0 Pre-Alpha';
+  static const objectClassTranslations = {
+    'student': 'Estudiante',
+    'worker': 'Trabajador'
+  };
 }
