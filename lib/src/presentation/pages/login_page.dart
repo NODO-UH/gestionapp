@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 5,
                     ),
                     GestionUhDefaultButton(
-                      text: 'Registrar',
+                      text: 'Registrarse',
                       onPressed: () => _registerAction(context),
                     ),
                   ],
