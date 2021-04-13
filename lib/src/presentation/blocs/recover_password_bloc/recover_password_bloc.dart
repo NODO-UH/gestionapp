@@ -35,7 +35,7 @@ class RecoverPasswordBloc
     final result = await recoverPasswordRepository.getUserSecurityQuestions(
       event.state.ci.text.trim(),
     );
-    if (result == null || result.questions == null) {
+    if (result == null) {
       yield RecoverPasswordCIError(
         ci: event.state.ci,
         error: 'Ha ocurrido un error inesperado.',
@@ -44,6 +44,11 @@ class RecoverPasswordBloc
       yield RecoverPasswordCIError(
         ci: event.state.ci,
         error: result.error!,
+      );
+    } else if (result.questions != null) {
+      yield RecoverPasswordCIError(
+        ci: event.state.ci,
+        error: 'Ha ocurrido un error inesperado.',
       );
     } else {
       yield RecoverPasswordQuestions(
@@ -72,7 +77,7 @@ class RecoverPasswordBloc
         password: event.state.password.text.trim(),
       ),
     );
-    if (result == null || result.userID == null) {
+    if (result == null) {
       yield RecoverPasswordQuestionsError(
         ci: event.state.ci,
         questions: event.state.questions,
@@ -87,6 +92,14 @@ class RecoverPasswordBloc
         answers: event.state.answers,
         password: event.state.password,
         error: result.error!,
+      );
+    } else if (result.userID != null) {
+      yield RecoverPasswordQuestionsError(
+        ci: event.state.ci,
+        questions: event.state.questions,
+        answers: event.state.answers,
+        password: event.state.password,
+        error: 'Ha ocurrido un error inesperado.',
       );
     } else {
       yield RecoverPasswordSuccess(userId: result.userID!);
