@@ -13,7 +13,7 @@ const linesColor = Color(0xffdfe1e1);
 const backgroundColor = Color(0xfff8f4f3);
 const backgroundAccentColor = Color(0xffffffff);
 const backgroundCategoriesColor = Color(0xffcccfce);
-const backgroundSecundaryColor = Color(0xfff6ddb4);
+const backgroundSecundaryColor = Color(0xeaeaeaea);
 
 final ThemeData light = ThemeData.light();
 
