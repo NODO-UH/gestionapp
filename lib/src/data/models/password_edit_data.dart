@@ -1,7 +1,7 @@
 import 'package:gestionuh/src/data/models/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'passwordEditData.g.dart';
+part 'password_edit_data.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PasswordEditData extends BaseModel {

@@ -1,7 +1,7 @@
 import 'package:gestionuh/src/data/models/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'userId.g.dart';
+part 'user_id.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class UserId extends BaseModel {

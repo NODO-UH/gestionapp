@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'userCi.dart';
+part of 'user_ci.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

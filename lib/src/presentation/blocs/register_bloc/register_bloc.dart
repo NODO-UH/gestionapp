@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../data/models/passwordEditData.dart';
+import '../../../data/models/password_edit_data.dart';
 import '../../../data/repository/auth_repository/auth_repository.dart';
 
 part 'register_event.dart';

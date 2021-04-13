@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'passwordEditData.dart';
+part of 'password_edit_data.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
