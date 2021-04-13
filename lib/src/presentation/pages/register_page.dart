@@ -207,17 +207,18 @@ class _RegisterPageState extends State<RegisterPage> {
                           .copyWith(fontSize: 14, color: Colors.black45),
                       textAlign: TextAlign.center,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: () {
+                    Builder(
+                      builder: (BuildContext context) {
                         final childrenQuest = <Widget>[];
-                        for (int i = 0;
-                            i < NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
-                            i++) {
+                        const length = NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
+                        for (int i = 0; i < length; i++) {
                           childrenQuest.add(buildQuestionZone(i));
                         }
-                        return childrenQuest;
-                      }(),
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: childrenQuest,
+                        );
+                      },
                     ),
                     const SizedBox(height: 10),
                     GestionUhDefaultButton(
