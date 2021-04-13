@@ -188,9 +188,9 @@ class GestionApi {
 
     Response<String> response;
 
-    //TODO: set get body.
     try {
-      response = await dio.get(Constants.userSecurityQuestionsUrl);
+      response = await dio.request(Constants.userSecurityQuestionsUrl,
+          data: user.toJson(), options: Options(method: 'GET'));
     } catch (error) {
       questions.error = error.toString();
       return questions;
