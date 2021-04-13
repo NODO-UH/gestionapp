@@ -165,7 +165,7 @@ class GestionApi {
   Future<UserId> signUp(PasswordEditData data) async {
     if (Constants.testMode) {
       return UserId(
-        UserID: SampleData.userMail,
+        userId: SampleData.userMail,
       );
     }
 
@@ -178,14 +178,14 @@ class GestionApi {
     );
   }
 
-  Future<UserId> passwordRecovery(PasswordEditData data) async {
+  Future<UserId> passwordRecovery(PasswordResetData data) async {
     if (Constants.testMode) {
       return UserId(
-        UserID: SampleData.userMail,
+        userId: SampleData.userMail,
       );
     }
 
-    return apiRequest(
+    return apiRequest<UserId, PasswordResetData>(
       Constants.passwordRecoveryUrl,
       () => UserId(),
       data,
@@ -261,7 +261,7 @@ class GestionApi {
         if (response.statusCode! >= 300) {
           Error error = Error.fromJson(
               jsonDecode(response.data!) as Map<String, dynamic>);
-          target.error = error.Message;
+          target.error = error.message;
         } else {
           target = builder(jsonDecode(response.data!) as Map<String, dynamic>);
         }

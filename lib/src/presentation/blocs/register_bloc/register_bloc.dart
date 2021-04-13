@@ -53,7 +53,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     if (userId.error != null) {
       yield RegisterUserFailure(error: userId.error!);
     } else {
-      yield RegisterUserSuccess(userEmail: userId.UserID!);
+      yield RegisterUserSuccess(userEmail: userId.userId!);
     }
 
     //

@@ -8,10 +8,10 @@ part of 'user_id.dart';
 
 UserId _$UserIdFromJson(Map<String, dynamic> json) {
   return UserId(
-    UserID: json['UserID'] as String?,
+    userId: json['userId'] as String?,
   );
 }
 
 Map<String, dynamic> _$UserIdToJson(UserId instance) => <String, dynamic>{
-      'UserID': instance.UserID,
+      'userId': instance.userId,
     };
