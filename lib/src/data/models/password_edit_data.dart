@@ -15,5 +15,6 @@ class PasswordEditData extends BaseModel {
   static PasswordEditData fromJson(Map<String, dynamic> json) =>
       _$PasswordEditDataFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$PasswordEditDataToJson(this);
 }

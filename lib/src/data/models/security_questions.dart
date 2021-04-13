@@ -12,5 +12,6 @@ class SecurityQuestions extends BaseModel {
   static SecurityQuestions fromJson(Map<String, dynamic> json) =>
       _$SecurityQuestionsFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$SecurityQuestionsToJson(this);
 }

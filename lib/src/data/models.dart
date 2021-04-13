@@ -1,4 +1,6 @@
 export 'models/auth.dart';
+export 'models/base_model.dart';
+export 'models/error.dart';
 export 'models/login.dart';
 export 'models/mail_quota.dart';
 export 'models/pass_reset.dart';
