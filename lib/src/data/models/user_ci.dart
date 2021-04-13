@@ -11,6 +11,5 @@ class UserCi extends BaseModel {
 
   static UserCi fromJson(Map<String, dynamic> json) => _$UserCiFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$UserCiToJson(this);
 }

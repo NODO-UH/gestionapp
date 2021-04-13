@@ -12,6 +12,5 @@ class Error extends BaseModel {
 
   static Error fromJson(Map<String, dynamic> json) => _$ErrorFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$ErrorToJson(this);
 }

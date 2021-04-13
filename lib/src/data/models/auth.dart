@@ -12,6 +12,5 @@ class Auth extends BaseModel {
 
   static Auth fromJson(Map<String, dynamic> json) => _$AuthFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$AuthToJson(this);
 }
