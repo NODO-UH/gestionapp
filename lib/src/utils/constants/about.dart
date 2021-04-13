@@ -22,6 +22,10 @@ class Developers {
         name: 'Juan Jose Roque Cires',
         role: 'Desarrollador de Servicios',
       ),
+      DeveloperInfo(
+        name: 'Christian Rodriguez Diaz',
+        role: 'Desarrollador de Servicios',
+      ),
     ],
     'Grupo de Redes y Sistemas - UH': <DeveloperInfo>[
       DeveloperInfo(
@@ -44,6 +48,10 @@ class Developers {
       ),
       DeveloperInfo(
         name: 'Leonel Alejandro García López',
+        role: 'Desarrollador',
+      ),
+      DeveloperInfo(
+        name: 'Leynier Gutiérrez González',
         role: 'Desarrollador',
       ),
     ]
