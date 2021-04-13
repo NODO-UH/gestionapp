@@ -74,13 +74,13 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const SizedBox(
-                      height: 50,
+                      height: 10,
                     ),
                     Image.asset(
                       'assets/images/splash.png',
                     ),
                     const SizedBox(
-                      height: 60,
+                      height: 40,
                     ),
                     SizedBox(
                       height: 40,

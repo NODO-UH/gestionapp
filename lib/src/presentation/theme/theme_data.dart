@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 //general
-const primaryBrandColor = Color.fromARGB(255, 91, 1, 1);
-const secondaryBrandColor = Color.fromARGB(160, 91, 1, 1);
+const primaryBrandColor = Color.fromARGB(255, 46, 172, 220);
+const secondaryBrandColor = Color.fromARGB(255, 105, 187, 229);
 const highlightColor = Color(0xff18396c);
 const alternativeHighlightColor = Color(0xff8eadca);
 //per texts
@@ -13,7 +13,7 @@ const linesColor = Color(0xffdfe1e1);
 const backgroundColor = Color(0xfff8f4f3);
 const backgroundAccentColor = Color(0xffffffff);
 const backgroundCategoriesColor = Color(0xffcccfce);
-const backgroundSecundaryColor = Color(0xfff6ddb4);
+const backgroundSecundaryColor = Color(0xeaeaeaea);
 
 final ThemeData light = ThemeData.light();
 
