@@ -128,11 +128,14 @@ class GestionApi {
 
     final UserCi user = UserCi(ci: ci);
 
+    final params = {'ci': user.ci};
+
     return apiRequest<SecurityQuestions, UserCi>(
       Constants.userSecurityQuestionsUrl,
       () => SecurityQuestions(),
-      user,
+      null,
       (json) => SecurityQuestions.fromJson(json),
+      queryParams: params,
     );
   }
 
@@ -162,7 +165,7 @@ class GestionApi {
   Future<UserId> signUp(PasswordEditData data) async {
     if (Constants.testMode) {
       return UserId(
-        userID: SampleData.userMail,
+        UserID: SampleData.userMail,
       );
     }
 
@@ -178,7 +181,7 @@ class GestionApi {
   Future<UserId> passwordRecovery(PasswordEditData data) async {
     if (Constants.testMode) {
       return UserId(
-        userID: SampleData.userMail,
+        UserID: SampleData.userMail,
       );
     }
 
@@ -209,6 +212,7 @@ class GestionApi {
     String method = 'GET',
     bool auth = false,
     String apiUrl = Constants.baseUrl,
+    Map<String, dynamic>? queryParams,
   }) async {
     final dio = Dio(BaseOptions(baseUrl: apiUrl));
 
@@ -232,18 +236,21 @@ class GestionApi {
     Response<String> response;
 
     try {
-      response = await dio.request(url,
-          data: data?.toJson(),
-          options: Options(
-            method: method,
-            validateStatus: (status) {
-              if (status != null) {
-                return status < 500;
-              }
-              return false;
-            },
-            headers: headers,
-          ));
+      response = await dio.request(
+        url,
+        data: data?.toJson(),
+        options: Options(
+          method: method,
+          validateStatus: (status) {
+            if (status != null) {
+              return status < 500;
+            }
+            return false;
+          },
+          headers: headers,
+        ),
+        queryParameters: queryParams,
+      );
     } catch (error) {
       target.error = error.toString();
       return target;
@@ -251,17 +258,15 @@ class GestionApi {
 
     if (builder != null) {
       try {
-        final target =
-            builder(jsonDecode(response.data!) as Map<String, dynamic>);
-        return target;
-      } catch (e) {
-        try {
-          final Error error = Error.fromJson(
+        if (response.statusCode! >= 300) {
+          Error error = Error.fromJson(
               jsonDecode(response.data!) as Map<String, dynamic>);
-          target.error = error.message;
-        } catch (f) {
-          target.error = f.toString();
+          target.error = error.Message;
+        } else {
+          target = builder(jsonDecode(response.data!) as Map<String, dynamic>);
         }
+      } catch (e) {
+        target.error = e.toString();
       }
     }
 

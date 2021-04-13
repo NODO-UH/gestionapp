@@ -5,10 +5,10 @@ part 'error.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Error extends BaseModel {
-  int? code;
-  String? message;
+  int? Code;
+  String? Message;
 
-  Error({this.code, this.message});
+  Error({this.Code, this.Message});
 
   static Error fromJson(Map<String, dynamic> json) => _$ErrorFromJson(json);
 

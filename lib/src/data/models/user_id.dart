@@ -5,9 +5,9 @@ part 'user_id.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class UserId extends BaseModel {
-  String? userID;
+  String? UserID;
 
-  UserId({this.userID});
+  UserId({this.UserID});
 
   static UserId fromJson(Map<String, dynamic> json) => _$UserIdFromJson(json);
 
