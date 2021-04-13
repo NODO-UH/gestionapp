@@ -189,6 +189,8 @@ class GestionApi {
 
     final dio = Dio(BaseOptions(baseUrl: apiUrl));
 
+    UserCi user = UserCi(ci: ci);
+
     Response<String> response;
 
     try {
