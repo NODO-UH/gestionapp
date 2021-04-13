@@ -1,10 +1,7 @@
 part of 'register_bloc.dart';
 
-abstract class RegisterState extends Equatable {
+abstract class RegisterState {
   const RegisterState();
-
-  @override
-  List<Object> get props => [];
 }
 
 class RegisterInitial extends RegisterState {}
@@ -17,9 +14,6 @@ class LoadInitialDataFailure extends RegisterState {
   const LoadInitialDataFailure({
     required this.error,
   });
-
-  @override
-  List<Object> get props => [error];
 }
 
 class LoadInitialDataSuccess extends RegisterState {
@@ -28,8 +22,6 @@ class LoadInitialDataSuccess extends RegisterState {
   const LoadInitialDataSuccess({
     required this.questions,
   });
-  @override
-  List<Object> get props => [questions];
 }
 
 class RegisterUserInProgress extends RegisterState {}
@@ -40,9 +32,6 @@ class RegisterUserFailure extends RegisterState {
   const RegisterUserFailure({
     required this.error,
   });
-
-  @override
-  List<Object> get props => [error];
 }
 
 class RegisterUserSuccess extends RegisterState {
@@ -51,6 +40,4 @@ class RegisterUserSuccess extends RegisterState {
   const RegisterUserSuccess({
     required this.userEmail,
   });
-  @override
-  List<Object> get props => [userEmail];
 }

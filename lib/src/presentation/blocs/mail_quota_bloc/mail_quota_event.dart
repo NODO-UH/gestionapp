@@ -1,8 +1,5 @@
 part of 'mail_quota_bloc.dart';
 
-class MailQuotaEvent extends Equatable {
-  @override
-  List<Object> get props => [];
-}
+abstract class MailQuotaEvent {}
 
 class MailQuotaInitialized extends MailQuotaEvent {}

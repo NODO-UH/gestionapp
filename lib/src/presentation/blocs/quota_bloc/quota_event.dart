@@ -1,8 +1,5 @@
 part of 'quota_bloc.dart';
 
-class QuotaEvent extends Equatable {
-  @override
-  List<Object> get props => [];
-}
+abstract class QuotaEvent {}
 
 class QuotaInitialized extends QuotaEvent {}

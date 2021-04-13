@@ -1,9 +1,6 @@
 part of 'quota_bloc.dart';
 
-class QuotaState extends Equatable {
-  @override
-  List<Object> get props => [];
-}
+abstract class QuotaState {}
 
 class QuotaInitial extends QuotaState {}
 
@@ -15,9 +12,6 @@ class QuotaLoadedSuccess extends QuotaState {
   QuotaLoadedSuccess({
     required this.quota,
   });
-
-  @override
-  List<Object> get props => [quota];
 }
 
 class QuotaLoadedFailure extends QuotaState {
@@ -26,7 +20,4 @@ class QuotaLoadedFailure extends QuotaState {
   QuotaLoadedFailure({
     required this.error,
   });
-
-  @override
-  List<Object> get props => [error];
 }

@@ -54,6 +54,12 @@ Future<void> init() async {
     ),
   );
 
+  di.registerLazySingleton<RecoverPasswordRepository>(
+    () => RecoverPasswordRepository(
+      api: di(),
+    ),
+  );
+
   //Blocs
   di.registerFactory<LoginBloc>(
     () => LoginBloc(
@@ -76,6 +82,12 @@ Future<void> init() async {
   di.registerFactory<MailQuotaBloc>(
     () => MailQuotaBloc(
       mailQuotasRepository: di(),
+    ),
+  );
+
+  di.registerFactory<RecoverPasswordBloc>(
+    () => RecoverPasswordBloc(
+      recoverPasswordRepository: di(),
     ),
   );
 

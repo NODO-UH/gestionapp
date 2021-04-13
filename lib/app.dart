@@ -76,6 +76,13 @@ class GestionUhApp extends StatelessWidget {
             return MaterialPageRoute(
               builder: (_) => const AboutInformationPage(),
             );
+          case RECOVER_PASSWORD_ROUTE_NAME:
+            return MaterialPageRoute(
+              builder: (_) => BlocProvider<RecoverPasswordBloc>(
+                create: (_) => di(),
+                child: RecoverPasswordPage(),
+              ),
+            );
           default:
             final authRepo = di<AuthRepository>();
             if (authRepo.logged) {

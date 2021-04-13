@@ -1,3 +1,4 @@
+export 'widgets/bottom_sheet.dart';
 export 'widgets/buttons.dart';
 export 'widgets/drawers.dart';
 export 'widgets/loading_indicators.dart';
