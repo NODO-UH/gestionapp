@@ -13,6 +13,5 @@ class MailQuota extends BaseModel {
   static MailQuota fromJson(Map<String, dynamic> json) =>
       _$MailQuotaFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$MailQuotaToJson(this);
 }

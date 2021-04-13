@@ -13,6 +13,5 @@ class Quota extends BaseModel {
 
   static Quota fromJson(Map<String, dynamic> json) => _$QuotaFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$QuotaToJson(this);
 }

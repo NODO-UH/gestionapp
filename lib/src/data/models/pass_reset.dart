@@ -13,6 +13,5 @@ class PassReset extends BaseModel {
   static PassReset fromJson(Map<String, dynamic> json) =>
       _$PassResetFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$PassResetToJson(this);
 }
