@@ -5,6 +5,11 @@ import 'package:dio/dio.dart';
 import '../../utils/constants.dart';
 import '../models.dart';
 
+typedef ClassBuilder<T extends BaseModel> = T Function(
+    Map<String, dynamic> json);
+typedef ClassInitializer<T extends BaseModel> = T Function();
+typedef TokenRetriever = Future<Auth> Function();
+
 class GestionApi {
   String? userName;
   String? password;
@@ -20,27 +25,17 @@ class GestionApi {
       );
     }
 
-    Auth response = Auth();
+    final Auth response = Auth();
 
     if (userName == null || password == null) {
       response.error = 'Missing User Name or Password';
       return response;
     }
 
-    final dio = Dio(BaseOptions(baseUrl: apiUrl));
+    final login = Login(userName, password);
 
-    final login = Login(userName, password).toJson();
-
-    Response<String> result;
-    try {
-      result = await dio.post<String>(Constants.authUrl, data: login);
-    } catch (error) {
-      response.error = error.toString();
-      return response;
-    }
-
-    return response =
-        Auth.fromJson(jsonDecode(result.data!) as Map<String, dynamic>);
+    return apiRequest<Auth, Login>(
+        Constants.authUrl, () => Auth(), login, (json) => Auth.fromJson(json));
   }
 
   Future<Quota> getQuota() async {
@@ -52,29 +47,9 @@ class GestionApi {
       );
     }
 
-    final tokens = await getTokens();
-    var quota = Quota();
-
-    if (tokens.error != null) {
-      quota.error = tokens.error;
-      return quota;
-    }
-
-    final headers = {'Authorization': 'Bearer ${tokens.token}'};
-
-    final dio = Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
-
-    Response<String> response;
-
-    try {
-      response = await dio.get(Constants.quotaUrl);
-    } catch (error) {
-      quota.error = error.toString();
-      return quota;
-    }
-
-    return quota =
-        Quota.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
+    return apiRequest<Quota, Quota>(
+        Constants.quotaUrl, () => Quota(), null, (json) => Quota.fromJson(json),
+        auth: true);
   }
 
   Future<MailQuota> getMailQuota() async {
@@ -85,29 +60,9 @@ class GestionApi {
       );
     }
 
-    final tokens = await getTokens();
-    var mailQuota = MailQuota();
-
-    if (tokens.error != null) {
-      mailQuota.error = tokens.error;
-      return mailQuota;
-    }
-
-    final headers = {'Authorization': 'Bearer ${tokens.token}'};
-
-    final dio = Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
-
-    Response<String> response;
-
-    try {
-      response = await dio.get(Constants.mailQuotaUrl);
-    } catch (error) {
-      mailQuota.error = error.toString();
-      return mailQuota;
-    }
-
-    return mailQuota =
-        MailQuota.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
+    return apiRequest<MailQuota, MailQuota>(Constants.mailQuotaUrl,
+        () => MailQuota(), null, (json) => MailQuota.fromJson(json),
+        auth: true);
   }
 
   Future<UserData> getUserData() async {
@@ -124,34 +79,9 @@ class GestionApi {
       );
     }
 
-    final tokens = await getTokens();
-    UserData userData = UserData();
-
-    if (tokens.error != null) {
-      userData.error = tokens.error;
-      return userData;
-    }
-
-    final headers = {'Authorization': 'Bearer ${tokens.token}'};
-
-    final dio = Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
-
-    Response<String> response;
-
-    try {
-      response = await dio.get(Constants.userDataUrl);
-    } catch (error) {
-      userData.error = error.toString();
-      return userData;
-    }
-
-    userData =
-        UserData.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
-
-    userData.objectClass =
-        Constants.objectClassTranslations[userData.objectClass];
-
-    return userData;
+    return apiRequest<UserData, UserData>(Constants.userDataUrl,
+        () => UserData(), null, (json) => UserData.fromJson(json),
+        auth: true);
   }
 
   Future<SecurityQuestions> getAllSecurityQuestions() async {
@@ -161,21 +91,11 @@ class GestionApi {
       );
     }
 
-    SecurityQuestions questions = SecurityQuestions();
-
-    final dio = Dio(BaseOptions(baseUrl: apiUrl));
-
-    Response<String> response;
-
-    try {
-      response = await dio.get(Constants.allSecurityQuestionsUrl);
-    } catch (error) {
-      questions.error = error.toString();
-      return questions;
-    }
-
-    return questions = SecurityQuestions.fromJson(
-        jsonDecode(response.data!) as Map<String, dynamic>);
+    return apiRequest<SecurityQuestions, SecurityQuestions>(
+        Constants.allSecurityQuestionsUrl,
+        () => SecurityQuestions(),
+        null,
+        (json) => SecurityQuestions.fromJson(json));
   }
 
   Future<SecurityQuestions> getUserSecurityQuestions(String ci) async {
@@ -185,52 +105,31 @@ class GestionApi {
       );
     }
 
-    SecurityQuestions questions = SecurityQuestions();
-
-    final dio = Dio(BaseOptions(baseUrl: apiUrl));
-
     final UserCi user = UserCi(ci: ci);
 
-    Response<String> response;
-
-    try {
-      response = await dio.request(Constants.userSecurityQuestionsUrl,
-          data: user.toJson(), options: Options(method: 'GET'));
-    } catch (error) {
-      questions.error = error.toString();
-      return questions;
-    }
-
-    return questions = SecurityQuestions.fromJson(
-        jsonDecode(response.data!) as Map<String, dynamic>);
+    return apiRequest<SecurityQuestions, UserCi>(
+        Constants.userSecurityQuestionsUrl,
+        () => SecurityQuestions(),
+        user,
+        (json) => SecurityQuestions.fromJson(json));
   }
 
   Future<Status> resetPassword(String newPassw) async {
     if (Constants.testMode) return Status(status: true);
 
-    final tokens = await getTokens();
-
-    final response = Status();
-
-    if (tokens.error != null) {
-      response.error = tokens.error;
-      return response;
-    }
-
-    final headers = {'Authorization': 'Bearer ${tokens.token}'};
-
-    final dio = Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
+    Status response;
 
     final credentials = PassReset(password, newPassw);
 
-    try {
-      await dio.post(Constants.resetPasswordUrld, data: credentials.toJson());
-    } catch (error) {
-      response.error = error.toString();
-      return response;
+    response = await apiRequest<Status, PassReset>(
+        Constants.resetPasswordUrld, () => Status(), credentials, null,
+        method: 'POST', auth: true);
+
+    if (response.error == null) {
+      response.status = true;
     }
 
-    return Status(status: true);
+    return response;
   }
 
   Future<UserId> signUp(PasswordEditData data) async {
@@ -240,21 +139,9 @@ class GestionApi {
       );
     }
 
-    UserId user = UserId();
-
-    final dio = Dio(BaseOptions(baseUrl: apiUrl));
-
-    Response<String> response;
-
-    try {
-      response = await dio.post(Constants.signUpUrl, data: data.toJson());
-    } catch (error) {
-      user.error = error.toString();
-      return user;
-    }
-
-    return user =
-        UserId.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
+    return apiRequest<UserId, PasswordEditData>(Constants.signUpUrl,
+        () => UserId(), data, (json) => UserId.fromJson(json),
+        method: 'POST');
   }
 
   Future<UserId> passwordRecovery(PasswordEditData data) async {
@@ -264,22 +151,9 @@ class GestionApi {
       );
     }
 
-    UserId user = UserId();
-
-    final dio = Dio(BaseOptions(baseUrl: apiUrl));
-
-    Response<String> response;
-
-    try {
-      response =
-          await dio.post(Constants.passwordRecoveryUrl, data: data.toJson());
-    } catch (error) {
-      user.error = error.toString();
-      return user;
-    }
-
-    return user =
-        UserId.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
+    return apiRequest(Constants.passwordRecoveryUrl, () => UserId(), data,
+        (json) => UserId.fromJson(json),
+        method: 'POST');
   }
 
   void setLogin(String userName, String password) {
@@ -290,5 +164,72 @@ class GestionApi {
   void logout() {
     userName = null;
     password = null;
+  }
+
+  Future<T> apiRequest<T extends BaseModel, K extends BaseModel>(
+    String url,
+    ClassInitializer<T> initializer,
+    K? data,
+    ClassBuilder<T>? builder, {
+    String method = 'GET',
+    bool auth = false,
+    String apiUrl = Constants.baseUrl,
+  }) async {
+    final dio = Dio(BaseOptions(baseUrl: apiUrl));
+
+    T target = initializer();
+
+    Auth tokens;
+
+    Map<String, String>? headers;
+
+    if (auth) {
+      tokens = await getTokens();
+
+      if (tokens.error != null) {
+        target.error = tokens.error;
+        return target;
+      }
+
+      headers = {'Authorization': 'Bearer ${tokens.token}'};
+    }
+
+    Response<String> response;
+
+    try {
+      response = await dio.request(url,
+          data: data?.toJson(),
+          options: Options(
+            method: 'GET',
+            validateStatus: (status) {
+              if (status != null) {
+                return status < 500;
+              }
+              return false;
+            },
+            headers: headers,
+          ));
+    } catch (error) {
+      target.error = error.toString();
+      return target;
+    }
+
+    if (builder != null) {
+      try {
+        final target =
+            builder(jsonDecode(response.data!) as Map<String, dynamic>);
+        return target;
+      } catch (e) {
+        try {
+          final Error error = Error.fromJson(
+              jsonDecode(response.data!) as Map<String, dynamic>);
+          target.error = error.message;
+        } catch (f) {
+          target.error = f.toString();
+        }
+      }
+    }
+
+    return target;
   }
 }

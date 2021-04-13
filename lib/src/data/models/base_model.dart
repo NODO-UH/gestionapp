@@ -5,4 +5,6 @@ abstract class BaseModel {
   String? error;
 
   BaseModel();
+
+  Map<String, dynamic> toJson();
 }

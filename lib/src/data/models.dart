@@ -9,3 +9,5 @@ export 'models/status.dart';
 export 'models/user_ci.dart';
 export 'models/user_data.dart';
 export 'models/user_id.dart';
+export 'models/error.dart';
+export 'models/base_model.dart';
