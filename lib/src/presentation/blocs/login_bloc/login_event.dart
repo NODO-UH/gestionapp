@@ -1,9 +1,6 @@
 part of 'login_bloc.dart';
 
-class LoginEvent extends Equatable {
-  @override
-  List<Object> get props => [];
-}
+abstract class LoginEvent {}
 
 class LoginAttempted extends LoginEvent {
   final String username;
@@ -11,11 +8,8 @@ class LoginAttempted extends LoginEvent {
   final bool rememberMe;
 
   LoginAttempted({
-    this.username,
-    this.password,
-    this.rememberMe,
+    required this.username,
+    required this.password,
+    required this.rememberMe,
   });
-
-  @override
-  List<Object> get props => [username, password, rememberMe];
 }

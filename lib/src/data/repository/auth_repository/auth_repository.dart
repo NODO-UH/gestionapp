@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ffi';
 
 import '../../../utils/constants/storage_keys.dart';
 import '../../api/api.dart';
@@ -12,21 +11,24 @@ class AuthRepository {
   final ILocalStorage localStorage;
 
   AuthRepository({
-    this.api,
-    this.localStorage,
+    required this.api,
+    required this.localStorage,
   });
 
   Future<void> initialize() async {
     await localStorage.loadSession();
     if (logged) {
-      var credentials = await localStorage.getCredentials();
-      api.setLogin(credentials[USER_NAME], credentials[USER_PASSWORD]);
+      final credentials = await localStorage.getCredentials();
+      if (credentials != null) {
+        api.setLogin(credentials[USER_NAME] as String,
+            credentials[USER_PASSWORD] as String);
+      }
     }
   }
 
   bool get logged => localStorage.isLogged();
 
-  Future<Auth> login(
+  Future<Auth?> login(
     String username,
     String password, [
     bool remmemberMe = false,
@@ -42,7 +44,6 @@ class AuthRepository {
         await localStorage.updateCredentials(
           userName: username,
           password: password,
-          isLoggedInto: true,
           persist: remmemberMe,
         );
       }
@@ -59,24 +60,48 @@ class AuthRepository {
   }
 
   Future<Status> resetPassword(String password) async {
-    Status status;
     try {
-      status = await api.resetPassword(password);
-      if (status.status == false) return status;
+      final status = await api.resetPassword(password);
+      if (status.status == false) {
+        return status;
+      }
 
       final credentials = await localStorage.getCredentials();
 
+      if (credentials == null) {
+        throw Exception('Credentials is null.');
+      }
+
       // save new password
-      api.setLogin(credentials[USER_NAME], password);
+      api.setLogin(credentials[USER_NAME] as String, password);
       localStorage.updateCredentials(
-        userName: credentials[USER_NAME],
+        userName: credentials[USER_NAME] as String,
         password: password,
-        isLoggedInto: true,
-        persist: credentials[USER_REMEMBERME],
+        persist: credentials[USER_REMEMBERME] as bool,
       );
+
+      return status;
     } catch (e) {
       log(e.toString());
+      return Status(status: false);
     }
-    return status ?? Status(status: false);
+  }
+
+  Future<SecurityQuestions> getSecurityQuestions() async {
+    try {
+      return await api.getAllSecurityQuestions();
+    } catch (e) {
+      log(e.toString());
+      return SecurityQuestions()..error = e.toString();
+    }
+  }
+
+  Future<UserId> sendRegistration(PasswordEditData regData) async {
+    try {
+      return await api.signUp(regData);
+    } catch (e) {
+      log(e.toString());
+      return UserId()..error = e.toString();
+    }
   }
 }

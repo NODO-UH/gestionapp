@@ -1,106 +1,197 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+
 import '../../utils/constants.dart';
 import '../models.dart';
 
+typedef ClassBuilder<T extends BaseModel> = T Function(
+    Map<String, dynamic> json);
+typedef ClassInitializer<T extends BaseModel> = T Function();
+typedef TokenRetriever = Future<Auth> Function();
+
 class GestionApi {
-  String userName;
-  String password;
+  String? userName;
+  String? password;
   String apiUrl = Constants.baseUrl;
 
   GestionApi();
 
   Future<Auth> getTokens() async {
-    if (Constants.TestMode)
+    if (Constants.testMode) {
       return Auth(
         token: SampleData.authToken,
         tokenRefresh: SampleData.refreshToken,
       );
+    }
 
-    Auth response = Auth();
+    final Auth response = Auth();
 
-    if (this.userName == null || this.password == null) {
-      response.error = "Missing User Name or Password";
+    if (userName == null || password == null) {
+      response.error = 'Missing User Name or Password';
       return response;
     }
 
-    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl));
+    final login = Login(userName, password);
 
-    var login = Login(this.userName, this.password).toJson();
+    return apiRequest<Auth, Login>(
+      Constants.authUrl,
+      () => Auth(),
+      login,
+      (json) => Auth.fromJson(json),
+      method: 'POST',
+    );
+  }
 
-    Response<String> result;
-    try {
-      result = await dio.post<String>(Constants.authUrl, data: login);
-    } catch (error) {
-      response.error = error.toString();
-      return response;
+  Future<Quota> getQuota() async {
+    if (Constants.testMode) {
+      return Quota(
+        quota: SampleData.userQuota,
+        bonus: SampleData.userBonus,
+        consumed: SampleData.userConsumedQuota,
+      );
     }
 
-    response = Auth.fromJson(jsonDecode(result.data));
+    return apiRequest<Quota, Quota>(
+      Constants.quotaUrl,
+      () => Quota(),
+      null,
+      (json) => Quota.fromJson(json),
+      auth: true,
+    );
+  }
+
+  Future<MailQuota> getMailQuota() async {
+    if (Constants.testMode) {
+      return MailQuota(
+        quota: SampleData.mailQuota,
+        consumed: SampleData.mailConsumedQuota,
+      );
+    }
+
+    return apiRequest<MailQuota, MailQuota>(Constants.mailQuotaUrl,
+        () => MailQuota(), null, (json) => MailQuota.fromJson(json),
+        auth: true);
+  }
+
+  Future<UserData> getUserData() async {
+    if (Constants.testMode) {
+      return UserData(
+        careerName: SampleData.userCareer,
+        email: SampleData.userMail,
+        hasCloud: SampleData.userHasCloud,
+        hasEmail: SampleData.userHasMail,
+        hasInternet: SampleData.userHasInternet,
+        name: SampleData.user,
+        objectClass: SampleData.userObjectClass,
+        position: SampleData.userPosition,
+      );
+    }
+
+    UserData response = await apiRequest<UserData, UserData>(
+      Constants.userDataUrl,
+      () => UserData(),
+      null,
+      (json) => UserData.fromJson(json),
+      auth: true,
+    );
+
+    if (response.error == null) {
+      response.objectClass =
+          Constants.objectClassTranslations[response.objectClass];
+    }
 
     return response;
   }
 
-  Future<Quota> getQuota() async {
-    if (Constants.TestMode)
-      return Quota(
-          quota: SampleData.userQuota,
-          bonus: SampleData.userBonus,
-          consumed: SampleData.userConsumedQuota);
-
-    Auth tokens = await getTokens();
-    Quota quota = new Quota();
-
-    if (tokens.error != null) {
-      quota.error = tokens.error;
-      return quota;
+  Future<SecurityQuestions> getAllSecurityQuestions() async {
+    if (Constants.testMode) {
+      return SecurityQuestions(
+        questions: SampleData.securityQuestions,
+      );
     }
 
-    var headers = {'Authorization': 'Bearer ${tokens.token}'};
+    return apiRequest<SecurityQuestions, SecurityQuestions>(
+      Constants.allSecurityQuestionsUrl,
+      () => SecurityQuestions(),
+      null,
+      (json) => SecurityQuestions.fromJson(json),
+    );
+  }
 
-    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
-
-    Response<String> response;
-
-    try {
-      response = await dio.get(Constants.quotaUrl);
-    } catch (error) {
-      quota.error = error.toString();
-      return quota;
+  Future<SecurityQuestions> getUserSecurityQuestions(String ci) async {
+    if (Constants.testMode) {
+      return SecurityQuestions(
+        questions: SampleData.userSecurityQuestions,
+      );
     }
 
-    quota = Quota.fromJson(jsonDecode(response.data));
+    final UserCi user = UserCi(ci: ci);
 
-    return quota;
+    final params = {'ci': user.ci};
+
+    return apiRequest<SecurityQuestions, UserCi>(
+      Constants.userSecurityQuestionsUrl,
+      () => SecurityQuestions(),
+      null,
+      (json) => SecurityQuestions.fromJson(json),
+      queryParams: params,
+    );
   }
 
   Future<Status> resetPassword(String newPassw) async {
-    if (Constants.TestMode) return Status(status: true);
+    if (Constants.testMode) return Status(status: true);
 
-    Auth tokens = await getTokens();
+    Status response;
 
-    Status response = new Status();
+    final credentials = PassReset(password, newPassw);
 
-    if (tokens.error != null) {
-      response.error = tokens.error;
-      return response;
+    response = await apiRequest<Status, PassReset>(
+      Constants.resetPasswordUrld,
+      () => Status(),
+      credentials,
+      null,
+      method: 'POST',
+      auth: true,
+    );
+
+    if (response.error == null) {
+      response.status = true;
     }
 
-    var headers = {'Authorization': 'Bearer ${tokens.token}'};
+    return response;
+  }
 
-    Dio dio = new Dio(BaseOptions(baseUrl: apiUrl, headers: headers));
-
-    PassReset credentials = new PassReset(this.password, newPassw);
-
-    try {
-      await dio.post(Constants.resetPasswordUrld, data: credentials.toJson());
-    } catch (error) {
-      response.error = error.toString();
-      return response;
+  Future<UserId> signUp(PasswordEditData data) async {
+    if (Constants.testMode) {
+      return UserId(
+        userId: SampleData.userMail,
+      );
     }
 
-    return Status(status: true);
+    return apiRequest<UserId, PasswordEditData>(
+      Constants.signUpUrl,
+      () => UserId(),
+      data,
+      (json) => UserId.fromJson(json),
+      method: 'POST',
+    );
+  }
+
+  Future<PasswordResetUserId> passwordRecovery(PasswordResetData data) async {
+    if (Constants.testMode) {
+      return PasswordResetUserId(
+        userId: SampleData.userMail,
+      );
+    }
+
+    return apiRequest<PasswordResetUserId, PasswordResetData>(
+      Constants.passwordRecoveryUrl,
+      () => PasswordResetUserId(),
+      data,
+      (json) => PasswordResetUserId.fromJson(json),
+      method: 'POST',
+    );
   }
 
   void setLogin(String userName, String password) {
@@ -109,7 +200,76 @@ class GestionApi {
   }
 
   void logout() {
-    this.userName = null;
-    this.password = null;
+    userName = null;
+    password = null;
+  }
+
+  Future<T> apiRequest<T extends BaseModel, K extends BaseModel>(
+    String url,
+    ClassInitializer<T> initializer,
+    K? data,
+    ClassBuilder<T>? builder, {
+    String method = 'GET',
+    bool auth = false,
+    String apiUrl = Constants.baseUrl,
+    Map<String, dynamic>? queryParams,
+  }) async {
+    final dio = Dio(BaseOptions(baseUrl: apiUrl));
+
+    T target = initializer();
+
+    Auth tokens;
+
+    Map<String, String>? headers;
+
+    if (auth) {
+      tokens = await getTokens();
+
+      if (tokens.error != null) {
+        target.error = tokens.error;
+        return target;
+      }
+
+      headers = {'Authorization': 'Bearer ${tokens.token}'};
+    }
+
+    Response<String> response;
+
+    try {
+      response = await dio.request(
+        url,
+        data: data?.toJson(),
+        options: Options(
+          method: method,
+          validateStatus: (status) {
+            if (status != null) {
+              return status < 500;
+            }
+            return false;
+          },
+          headers: headers,
+        ),
+        queryParameters: queryParams,
+      );
+    } catch (error) {
+      target.error = error.toString();
+      return target;
+    }
+
+    if (builder != null) {
+      try {
+        if (response.statusCode! >= 300) {
+          Error error = Error.fromJson(
+              jsonDecode(response.data!) as Map<String, dynamic>);
+          target.error = error.message;
+        } else {
+          target = builder(jsonDecode(response.data!) as Map<String, dynamic>);
+        }
+      } catch (e) {
+        target.error = e.toString();
+      }
+    }
+
+    return target;
   }
 }

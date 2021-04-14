@@ -18,7 +18,7 @@ Future<void> init() async {
   di.registerSingleton<SharedPreferences>(sharedPrefs);
 
   di.registerLazySingleton(
-    () => FlutterSecureStorage(),
+    () => const FlutterSecureStorage(),
   );
 
   di.registerLazySingleton<ILocalStorage>(
@@ -42,6 +42,24 @@ Future<void> init() async {
     ),
   );
 
+  di.registerLazySingleton<MailQuotasRepository>(
+    () => MailQuotasRepository(
+      api: di(),
+    ),
+  );
+
+  di.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepository(
+      api: di(),
+    ),
+  );
+
+  di.registerLazySingleton<RecoverPasswordRepository>(
+    () => RecoverPasswordRepository(
+      api: di(),
+    ),
+  );
+
   //Blocs
   di.registerFactory<LoginBloc>(
     () => LoginBloc(
@@ -58,6 +76,30 @@ Future<void> init() async {
   di.registerFactory<ResetPasswordBloc>(
     () => ResetPasswordBloc(
       authRepository: di(),
+    ),
+  );
+
+  di.registerFactory<MailQuotaBloc>(
+    () => MailQuotaBloc(
+      mailQuotasRepository: di(),
+    ),
+  );
+
+  di.registerFactory<RecoverPasswordBloc>(
+    () => RecoverPasswordBloc(
+      recoverPasswordRepository: di(),
+    ),
+  );
+
+  di.registerFactory<RegisterBloc>(
+    () => RegisterBloc(
+      repository: di(),
+    ),
+  );
+
+  di.registerFactory<ProfileBloc>(
+    () => ProfileBloc(
+      profileRepository: di(),
     ),
   );
 }

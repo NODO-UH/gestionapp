@@ -8,8 +8,8 @@ part of 'login.dart';
 
 Login _$LoginFromJson(Map<String, dynamic> json) {
   return Login(
-    json['user'] as String,
-    json['password'] as String,
+    json['user'] as String?,
+    json['password'] as String?,
   );
 }
 

@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 
 //general
-final primaryBrandColor = Color.fromARGB(255, 91, 1, 1);
-final secondaryBrandColor = Color.fromARGB(160, 91, 1, 1);
-final highlightColor = Color(0xff18396c);
-final alternativeHighlightColor = Color(0xff8eadca);
+const primaryBrandColor = Color.fromARGB(255, 46, 172, 220);
+const secondaryBrandColor = Color.fromARGB(255, 105, 187, 229);
+const highlightColor = Color(0xff18396c);
+const alternativeHighlightColor = Color(0xff8eadca);
 //per texts
-final titlesAndParagraphsColor = Color(0xff5d5d5d);
-final subtitlesColor = Color(0xffababab);
-final linesColor = Color(0xffdfe1e1);
+const titlesAndParagraphsColor = Color(0xff5d5d5d);
+const subtitlesColor = Color(0xffababab);
+const linesColor = Color(0xffdfe1e1);
 //per background
-final backgroundColor = Color(0xfff8f4f3);
-final backgroundAccentColor = Color(0xffffffff);
-final backgroundCategoriesColor = Color(0xffcccfce);
-final backgroundSecundaryColor = Color(0xfff6ddb4);
+const backgroundColor = Color(0xfdfdfdfd);
+const backgroundAccentColor = Color(0xffffffff);
+const backgroundCategoriesColor = Color(0xffcccfce);
+const backgroundSecundaryColor = Color(0xfdfdfdfd);
 
 final ThemeData light = ThemeData.light();
 
-TextStyle titleTextStyle = TextStyle(
-    fontFamily: "Enriqueta",
+const titleTextStyle = TextStyle(
+    fontFamily: 'Enriqueta',
     color: titlesAndParagraphsColor,
     fontWeight: FontWeight.bold);
 
-TextStyle bodyTextStyle = TextStyle(fontFamily: "Vegur", color: subtitlesColor);
+const bodyTextStyle = TextStyle(fontFamily: 'Vegur', color: subtitlesColor);
 
 final TextTheme textTheme = light.textTheme.copyWith(
     headline4: titleTextStyle.copyWith(fontSize: 24),
@@ -55,14 +55,21 @@ final ThemeData gestionuhLightTheme = light.copyWith(
   highlightColor: highlightColor,
   scaffoldBackgroundColor: backgroundColor,
   canvasColor: backgroundColor,
-  cursorColor: primaryBrandColor,
+  textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: primaryBrandColor,
+    selectionColor: primaryBrandColor,
+    selectionHandleColor: primaryBrandColor,
+  ),
   backgroundColor: backgroundColor,
   buttonTheme: light.buttonTheme.copyWith(
-      buttonColor: primaryBrandColor,
-      textTheme: ButtonTextTheme.primary,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(50)),
-      )),
+    buttonColor: primaryBrandColor,
+    textTheme: ButtonTextTheme.primary,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(50),
+      ),
+    ),
+  ),
   textTheme: textTheme,
   primaryTextTheme: primaryTextTheme,
   accentTextTheme: primaryTextTheme,
@@ -73,18 +80,14 @@ final ThemeData gestionuhLightTheme = light.copyWith(
     filled: true,
     fillColor: light.cardColor,
     focusColor: secondaryBrandColor,
-    focusedBorder: OutlineInputBorder(
+    focusedBorder: const OutlineInputBorder(
       borderSide: BorderSide(
         color: secondaryBrandColor,
-        width: 1.0,
-        style: BorderStyle.solid,
       ),
     ),
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(
         color: light.disabledColor,
-        width: 1.0,
-        style: BorderStyle.solid,
       ),
     ),
   ),
