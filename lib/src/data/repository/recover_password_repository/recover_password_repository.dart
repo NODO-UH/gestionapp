@@ -21,7 +21,7 @@ class RecoverPasswordRepository {
     }
   }
 
-  Future<UserId?> passwordRecovery(PasswordEditData data) async {
+  Future<PasswordResetUserId?> passwordRecovery(PasswordResetData data) async {
     try {
       final result = await api.passwordRecovery(data);
       if (result.error != null) {
