@@ -168,6 +168,9 @@ class _LoginPageState extends State<LoginPage> {
                       text: 'Registrarse',
                       onPressed: () => _registerAction(context),
                     ),
+                    const SizedBox(
+                      height: 40,
+                    ),
                   ],
                 ),
               ),
