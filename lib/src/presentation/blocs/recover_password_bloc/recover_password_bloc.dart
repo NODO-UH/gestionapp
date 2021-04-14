@@ -93,7 +93,7 @@ class RecoverPasswordBloc
         password: event.state.password,
         error: result.error!,
       );
-    } else if (result.userId != null) {
+    } else if (result.userId == null) {
       yield RecoverPasswordQuestionsError(
         ci: event.state.ci,
         questions: event.state.questions,

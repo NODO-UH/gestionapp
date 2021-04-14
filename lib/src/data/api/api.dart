@@ -178,18 +178,18 @@ class GestionApi {
     );
   }
 
-  Future<UserId> passwordRecovery(PasswordResetData data) async {
+  Future<PasswordResetUserId> passwordRecovery(PasswordResetData data) async {
     if (Constants.testMode) {
-      return UserId(
+      return PasswordResetUserId(
         userId: SampleData.userMail,
       );
     }
 
-    return apiRequest<UserId, PasswordResetData>(
+    return apiRequest<PasswordResetUserId, PasswordResetData>(
       Constants.passwordRecoveryUrl,
-      () => UserId(),
+      () => PasswordResetUserId(),
       data,
-      (json) => UserId.fromJson(json),
+      (json) => PasswordResetUserId.fromJson(json),
       method: 'POST',
     );
   }

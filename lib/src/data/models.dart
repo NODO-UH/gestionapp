@@ -6,6 +6,7 @@ export 'models/mail_quota.dart';
 export 'models/pass_reset.dart';
 export 'models/password_edit_data.dart';
 export 'models/password_reset_data.dart';
+export 'models/password_reset_user_id.dart';
 export 'models/quota.dart';
 export 'models/security_questions.dart';
 export 'models/status.dart';
