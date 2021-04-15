@@ -12,5 +12,6 @@ class Login extends BaseModel {
 
   static Login fromJson(Map<String, dynamic> json) => _$LoginFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$LoginToJson(this);
 }
