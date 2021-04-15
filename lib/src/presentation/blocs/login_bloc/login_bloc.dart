@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestionuh/src/utils/constants.dart';
 
 import '../../../data/repository.dart';
 
@@ -28,7 +29,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
     if (result == null) {
       yield LoginAttemptInitial(
-        error: 'Ha ocurrido un error inesperado.',
+        error: Errors.DefaultError,
       );
     } else if (result.error != null) {
       yield LoginAttemptInitial(
