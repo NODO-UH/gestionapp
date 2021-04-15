@@ -10,10 +10,10 @@ const titlesAndParagraphsColor = Color(0xff5d5d5d);
 const subtitlesColor = Color(0xffababab);
 const linesColor = Color(0xffdfe1e1);
 //per background
-const backgroundColor = Color(0xfdfdfdfd);
+const backgroundColor = Color(0xfffdfdfd);
 const backgroundAccentColor = Color(0xffffffff);
 const backgroundCategoriesColor = Color(0xffcccfce);
-const backgroundSecundaryColor = Color(0xfdfdfdfd);
+const backgroundSecundaryColor = Color(0xfffdfdfd);
 
 final ThemeData light = ThemeData.light();
 
