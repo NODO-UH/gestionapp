@@ -1,4 +1,3 @@
-import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,6 +7,7 @@ import '../../utils/constants/routes.dart';
 import '../blocs.dart';
 import '../widgets.dart';
 import '../widgets/bottom_sheet.dart';
+import '../widgets/flash_helper.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -61,11 +61,7 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).pushReplacementNamed(PROFILE_ROUTE_NAME);
           }
           if (state is LoginAttemptInitial) {
-            _showCenterFlash(
-              error: state.error,
-              position: FlashPosition.top,
-              style: FlashStyle.floating,
-            );
+            FlashHelper.errorBar(context, message: state.error);
           }
         },
         builder: (context, state) {
@@ -186,40 +182,6 @@ class _LoginPageState extends State<LoginPage> {
           );
         },
       ),
-    );
-  }
-
-  void _showCenterFlash({
-    required String error,
-    FlashPosition? position,
-    FlashStyle? style,
-    Alignment? alignment,
-  }) {
-    showFlash(
-      context: context,
-      duration: const Duration(seconds: 5),
-      builder: (_, controller) {
-        return Flash(
-          controller: controller,
-          backgroundColor: Colors.black87,
-          borderRadius: BorderRadius.circular(8.0),
-          borderColor: Colors.blue,
-          position: position,
-          style: style,
-          alignment: alignment,
-          enableDrag: false,
-          onTap: () => controller.dismiss(),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: DefaultTextStyle(
-              style: const TextStyle(color: Colors.white),
-              child: Text(
-                error,
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }
