@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gestionuh/src/data/models.dart';
 import 'package:gestionuh/src/data/repository.dart';
 import 'package:meta/meta.dart';
+import 'package:gestionuh/src/utils/constants.dart';
 
 part 'recover_password_event.dart';
 part 'recover_password_state.dart';
@@ -38,7 +39,7 @@ class RecoverPasswordBloc
     if (result == null) {
       yield RecoverPasswordCIError(
         ci: event.state.ci,
-        error: 'Ha ocurrido un error inesperado.',
+        error: Errors.DefaultError,
       );
     } else if (result.error != null) {
       yield RecoverPasswordCIError(
@@ -48,7 +49,7 @@ class RecoverPasswordBloc
     } else if (result.questions == null) {
       yield RecoverPasswordCIError(
         ci: event.state.ci,
-        error: 'Ha ocurrido un error inesperado.',
+        error: Errors.DefaultError,
       );
     } else {
       yield RecoverPasswordQuestions(
@@ -83,7 +84,7 @@ class RecoverPasswordBloc
         questions: event.state.questions,
         answers: event.state.answers,
         password: event.state.password,
-        error: 'Ha ocurrido un error inesperado.',
+        error: Errors.DefaultError,
       );
     } else if (result.error != null) {
       yield RecoverPasswordQuestionsError(
@@ -99,7 +100,7 @@ class RecoverPasswordBloc
         questions: event.state.questions,
         answers: event.state.answers,
         password: event.state.password,
-        error: 'Ha ocurrido un error inesperado.',
+        error: Errors.DefaultError,
       );
     } else {
       yield RecoverPasswordSuccess(userId: result.userId!);

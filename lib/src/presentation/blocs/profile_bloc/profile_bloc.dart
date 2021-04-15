@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/data/models.dart';
 import 'package:gestionuh/src/data/repository.dart';
+import 'package:gestionuh/src/utils/constants.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
@@ -25,7 +26,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     final result = await profileRepository.getUserData();
     if (result == null) {
       yield ProfileLoadedFailure(
-        error: 'Ha ocurrido un error inesperado.',
+        error: Errors.DefaultError,
       );
     } else if (result.error != null) {
       yield ProfileLoadedFailure(

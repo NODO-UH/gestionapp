@@ -261,13 +261,17 @@ class GestionApi {
         if (response.statusCode! >= 300) {
           Error error = Error.fromJson(
               jsonDecode(response.data!) as Map<String, dynamic>);
-          target.error = error.message;
+          target.error = error.code.toString();
         } else {
           target = builder(jsonDecode(response.data!) as Map<String, dynamic>);
         }
       } catch (e) {
         target.error = e.toString();
       }
+    }
+
+    if (target.error != null) {
+      target.error = Errors.retrieveError(target.error!);
     }
 
     return target;
