@@ -12,5 +12,6 @@ class PasswordResetUserId extends BaseModel {
   static PasswordResetUserId fromJson(Map<String, dynamic> json) =>
       _$PasswordResetUserIdFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$PasswordResetUserIdToJson(this);
 }

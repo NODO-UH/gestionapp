@@ -5,9 +5,9 @@ class Errors {
 
   static String? retrieveError(String message) {
     try {
-      var index = int.parse(message);
+      final index = int.parse(message);
       return Messages[index];
-    } catch (e) {}
+    } catch (_) {}
 
     return DefaultError;
   }

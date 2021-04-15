@@ -14,7 +14,7 @@ class _MessageItem<T> {
 
 class FlashHelper {
   static Completer<BuildContext> _buildCompleter = Completer<BuildContext>();
-  static Queue<_MessageItem> _messageQueue = Queue<_MessageItem>();
+  static final Queue<_MessageItem> _messageQueue = Queue<_MessageItem>();
   static Completer? _previousCompleter;
 
   static void init(BuildContext context) {

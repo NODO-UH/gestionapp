@@ -88,7 +88,7 @@ class GestionApi {
       );
     }
 
-    UserData response = await apiRequest<UserData, UserData>(
+    final UserData response = await apiRequest<UserData, UserData>(
       Constants.userDataUrl,
       () => UserData(),
       null,
@@ -252,14 +252,14 @@ class GestionApi {
         queryParameters: queryParams,
       );
     } catch (error) {
-      target.error = error.toString();
+      target.error = Errors.retrieveError(error.toString());
       return target;
     }
 
     if (builder != null) {
       try {
         if (response.statusCode! >= 300) {
-          Error error = Error.fromJson(
+          final Error error = Error.fromJson(
               jsonDecode(response.data!) as Map<String, dynamic>);
           target.error = error.code.toString();
         } else {
