@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestionuh/src/utils/constants.dart';
 
 import '../../../data/repository.dart';
 
@@ -10,8 +10,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository authRepository;
 
   LoginBloc({
-    this.authRepository,
-  }) : super(LoginAttemptInitial());
+    required this.authRepository,
+  }) : super(LoginAttemptInitial(error: ''));
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
@@ -22,18 +22,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> handleLoginAttempted(LoginAttempted event) async* {
     yield LoginAttemptInProgress();
-    var result = await authRepository.login(
+    final result = await authRepository.login(
       event.username,
       event.password,
       event.rememberMe,
     );
     if (result == null) {
       yield LoginAttemptInitial(
-        error: 'Ha ocurrido un error inesperado.',
+        error: Errors.DefaultError,
       );
     } else if (result.error != null) {
       yield LoginAttemptInitial(
-        error: result.error,
+        error: result.error!,
       );
     } else {
       yield LoginAttemptSuccess();

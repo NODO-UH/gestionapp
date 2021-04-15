@@ -1,10 +1,7 @@
 part of 'register_bloc.dart';
 
-abstract class RegisterEvent extends Equatable {
+abstract class RegisterEvent {
   const RegisterEvent();
-
-  @override
-  List<Object> get props => [];
 }
 
 class QuestionsRequestedRegister extends RegisterEvent {}
@@ -17,14 +14,10 @@ class FormsEnteredRegister extends RegisterEvent {
   final List<String> questions;
 
   const FormsEnteredRegister({
-    this.answers,
-    this.ci,
-    this.passwordFirst,
-    this.passwordSecond,
-    this.questions,
+    required this.answers,
+    required this.ci,
+    required this.passwordFirst,
+    required this.passwordSecond,
+    required this.questions,
   });
-
-  @override
-  List<Object> get props =>
-      [answers, ci, passwordFirst, passwordSecond, questions];
 }

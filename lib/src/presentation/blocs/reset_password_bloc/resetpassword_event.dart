@@ -1,10 +1,7 @@
 part of 'resetpassword_bloc.dart';
 
-abstract class ResetPasswordEvent extends Equatable {
+abstract class ResetPasswordEvent {
   const ResetPasswordEvent();
-
-  @override
-  List<Object> get props => [];
 }
 
 class ResetPasswordAttempted extends ResetPasswordEvent {
@@ -12,7 +9,7 @@ class ResetPasswordAttempted extends ResetPasswordEvent {
   final String passwordSecond;
 
   const ResetPasswordAttempted({
-    this.passwordFirst,
-    this.passwordSecond,
+    required this.passwordFirst,
+    required this.passwordSecond,
   });
 }

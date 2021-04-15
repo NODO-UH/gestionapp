@@ -7,15 +7,15 @@ class QuotasRepository {
   final GestionApi api;
 
   QuotasRepository({
-    this.api,
+    required this.api,
   });
 
-  Future<Quota> getQuota() async {
+  Future<Quota?> getQuota() async {
     Quota result;
     try {
       result = await api.getQuota();
       if (result.error != null) {
-        log(result.error);
+        log(result.error!);
       }
       return result;
     } catch (e) {
