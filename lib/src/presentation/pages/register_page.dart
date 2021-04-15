@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart' show IterableExtension;
-import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,6 +8,7 @@ import '../../utils/validators.dart';
 import '../blocs.dart';
 import '../widgets.dart';
 import '../widgets/bottom_sheet.dart';
+import '../widgets/flash_helper.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -95,10 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: BlocConsumer<RegisterBloc, RegisterState>(
         listener: (context, state) async {
           if (state is RegisterUserFailure) {
-            _showCenterFlash(
-              message: state.error,
-              borderColor: Colors.red,
-            );
+            FlashHelper.errorBar(context, message: state.error);
           } else if (state is LoadInitialDataFailure) {
             Future.delayed(
               const Duration(seconds: 2),
@@ -106,6 +103,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   .read<RegisterBloc>()
                   .add(QuestionsRequestedRegister()),
             );
+          } else if (state is RegisterUserSuccess) {
+            FlashHelper.infoBar(context,
+                message: 'El usuario fue registrado correctamente.');
           }
         },
         builder: (context, state) {
@@ -335,41 +335,6 @@ class _RegisterPageState extends State<RegisterPage> {
             Container(),
         ],
       ),
-    );
-  }
-
-  void _showCenterFlash({
-    required String message,
-    FlashPosition position = FlashPosition.top,
-    FlashStyle style = FlashStyle.floating,
-    Alignment? alignment,
-    Color? borderColor,
-  }) {
-    showFlash(
-      context: context,
-      duration: const Duration(seconds: 5),
-      builder: (_, controller) {
-        return Flash(
-          controller: controller,
-          backgroundColor: Colors.black87,
-          borderRadius: BorderRadius.circular(8.0),
-          borderColor: borderColor ?? Colors.black,
-          position: position,
-          style: style,
-          alignment: alignment,
-          enableDrag: false,
-          onTap: () => controller.dismiss(),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: DefaultTextStyle(
-              style: const TextStyle(color: Colors.white),
-              child: Text(
-                message,
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }

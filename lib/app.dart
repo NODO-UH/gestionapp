@@ -67,9 +67,15 @@ class GestionUhApp extends StatelessWidget {
             );
           case REGISTER_ROUTE_NAME:
             return MaterialPageRoute(
-              builder: (_) => BlocProvider<RegisterBloc>(
-                create: (_) => di()..add(QuestionsRequestedRegister()),
-                child: const RegisterPage(),
+              builder: (_) => Overlay(
+                initialEntries: [
+                  OverlayEntry(builder: (context) {
+                    return BlocProvider<RegisterBloc>(
+                      create: (_) => di()..add(QuestionsRequestedRegister()),
+                      child: const RegisterPage(),
+                    );
+                  }),
+                ],
               ),
             );
           case ABOUT_ROUTE_NAME:

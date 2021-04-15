@@ -1,8 +1,8 @@
-import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/presentation/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets.dart';
+import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
 import 'package:gestionuh/src/utils/validators.dart';
 
 class RecoverPasswordPage extends StatelessWidget {
@@ -19,11 +19,7 @@ class RecoverPasswordPage extends StatelessWidget {
         body: BlocConsumer<RecoverPasswordBloc, RecoverPasswordState>(
           listener: (context, state) {
             if (state is RecoverPasswordError) {
-              _showCenterFlash(
-                context: context,
-                message: state.error,
-                borderColor: Colors.red,
-              );
+              FlashHelper.errorBar(context, message: state.error);
             }
           },
           builder: (context, state) {
@@ -218,41 +214,5 @@ class RecoverPasswordPage extends StatelessWidget {
             return Container();
           },
         ));
-  }
-
-  void _showCenterFlash({
-    required BuildContext context,
-    required String message,
-    FlashPosition position = FlashPosition.top,
-    FlashStyle style = FlashStyle.floating,
-    Alignment? alignment,
-    Color? borderColor,
-  }) {
-    showFlash(
-      context: context,
-      duration: const Duration(seconds: 5),
-      builder: (_, controller) {
-        return Flash(
-          controller: controller,
-          backgroundColor: Colors.black87,
-          borderRadius: BorderRadius.circular(8.0),
-          borderColor: borderColor ?? Colors.black,
-          position: position,
-          style: style,
-          alignment: alignment,
-          enableDrag: false,
-          onTap: () => controller.dismiss(),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: DefaultTextStyle(
-              style: const TextStyle(color: Colors.white),
-              child: Text(
-                message,
-              ),
-            ),
-          ),
-        );
-      },
-    );
   }
 }

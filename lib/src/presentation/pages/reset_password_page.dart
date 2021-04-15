@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,6 +7,7 @@ import '../../utils/validators.dart';
 import '../blocs/reset_password_bloc/resetpassword_bloc.dart';
 import '../widgets.dart';
 import '../widgets/bottom_sheet.dart';
+import '../widgets/flash_helper.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
@@ -39,16 +39,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         body: BlocConsumer<ResetPasswordBloc, ResetPasswordState>(
           listener: (context, state) {
             if (state is ResetPasswordInitial) {
-              _showCenterFlash(
-                message: state.error,
-                borderColor: Colors.red,
-              );
+              FlashHelper.errorBar(context, message: state.error);
             }
             if (state is ResetPasswordSuccess) {
-              _showCenterFlash(
-                message: 'Operación Completada.',
-                borderColor: Colors.green,
-              );
+              FlashHelper.infoBar(context,
+                  message: 'La contraseña ha sido actualizada correctamente.');
             }
           },
           builder: (context, state) {
@@ -164,40 +159,5 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 passwordFirst: passwordFirst, passwordSecond: passwordSecond),
           );
     }
-  }
-
-  void _showCenterFlash({
-    required String message,
-    FlashPosition position = FlashPosition.top,
-    FlashStyle style = FlashStyle.floating,
-    Alignment? alignment,
-    Color? borderColor,
-  }) {
-    showFlash(
-      context: context,
-      duration: const Duration(seconds: 5),
-      builder: (_, controller) {
-        return Flash(
-          controller: controller,
-          backgroundColor: Colors.black87,
-          borderRadius: BorderRadius.circular(8.0),
-          borderColor: borderColor ?? Colors.black,
-          position: position,
-          style: style,
-          alignment: alignment,
-          enableDrag: false,
-          onTap: () => controller.dismiss(),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: DefaultTextStyle(
-              style: const TextStyle(color: Colors.white),
-              child: Text(
-                message,
-              ),
-            ),
-          ),
-        );
-      },
-    );
   }
 }
