@@ -39,7 +39,7 @@ flutter:
 
 flutter_native_splash:
   image: assets/images/splash2.png
-  color: '#5b0101'
+  color: '#fdfdfd'
   fill: false
 
 flutter_icons:
