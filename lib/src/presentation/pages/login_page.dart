@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../deps_injector.dart';
-import '../../data/repository.dart';
-import '../../utils/constants/routes.dart';
-import '../blocs.dart';
-import '../widgets.dart';
-import '../widgets/bottom_sheet.dart';
-import '../widgets/flash_helper.dart';
+import 'package:gestionuh/deps_injector.dart';
+import 'package:gestionuh/src/data/repository.dart';
+import 'package:gestionuh/src/presentation/blocs.dart';
+import 'package:gestionuh/src/presentation/widgets.dart';
+import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
+import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
+import 'package:gestionuh/src/utils/constants/routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

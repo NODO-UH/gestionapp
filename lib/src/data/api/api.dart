@@ -1,9 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-
-import '../../utils/constants.dart';
-import '../models.dart';
+import 'package:gestionuh/src/data/models.dart';
+import 'package:gestionuh/src/utils/constants.dart';
 
 typedef ClassBuilder<T extends BaseModel> = T Function(
     Map<String, dynamic> json);

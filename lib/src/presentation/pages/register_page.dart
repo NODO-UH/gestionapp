@@ -1,14 +1,13 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../utils/constants.dart';
-import '../../utils/pair.dart';
-import '../../utils/validators.dart';
-import '../blocs.dart';
-import '../widgets.dart';
-import '../widgets/bottom_sheet.dart';
-import '../widgets/flash_helper.dart';
+import 'package:gestionuh/src/presentation/blocs.dart';
+import 'package:gestionuh/src/presentation/widgets.dart';
+import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
+import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
+import 'package:gestionuh/src/utils/constants.dart';
+import 'package:gestionuh/src/utils/pair.dart';
+import 'package:gestionuh/src/utils/validators.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
