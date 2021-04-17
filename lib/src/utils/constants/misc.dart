@@ -1,5 +1,5 @@
 class Constants {
-  static const appName = 'Gestion UH';
+  static const appName = 'Gestión UH';
   static const testMode = false;
   static const authUrl = '/auth/login';
   static const quotaUrl = '/proxy/quota';
