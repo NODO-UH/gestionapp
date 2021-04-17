@@ -62,7 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return qFree;
   }
 
-  void _showTermsAndConditionsDialog() async {
+  Future<void> _showTermsAndConditionsDialog() async {
     final accepted = await FlashHelper.aceptDeclineDialog(
       context,
     );
