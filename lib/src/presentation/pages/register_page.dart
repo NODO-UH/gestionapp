@@ -8,6 +8,7 @@ import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
 import 'package:gestionuh/src/utils/constants.dart';
 import 'package:gestionuh/src/utils/pair.dart';
 import 'package:gestionuh/src/utils/validators.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -119,117 +120,131 @@ class _RegisterPageState extends State<RegisterPage> {
               state is LoadInitialDataSuccess ||
               state is LoadInitialDataInProgress ||
               state is LoadInitialDataFailure) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 30, bottom: 9, left: 18, right: 18),
-                child: Form(
-                  key: _formKey,
-                  autovalidateMode: AutovalidateMode.disabled,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Todos los campos son obligatorios.*',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(fontSize: 14, color: Colors.black45),
-                        textAlign: TextAlign.center,
+            return Scrollbar(
+              child: SingleChildScrollView(
+                child: Center(
+                  child: Container(
+                    width: getValueForScreenType<double>(
+                      context: context,
+                      mobile: MediaQuery.of(context).size.width,
+                      tablet: MediaQuery.of(context).size.width * 0.5,
+                    ),
+                    padding: const EdgeInsets.only(
+                      top: 30,
+                      bottom: 9,
+                      left: 18,
+                      right: 18,
+                    ),
+                    child: Form(
+                      key: _formKey,
+                      autovalidateMode: AutovalidateMode.disabled,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Todos los campos son obligatorios.*',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6!
+                                .copyWith(fontSize: 14, color: Colors.black45),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Número de Carnet De Identidad',
+                                  style: headlineTextsTheme,
+                                ),
+                                GestionUhDefaultTextField(
+                                  hintText: '###########',
+                                  autovalidateMode: AutovalidateMode.disabled,
+                                  controller: ciController,
+                                  validator: identityNumberCIValidator,
+                                  keyboardType: TextInputType.number,
+                                ),
+                              ]),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Contraseña',
+                                  style: headlineTextsTheme,
+                                ),
+                                GestionUhDefaultTextField(
+                                  hintText: '********',
+                                  autovalidateMode: AutovalidateMode.disabled,
+                                  controller: passwordFirstController,
+                                  validator: safetyPasswordValidator,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                  ),
+                                ),
+                              ]),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Repetir Contraseña',
+                                  style: headlineTextsTheme,
+                                ),
+                                GestionUhDefaultTextField(
+                                  hintText: '********',
+                                  autovalidateMode: AutovalidateMode.disabled,
+                                  controller: passwordSecondController,
+                                  validator: safetyPasswordValidator,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                  ),
+                                ),
+                              ]),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            'Introduzca respuesta para las preguntas de seguridad de su preferencia.',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6!
+                                .copyWith(fontSize: 14, color: Colors.black45),
+                            textAlign: TextAlign.center,
+                          ),
+                          Builder(
+                            builder: (BuildContext context) {
+                              final childrenQuest = <Widget>[];
+                              const length =
+                                  NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
+                              for (int i = 0; i < length; i++) {
+                                childrenQuest.add(buildQuestionZone(i));
+                              }
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: childrenQuest,
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          GestionUhDefaultButton(
+                            text: 'Finalizar',
+                            onPressed: _onRegisterAction,
+                          ),
+                          const SizedBox(height: 30),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Número de Carnet De Identidad',
-                              style: headlineTextsTheme,
-                            ),
-                            GestionUhDefaultTextField(
-                              hintText: '###########',
-                              autovalidateMode: AutovalidateMode.disabled,
-                              controller: ciController,
-                              validator: identityNumberCIValidator,
-                              keyboardType: TextInputType.number,
-                            ),
-                          ]),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Contraseña',
-                              style: headlineTextsTheme,
-                            ),
-                            GestionUhDefaultTextField(
-                              hintText: '********',
-                              autovalidateMode: AutovalidateMode.disabled,
-                              controller: passwordFirstController,
-                              validator: safetyPasswordValidator,
-                              keyboardType: TextInputType.visiblePassword,
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                bottomLeft: Radius.circular(5),
-                              ),
-                            ),
-                          ]),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Repetir Contraseña',
-                              style: headlineTextsTheme,
-                            ),
-                            GestionUhDefaultTextField(
-                              hintText: '********',
-                              autovalidateMode: AutovalidateMode.disabled,
-                              controller: passwordSecondController,
-                              validator: safetyPasswordValidator,
-                              keyboardType: TextInputType.visiblePassword,
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                bottomLeft: Radius.circular(5),
-                              ),
-                            ),
-                          ]),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Introduzca respuesta para las preguntas de seguridad de su preferencia.',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(fontSize: 14, color: Colors.black45),
-                        textAlign: TextAlign.center,
-                      ),
-                      Builder(
-                        builder: (BuildContext context) {
-                          final childrenQuest = <Widget>[];
-                          const length = NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
-                          for (int i = 0; i < length; i++) {
-                            childrenQuest.add(buildQuestionZone(i));
-                          }
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: childrenQuest,
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 10),
-                      GestionUhDefaultButton(
-                        text: 'Finalizar',
-                        onPressed: _onRegisterAction,
-                      ),
-                      const SizedBox(height: 30),
-                    ],
+                    ),
                   ),
                 ),
               ),

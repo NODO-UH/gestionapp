@@ -52,8 +52,12 @@ class DefaultDrawer extends Drawer {
             icon: Icons.security_rounded,
             onTap: () {
               Navigator.of(context)
-                ..pop()
-                ..pushNamed(RESET_PASSWORD_ROUTE_NAME);
+                ..popUntil(
+                  (route) {
+                    return !(route as MaterialPageRoute).canPop;
+                  },
+                )
+                ..pushReplacementNamed(RESET_PASSWORD_ROUTE_NAME);
             },
           ),
           _buildDrawerItem(
@@ -78,8 +82,12 @@ class DefaultDrawer extends Drawer {
             icon: Icons.info_outline_rounded,
             onTap: () {
               Navigator.of(context)
-                ..pop()
-                ..pushNamed(ABOUT_ROUTE_NAME);
+                ..popUntil(
+                  (route) {
+                    return !(route as MaterialPageRoute).canPop;
+                  },
+                )
+                ..pushReplacementNamed(ABOUT_ROUTE_NAME);
             },
           ),
         ],
