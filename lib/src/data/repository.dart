@@ -3,3 +3,4 @@ export 'repository/mail_quota_repository/mail_quota_repository.dart';
 export 'repository/profile_repository/profile_repository.dart';
 export 'repository/quotas_repository/quotas_repository.dart';
 export 'repository/recover_password_repository/recover_password_repository.dart';
+export 'repository/version_repository/version_repository.dart';
