@@ -18,9 +18,12 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^7.0.0
   flutter_secure_storage: ^4.1.0
+  flutter_web_plugins:
+    sdk: flutter
   get_it: ^6.0.0
   json_annotation: ^4.0.1
   package_info_plus: ^1.0.0
+  responsive_builder: ^0.4.1
   shared_preferences: ^2.0.5
   url_launcher: ^6.0.3
 

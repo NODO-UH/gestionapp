@@ -7,6 +7,7 @@ import 'package:gestionuh/src/presentation/widgets.dart';
 import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
 import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
 import 'package:gestionuh/src/utils/validators.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
@@ -34,6 +35,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           title: const Text('Cambiar Contraseña'),
           centerTitle: true,
         ),
+        drawer: DefaultDrawer(),
         bottomSheet: const GestionUHBottomSheet(),
         body: BlocConsumer<ResetPasswordBloc, ResetPasswordState>(
           listener: (context, state) {
@@ -47,99 +49,108 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           },
           builder: (context, state) {
             return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 30, bottom: 9, left: 18, right: 18),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Hints Area
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 5.0,
-                        vertical: 16.0,
+              child: Center(
+                child: Container(
+                  width: getValueForScreenType<double>(
+                    context: context,
+                    mobile: MediaQuery.of(context).size.width,
+                    tablet: MediaQuery.of(context).size.width * 0.5,
+                  ),
+                  padding: const EdgeInsets.only(
+                      top: 30, bottom: 9, left: 18, right: 18),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Hints Area
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 5.0,
+                          vertical: 16.0,
+                        ),
+                        child: RichText(
+                          text: TextSpan(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(height: 1.4),
+                              children: [
+                                TextSpan(
+                                  text: 'Su nueva contraseña debe tener:\n',
+                                  style: Theme.of(context).textTheme.headline6,
+                                ),
+                                const TextSpan(
+                                  text: '(1) Más de 8 caracteres.\n',
+                                ),
+                                const TextSpan(
+                                  text: '(2) Al menos una minúscula.\n',
+                                ),
+                                const TextSpan(
+                                  text: '(3) Al menos una mayúscula.\n',
+                                ),
+                                const TextSpan(
+                                  text:
+                                      '(4) Al menos un caracter especial, Ej. !\$@+.\n',
+                                ),
+                                const TextSpan(
+                                  text: '(5) Al menos un número.\n',
+                                ),
+                              ]),
+                        ),
                       ),
-                      child: RichText(
-                        text: TextSpan(
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .copyWith(height: 1.4),
-                            children: [
-                              TextSpan(
-                                text: 'Su nueva contraseña debe tener:\n',
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                              const TextSpan(
-                                text: '(1) Más de 8 caracteres.\n',
-                              ),
-                              const TextSpan(
-                                text: '(2) Al menos una minúscula.\n',
-                              ),
-                              const TextSpan(
-                                text: '(3) Al menos una mayúscula.\n',
-                              ),
-                              const TextSpan(
-                                text:
-                                    '(4) Al menos un caracter especial, Ej. !\$@+.\n',
-                              ),
-                              const TextSpan(
-                                text: '(5) Al menos un número.\n',
-                              ),
-                            ]),
-                      ),
-                    ),
 
-                    // Password inputs
-                    Form(
-                      key: _formPasswordKey,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: GestionUhDefaultTextField(
-                              labelText: '\t\tContraseña*',
-                              controller: _passwordFirstController,
-                              validator: safetyPasswordValidator,
-                              autovalidateMode: AutovalidateMode.disabled,
-                              keyboardType: TextInputType.visiblePassword,
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                bottomLeft: Radius.circular(5),
+                      // Password inputs
+                      Form(
+                        key: _formPasswordKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: GestionUhDefaultTextField(
+                                labelText: 'Contraseña*',
+                                controller: _passwordFirstController,
+                                validator: safetyPasswordValidator,
+                                autovalidateMode: AutovalidateMode.disabled,
+                                keyboardType: TextInputType.visiblePassword,
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: GestionUhDefaultTextField(
-                              labelText: '\t\tRepetir Contraseña*',
-                              controller: _passwordSecondController,
-                              validator: safetyPasswordValidator,
-                              autovalidateMode: AutovalidateMode.disabled,
-                              keyboardType: TextInputType.visiblePassword,
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                bottomLeft: Radius.circular(5),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: GestionUhDefaultTextField(
+                                labelText: 'Repetir Contraseña*',
+                                controller: _passwordSecondController,
+                                validator: safetyPasswordValidator,
+                                autovalidateMode: AutovalidateMode.disabled,
+                                keyboardType: TextInputType.visiblePassword,
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    GestionUhDefaultButton(
-                      text: 'Actualizar Contraseña',
-                      onPressed: state is ResetPasswordInProgress
-                          ? null
-                          : () => _resetPassword(context),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      GestionUhDefaultButton(
+                        text: 'Actualizar Contraseña',
+                        onPressed: state is ResetPasswordInProgress
+                            ? null
+                            : () => _resetPassword(context),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

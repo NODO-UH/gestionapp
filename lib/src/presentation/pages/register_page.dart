@@ -9,6 +9,7 @@ import 'package:gestionuh/src/presentation/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets.dart';
 import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
 import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -132,118 +133,136 @@ class _RegisterPageState extends State<RegisterPage> {
               state is LoadInitialDataSuccess ||
               state is LoadInitialDataInProgress ||
               state is LoadInitialDataFailure) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 30, bottom: 9, left: 18, right: 18),
-                child: Form(
-                  key: _formKey,
-                  autovalidateMode: AutovalidateMode.disabled,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      GestionUhDefaultTextField(
-                        labelText: 'Número de Carnet De Identidad',
-                        labelStyle: headlineTextsTheme,
-                        hintText: '###########',
-                        autovalidateMode: AutovalidateMode.disabled,
-                        controller: ciController,
-                        validator: identityNumberCIValidator,
-                        keyboardType: TextInputType.number,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      GestionUhDefaultTextField(
-                        labelText: 'Contraseña',
-                        labelStyle: headlineTextsTheme,
-                        hintText: '********',
-                        autovalidateMode: AutovalidateMode.disabled,
-                        controller: passwordFirstController,
-                        validator: safetyPasswordValidator,
-                        keyboardType: TextInputType.visiblePassword,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          bottomLeft: Radius.circular(5),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      GestionUhDefaultTextField(
-                        labelText: 'Repetir Contraseña',
-                        labelStyle: headlineTextsTheme,
-                        hintText: '********',
-                        autovalidateMode: AutovalidateMode.disabled,
-                        controller: passwordSecondController,
-                        validator: safetyPasswordValidator,
-                        keyboardType: TextInputType.visiblePassword,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          bottomLeft: Radius.circular(5),
-                        ),
-                      ),
-                      const SizedBox(height: 60),
-                      const Divider(
-                        color: Colors.black54,
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'PREGUNTAS DE SEGURIDAD',
-                        style: Theme.of(context).textTheme.headline6!.copyWith(
-                            fontSize: 14,
+            return Scrollbar(
+              child: SingleChildScrollView(
+                child: Center(
+                  child: Container(
+                    width: getValueForScreenType<double>(
+                      context: context,
+                      mobile: MediaQuery.of(context).size.width,
+                      tablet: MediaQuery.of(context).size.width * 0.5,
+                    ),
+                    padding: const EdgeInsets.only(
+                      top: 30,
+                      bottom: 9,
+                      left: 18,
+                      right: 18,
+                    ),
+                    child: Form(
+                      key: _formKey,
+                      autovalidateMode: AutovalidateMode.disabled,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          GestionUhDefaultTextField(
+                            labelText: 'Número de Carnet De Identidad',
+                            labelStyle: headlineTextsTheme,
+                            hintText: '###########',
+                            autovalidateMode: AutovalidateMode.disabled,
+                            controller: ciController,
+                            validator: identityNumberCIValidator,
+                            keyboardType: TextInputType.number,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          GestionUhDefaultTextField(
+                            labelText: 'Contraseña',
+                            labelStyle: headlineTextsTheme,
+                            hintText: '********',
+                            autovalidateMode: AutovalidateMode.disabled,
+                            controller: passwordFirstController,
+                            validator: safetyPasswordValidator,
+                            keyboardType: TextInputType.visiblePassword,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          GestionUhDefaultTextField(
+                            labelText: 'Repetir Contraseña',
+                            labelStyle: headlineTextsTheme,
+                            hintText: '********',
+                            autovalidateMode: AutovalidateMode.disabled,
+                            controller: passwordSecondController,
+                            validator: safetyPasswordValidator,
+                            keyboardType: TextInputType.visiblePassword,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
+                          ),
+                          const SizedBox(height: 60),
+                          const Divider(
                             color: Colors.black54,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      Builder(
-                        builder: (BuildContext context) {
-                          final childrenQuest = <Widget>[];
-                          const length = NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
-                          for (int i = 0; i < length; i++) {
-                            childrenQuest.add(buildQuestionZone(i));
-                          }
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: childrenQuest,
-                          );
-                        },
-                      ),
-                      TextButton(
-                        onPressed: _showTermsAndConditionsDialog,
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              value: termsAccepted,
-                              activeColor: Theme.of(context).primaryColor,
-                              // ignore: avoid_returning_null_for_void
-                              onChanged: (value) =>
-                                  _showTermsAndConditionsDialog(),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'PREGUNTAS DE SEGURIDAD',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6!
+                                .copyWith(
+                                    fontSize: 14,
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                          Builder(
+                            builder: (BuildContext context) {
+                              final childrenQuest = <Widget>[];
+                              const length =
+                                  NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
+                              for (int i = 0; i < length; i++) {
+                                childrenQuest.add(buildQuestionZone(i));
+                              }
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: childrenQuest,
+                              );
+                            },
+                          ),
+                          TextButton(
+                            onPressed: _showTermsAndConditionsDialog,
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                  value: termsAccepted,
+                                  activeColor: Theme.of(context).primaryColor,
+                                  // ignore: avoid_returning_null_for_void
+                                  onChanged: (value) =>
+                                      _showTermsAndConditionsDialog(),
+                                ),
+                                Text(
+                                  'TÉRMINOS Y CONDICIONES DE USO',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.fade,
+                                  softWrap: true,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle2
+                                      ?.copyWith(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                ),
+                              ],
                             ),
-                            Text(
-                              'TÉRMINOS Y CONDICIONES DE USO',
-                              maxLines: 2,
-                              overflow: TextOverflow.fade,
-                              softWrap: true,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle2
-                                  ?.copyWith(
-                                      color: Theme.of(context).primaryColor),
-                            ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(height: 10),
+                          GestionUhDefaultButton(
+                            text: 'Finalizar',
+                            onPressed: termsAccepted ? _onRegisterAction : null,
+                          ),
+                          const SizedBox(height: 30),
+                        ],
                       ),
-                      const SizedBox(height: 10),
-                      GestionUhDefaultButton(
-                        text: 'Finalizar',
-                        onPressed: termsAccepted ? _onRegisterAction : null,
-                      ),
-                      const SizedBox(height: 30),
-                    ],
+                    ),
                   ),
                 ),
               ),
