@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gestionuh/deps_injector.dart';
+import 'package:gestionuh/src/data/repository.dart';
 import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
 import 'package:gestionuh/src/utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,16 +17,35 @@ class AboutInformationPage extends StatelessWidget {
       ),
       bottomSheet: Center(
         heightFactor: 1,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              '\u00a9 2021${Constants.copyRight}',
+        child: FutureBuilder<String>(
+          future: di<VersionRepository>().getVersion(),
+          builder: (context, snapshot) {
+            final textSpans = [
+              TextSpan(text: '\u00a9 ${DateTime.now().year}'),
+            ];
+            if (snapshot.hasData) {
+              textSpans.addAll([
+                const TextSpan(text: ' '),
+                TextSpan(
+                  text: '${Constants.appName} v${snapshot.data}',
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 11,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                ),
+              ]);
+            }
+            return RichText(
+              text: TextSpan(
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(fontSize: 11),
+                children: textSpans,
+              ),
               textAlign: TextAlign.center,
-              style:
-                  Theme.of(context).textTheme.headline6!.copyWith(fontSize: 12),
-            ),
-          ],
+            );
+          },
         ),
       ),
       body: SingleChildScrollView(

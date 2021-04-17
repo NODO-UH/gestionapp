@@ -58,6 +58,10 @@ Future<void> init() async {
     ),
   );
 
+  di.registerLazySingleton<VersionRepository>(
+    () => VersionRepository(),
+  );
+
   //Blocs
   di.registerFactory<LoginBloc>(
     () => LoginBloc(

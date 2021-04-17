@@ -20,6 +20,7 @@ dependencies:
   flutter_secure_storage: ^4.1.0
   get_it: ^6.0.0
   json_annotation: ^4.0.1
+  package_info_plus: ^1.0.0
   shared_preferences: ^2.0.5
   url_launcher: ^6.0.3
 
