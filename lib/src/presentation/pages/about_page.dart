@@ -1,8 +1,7 @@
-import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
+import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
+import 'package:gestionuh/src/utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../utils/constants.dart';
 
 class AboutInformationPage extends StatelessWidget {
   const AboutInformationPage({Key? key}) : super(key: key);
@@ -89,9 +88,9 @@ class AboutInformationPage extends StatelessWidget {
                                             if (await canLaunch(e.link!)) {
                                               await launch(e.link!);
                                             } else {
-                                              _showCenterFlash(
+                                              FlashHelper.errorBar(
                                                 context,
-                                                error:
+                                                message:
                                                     'No puede acceder a ${e.link}',
                                               );
                                             }
@@ -126,9 +125,9 @@ class AboutInformationPage extends StatelessWidget {
                   if (await canLaunch(url)) {
                     await launch(url);
                   } else {
-                    _showCenterFlash(
+                    FlashHelper.errorBar(
                       context,
-                      error: 'No puede acceder a $url',
+                      message: 'No puede acceder a $url',
                     );
                   }
                 },
@@ -166,41 +165,6 @@ class AboutInformationPage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  void _showCenterFlash(
-    BuildContext context, {
-    String? error,
-    FlashPosition position = FlashPosition.top,
-    FlashStyle style = FlashStyle.floating,
-    Alignment? alignment,
-  }) {
-    showFlash(
-      context: context,
-      duration: const Duration(seconds: 5),
-      builder: (_, controller) {
-        return Flash(
-          controller: controller,
-          backgroundColor: Colors.black87,
-          borderRadius: BorderRadius.circular(8.0),
-          borderColor: Colors.blue,
-          position: position,
-          style: style,
-          alignment: alignment,
-          enableDrag: false,
-          onTap: () => controller.dismiss(),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: DefaultTextStyle(
-              style: const TextStyle(color: Colors.white),
-              child: Text(
-                error!,
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }

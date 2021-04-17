@@ -1,9 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-
-import '../../utils/constants.dart';
-import '../models.dart';
+import 'package:gestionuh/src/data/models.dart';
+import 'package:gestionuh/src/utils/constants.dart';
 
 typedef ClassBuilder<T extends BaseModel> = T Function(
     Map<String, dynamic> json);
@@ -88,7 +87,7 @@ class GestionApi {
       );
     }
 
-    UserData response = await apiRequest<UserData, UserData>(
+    final UserData response = await apiRequest<UserData, UserData>(
       Constants.userDataUrl,
       () => UserData(),
       null,
@@ -252,22 +251,26 @@ class GestionApi {
         queryParameters: queryParams,
       );
     } catch (error) {
-      target.error = error.toString();
+      target.error = Errors.retrieveError(error.toString());
       return target;
     }
 
     if (builder != null) {
       try {
         if (response.statusCode! >= 300) {
-          Error error = Error.fromJson(
+          final Error error = Error.fromJson(
               jsonDecode(response.data!) as Map<String, dynamic>);
-          target.error = error.message;
+          target.error = error.code.toString();
         } else {
           target = builder(jsonDecode(response.data!) as Map<String, dynamic>);
         }
       } catch (e) {
         target.error = e.toString();
       }
+    }
+
+    if (target.error != null) {
+      target.error = Errors.retrieveError(target.error!);
     }
 
     return target;

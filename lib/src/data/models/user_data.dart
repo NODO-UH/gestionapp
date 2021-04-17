@@ -28,5 +28,6 @@ class UserData extends BaseModel {
   static UserData fromJson(Map<String, dynamic> json) =>
       _$UserDataFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$UserDataToJson(this);
 }

@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'deps_injector.dart';
-import 'src/data/repository/auth_repository/auth_repository.dart';
-import 'src/presentation/blocs.dart';
-import 'src/presentation/blocs/reset_password_bloc/resetpassword_bloc.dart';
-import 'src/presentation/pages.dart';
-import 'src/presentation/pages/about_page.dart';
-import 'src/presentation/pages/register_page.dart';
-import 'src/presentation/theme.dart';
-import 'src/utils/constants.dart';
-import 'src/utils/constants/routes.dart';
+import 'package:gestionuh/deps_injector.dart';
+import 'package:gestionuh/src/data/repository/auth_repository/auth_repository.dart';
+import 'package:gestionuh/src/presentation/blocs.dart';
+import 'package:gestionuh/src/presentation/pages.dart';
+import 'package:gestionuh/src/presentation/pages/about_page.dart';
+import 'package:gestionuh/src/presentation/pages/register_page.dart';
+import 'package:gestionuh/src/presentation/theme.dart';
+import 'package:gestionuh/src/utils/constants.dart';
+import 'package:gestionuh/src/utils/constants/routes.dart';
 
 class GestionUhApp extends StatelessWidget {
   @override
@@ -67,9 +65,15 @@ class GestionUhApp extends StatelessWidget {
             );
           case REGISTER_ROUTE_NAME:
             return MaterialPageRoute(
-              builder: (_) => BlocProvider<RegisterBloc>(
-                create: (_) => di()..add(QuestionsRequestedRegister()),
-                child: const RegisterPage(),
+              builder: (_) => Overlay(
+                initialEntries: [
+                  OverlayEntry(builder: (context) {
+                    return BlocProvider<RegisterBloc>(
+                      create: (_) => di()..add(QuestionsRequestedRegister()),
+                      child: const RegisterPage(),
+                    );
+                  }),
+                ],
               ),
             );
           case ABOUT_ROUTE_NAME:

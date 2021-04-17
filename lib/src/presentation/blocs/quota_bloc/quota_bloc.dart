@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/data/models.dart';
 import 'package:gestionuh/src/data/repository.dart';
+import 'package:gestionuh/src/utils/constants.dart';
 
 part 'quota_event.dart';
 part 'quota_state.dart';
@@ -24,7 +25,7 @@ class QuotaBloc extends Bloc<QuotaEvent, QuotaState> {
     final result = await quotasRepository.getQuota();
     if (result == null) {
       yield QuotaLoadedFailure(
-        error: 'Ha ocurrido un error inesperado.',
+        error: Errors.DefaultError,
       );
     } else if (result.error != null) {
       yield QuotaLoadedFailure(

@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import '../../../utils/constants/storage_keys.dart';
-import '../../api/api.dart';
-import '../../local/local_storage.dart';
-import '../../models.dart';
-import '../../models/status.dart';
+import 'package:gestionuh/src/data/api/api.dart';
+import 'package:gestionuh/src/data/local/local_storage.dart';
+import 'package:gestionuh/src/data/models.dart';
+import 'package:gestionuh/src/data/models/status.dart';
+import 'package:gestionuh/src/utils/constants/storage_keys.dart';
 
 class AuthRepository {
   final GestionApi api;

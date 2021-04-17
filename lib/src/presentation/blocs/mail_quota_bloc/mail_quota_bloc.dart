@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/data/models.dart';
 import 'package:gestionuh/src/data/repository.dart';
+import 'package:gestionuh/src/utils/constants.dart';
 
 part 'mail_quota_event.dart';
 part 'mail_quota_state.dart';
@@ -25,7 +26,7 @@ class MailQuotaBloc extends Bloc<MailQuotaEvent, MailQuotaState> {
     final result = await mailQuotasRepository.getQuota();
     if (result == null) {
       yield MailQuotaLoadedFailure(
-        error: 'Ha ocurrido un error inesperado.',
+        error: Errors.DefaultError,
       );
     } else if (result.error != null) {
       yield MailQuotaLoadedFailure(
