@@ -1,13 +1,14 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:gestionuh/src/utils/constants.dart';
+import 'package:gestionuh/src/utils/pair.dart';
+import 'package:gestionuh/src/utils/validators.dart';
 import 'package:gestionuh/src/presentation/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets.dart';
 import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
 import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
-import 'package:gestionuh/src/utils/constants.dart';
-import 'package:gestionuh/src/utils/pair.dart';
-import 'package:gestionuh/src/utils/validators.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   late List<Pair<String, int>> questions;
   late List<int> questionsTaken;
+  late bool termsAccepted;
 
   late List<TextEditingController> answersTextControllers;
   TextEditingController ciController = TextEditingController();
@@ -40,6 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
+    termsAccepted = false;
     questions = [];
     questionsTaken = [];
     answersTextControllers = List<TextEditingController>.generate(
@@ -59,10 +62,20 @@ class _RegisterPageState extends State<RegisterPage> {
     return qFree;
   }
 
+  Future<void> _showTermsAndConditionsDialog() async {
+    final accepted = await FlashHelper.aceptDeclineDialog(
+      context,
+    );
+    setState(() {
+      termsAccepted = accepted ?? false;
+    });
+  }
+
   void _onRegisterAction() {
     if (!(_formKey.currentState?.validate() ?? false)) return;
-    if (questionsTaken.where((element) => element != -1).length !=
-        NUMBER_OF_SECURITY_QUESTIONS_NEEDED) return;
+    if (!termsAccepted ||
+        questionsTaken.where((element) => element != -1).length !=
+            NUMBER_OF_SECURITY_QUESTIONS_NEEDED) return;
     final _questions =
         questions.map((e) => questionsTaken[e.second] >= 0 ? e : null).toList();
     _questions.removeWhere((element) => element == null);
@@ -129,85 +142,61 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        'Todos los campos son obligatorios.*',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(fontSize: 14, color: Colors.black45),
-                        textAlign: TextAlign.center,
-                      ),
                       const SizedBox(
-                        height: 30,
+                        height: 10,
                       ),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Número de Carnet De Identidad',
-                              style: headlineTextsTheme,
-                            ),
-                            GestionUhDefaultTextField(
-                              hintText: '###########',
-                              autovalidateMode: AutovalidateMode.disabled,
-                              controller: ciController,
-                              validator: identityNumberCIValidator,
-                              keyboardType: TextInputType.number,
-                            ),
-                          ]),
+                      GestionUhDefaultTextField(
+                        labelText: 'Número de Carnet De Identidad',
+                        labelStyle: headlineTextsTheme,
+                        hintText: '###########',
+                        autovalidateMode: AutovalidateMode.disabled,
+                        controller: ciController,
+                        validator: identityNumberCIValidator,
+                        keyboardType: TextInputType.number,
+                      ),
                       const SizedBox(
                         height: 15,
                       ),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Contraseña',
-                              style: headlineTextsTheme,
-                            ),
-                            GestionUhDefaultTextField(
-                              hintText: '********',
-                              autovalidateMode: AutovalidateMode.disabled,
-                              controller: passwordFirstController,
-                              validator: safetyPasswordValidator,
-                              keyboardType: TextInputType.visiblePassword,
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                bottomLeft: Radius.circular(5),
-                              ),
-                            ),
-                          ]),
+                      GestionUhDefaultTextField(
+                        labelText: 'Contraseña',
+                        labelStyle: headlineTextsTheme,
+                        hintText: '********',
+                        autovalidateMode: AutovalidateMode.disabled,
+                        controller: passwordFirstController,
+                        validator: safetyPasswordValidator,
+                        keyboardType: TextInputType.visiblePassword,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(5),
+                          bottomLeft: Radius.circular(5),
+                        ),
+                      ),
                       const SizedBox(
                         height: 20,
                       ),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Repetir Contraseña',
-                              style: headlineTextsTheme,
-                            ),
-                            GestionUhDefaultTextField(
-                              hintText: '********',
-                              autovalidateMode: AutovalidateMode.disabled,
-                              controller: passwordSecondController,
-                              validator: safetyPasswordValidator,
-                              keyboardType: TextInputType.visiblePassword,
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                bottomLeft: Radius.circular(5),
-                              ),
-                            ),
-                          ]),
-                      const SizedBox(
-                        height: 20,
+                      GestionUhDefaultTextField(
+                        labelText: 'Repetir Contraseña',
+                        labelStyle: headlineTextsTheme,
+                        hintText: '********',
+                        autovalidateMode: AutovalidateMode.disabled,
+                        controller: passwordSecondController,
+                        validator: safetyPasswordValidator,
+                        keyboardType: TextInputType.visiblePassword,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(5),
+                          bottomLeft: Radius.circular(5),
+                        ),
                       ),
+                      const SizedBox(height: 60),
+                      const Divider(
+                        color: Colors.black54,
+                      ),
+                      const SizedBox(height: 10),
                       Text(
-                        'Introduzca respuesta para las preguntas de seguridad de su preferencia.',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(fontSize: 14, color: Colors.black45),
+                        'PREGUNTAS DE SEGURIDAD',
+                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                            fontSize: 14,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                       Builder(
@@ -223,10 +212,35 @@ class _RegisterPageState extends State<RegisterPage> {
                           );
                         },
                       ),
+                      TextButton(
+                        onPressed: _showTermsAndConditionsDialog,
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              value: termsAccepted,
+                              activeColor: Theme.of(context).primaryColor,
+                              // ignore: avoid_returning_null_for_void
+                              onChanged: (value) =>
+                                  _showTermsAndConditionsDialog(),
+                            ),
+                            Text(
+                              'TÉRMINOS Y CONDICIONES DE USO',
+                              maxLines: 2,
+                              overflow: TextOverflow.fade,
+                              softWrap: true,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle2
+                                  ?.copyWith(
+                                      color: Theme.of(context).primaryColor),
+                            ),
+                          ],
+                        ),
+                      ),
                       const SizedBox(height: 10),
                       GestionUhDefaultButton(
                         text: 'Finalizar',
-                        onPressed: _onRegisterAction,
+                        onPressed: termsAccepted ? _onRegisterAction : null,
                       ),
                       const SizedBox(height: 30),
                     ],
@@ -291,7 +305,7 @@ class _RegisterPageState extends State<RegisterPage> {
         children: [
           DropdownButton(
             underline: Container(),
-            icon: const Icon(Icons.add_box_outlined),
+            icon: const Icon(Icons.arrow_drop_down),
             isExpanded: true,
             hint: Text(
               'Seleccione una pregunta',
@@ -328,6 +342,7 @@ class _RegisterPageState extends State<RegisterPage> {
             GestionUhDefaultTextField(
               hintText: 'Respuesta No.${index + 1}',
               validator: answerValidator,
+              autovalidateMode: AutovalidateMode.disabled,
               controller: answersTextControllers[index],
             )
           else
