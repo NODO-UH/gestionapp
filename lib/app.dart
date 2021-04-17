@@ -22,49 +22,55 @@ class GestionUhApp extends StatelessWidget {
           case LOGIN_ROUTE_NAME:
             final authRepo = di<AuthRepository>();
             if (authRepo.logged) {
-              return MaterialPageRoute(
+              return _buildPage(
                 builder: (_) => BlocProvider<QuotaBloc>(
                   create: (_) => di()..add(QuotaInitialized()),
                   child: const QuotaPage(),
                 ),
+                settings: settings,
               );
             }
-            return MaterialPageRoute(
+            return _buildPage(
               builder: (_) => BlocProvider<LoginBloc>(
                 create: (_) => di(),
                 child: const LoginPage(),
               ),
+              settings: settings,
             );
           case QUOTA_ROUTE_NAME:
-            return MaterialPageRoute(
+            return _buildPage(
               builder: (_) => BlocProvider<QuotaBloc>(
                 create: (_) => di()..add(QuotaInitialized()),
                 child: const QuotaPage(),
               ),
+              settings: settings,
             );
           case PROFILE_ROUTE_NAME:
-            return MaterialPageRoute(
+            return _buildPage(
               builder: (_) => BlocProvider<ProfileBloc>(
                 create: (_) => di()..add(ProfileInitialized()),
                 child: const ProfilePage(),
               ),
+              settings: settings,
             );
           case MAIL_ROUTE_NAME:
-            return MaterialPageRoute(
+            return _buildPage(
               builder: (_) => BlocProvider<MailQuotaBloc>(
                 create: (_) => di()..add(MailQuotaInitialized()),
                 child: const MailQuotaPage(),
               ),
+              settings: settings,
             );
           case RESET_PASSWORD_ROUTE_NAME:
-            return MaterialPageRoute(
+            return _buildPage(
               builder: (_) => BlocProvider<ResetPasswordBloc>(
                 create: (_) => di(),
                 child: const ResetPasswordPage(),
               ),
+              settings: settings,
             );
           case REGISTER_ROUTE_NAME:
-            return MaterialPageRoute(
+            return _buildPage(
               builder: (_) => Overlay(
                 initialEntries: [
                   OverlayEntry(builder: (context) {
@@ -75,36 +81,51 @@ class GestionUhApp extends StatelessWidget {
                   }),
                 ],
               ),
+              settings: settings,
             );
           case ABOUT_ROUTE_NAME:
-            return MaterialPageRoute(
+            return _buildPage(
               builder: (_) => const AboutInformationPage(),
+              settings: settings,
             );
           case RECOVER_PASSWORD_ROUTE_NAME:
-            return MaterialPageRoute(
+            return _buildPage(
               builder: (_) => BlocProvider<RecoverPasswordBloc>(
                 create: (_) => di(),
                 child: RecoverPasswordPage(),
               ),
+              settings: settings,
             );
           default:
             final authRepo = di<AuthRepository>();
             if (authRepo.logged) {
-              return MaterialPageRoute(
+              return _buildPage(
                 builder: (_) => BlocProvider<ProfileBloc>(
                   create: (_) => di()..add(ProfileInitialized()),
                   child: const ProfilePage(),
                 ),
+                settings: settings,
               );
             }
-            return MaterialPageRoute(
+            return _buildPage(
               builder: (_) => BlocProvider<LoginBloc>(
                 create: (_) => di(),
                 child: const LoginPage(),
               ),
+              settings: settings,
             );
         }
       },
+    );
+  }
+
+  PageRoute _buildPage({
+    required WidgetBuilder builder,
+    required RouteSettings settings,
+  }) {
+    return MaterialPageRoute(
+      builder: builder,
+      settings: settings,
     );
   }
 }

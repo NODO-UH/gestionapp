@@ -60,8 +60,6 @@ class QuotaGraph extends StatelessWidget {
           child: PieChart(
             PieChartData(
               borderData: FlBorderData(show: false),
-              sectionsSpace: 0,
-              centerSpaceRadius: MediaQuery.of(context).size.width / 6,
               sections: data
                   .where((x) => x.cant != 0)
                   .map((item) => PieChartSectionData(
