@@ -61,70 +61,74 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: TextFormField(
-            validator: widget.validator,
-            inputFormatters: widget.inputFormatters ?? [],
-            autovalidateMode:
-                widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
-            style: widget.style ?? const TextStyle(fontSize: 17),
-            onChanged: widget.onChanged,
-            onTap: widget.onTap as void Function()?,
-            controller: widget.controller,
-            keyboardType: widget.keyboardType,
-            textAlignVertical: TextAlignVertical.center,
-            textInputAction: TextInputAction.done,
-            textAlign: TextAlign.justify,
-            cursorColor: Theme.of(context).accentColor,
-            obscureText: _obscureText,
-            decoration: InputDecoration(
-              fillColor: Theme.of(context).cardColor,
-              filled: true,
-              contentPadding: const EdgeInsets.only(left: 10),
-              labelStyle: widget.labelStyle ??
-                  Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Theme.of(context).primaryColor),
-              hintStyle:
-                  widget.hintStyle ?? Theme.of(context).textTheme.bodyText1,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: widget.borderRadius ??
-                    const BorderRadius.all(Radius.circular(5)),
-                borderSide: BorderSide(
-                  color: Colors.grey[300]!,
+          child: SizedBox(
+            // height: 40,
+            child: TextFormField(
+              validator: widget.validator,
+              inputFormatters: widget.inputFormatters ?? [],
+              autovalidateMode:
+                  widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
+              style: widget.style ?? const TextStyle(fontSize: 17),
+              onChanged: widget.onChanged,
+              onTap: widget.onTap as void Function()?,
+              controller: widget.controller,
+              keyboardType: widget.keyboardType,
+              textAlignVertical: TextAlignVertical.center,
+              textInputAction: TextInputAction.done,
+              textAlign: TextAlign.justify,
+              cursorColor: Theme.of(context).accentColor,
+              obscureText: _obscureText,
+              decoration: InputDecoration(
+                fillColor: Theme.of(context).cardColor,
+                filled: true,
+                contentPadding: const EdgeInsets.only(left: 10),
+                labelStyle: widget.labelStyle ??
+                    Theme.of(context)
+                        .textTheme
+                        .bodyText1!
+                        .copyWith(color: Theme.of(context).primaryColor),
+                hintStyle:
+                    widget.hintStyle ?? Theme.of(context).textTheme.bodyText1,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: widget.borderRadius ??
+                      const BorderRadius.all(Radius.circular(5)),
+                  borderSide: BorderSide(
+                    color: Colors.grey[300]!,
+                  ),
                 ),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: widget.borderRadius ??
-                    const BorderRadius.all(
-                      Radius.circular(5),
-                    ),
-                borderSide: BorderSide(
-                  color: Colors.grey[300]!,
+                border: OutlineInputBorder(
+                  borderRadius: widget.borderRadius ??
+                      const BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                  borderSide: BorderSide(
+                    color: Colors.grey[300]!,
+                  ),
                 ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: widget.borderRadius ??
-                    const BorderRadius.all(
-                      Radius.circular(5),
-                    ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: widget.borderRadius ??
-                    const BorderRadius.all(
-                      Radius.circular(5),
-                    ),
-                borderSide: BorderSide(
-                  color: Colors.red.withOpacity(.5),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: widget.borderRadius ??
+                      const BorderRadius.all(
+                        Radius.circular(5),
+                      ),
                 ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: widget.borderRadius ??
+                      const BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                  borderSide: BorderSide(
+                    color: Colors.red.withOpacity(.5),
+                  ),
+                ),
+                labelText: widget.labelText,
+                hintText: widget.hintText,
               ),
-              labelText: widget.labelText,
-              hintText: widget.hintText,
             ),
           ),
         ),
         if (widget.keyboardType == TextInputType.visiblePassword)
           SizedBox(
+            // height: 40,
             width: 40,
             child: Material(
               color: Theme.of(context).primaryColor,

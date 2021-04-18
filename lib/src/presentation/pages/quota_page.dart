@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/presentation/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets.dart';
 import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class QuotaPage extends StatefulWidget {
   const QuotaPage({Key? key}) : super(key: key);
@@ -29,53 +30,79 @@ class _QuotaPageState extends State<QuotaPage> {
               onRefresh: () async {
                 context.read<QuotaBloc>().add(QuotaInitialized());
               },
-              child: ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 30, bottom: 9, left: 18, right: 18),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: QuotaGraph(
-                            quota: state.quota,
-                          ),
+              child: Scrollbar(
+                child: ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  children: [
+                    Center(
+                      child: Container(
+                        width: getValueForScreenType<double>(
+                          context: context,
+                          mobile: MediaQuery.of(context).size.width,
+                          tablet: MediaQuery.of(context).size.width * 0.5,
                         ),
-                      ],
+                        padding: const EdgeInsets.only(
+                          top: 30,
+                          bottom: 9,
+                          left: 18,
+                          right: 18,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Center(
+                              child: QuotaGraph(
+                                quota: state.quota,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           }
           if (state is QuotaLoadedFailure) {
-            return ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 30, bottom: 9, left: 18, right: 18),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(state.error),
-                      Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: GestionUhDefaultButton(
-                          text: 'Reintentar',
-                          onPressed: () {
-                            context.read<QuotaBloc>().add(
-                                  QuotaInitialized(),
-                                );
-                          },
-                        ),
+            return Scrollbar(
+              child: ListView(
+                children: [
+                  Center(
+                    child: Container(
+                      width: getValueForScreenType<double>(
+                        context: context,
+                        mobile: MediaQuery.of(context).size.width,
+                        tablet: MediaQuery.of(context).size.width * 0.5,
                       ),
-                    ],
+                      padding: const EdgeInsets.only(
+                        top: 30,
+                        bottom: 9,
+                        left: 18,
+                        right: 18,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(state.error),
+                          Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: GestionUhDefaultButton(
+                              text: 'Reintentar',
+                              onPressed: () {
+                                context.read<QuotaBloc>().add(
+                                      QuotaInitialized(),
+                                    );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           }
           return Center(

@@ -42,3 +42,5 @@ app.*.map.json
 
 # Openapi java generator
 openapi/openapi-generator-cli.jar
+
+windows
