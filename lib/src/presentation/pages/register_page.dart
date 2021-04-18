@@ -118,7 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   .add(QuestionsRequestedRegister()),
             );
           } else if (state is RegisterUserSuccess) {
-            FlashHelper.infoBar(context,
+            FlashHelper.successBar(context,
                 message: 'El usuario fue registrado correctamente.');
           }
         },

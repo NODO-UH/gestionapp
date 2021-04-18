@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:collection';
-import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flash/flash.dart';
@@ -419,9 +418,7 @@ class FlashHelper {
             scrollController.addListener(() {
               final maxScroll = scrollController.position.maxScrollExtent;
               final currentScroll = scrollController.position.pixels;
-              log('scrolled, $currentScroll de $maxScroll');
               if (!acceptAvailable && maxScroll == currentScroll) {
-                log('available accept');
                 setState(() {
                   acceptAvailable = true;
                 });
@@ -432,7 +429,6 @@ class FlashHelper {
               if (!acceptAvailable &&
                   scrollController.position.pixels ==
                       scrollController.position.maxScrollExtent) {
-                log('available accept');
                 setState(() {
                   acceptAvailable = true;
                 });

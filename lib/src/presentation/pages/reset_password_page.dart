@@ -44,7 +44,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               FlashHelper.errorBar(context, message: state.error);
             }
             if (state is ResetPasswordSuccess) {
-              FlashHelper.infoBar(context,
+              FlashHelper.successBar(context,
                   message: 'La contraseña ha sido actualizada correctamente.');
             }
           },
@@ -173,9 +173,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       final String currentPassword = _passwordCurrentController.text;
       final String passwordFirst = _passwordFirstController.text;
       final String passwordSecond = _passwordSecondController.text;
-      log('Current Password $currentPassword');
-      log('Password 1 $passwordFirst');
-      log('Password 2 $passwordSecond');
       context.read<ResetPasswordBloc>().add(
             ResetPasswordAttempted(
               currentPassword: currentPassword,
