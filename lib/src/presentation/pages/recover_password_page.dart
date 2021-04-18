@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
 import 'package:gestionuh/src/presentation/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets.dart';
 import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
 import 'package:gestionuh/src/utils/validators.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 class RecoverPasswordPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();

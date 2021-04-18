@@ -6,8 +6,8 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:gestionuh/src/utils/constants/messages.dart';
 import 'package:gestionuh/src/presentation/widgets/buttons/default_button.dart';
+import 'package:gestionuh/src/utils/constants/messages.dart';
 
 class _MessageItem<T> {
   final String message;
