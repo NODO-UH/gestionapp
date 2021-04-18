@@ -1,8 +1,6 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_builder/responsive_builder.dart';
-
 import 'package:gestionuh/src/presentation/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets.dart';
 import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
@@ -10,6 +8,7 @@ import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
 import 'package:gestionuh/src/utils/constants.dart';
 import 'package:gestionuh/src/utils/pair.dart';
 import 'package:gestionuh/src/utils/validators.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -178,10 +177,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             controller: passwordFirstController,
                             validator: safetyPasswordValidator,
                             keyboardType: TextInputType.visiblePassword,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                            ),
                           ),
                           const SizedBox(
                             height: 15,
@@ -194,10 +189,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             controller: passwordSecondController,
                             validator: safetyPasswordValidator,
                             keyboardType: TextInputType.visiblePassword,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                            ),
                           ),
                           const SizedBox(height: 60),
                           const Divider(
