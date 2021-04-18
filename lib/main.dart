@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/app.dart';
-import 'package:gestionuh/src/data/repository/auth_repository.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
 import 'package:gestionuh/src/dependencies.dart';
 import 'package:gestionuh/src/utils/configurations/configure_nonweb.dart'
     if (dart.library.html) 'package:gestionuh/src/utils/configurations/configure_web.dart';
