@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_builder/responsive_builder.dart';
-
-import 'package:gestionuh/src/utils/validators.dart';
 import 'package:gestionuh/src/presentation/blocs/reset_password_bloc/resetpassword_bloc.dart';
-import 'package:gestionuh/src/presentation/widgets.dart';
 import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
 import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
+import 'package:gestionuh/src/presentation/widgets/widgets.dart';
+import 'package:gestionuh/src/utils/validators.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
@@ -103,10 +102,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                 validator: safetyPasswordValidator,
                                 autovalidateMode: AutovalidateMode.disabled,
                                 keyboardType: TextInputType.visiblePassword,
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
                               ),
                             ),
                             const SizedBox(
@@ -124,10 +119,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                 validator: safetyPasswordValidator,
                                 autovalidateMode: AutovalidateMode.disabled,
                                 keyboardType: TextInputType.visiblePassword,
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
                               ),
                             ),
 
@@ -141,10 +132,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                 validator: safetyPasswordValidator,
                                 autovalidateMode: AutovalidateMode.disabled,
                                 keyboardType: TextInputType.visiblePassword,
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
                               ),
                             ),
                           ],

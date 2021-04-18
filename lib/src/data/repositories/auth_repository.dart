@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:gestionuh/src/data/api/api.dart';
 import 'package:gestionuh/src/data/local/local_storage.dart';
-import 'package:gestionuh/src/data/models.dart';
+import 'package:gestionuh/src/data/models/models.dart';
 import 'package:gestionuh/src/data/models/status.dart';
 import 'package:gestionuh/src/utils/constants/storage_keys.dart';
 

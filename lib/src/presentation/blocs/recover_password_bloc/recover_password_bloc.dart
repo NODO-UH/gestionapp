@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:gestionuh/src/data/models/models.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 import 'package:meta/meta.dart';
-
-import 'package:gestionuh/src/data/models.dart';
-import 'package:gestionuh/src/data/repository.dart';
-import 'package:gestionuh/src/utils/constants.dart';
 
 part 'recover_password_event.dart';
 part 'recover_password_state.dart';

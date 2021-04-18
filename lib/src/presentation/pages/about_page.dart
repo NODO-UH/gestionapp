@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
+import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
+import 'package:gestionuh/src/presentation/widgets/widgets.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
+import 'package:get_it/get_it.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'package:gestionuh/deps_injector.dart';
-import 'package:gestionuh/src/data/repository.dart';
-import 'package:gestionuh/src/presentation/widgets.dart';
-import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
-import 'package:gestionuh/src/utils/constants.dart';
 
 class AboutInformationPage extends StatelessWidget {
   const AboutInformationPage({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class AboutInformationPage extends StatelessWidget {
       bottomSheet: Center(
         heightFactor: 1,
         child: FutureBuilder<String>(
-          future: di<VersionRepository>().getVersion(),
+          future: GetIt.I<VersionRepository>().getVersion(),
           builder: (context, snapshot) {
             final textSpans = [
               TextSpan(text: '\u00a9 ${DateTime.now().year}'),

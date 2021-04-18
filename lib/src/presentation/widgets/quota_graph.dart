@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:gestionuh/src/data/models.dart';
+import 'package:gestionuh/src/data/models/models.dart';
 
 class QuotaGraph extends StatelessWidget {
   final Quota quota;

@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:gestionuh/src/data/repository.dart';
-import 'package:gestionuh/src/utils/constants.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:gestionuh/src/data/models/password_edit_data.dart';
-import 'package:gestionuh/src/data/repository/auth_repository/auth_repository.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';

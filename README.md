@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-    A UH managment app.
+    Aplicación para la gestión electrónica en la Universidad de La Habana.
 </p>
 
 <p align="center">
@@ -23,3 +23,26 @@
 </p>
 
 <hr>
+
+### Principales funcionalidades
+
+- Creación del perfil.
+- Consultar la cuota de Internet.
+- Consultar el espacio restante del buzón de Correo.
+
+### Desarrolladores
+
+- Nodo Central de Red - UH
+    1. Jesús Luis Guerrero Campins - Infraestructura y Conectividad
+    2. [Máximo Alejandro Alfonso Fernández - Infraestructura y Conectividad](https://github.com/maximoalejandro)
+    3. [Andy González Peña - Infraestructura y Conectividad](https://github.com/andyglez)
+    4. [Juan Jose Roque Cires - Desarrollador de Servicios](https://github.com/jr638091)
+    5. [Christian Rodriguez Diaz - Desarrollador de Servicios](https://github.com/WrathXL)
+- Grupo de Redes y Sistemas - UH
+    1. [Adrian Tubal Páez Ruiz - Desarrollador de Servicios](https://github.com/stdevAdrianPaez)
+    2. [Marcos Antonio Maceo Reyes - Desarrollador de Servicios](https://github.com/stdevMac)
+    3. [Roberto Marti Cedeño - Desarrollador](https://github.com/rmarticedeno)
+- Facultad de Matemática y Computación - UH
+    1. [Carlos Bermúdez Porto - Desarrollador](https://github.com/cbermudez97)
+    2. [Leonel Alejandro García López - Desarrollador](https://github.com/lagcleaner)
+    3. [Leynier Gutiérrez González - Desarrollador](https://github.com/leynier)

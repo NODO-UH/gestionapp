@@ -2,9 +2,8 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:gestionuh/src/utils/constants.dart';
 
 abstract class ILocalStorage {
   //Account-Credentials

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
-import 'package:gestionuh/deps_injector.dart';
-import 'package:gestionuh/src/data/repository.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
 import 'package:gestionuh/src/utils/constants/routes.dart';
+import 'package:get_it/get_it.dart';
 
 class DefaultDrawer extends Drawer {
   @override
   Widget build(BuildContext context) {
-    final authRepo = di<AuthRepository>();
+    final authRepo = GetIt.I<AuthRepository>();
     return Drawer(
       key: key ?? UniqueKey(),
       child: ListView(
@@ -25,7 +24,10 @@ class DefaultDrawer extends Drawer {
             onTap: () {
               Navigator.of(context)
                 ..pop()
-                ..pushReplacementNamed(PROFILE_ROUTE_NAME);
+                ..pushNamedAndRemoveUntil(
+                  PROFILE_ROUTE_NAME,
+                  (route) => false,
+                );
             },
           ),
           _buildDrawerItem(
@@ -35,7 +37,10 @@ class DefaultDrawer extends Drawer {
             onTap: () {
               Navigator.of(context)
                 ..pop()
-                ..pushReplacementNamed(QUOTA_ROUTE_NAME);
+                ..pushNamedAndRemoveUntil(
+                  QUOTA_ROUTE_NAME,
+                  (route) => false,
+                );
             },
           ),
           _buildDrawerItem(
@@ -45,7 +50,10 @@ class DefaultDrawer extends Drawer {
               onTap: () {
                 Navigator.of(context)
                   ..pop()
-                  ..pushReplacementNamed(MAIL_ROUTE_NAME);
+                  ..pushNamedAndRemoveUntil(
+                    MAIL_ROUTE_NAME,
+                    (route) => false,
+                  );
               }),
           _buildDrawerItem(
             context: context,
@@ -53,12 +61,11 @@ class DefaultDrawer extends Drawer {
             icon: Icons.security_rounded,
             onTap: () {
               Navigator.of(context)
-                ..popUntil(
-                  (route) {
-                    return !(route as MaterialPageRoute).canPop;
-                  },
-                )
-                ..pushReplacementNamed(RESET_PASSWORD_ROUTE_NAME);
+                ..pop()
+                ..pushNamedAndRemoveUntil(
+                  RESET_PASSWORD_ROUTE_NAME,
+                  (route) => false,
+                );
             },
           ),
           _buildDrawerItem(
@@ -66,14 +73,35 @@ class DefaultDrawer extends Drawer {
             text: 'Cerrar Sesión',
             icon: Icons.logout,
             onTap: () async {
-              await authRepo.logout();
-              Navigator.of(context)
-                ..popUntil(
-                  (route) {
-                    return !(route as MaterialPageRoute).canPop;
-                  },
-                )
-                ..pushReplacementNamed(LOGIN_ROUTE_NAME);
+              Navigator.of(context).pop();
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content:
+                          const Text('¿Está seguro que desea cerrar sesión?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () async {
+                            await authRepo.logout();
+                            Navigator.of(context)
+                              ..pop()
+                              ..pushNamedAndRemoveUntil(
+                                LOGIN_ROUTE_NAME,
+                                (route) => false,
+                              );
+                          },
+                          child: const Text('Si'),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('No'),
+                        ),
+                      ],
+                    );
+                  });
             },
           ),
           const Divider(),
@@ -83,12 +111,11 @@ class DefaultDrawer extends Drawer {
             icon: Icons.info_outline_rounded,
             onTap: () {
               Navigator.of(context)
-                ..popUntil(
-                  (route) {
-                    return !(route as MaterialPageRoute).canPop;
-                  },
-                )
-                ..pushReplacementNamed(ABOUT_ROUTE_NAME);
+                ..pop()
+                ..pushNamedAndRemoveUntil(
+                  ABOUT_ROUTE_NAME,
+                  (route) => false,
+                );
             },
           ),
         ],
