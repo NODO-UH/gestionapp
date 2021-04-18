@@ -34,10 +34,10 @@
 
 - Nodo Central de Red - UH
     1. Jesús Luis Guerrero Campins - Infraestructura y Conectividad
-    2. Máximo Alejandro Alfonso Fernández - Infraestructura y Conectividad
-    3. Andy González Peña - Infraestructura y Conectividad
-    4. Juan Jose Roque Cires - Desarrollador de Servicios
-    5. Christian Rodriguez Diaz - Desarrollador de Servicios
+    2. [Máximo Alejandro Alfonso Fernández - Infraestructura y Conectividad](https://github.com/maximoalejandro)
+    3. [Andy González Peña - Infraestructura y Conectividad](https://github.com/andyglez)
+    4. [Juan Jose Roque Cires - Desarrollador de Servicios](https://github.com/jr638091)
+    5. [Christian Rodriguez Diaz - Desarrollador de Servicios](https://github.com/WrathXL)
 - Grupo de Redes y Sistemas - UH
     1. [Adrian Tubal Páez Ruiz - Desarrollador de Servicios](https://github.com/stdevAdrianPaez)
     2. [Marcos Antonio Maceo Reyes - Desarrollador de Servicios](https://github.com/stdevMac)
