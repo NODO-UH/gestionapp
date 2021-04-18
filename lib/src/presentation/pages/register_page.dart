@@ -229,33 +229,24 @@ class _RegisterPageState extends State<RegisterPage> {
                               );
                             },
                           ),
-                          TextButton(
-                            onPressed: _showTermsAndConditionsDialog,
-                            child: Row(
-                              children: [
-                                Checkbox(
-                                  value: termsAccepted,
-                                  activeColor: Theme.of(context).primaryColor,
-                                  // ignore: avoid_returning_null_for_void
-                                  onChanged: (value) =>
-                                      _showTermsAndConditionsDialog(),
-                                ),
-                                Text(
-                                  'TÉRMINOS Y CONDICIONES DE USO',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.fade,
-                                  softWrap: true,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle2
-                                      ?.copyWith(
-                                          color:
-                                              Theme.of(context).primaryColor),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 10),
+                          CheckboxListTile(
+                              controlAffinity: ListTileControlAffinity.leading,
+                              dense: true,
+                              activeColor: Theme.of(context).primaryColor,
+                              value: termsAccepted,
+                              title: Text(
+                                'ACEPTO LOS TÉRMINOS Y CONDICIONES',
+                                overflow: TextOverflow.fade,
+                                softWrap: true,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2
+                                    ?.copyWith(
+                                        color: Theme.of(context).primaryColor),
+                              ),
+                              onChanged: (value) =>
+                                  _showTermsAndConditionsDialog()),
+                          const SizedBox(height: 15),
                           GestionUhDefaultButton(
                             text: 'Finalizar',
                             onPressed: termsAccepted ? _onRegisterAction : null,
