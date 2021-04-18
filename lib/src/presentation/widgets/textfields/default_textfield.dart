@@ -62,7 +62,7 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
       children: [
         Expanded(
           child: SizedBox(
-            height: 40,
+            // height: 40,
             child: TextFormField(
               validator: widget.validator,
               inputFormatters: widget.inputFormatters ?? [],
@@ -128,7 +128,7 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
         ),
         if (widget.keyboardType == TextInputType.visiblePassword)
           SizedBox(
-            height: 40,
+            // height: 40,
             width: 40,
             child: Material(
               color: Theme.of(context).primaryColor,
