@@ -17,6 +17,7 @@ class ResetPasswordPage extends StatefulWidget {
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
+  final _passwordCurrentController = TextEditingController();
   final _passwordFirstController = TextEditingController();
   final _passwordSecondController = TextEditingController();
   final _formPasswordKey = GlobalKey<FormState>();
@@ -63,10 +64,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     children: [
                       // Hints Area
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 5.0,
-                          vertical: 16.0,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: RichText(
                           text: TextSpan(
                               style: Theme.of(context)
@@ -78,22 +76,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                   text: 'Su nueva contraseña debe tener:\n',
                                   style: Theme.of(context).textTheme.headline6,
                                 ),
-                                const TextSpan(
-                                  text: '(1) Más de 8 caracteres.\n',
-                                ),
-                                const TextSpan(
-                                  text: '(2) Al menos una minúscula.\n',
-                                ),
-                                const TextSpan(
-                                  text: '(3) Al menos una mayúscula.\n',
-                                ),
-                                const TextSpan(
-                                  text:
-                                      '(4) Al menos un caracter especial, Ej. !\$@+.\n',
-                                ),
-                                const TextSpan(
-                                  text: '(5) Al menos un número.\n',
-                                ),
+                                ...const <String>[
+                                  '(1) Más de 8 caracteres.',
+                                  '(2) Al menos una minúscula.',
+                                  '(3) Al menos una mayúscula.',
+                                  '(4) Al menos un caracter especial, Ej. !\$@+.',
+                                  '(5) Al menos un número.',
+                                ].map((e) => TextSpan(text: '$e\n')),
                               ]),
                         ),
                       ),
@@ -104,12 +93,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
+                            // Current password input
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 8.0),
                               child: GestionUhDefaultTextField(
-                                labelText: 'Contraseña*',
-                                controller: _passwordFirstController,
+                                labelText: 'Contraseña Actual',
+                                hintText: '********',
+                                controller: _passwordCurrentController,
                                 validator: safetyPasswordValidator,
                                 autovalidateMode: AutovalidateMode.disabled,
                                 keyboardType: TextInputType.visiblePassword,
@@ -120,13 +111,33 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               ),
                             ),
                             const SizedBox(
-                              height: 10,
+                                height: 30,
+                                child: Divider(
+                                  color: Colors.black54,
+                                )),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: GestionUhDefaultTextField(
+                                labelText: 'Contraseña Nueva*',
+                                hintText: '********',
+                                controller: _passwordFirstController,
+                                validator: safetyPasswordValidator,
+                                autovalidateMode: AutovalidateMode.disabled,
+                                keyboardType: TextInputType.visiblePassword,
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                ),
+                              ),
                             ),
+
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 8.0),
                               child: GestionUhDefaultTextField(
                                 labelText: 'Repetir Contraseña*',
+                                hintText: '********',
                                 controller: _passwordSecondController,
                                 validator: safetyPasswordValidator,
                                 autovalidateMode: AutovalidateMode.disabled,
@@ -140,15 +151,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 25,
-                      ),
+                      const SizedBox(height: 25),
                       GestionUhDefaultButton(
                         text: 'Actualizar Contraseña',
                         onPressed: state is ResetPasswordInProgress
                             ? null
                             : () => _resetPassword(context),
                       ),
+                      const SizedBox(height: 30)
                     ],
                   ),
                 ),
@@ -160,13 +170,18 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   void _resetPassword(BuildContext context) {
     if (_formPasswordKey.currentState!.validate()) {
+      final String currentPassword = _passwordCurrentController.text;
       final String passwordFirst = _passwordFirstController.text;
       final String passwordSecond = _passwordSecondController.text;
+      log('Current Password $currentPassword');
       log('Password 1 $passwordFirst');
       log('Password 2 $passwordSecond');
       context.read<ResetPasswordBloc>().add(
             ResetPasswordAttempted(
-                passwordFirst: passwordFirst, passwordSecond: passwordSecond),
+              currentPassword: currentPassword,
+              passwordFirst: passwordFirst,
+              passwordSecond: passwordSecond,
+            ),
           );
     }
   }

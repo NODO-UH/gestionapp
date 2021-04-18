@@ -110,8 +110,9 @@ class _RegisterPageState extends State<RegisterPage> {
           if (state is RegisterUserFailure) {
             FlashHelper.errorBar(context, message: state.error);
           } else if (state is LoadInitialDataFailure) {
+            await FlashHelper.errorBar(context, message: state.error);
             Future.delayed(
-              const Duration(seconds: 2),
+              const Duration(seconds: 1),
               () => context
                   .read<RegisterBloc>()
                   .add(QuestionsRequestedRegister()),

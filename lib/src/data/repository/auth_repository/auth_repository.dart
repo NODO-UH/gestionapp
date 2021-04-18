@@ -59,9 +59,10 @@ class AuthRepository {
     await localStorage.invalidateCredentials();
   }
 
-  Future<Status> resetPassword(String password) async {
+  Future<Status> resetPassword(
+      String currentPassword, String newPassword) async {
     try {
-      final status = await api.resetPassword(password);
+      final status = await api.resetPassword(currentPassword, newPassword);
       if (status.status == false) {
         return status;
       }
@@ -69,14 +70,15 @@ class AuthRepository {
       final credentials = await localStorage.getCredentials();
 
       if (credentials == null) {
-        throw Exception('Credentials is null.');
+        return Status()..error = 'Cierre sesión, por favor';
+        // exception ---> 'Credentials is null.';
       }
 
       // save new password
-      api.setLogin(credentials[USER_NAME] as String, password);
+      api.setLogin(credentials[USER_NAME] as String, newPassword);
       localStorage.updateCredentials(
         userName: credentials[USER_NAME] as String,
-        password: password,
+        password: newPassword,
         persist: credentials[USER_REMEMBERME] as bool,
       );
 

@@ -29,7 +29,10 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       yield const ResetPasswordInitial(error: 'Las contraseñas no coinciden.');
       return;
     }
-    final status = await authRepository.resetPassword(event.passwordFirst);
+    final status = await authRepository.resetPassword(
+      event.currentPassword,
+      event.passwordFirst,
+    );
     if (status.status ?? false) {
       yield ResetPasswordSuccess();
     } else {
