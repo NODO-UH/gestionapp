@@ -427,6 +427,18 @@ class FlashHelper {
                 });
               }
             });
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              // in case that there is no need to scroll
+              if (!acceptAvailable &&
+                  scrollController.position.pixels ==
+                      scrollController.position.maxScrollExtent) {
+                log('available accept');
+                setState(() {
+                  acceptAvailable = true;
+                });
+              }
+            });
+
             return SafeArea(
               child: Flash<bool>.dialog(
                 controller: controller,
