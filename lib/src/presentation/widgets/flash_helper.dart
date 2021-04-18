@@ -1,9 +1,14 @@
 import 'dart:async';
 import 'dart:collection';
+import 'dart:developer';
+import 'dart:ui';
 
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:gestionuh/src/utils/constants/messages.dart';
+import 'package:gestionuh/src/presentation/widgets/buttons/default_button.dart';
 
 class _MessageItem<T> {
   final String message;
@@ -394,6 +399,124 @@ class FlashHelper {
               ),
             ),
           ),
+        );
+      },
+    );
+  }
+
+  static Future<bool?> aceptDeclineDialog(BuildContext context) {
+    bool acceptAvailable = false;
+    final scrollController = ScrollController();
+    return showFlash<bool>(
+      context: context,
+      persistent: false,
+      onWillPop: () async => false,
+      builder: (context, controller) {
+        final theme = Theme.of(context);
+
+        return StatefulBuilder(
+          builder: (context, setState) {
+            scrollController.addListener(() {
+              final maxScroll = scrollController.position.maxScrollExtent;
+              final currentScroll = scrollController.position.pixels;
+              log('scrolled, $currentScroll de $maxScroll');
+              if (!acceptAvailable && maxScroll == currentScroll) {
+                log('available accept');
+                setState(() {
+                  acceptAvailable = true;
+                });
+              }
+            });
+            return SafeArea(
+              child: Flash<bool>.dialog(
+                controller: controller,
+                borderWidth: 3,
+                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                child: FlashBar(
+                  title: Text(TERMS_AND_CONDITIONS_OF_USE_TITLE,
+                      style: theme.textTheme.headline6?.copyWith(
+                          fontSize: 20.0, color: theme.primaryColor)),
+                  message: Container(
+                    padding: const EdgeInsets.all(3),
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8)),
+                        boxShadow: [
+                          BoxShadow(
+                              color: theme.primaryColor.withOpacity(0.05),
+                              blurRadius: 1)
+                        ]),
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width - 400,
+                      maxHeight: MediaQuery.of(context).size.height / 2,
+                    ),
+                    child: Stack(
+                      children: [
+                        SingleChildScrollView(
+                          controller: scrollController,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(TERMS_AND_CONDITIONS_OF_USE_SUBTITLE,
+                                  style: theme.textTheme.bodyText1
+                                      ?.copyWith(color: theme.primaryColor)),
+                              Text(TERMS_AND_CONDITIONS_OF_USE_ENUM_TERMS,
+                                  style: theme.textTheme.bodyText2),
+                            ],
+                          ),
+                        ),
+                        if (!acceptAvailable)
+                          Positioned(
+                              bottom: 10,
+                              right: 1,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(100))),
+                                ),
+                                onPressed: () {
+                                  scrollController.animateTo(
+                                    scrollController.position.maxScrollExtent,
+                                    curve: Curves.easeOut,
+                                    duration: const Duration(milliseconds: 300),
+                                  );
+                                },
+                                child: const Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: Colors.black45,
+                                  size: 30,
+                                ),
+                              )),
+                      ],
+                    ),
+                  ),
+                  leftBarIndicatorColor: theme.primaryColor,
+                  actions: [
+                    GestionUhDefaultButton(
+                      isSecundary: true,
+                      onPressed: () {
+                        scrollController.dispose();
+                        controller.dismiss(false);
+                      },
+                      text: 'No Acepto',
+                      // child: const Text('No acepto'),
+                    ),
+                    GestionUhDefaultButton(
+                      onPressed: acceptAvailable
+                          ? () {
+                              scrollController.dispose();
+                              controller.dismiss(true);
+                            }
+                          : null,
+                      text: 'Acepto',
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         );
       },
     );
