@@ -449,6 +449,7 @@ class FlashHelper {
                       style: theme.textTheme.headline6?.copyWith(
                           fontSize: 20.0, color: theme.primaryColor)),
                   message: Container(
+                    height: MediaQuery.of(context).size.height * 0.58,
                     padding: const EdgeInsets.all(3),
                     decoration: BoxDecoration(
                         borderRadius:
@@ -458,10 +459,6 @@ class FlashHelper {
                               color: theme.primaryColor.withOpacity(0.05),
                               blurRadius: 1)
                         ]),
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width - 400,
-                      maxHeight: MediaQuery.of(context).size.height / 2,
-                    ),
                     child: Stack(
                       children: [
                         SingleChildScrollView(
