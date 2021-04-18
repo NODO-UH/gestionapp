@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:gestionuh/deps_injector.dart';
 import 'package:gestionuh/src/data/repository.dart';
 import 'package:gestionuh/src/presentation/widgets.dart';
 import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
 import 'package:gestionuh/src/utils/constants.dart';
-import 'package:responsive_builder/responsive_builder.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AboutInformationPage extends StatelessWidget {
   const AboutInformationPage({Key? key}) : super(key: key);

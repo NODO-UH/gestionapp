@@ -1,15 +1,15 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
-import 'package:gestionuh/src/utils/constants.dart';
-import 'package:gestionuh/src/utils/pair.dart';
-import 'package:gestionuh/src/utils/validators.dart';
 import 'package:gestionuh/src/presentation/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets.dart';
 import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
 import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+import 'package:gestionuh/src/utils/constants.dart';
+import 'package:gestionuh/src/utils/pair.dart';
+import 'package:gestionuh/src/utils/validators.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -118,7 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   .add(QuestionsRequestedRegister()),
             );
           } else if (state is RegisterUserSuccess) {
-            FlashHelper.infoBar(context,
+            FlashHelper.successBar(context,
                 message: 'El usuario fue registrado correctamente.');
           }
         },
@@ -229,33 +229,24 @@ class _RegisterPageState extends State<RegisterPage> {
                               );
                             },
                           ),
-                          TextButton(
-                            onPressed: _showTermsAndConditionsDialog,
-                            child: Row(
-                              children: [
-                                Checkbox(
-                                  value: termsAccepted,
-                                  activeColor: Theme.of(context).primaryColor,
-                                  // ignore: avoid_returning_null_for_void
-                                  onChanged: (value) =>
-                                      _showTermsAndConditionsDialog(),
-                                ),
-                                Text(
-                                  'TÉRMINOS Y CONDICIONES DE USO',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.fade,
-                                  softWrap: true,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle2
-                                      ?.copyWith(
-                                          color:
-                                              Theme.of(context).primaryColor),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 10),
+                          CheckboxListTile(
+                              controlAffinity: ListTileControlAffinity.leading,
+                              dense: true,
+                              activeColor: Theme.of(context).primaryColor,
+                              value: termsAccepted,
+                              title: Text(
+                                'ACEPTO LOS TÉRMINOS Y CONDICIONES',
+                                overflow: TextOverflow.fade,
+                                softWrap: true,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2
+                                    ?.copyWith(
+                                        color: Theme.of(context).primaryColor),
+                              ),
+                              onChanged: (value) =>
+                                  _showTermsAndConditionsDialog()),
+                          const SizedBox(height: 15),
                           GestionUhDefaultButton(
                             text: 'Finalizar',
                             onPressed: termsAccepted ? _onRegisterAction : null,

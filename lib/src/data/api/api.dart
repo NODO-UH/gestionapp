@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+
 import 'package:gestionuh/src/data/models.dart';
 import 'package:gestionuh/src/utils/constants.dart';
 
@@ -27,7 +28,7 @@ class GestionApi {
     final Auth response = Auth();
 
     if (userName == null || password == null) {
-      response.error = 'Missing User Name or Password';
+      response.error = 'Missing User Name or Password'; // dead code
       return response;
     }
 

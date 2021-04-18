@@ -1,5 +1,6 @@
-import 'package:gestionuh/src/data/models/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'package:gestionuh/src/data/models/base_model.dart';
 
 part 'security_questions.g.dart';
 

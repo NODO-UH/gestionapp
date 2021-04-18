@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
 import 'package:gestionuh/deps_injector.dart';
 import 'package:gestionuh/src/data/local/local_storage.dart';
 import 'package:gestionuh/src/data/repository.dart';
@@ -8,7 +10,6 @@ import 'package:gestionuh/src/presentation/widgets.dart';
 import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
 import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
 import 'package:gestionuh/src/utils/constants/routes.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

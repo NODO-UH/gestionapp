@@ -1,14 +1,13 @@
 import 'dart:async';
 import 'dart:collection';
-import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:gestionuh/src/utils/constants/messages.dart';
 import 'package:gestionuh/src/presentation/widgets/buttons/default_button.dart';
+import 'package:gestionuh/src/utils/constants/messages.dart';
 
 class _MessageItem<T> {
   final String message;
@@ -419,14 +418,23 @@ class FlashHelper {
             scrollController.addListener(() {
               final maxScroll = scrollController.position.maxScrollExtent;
               final currentScroll = scrollController.position.pixels;
-              log('scrolled, $currentScroll de $maxScroll');
               if (!acceptAvailable && maxScroll == currentScroll) {
-                log('available accept');
                 setState(() {
                   acceptAvailable = true;
                 });
               }
             });
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              // in case that there is no need to scroll
+              if (!acceptAvailable &&
+                  scrollController.position.pixels ==
+                      scrollController.position.maxScrollExtent) {
+                setState(() {
+                  acceptAvailable = true;
+                });
+              }
+            });
+
             return SafeArea(
               child: Flash<bool>.dialog(
                 controller: controller,
@@ -437,6 +445,7 @@ class FlashHelper {
                       style: theme.textTheme.headline6?.copyWith(
                           fontSize: 20.0, color: theme.primaryColor)),
                   message: Container(
+                    height: MediaQuery.of(context).size.height * 0.58,
                     padding: const EdgeInsets.all(3),
                     decoration: BoxDecoration(
                         borderRadius:
@@ -446,10 +455,6 @@ class FlashHelper {
                               color: theme.primaryColor.withOpacity(0.05),
                               blurRadius: 1)
                         ]),
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width - 400,
-                      maxHeight: MediaQuery.of(context).size.height / 2,
-                    ),
                     child: Stack(
                       children: [
                         SingleChildScrollView(

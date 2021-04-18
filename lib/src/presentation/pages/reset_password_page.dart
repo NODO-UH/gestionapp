@@ -1,13 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
+import 'package:gestionuh/src/utils/validators.dart';
 import 'package:gestionuh/src/presentation/blocs/reset_password_bloc/resetpassword_bloc.dart';
 import 'package:gestionuh/src/presentation/widgets.dart';
 import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
 import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
-import 'package:gestionuh/src/utils/validators.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
@@ -44,7 +43,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               FlashHelper.errorBar(context, message: state.error);
             }
             if (state is ResetPasswordSuccess) {
-              FlashHelper.infoBar(context,
+              FlashHelper.successBar(context,
                   message: 'La contraseña ha sido actualizada correctamente.');
             }
           },
@@ -173,9 +172,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       final String currentPassword = _passwordCurrentController.text;
       final String passwordFirst = _passwordFirstController.text;
       final String passwordSecond = _passwordSecondController.text;
-      log('Current Password $currentPassword');
-      log('Password 1 $passwordFirst');
-      log('Password 2 $passwordSecond');
       context.read<ResetPasswordBloc>().add(
             ResetPasswordAttempted(
               currentPassword: currentPassword,
