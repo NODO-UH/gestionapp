@@ -9,6 +9,7 @@ import 'package:gestionuh/src/presentation/pages/register_page.dart';
 import 'package:gestionuh/src/presentation/theme.dart';
 import 'package:gestionuh/src/utils/constants.dart';
 import 'package:gestionuh/src/utils/constants/routes.dart';
+import 'package:page_transition/page_transition.dart';
 
 class GestionUhApp extends StatelessWidget {
   @override
@@ -23,7 +24,7 @@ class GestionUhApp extends StatelessWidget {
             final authRepo = di<AuthRepository>();
             if (authRepo.logged) {
               return _buildPage(
-                builder: (_) => BlocProvider<QuotaBloc>(
+                builder: BlocProvider<QuotaBloc>(
                   create: (_) => di()..add(QuotaInitialized()),
                   child: const QuotaPage(),
                 ),
@@ -31,7 +32,7 @@ class GestionUhApp extends StatelessWidget {
               );
             }
             return _buildPage(
-              builder: (_) => BlocProvider<LoginBloc>(
+              builder: BlocProvider<LoginBloc>(
                 create: (_) => di(),
                 child: const LoginPage(),
               ),
@@ -39,7 +40,7 @@ class GestionUhApp extends StatelessWidget {
             );
           case QUOTA_ROUTE_NAME:
             return _buildPage(
-              builder: (_) => BlocProvider<QuotaBloc>(
+              builder: BlocProvider<QuotaBloc>(
                 create: (_) => di()..add(QuotaInitialized()),
                 child: const QuotaPage(),
               ),
@@ -47,7 +48,7 @@ class GestionUhApp extends StatelessWidget {
             );
           case PROFILE_ROUTE_NAME:
             return _buildPage(
-              builder: (_) => BlocProvider<ProfileBloc>(
+              builder: BlocProvider<ProfileBloc>(
                 create: (_) => di()..add(ProfileInitialized()),
                 child: const ProfilePage(),
               ),
@@ -55,7 +56,7 @@ class GestionUhApp extends StatelessWidget {
             );
           case MAIL_ROUTE_NAME:
             return _buildPage(
-              builder: (_) => BlocProvider<MailQuotaBloc>(
+              builder: BlocProvider<MailQuotaBloc>(
                 create: (_) => di()..add(MailQuotaInitialized()),
                 child: const MailQuotaPage(),
               ),
@@ -63,7 +64,7 @@ class GestionUhApp extends StatelessWidget {
             );
           case RESET_PASSWORD_ROUTE_NAME:
             return _buildPage(
-              builder: (_) => BlocProvider<ResetPasswordBloc>(
+              builder: BlocProvider<ResetPasswordBloc>(
                 create: (_) => di(),
                 child: const ResetPasswordPage(),
               ),
@@ -71,7 +72,7 @@ class GestionUhApp extends StatelessWidget {
             );
           case REGISTER_ROUTE_NAME:
             return _buildPage(
-              builder: (_) => Overlay(
+              builder: Overlay(
                 initialEntries: [
                   OverlayEntry(builder: (context) {
                     return BlocProvider<RegisterBloc>(
@@ -85,12 +86,12 @@ class GestionUhApp extends StatelessWidget {
             );
           case ABOUT_ROUTE_NAME:
             return _buildPage(
-              builder: (_) => const AboutInformationPage(),
+              builder: const AboutInformationPage(),
               settings: settings,
             );
           case RECOVER_PASSWORD_ROUTE_NAME:
             return _buildPage(
-              builder: (_) => BlocProvider<RecoverPasswordBloc>(
+              builder: BlocProvider<RecoverPasswordBloc>(
                 create: (_) => di(),
                 child: RecoverPasswordPage(),
               ),
@@ -100,7 +101,7 @@ class GestionUhApp extends StatelessWidget {
             final authRepo = di<AuthRepository>();
             if (authRepo.logged) {
               return _buildPage(
-                builder: (_) => BlocProvider<ProfileBloc>(
+                builder: BlocProvider<ProfileBloc>(
                   create: (_) => di()..add(ProfileInitialized()),
                   child: const ProfilePage(),
                 ),
@@ -108,7 +109,7 @@ class GestionUhApp extends StatelessWidget {
               );
             }
             return _buildPage(
-              builder: (_) => BlocProvider<LoginBloc>(
+              builder: BlocProvider<LoginBloc>(
                 create: (_) => di(),
                 child: const LoginPage(),
               ),
@@ -120,12 +121,13 @@ class GestionUhApp extends StatelessWidget {
   }
 
   PageRoute _buildPage({
-    required WidgetBuilder builder,
+    required Widget builder,
     required RouteSettings settings,
   }) {
-    return MaterialPageRoute(
-      builder: builder,
+    return PageTransition(
+      child: builder,
       settings: settings,
+      type: PageTransitionType.fade,
     );
   }
 }
