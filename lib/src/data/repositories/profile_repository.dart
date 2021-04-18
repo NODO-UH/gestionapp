@@ -1,19 +1,19 @@
 import 'dart:developer';
 
 import 'package:gestionuh/src/data/api/api.dart';
-import 'package:gestionuh/src/data/models.dart';
+import 'package:gestionuh/src/data/models/models.dart';
 
-class QuotasRepository {
+class ProfileRepository {
   final GestionApi api;
 
-  QuotasRepository({
+  ProfileRepository({
     required this.api,
   });
 
-  Future<Quota?> getQuota() async {
-    Quota result;
+  Future<UserData?> getUserData() async {
+    UserData result;
     try {
-      result = await api.getQuota();
+      result = await api.getUserData();
       if (result.error != null) {
         log(result.error!);
       }

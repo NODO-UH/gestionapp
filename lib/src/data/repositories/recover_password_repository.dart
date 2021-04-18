@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:gestionuh/src/data/api/api.dart';
-import 'package:gestionuh/src/data/models.dart';
+import 'package:gestionuh/src/data/models/models.dart';
 
 class RecoverPasswordRepository {
   final GestionApi api;

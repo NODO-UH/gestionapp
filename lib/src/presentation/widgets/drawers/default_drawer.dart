@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gestionuh/deps_injector.dart';
-import 'package:gestionuh/src/data/repository.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
 import 'package:gestionuh/src/utils/constants/routes.dart';
+import 'package:get_it/get_it.dart';
 
 class DefaultDrawer extends Drawer {
   @override
   Widget build(BuildContext context) {
-    final authRepo = di<AuthRepository>();
+    final authRepo = GetIt.I<AuthRepository>();
     return Drawer(
       key: key ?? UniqueKey(),
       child: ListView(

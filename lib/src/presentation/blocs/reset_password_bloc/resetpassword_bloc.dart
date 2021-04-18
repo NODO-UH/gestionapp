@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-
-import 'package:gestionuh/src/data/repository.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
 
 part 'resetpassword_event.dart';
 part 'resetpassword_state.dart';

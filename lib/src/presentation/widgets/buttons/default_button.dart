@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:gestionuh/src/presentation/theme.dart';
+import 'package:gestionuh/src/presentation/theme/theme.dart';
 
 class GestionUhDefaultButton extends StatelessWidget {
   final Widget? child;

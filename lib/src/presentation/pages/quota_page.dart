@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_builder/responsive_builder.dart';
-
-import 'package:gestionuh/src/presentation/blocs.dart';
-import 'package:gestionuh/src/presentation/widgets.dart';
+import 'package:gestionuh/src/presentation/blocs/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
+import 'package:gestionuh/src/presentation/widgets/widgets.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class QuotaPage extends StatefulWidget {
   const QuotaPage({Key? key}) : super(key: key);

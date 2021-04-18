@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestionuh/deps_injector.dart';
 import 'package:gestionuh/src/data/local/local_storage.dart';
-import 'package:gestionuh/src/data/repository.dart';
-import 'package:gestionuh/src/presentation/blocs.dart';
-import 'package:gestionuh/src/presentation/widgets.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
+import 'package:gestionuh/src/presentation/blocs/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
 import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
+import 'package:gestionuh/src/presentation/widgets/widgets.dart';
 import 'package:gestionuh/src/utils/constants/routes.dart';
+import 'package:get_it/get_it.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class LoginPage extends StatefulWidget {
@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final authRepo = di<AuthRepository>();
+    final authRepo = GetIt.I<AuthRepository>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Iniciar Sesión'),
@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(
                           height: 20,
                         ),
-                        if (di<ILocalStorage>().isSecureStorageAvailable)
+                        if (GetIt.I<ILocalStorage>().isSecureStorageAvailable)
                           GestureDetector(
                             onTap: () =>
                                 setState(() => _rememberMe = !_rememberMe),
