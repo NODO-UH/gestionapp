@@ -138,7 +138,7 @@ class GestionApi {
     );
   }
 
-  Future<Status> resetPassword(String newPassw) async {
+  Future<Status> resetPassword(String currentPassw, String newPassw) async {
     if (Constants.testMode) return Status(status: true);
 
     Status response;
