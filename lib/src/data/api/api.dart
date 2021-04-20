@@ -252,7 +252,7 @@ class GestionApi {
         queryParameters: queryParams,
       );
     } catch (error) {
-      target.error = Errors.retrieveError(error.toString());
+      target.error = Errors.ConnectionError;
       return target;
     }
 
@@ -266,7 +266,7 @@ class GestionApi {
           target = builder(jsonDecode(response.data!) as Map<String, dynamic>);
         }
       } catch (e) {
-        target.error = e.toString();
+        target.error = Errors.DefaultError;
       }
     }
 
