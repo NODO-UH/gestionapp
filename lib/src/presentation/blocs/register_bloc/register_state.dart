@@ -1,43 +1,18 @@
 part of 'register_bloc.dart';
 
-abstract class RegisterState {
-  const RegisterState();
-}
-
-class RegisterInitial extends RegisterState {}
-
-class LoadInitialDataInProgress extends RegisterState {}
-
-class LoadInitialDataFailure extends RegisterState {
-  final String error;
-
-  const LoadInitialDataFailure({
-    required this.error,
-  });
-}
-
-class LoadInitialDataSuccess extends RegisterState {
-  final List<String> questions;
-
-  const LoadInitialDataSuccess({
-    required this.questions,
-  });
-}
-
-class RegisterUserInProgress extends RegisterState {}
-
-class RegisterUserFailure extends RegisterState {
-  final String error;
-
-  const RegisterUserFailure({
-    required this.error,
-  });
-}
-
-class RegisterUserSuccess extends RegisterState {
-  final String userEmail;
-
-  const RegisterUserSuccess({
-    required this.userEmail,
-  });
+@freezed
+abstract class RegisterState with _$RegisterState {
+  const factory RegisterState.initial() = _RegisterInitial;
+  const factory RegisterState.initialLoadInProgress() =
+      _RegisterLoadInitialDataInProgress;
+  const factory RegisterState.initialLoadFailure({required String error}) =
+      _RegisterLoadInitialDataFailure;
+  const factory RegisterState.initialLoadSuccess(
+      {required List<String> questions}) = _RegisterLoadInitialDataSuccess;
+  const factory RegisterState.registrationInProgress() =
+      _RegisterUserInProgress;
+  const factory RegisterState.registrationFailure({required String error}) =
+      _RegisterUserFailure;
+  const factory RegisterState.registrationSuccess({required String userEmail}) =
+      _RegisterUserSuccess;
 }
