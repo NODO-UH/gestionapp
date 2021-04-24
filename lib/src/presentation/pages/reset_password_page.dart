@@ -22,6 +22,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   @override
   void dispose() {
+    _passwordCurrentController.dispose();
     _passwordFirstController.dispose();
     _passwordSecondController.dispose();
     super.dispose();
@@ -38,13 +39,19 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         bottomSheet: const GestionUHBottomSheet(),
         body: BlocConsumer<ResetPasswordBloc, ResetPasswordState>(
           listener: (context, state) {
-            if (state is ResetPasswordInitial) {
-              FlashHelper.errorBar(context, message: state.error);
-            }
-            if (state is ResetPasswordSuccess) {
-              FlashHelper.successBar(context,
-                  message: 'La contraseña ha sido actualizada correctamente.');
-            }
+            state.maybeWhen(
+              success: () {
+                FlashHelper.errorBar(
+                  context,
+                  message: 'La contraseña ha sido actualizada correctamente.',
+                );
+              },
+              failure: (error) => FlashHelper.errorBar(
+                context,
+                message: error,
+              ),
+              orElse: () {},
+            );
           },
           builder: (context, state) {
             return SingleChildScrollView(
@@ -99,7 +106,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                 labelText: 'Contraseña Actual',
                                 hintText: '********',
                                 controller: _passwordCurrentController,
-                                validator: safetyPasswordValidator,
+                                validator: currentPasswordValidator,
                                 autovalidateMode: AutovalidateMode.disabled,
                                 keyboardType: TextInputType.visiblePassword,
                               ),
@@ -140,9 +147,12 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       const SizedBox(height: 25),
                       GestionUhDefaultButton(
                         text: 'Actualizar Contraseña',
-                        onPressed: state is ResetPasswordInProgress
-                            ? null
-                            : () => _resetPassword(context),
+                        onPressed: state.maybeWhen(
+                          inProgress: () => null,
+                          orElse: () {
+                            return () => _resetPassword(context);
+                          },
+                        ),
                       ),
                       const SizedBox(height: 30)
                     ],
@@ -160,7 +170,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       final String passwordFirst = _passwordFirstController.text;
       final String passwordSecond = _passwordSecondController.text;
       context.read<ResetPasswordBloc>().add(
-            ResetPasswordAttempted(
+            ResetPasswordEvent.resetPasswordAttempted(
               currentPassword: currentPassword,
               passwordFirst: passwordFirst,
               passwordSecond: passwordSecond,
