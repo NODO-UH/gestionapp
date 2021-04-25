@@ -32,8 +32,8 @@ class GestionUHBottomSheet extends StatelessWidget {
                 ),
               ]);
             }
-            return RichText(
-              text: TextSpan(
+            return SelectableText.rich(
+              TextSpan(
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1!

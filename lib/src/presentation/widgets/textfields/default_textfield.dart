@@ -12,6 +12,7 @@ class GestionUhDefaultTextField extends StatefulWidget {
   final TextStyle? style, labelStyle, hintStyle;
   final Function? onTap;
   final List<TextInputFormatter>? inputFormatters;
+  final Iterable<String>? autofillHints;
 
   const GestionUhDefaultTextField({
     Key? key,
@@ -28,6 +29,7 @@ class GestionUhDefaultTextField extends StatefulWidget {
     this.onTap,
     this.keyboardType,
     this.inputFormatters,
+    this.autofillHints,
   }) : super(key: key);
 
   @override
@@ -60,6 +62,7 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
     return TextFormField(
       validator: widget.validator,
       inputFormatters: widget.inputFormatters ?? [],
+      autofillHints: widget.autofillHints,
       autovalidateMode:
           widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
       style: widget.style ?? const TextStyle(fontSize: 17),
