@@ -7,6 +7,7 @@ import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
 import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
 import 'package:gestionuh/src/presentation/widgets/widgets.dart';
 import 'package:gestionuh/src/utils/constants/routes.dart';
+import 'package:gestionuh/src/utils/validators.dart';
 import 'package:get_it/get_it.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -21,15 +22,18 @@ class _LoginPageState extends State<LoginPage> {
   final _userNameController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _rememberMe = false;
+  final _formLoginKey = GlobalKey<FormState>();
 
   void _loginAction(BuildContext context) {
-    context.read<LoginBloc>().add(
-          LoginAttempted(
-            username: _usernameController.text,
-            password: _passwordController.text,
-            rememberMe: _rememberMe,
-          ),
-        );
+    if (_formLoginKey.currentState?.validate() ?? false) {
+      context.read<LoginBloc>().add(
+            LoginEvent.loginAttempted(
+              userName: _userNameController.text,
+              password: _passwordController.text,
+              rememberMe: _rememberMe,
+            ),
+          );
+    }
   }
 
   void _recoverAction(BuildContext context) {
@@ -108,7 +112,6 @@ class _LoginPageState extends State<LoginPage> {
                     height: 40,
                   ),
                   SizedBox(
-                    height: 40,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -116,9 +119,9 @@ class _LoginPageState extends State<LoginPage> {
                         Expanded(
                           flex: 7,
                           child: GestionUhDefaultTextField(
-                            labelText: 'Usuario',
+                            labelText: 'Nombre de Usuario',
                             controller: _userNameController,
-                            validator: null,
+                            validator: userNameValidator,
                             autovalidateMode: AutovalidateMode.disabled,
                           ),
                         ),
@@ -131,6 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                   GestionUhDefaultTextField(
                     labelText: 'Contraseña',
                     controller: _passwordController,
+                    autovalidateMode: AutovalidateMode.disabled,
+                    validator: currentPasswordValidator,
                     keyboardType: TextInputType.visiblePassword,
                   ),
                   const SizedBox(
