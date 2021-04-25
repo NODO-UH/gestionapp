@@ -30,8 +30,8 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       return;
     }
     final status = await authRepository.resetPassword(
-      event.currentPassword,
-      event.passwordFirst,
+      event.currentPassword.trim(),
+      event.passwordFirst.trim(),
     );
     if (status.status ?? false) {
       yield ResetPasswordSuccess();

@@ -14,9 +14,9 @@ class RouterNavigation {
         final authRepo = GetIt.I<AuthRepository>();
         if (authRepo.logged) {
           return _buildPage(
-            builder: BlocProvider<QuotaBloc>(
-              create: (_) => GetIt.I()..add(QuotaInitialized()),
-              child: const QuotaPage(),
+            builder: BlocProvider<HomeBloc>(
+              create: (_) => GetIt.I()..add(const HomeEvent.loadProfile()),
+              child: HomePage(),
             ),
             settings: settings,
           );
@@ -25,38 +25,6 @@ class RouterNavigation {
           builder: BlocProvider<LoginBloc>(
             create: (_) => GetIt.I(),
             child: const LoginPage(),
-          ),
-          settings: settings,
-        );
-      case QUOTA_ROUTE_NAME:
-        return _buildPage(
-          builder: BlocProvider<QuotaBloc>(
-            create: (_) => GetIt.I()..add(QuotaInitialized()),
-            child: const QuotaPage(),
-          ),
-          settings: settings,
-        );
-      case PROFILE_ROUTE_NAME:
-        return _buildPage(
-          builder: BlocProvider<ProfileBloc>(
-            create: (_) => GetIt.I()..add(ProfileInitialized()),
-            child: const ProfilePage(),
-          ),
-          settings: settings,
-        );
-      case MAIL_ROUTE_NAME:
-        return _buildPage(
-          builder: BlocProvider<MailQuotaBloc>(
-            create: (_) => GetIt.I()..add(MailQuotaInitialized()),
-            child: const MailQuotaPage(),
-          ),
-          settings: settings,
-        );
-      case RESET_PASSWORD_ROUTE_NAME:
-        return _buildPage(
-          builder: BlocProvider<ResetPasswordBloc>(
-            create: (_) => GetIt.I(),
-            child: const ResetPasswordPage(),
           ),
           settings: settings,
         );
@@ -74,11 +42,6 @@ class RouterNavigation {
           ),
           settings: settings,
         );
-      case ABOUT_ROUTE_NAME:
-        return _buildPage(
-          builder: const AboutInformationPage(),
-          settings: settings,
-        );
       case RECOVER_PASSWORD_ROUTE_NAME:
         return _buildPage(
           builder: BlocProvider<RecoverPasswordBloc>(
@@ -87,13 +50,14 @@ class RouterNavigation {
           ),
           settings: settings,
         );
+      case HOME_ROUTE_NAME:
       default:
         final authRepo = GetIt.I<AuthRepository>();
         if (authRepo.logged) {
           return _buildPage(
-            builder: BlocProvider<ProfileBloc>(
-              create: (_) => GetIt.I()..add(ProfileInitialized()),
-              child: const ProfilePage(),
+            builder: BlocProvider<HomeBloc>(
+              create: (_) => GetIt.I()..add(const HomeEvent.loadProfile()),
+              child: HomePage(),
             ),
             settings: settings,
           );

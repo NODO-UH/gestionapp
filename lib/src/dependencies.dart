@@ -64,6 +64,13 @@ class DependencyInjection {
     );
 
     // Blocs
+    I.registerFactory<HomeBloc>(
+      () => HomeBloc(
+        authRepository: I(),
+        profileRepository: I(),
+      ),
+    );
+
     I.registerFactory<LoginBloc>(
       () => LoginBloc(
         authRepository: I(),

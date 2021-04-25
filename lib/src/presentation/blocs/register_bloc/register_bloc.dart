@@ -44,9 +44,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       return;
     }
     final userId = await repository.sendRegistration(PasswordEditData(
-      answers: event.answers,
-      ci: event.ci,
-      password: event.passwordFirst,
+      answers: event.answers.map((e) => e.trim()).toList(),
+      ci: event.ci.trim(),
+      password: event.passwordFirst.trim(),
       questions: event.questions,
     ));
     if (userId.error != null) {
