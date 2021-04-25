@@ -1,7 +1,7 @@
 part of 'register_bloc.dart';
 
 @freezed
-abstract class RegisterEvent with _$RegisterEvent {
+class RegisterEvent with _$RegisterEvent {
   const factory RegisterEvent.questionsRequested() =
       _$QuestionsRequestedRegister;
   const factory RegisterEvent.formSubmitted({
