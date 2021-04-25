@@ -143,12 +143,18 @@ class __$LoadProfileCopyWithImpl<$Res> extends _$HomeEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadProfile implements _LoadProfile {
+class _$_LoadProfile with DiagnosticableTreeMixin implements _LoadProfile {
   const _$_LoadProfile();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeEvent.loadProfile()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'HomeEvent.loadProfile'));
   }
 
   @override
@@ -248,12 +254,18 @@ class __$SendLogoutCopyWithImpl<$Res> extends _$HomeEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SendLogout implements _SendLogout {
+class _$_SendLogout with DiagnosticableTreeMixin implements _SendLogout {
   const _$_SendLogout();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeEvent.logout()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'HomeEvent.logout'));
   }
 
   @override
@@ -366,15 +378,23 @@ class __$GoToProfileCopyWithImpl<$Res> extends _$HomeEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GoToProfile implements _GoToProfile {
+class _$_GoToProfile with DiagnosticableTreeMixin implements _GoToProfile {
   const _$_GoToProfile(this.profile);
 
   @override
   final UserData profile;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeEvent.goToProfile(profile: $profile)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeEvent.goToProfile'))
+      ..add(DiagnosticsProperty('profile', profile));
   }
 
   @override
@@ -500,15 +520,23 @@ class __$GoToQuotaCopyWithImpl<$Res> extends _$HomeEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GoToQuota implements _GoToQuota {
+class _$_GoToQuota with DiagnosticableTreeMixin implements _GoToQuota {
   const _$_GoToQuota(this.profile);
 
   @override
   final UserData profile;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeEvent.goToQuota(profile: $profile)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeEvent.goToQuota'))
+      ..add(DiagnosticsProperty('profile', profile));
   }
 
   @override
@@ -635,15 +663,23 @@ class __$GoToMailQuotaCopyWithImpl<$Res> extends _$HomeEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GoToMailQuota implements _GoToMailQuota {
+class _$_GoToMailQuota with DiagnosticableTreeMixin implements _GoToMailQuota {
   const _$_GoToMailQuota(this.profile);
 
   @override
   final UserData profile;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeEvent.goToMailQuota(profile: $profile)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeEvent.goToMailQuota'))
+      ..add(DiagnosticsProperty('profile', profile));
   }
 
   @override
@@ -771,15 +807,25 @@ class __$GoToResetPasswordCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GoToResetPassword implements _GoToResetPassword {
+class _$_GoToResetPassword
+    with DiagnosticableTreeMixin
+    implements _GoToResetPassword {
   const _$_GoToResetPassword(this.profile);
 
   @override
   final UserData profile;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeEvent.goToResetPassword(profile: $profile)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeEvent.goToResetPassword'))
+      ..add(DiagnosticsProperty('profile', profile));
   }
 
   @override
@@ -906,15 +952,23 @@ class __$GoToAboutUsCopyWithImpl<$Res> extends _$HomeEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GoToAboutUs implements _GoToAboutUs {
+class _$_GoToAboutUs with DiagnosticableTreeMixin implements _GoToAboutUs {
   const _$_GoToAboutUs(this.profile);
 
   @override
   final UserData profile;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeEvent.goToAboutUs(profile: $profile)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeEvent.goToAboutUs'))
+      ..add(DiagnosticsProperty('profile', profile));
   }
 
   @override
@@ -1156,12 +1210,18 @@ class __$LoadingCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
+class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   const _$_Loading();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'HomeState.loading'));
   }
 
   @override
@@ -1280,15 +1340,23 @@ class __$ErrorCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Error implements _Error {
+class _$_Error with DiagnosticableTreeMixin implements _Error {
   const _$_Error(this.message);
 
   @override
   final String message;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeState.error(message: $message)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.error'))
+      ..add(DiagnosticsProperty('message', message));
   }
 
   @override
@@ -1407,12 +1475,18 @@ class __$LogoutCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Logout implements _Logout {
+class _$_Logout with DiagnosticableTreeMixin implements _Logout {
   const _$_Logout();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeState.logout()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'HomeState.logout'));
   }
 
   @override
@@ -1536,7 +1610,7 @@ class __$ProfileCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Profile implements _Profile {
+class _$_Profile with DiagnosticableTreeMixin implements _Profile {
   const _$_Profile(this.profile, this.items);
 
   @override
@@ -1545,8 +1619,17 @@ class _$_Profile implements _Profile {
   final List<HomeItemEnum> items;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeState.profile(profile: $profile, items: $items)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.profile'))
+      ..add(DiagnosticsProperty('profile', profile))
+      ..add(DiagnosticsProperty('items', items));
   }
 
   @override
@@ -1691,7 +1774,7 @@ class __$QuotaCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Quota implements _Quota {
+class _$_Quota with DiagnosticableTreeMixin implements _Quota {
   const _$_Quota(this.profile, this.items);
 
   @override
@@ -1700,8 +1783,17 @@ class _$_Quota implements _Quota {
   final List<HomeItemEnum> items;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeState.quota(profile: $profile, items: $items)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.quota'))
+      ..add(DiagnosticsProperty('profile', profile))
+      ..add(DiagnosticsProperty('items', items));
   }
 
   @override
@@ -1845,7 +1937,7 @@ class __$MailQuotaCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MailQuota implements _MailQuota {
+class _$_MailQuota with DiagnosticableTreeMixin implements _MailQuota {
   const _$_MailQuota(this.profile, this.items);
 
   @override
@@ -1854,8 +1946,17 @@ class _$_MailQuota implements _MailQuota {
   final List<HomeItemEnum> items;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeState.mailQuota(profile: $profile, items: $items)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.mailQuota'))
+      ..add(DiagnosticsProperty('profile', profile))
+      ..add(DiagnosticsProperty('items', items));
   }
 
   @override
@@ -2002,7 +2103,7 @@ class __$ResetPasswordCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ResetPassword implements _ResetPassword {
+class _$_ResetPassword with DiagnosticableTreeMixin implements _ResetPassword {
   const _$_ResetPassword(this.profile, this.items);
 
   @override
@@ -2011,8 +2112,17 @@ class _$_ResetPassword implements _ResetPassword {
   final List<HomeItemEnum> items;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeState.resetPassword(profile: $profile, items: $items)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.resetPassword'))
+      ..add(DiagnosticsProperty('profile', profile))
+      ..add(DiagnosticsProperty('items', items));
   }
 
   @override
@@ -2157,7 +2267,7 @@ class __$AboutUsCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AboutUs implements _AboutUs {
+class _$_AboutUs with DiagnosticableTreeMixin implements _AboutUs {
   const _$_AboutUs(this.profile, this.items);
 
   @override
@@ -2166,8 +2276,17 @@ class _$_AboutUs implements _AboutUs {
   final List<HomeItemEnum> items;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeState.aboutUs(profile: $profile, items: $items)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.aboutUs'))
+      ..add(DiagnosticsProperty('profile', profile))
+      ..add(DiagnosticsProperty('items', items));
   }
 
   @override
