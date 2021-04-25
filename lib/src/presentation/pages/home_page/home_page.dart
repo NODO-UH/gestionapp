@@ -102,7 +102,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                       ],
-                      error: (error) => [
+                      error: (error, items) => [
                         ListTile(
                           leading: const Icon(Icons.error),
                           title: Text(
@@ -110,6 +110,43 @@ class HomePage extends StatelessWidget {
                             style: Theme.of(context).textTheme.subtitle2,
                           ),
                         ),
+                        if (items.contains(HomeItemEnum.Logout))
+                          _buildDrawerItem(
+                            context: context,
+                            text: 'Cerrar Sesión',
+                            icon: Icons.logout,
+                            onTap: () async {
+                              _applyPopIfDrawerIsDialog(context);
+                              final option = await showDialog<bool>(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    content: const SelectableText(
+                                        '¿Está seguro que desea cerrar sesión?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop(true);
+                                        },
+                                        child: const Text('Si'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () async {
+                                          Navigator.of(context).pop(false);
+                                        },
+                                        child: const Text('No'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                              if (option ?? false) {
+                                context
+                                    .read<HomeBloc>()
+                                    .add(const HomeEvent.logout());
+                              }
+                            },
+                          ),
                       ],
                       profile: (p, x) => _getDrawerItems(context, p, x),
                       quota: (p, x) => _getDrawerItems(context, p, x),
