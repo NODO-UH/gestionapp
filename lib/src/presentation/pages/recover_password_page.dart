@@ -40,7 +40,7 @@ class RecoverPasswordPage extends StatelessWidget {
                         children: [
                           Opacity(
                             opacity: state is RecoverPasswordCILoading ? 1 : 0,
-                            child: const CircularProgressIndicator(),
+                            child: const GestionUhLoadingIndicator(),
                           ),
                           Container(
                             padding: const EdgeInsets.only(
