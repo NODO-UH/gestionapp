@@ -5,9 +5,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gestionuh/src/data/repositories/repositories.dart';
 import 'package:gestionuh/src/utils/constants/constants.dart';
 
-part 'resetpassword_event.dart';
-part 'resetpassword_state.dart';
-part 'resetpassword_bloc.freezed.dart';
+part 'reset_password_bloc.freezed.dart';
+part 'reset_password_event.dart';
+part 'reset_password_state.dart';
 
 class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   final AuthRepository authRepository;

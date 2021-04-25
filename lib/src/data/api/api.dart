@@ -144,7 +144,7 @@ class GestionApi {
 
     Status response;
 
-    final credentials = PassReset(password, newPassw);
+    final credentials = PassReset(currentPassw, newPassw);
 
     response = await apiRequest<Status, PassReset>(
       Constants.resetPasswordUrld,
@@ -256,18 +256,18 @@ class GestionApi {
       return target;
     }
 
-    if (builder != null) {
-      try {
-        if (response.statusCode! >= 300) {
-          final Error error = Error.fromJson(
-              jsonDecode(response.data!) as Map<String, dynamic>);
-          target.error = error.code.toString();
-        } else {
+    try {
+      if (response.statusCode! >= 300) {
+        final Error error =
+            Error.fromJson(jsonDecode(response.data!) as Map<String, dynamic>);
+        target.error = error.code.toString();
+      } else {
+        if (builder != null) {
           target = builder(jsonDecode(response.data!) as Map<String, dynamic>);
         }
-      } catch (e) {
-        target.error = Errors.DefaultError;
       }
+    } catch (e) {
+      target.error = Errors.DefaultError;
     }
 
     if (target.error != null) {

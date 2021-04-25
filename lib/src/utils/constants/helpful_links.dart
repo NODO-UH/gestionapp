@@ -11,6 +11,10 @@ const helpfulLinks = [
     name: 'Correo de la Universidad de La Habana',
     url: 'https://correo.uh.cu',
   ),
+  HelpfulLink(
+    name: 'Plataforma digital de enseñanza',
+    url: 'https://evea.uh.cu',
+  ),
 ];
 
 class HelpfulLink {

@@ -2,6 +2,7 @@ class Errors {
   static const Messages = {
     1: 'Datos inválidos.',
     2: 'Credenciales inválidas.',
+    8: 'Credenciales inválidas.',
     20: 'Datos inválidos.',
   };
 
