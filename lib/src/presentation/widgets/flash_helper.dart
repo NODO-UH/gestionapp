@@ -5,8 +5,8 @@ import 'dart:ui';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:gestionuh/src/presentation/widgets/buttons/default_button.dart';
+import 'package:gestionuh/src/presentation/widgets/widgets.dart';
 import 'package:gestionuh/src/utils/constants/messages.dart';
 
 class _MessageItem<T> {
@@ -339,7 +339,7 @@ class FlashHelper {
             borderRadius: const BorderRadius.all(Radius.circular(8.0)),
             child: const Padding(
               padding: EdgeInsets.all(16.0),
-              child: CircularProgressIndicator(strokeWidth: 2.0),
+              child: GestionUhLoadingIndicator(strokeWidth: 2.0),
             ),
           ),
         );
