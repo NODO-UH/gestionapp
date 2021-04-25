@@ -1,7 +1,7 @@
-part of 'resetpassword_bloc.dart';
+part of 'reset_password_bloc.dart';
 
 @freezed
-abstract class ResetPasswordState with _$ResetPasswordState {
+class ResetPasswordState with _$ResetPasswordState {
   const factory ResetPasswordState.initial() = _$ResetPasswordInitialState;
   const factory ResetPasswordState.inProgress() = _$ResetPasswordInProgress;
   const factory ResetPasswordState.success() = _$ResetPasswordSuccess;

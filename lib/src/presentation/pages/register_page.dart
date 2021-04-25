@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/presentation/blocs/blocs.dart';
-import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
 import 'package:gestionuh/src/presentation/widgets/widgets.dart';
 import 'package:gestionuh/src/utils/constants/constants.dart';
 import 'package:gestionuh/src/utils/pair.dart';
@@ -96,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Registrarse'),
+        title: const SelectableText('Registrarse'),
         centerTitle: true,
       ),
       body: BlocConsumer<RegisterBloc, RegisterState>(
@@ -115,8 +115,10 @@ class _RegisterPageState extends State<RegisterPage> {
               FlashHelper.errorBar(context, message: error);
             },
             registrationSuccess: (_) {
-              FlashHelper.successBar(context,
-                  message: 'El usuario fue registrado correctamente.');
+              FlashHelper.successBar(
+                context,
+                message: 'El usuario fue registrado correctamente.',
+              );
             },
             orElse: () {},
           );
@@ -170,75 +172,81 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Form(
               key: _formKey,
               autovalidateMode: AutovalidateMode.disabled,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  GestionUhDefaultTextField(
-                    labelText: 'Número de Carnet De Identidad',
-                    labelStyle: headlineTextsTheme,
-                    hintText: '###########',
-                    autovalidateMode: AutovalidateMode.disabled,
-                    controller: ciController,
-                    validator: identityNumberCIValidator,
-                    keyboardType: TextInputType.number,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  GestionUhDefaultTextField(
-                    labelText: 'Contraseña',
-                    labelStyle: headlineTextsTheme,
-                    hintText: '********',
-                    autovalidateMode: AutovalidateMode.disabled,
-                    controller: passwordFirstController,
-                    validator: safetyPasswordValidator,
-                    keyboardType: TextInputType.visiblePassword,
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  GestionUhDefaultTextField(
-                    labelText: 'Repetir Contraseña',
-                    labelStyle: headlineTextsTheme,
-                    hintText: '********',
-                    autovalidateMode: AutovalidateMode.disabled,
-                    controller: passwordSecondController,
-                    validator: safetyPasswordValidator,
-                    keyboardType: TextInputType.visiblePassword,
-                  ),
-                  const SizedBox(height: 60),
-                  const Divider(
-                    color: Colors.black54,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'PREGUNTAS DE SEGURIDAD',
-                    style: Theme.of(context).textTheme.headline6!.copyWith(
-                        fontSize: 14,
-                        color: Colors.black54,
-                        fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                  Builder(
-                    builder: (BuildContext context) {
-                      final childrenQuest = <Widget>[];
-                      const length = NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
-                      for (int i = 0; i < length; i++) {
-                        final pairValue = questionsTaken.contains(i)
-                            ? questions[questionsTaken.indexOf(i)]
-                            : getFirstQuestionNotOccupeid(i);
-                        childrenQuest.add(_buildQuestionZone(i, pairValue));
-                      }
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: childrenQuest,
-                      );
-                    },
-                  ),
-                  CheckboxListTile(
+              child: AutofillGroup(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    GestionUhDefaultTextField(
+                      labelText: 'Número de Carnet De Identidad',
+                      labelStyle: headlineTextsTheme,
+                      hintText: '###########',
+                      autovalidateMode: AutovalidateMode.disabled,
+                      controller: ciController,
+                      validator: identityNumberCIValidator,
+                      keyboardType: TextInputType.number,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    GestionUhDefaultTextField(
+                      labelText: 'Contraseña',
+                      labelStyle: headlineTextsTheme,
+                      hintText: '********',
+                      autovalidateMode: AutovalidateMode.disabled,
+                      controller: passwordFirstController,
+                      validator: safetyPasswordValidator,
+                      keyboardType: TextInputType.visiblePassword,
+                      autofillHints: const [AutofillHints.newPassword],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    GestionUhDefaultTextField(
+                      labelText: 'Repetir Contraseña',
+                      labelStyle: headlineTextsTheme,
+                      hintText: '********',
+                      autovalidateMode: AutovalidateMode.disabled,
+                      controller: passwordSecondController,
+                      validator: safetyPasswordValidator,
+                      keyboardType: TextInputType.visiblePassword,
+                      autofillHints: const [AutofillHints.newPassword],
+                    ),
+                    const SizedBox(height: 60),
+                    const Divider(
+                      color: Colors.black54,
+                    ),
+                    const SizedBox(height: 10),
+                    SelectableText(
+                      'PREGUNTAS DE SEGURIDAD',
+                      style: Theme.of(context).textTheme.headline6!.copyWith(
+                          fontSize: 14,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                    Builder(
+                      builder: (BuildContext context) {
+                        final childrenQuest = <Widget>[];
+                        const length = NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
+                        for (int i = 0; i < length; i++) {
+                          final pairValue = questionsTaken.contains(i)
+                              ? questions[questionsTaken.indexOf(i)]
+                              : getFirstQuestionNotOccupeid(i);
+                          childrenQuest.add(_buildQuestionZone(i, pairValue));
+                        }
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: childrenQuest,
+                        );
+                      },
+                    ),
+                    CheckboxListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       controlAffinity: ListTileControlAffinity.leading,
                       dense: true,
                       activeColor: Theme.of(context).primaryColor,
@@ -252,14 +260,16 @@ class _RegisterPageState extends State<RegisterPage> {
                             .subtitle2
                             ?.copyWith(color: Theme.of(context).primaryColor),
                       ),
-                      onChanged: (value) => _showTermsAndConditionsDialog()),
-                  const SizedBox(height: 15),
-                  GestionUhDefaultButton(
-                    text: 'Finalizar',
-                    onPressed: termsAccepted ? _onRegisterAction : null,
-                  ),
-                  const SizedBox(height: 30),
-                ],
+                      onChanged: (value) => _showTermsAndConditionsDialog(),
+                    ),
+                    const SizedBox(height: 15),
+                    GestionUhDefaultButton(
+                      text: 'Finalizar',
+                      onPressed: termsAccepted ? _onRegisterAction : null,
+                    ),
+                    const SizedBox(height: 50),
+                  ],
+                ),
               ),
             ),
           ),
@@ -274,27 +284,39 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          RichText(
+          SelectableText.rich(
+            TextSpan(
+              style: Theme.of(context).textTheme.subtitle1,
+              children: [
+                const TextSpan(
+                  text: 'Se ha registrado correctamente '
+                      'su correo es ',
+                ),
+                TextSpan(
+                  text: '"$userEmail"',
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
+                      ?.copyWith(color: Colors.red),
+                ),
+                const TextSpan(
+                  text: ', anótelo de ser necesario '
+                      'no se mostrará otra vez.',
+                ),
+              ],
+            ),
             textAlign: TextAlign.center,
-            text: TextSpan(
-                style: Theme.of(context).textTheme.subtitle1,
-                children: [
-                  const TextSpan(
-                    text: 'Se ha registrado correctamente '
-                        'su correo es ',
-                  ),
-                  TextSpan(
-                    text: '"$userEmail"',
-                    style: Theme.of(context)
-                        .textTheme
-                        .subtitle1
-                        ?.copyWith(color: Colors.red),
-                  ),
-                  const TextSpan(
-                    text: ', anótelo de ser necesario '
-                        'no se mostrará otra vez',
-                  ),
-                ]),
+          ),
+          const SizedBox(height: 15),
+          GestionUhDefaultButton(
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: userEmail));
+              FlashHelper.successBar(
+                context,
+                message: 'Correo copiado correctamente.',
+              );
+            },
+            child: const Text('Copiar Correo'),
           ),
           const SizedBox(height: 30),
           GestionUhDefaultButton(

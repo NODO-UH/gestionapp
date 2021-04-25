@@ -1,5 +1,6 @@
 part of 'profile_bloc.dart';
 
-abstract class ProfileEvent {}
-
-class ProfileInitialized extends ProfileEvent {}
+@freezed
+class ProfileEvent with _$ProfileEvent {
+  const factory ProfileEvent.load() = _Load;
+}

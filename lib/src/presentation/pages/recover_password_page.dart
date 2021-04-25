@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/presentation/blocs/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets/widgets.dart';
@@ -12,7 +13,7 @@ class RecoverPasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recuperar Contraseña'),
+        title: const SelectableText('Recuperar Contraseña'),
         centerTitle: true,
       ),
       bottomSheet: const GestionUHBottomSheet(),
@@ -149,105 +150,109 @@ class RecoverPasswordPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Opacity(
-              opacity: loading ? 1 : 0,
-              child: const LinearProgressIndicator(),
-            ),
-            Container(
-              padding: const EdgeInsets.only(
-                top: 30,
-                bottom: 9,
-                left: 18,
-                right: 18,
+        child: AutofillGroup(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Opacity(
+                opacity: loading ? 1 : 0,
+                child: const LinearProgressIndicator(),
               ),
-              child: Column(
-                children: [
-                  for (var i = 0; i < questions.length; ++i)
-                    Column(
-                      children: [
-                        Text(questions[i]),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8.0,
-                          ),
-                          child: GestionUhDefaultTextField(
-                            controller: answers[i],
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'La respuesta es necesaria.';
-                              }
-                              return null;
-                            },
-                            autovalidateMode: AutovalidateMode.disabled,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
+              Container(
+                padding: const EdgeInsets.only(
+                  top: 30,
+                  bottom: 9,
+                  left: 18,
+                  right: 18,
+                ),
+                child: Column(
+                  children: [
+                    for (var i = 0; i < questions.length; ++i)
+                      Column(
+                        children: [
+                          SelectableText(questions[i]),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 8.0,
+                            ),
+                            child: GestionUhDefaultTextField(
+                              controller: answers[i],
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'La respuesta es necesaria.';
+                                }
+                                return null;
+                              },
+                              autovalidateMode: AutovalidateMode.disabled,
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: GestionUhDefaultTextField(
+                        labelText: 'Contraseña*',
+                        controller: password,
+                        validator: safetyPasswordValidator,
+                        autovalidateMode: AutovalidateMode.disabled,
+                        keyboardType: TextInputType.visiblePassword,
+                        autofillHints: const [AutofillHints.newPassword],
+                      ),
                     ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: GestionUhDefaultTextField(
-                      labelText: 'Contraseña*',
-                      controller: password,
-                      validator: safetyPasswordValidator,
-                      autovalidateMode: AutovalidateMode.disabled,
-                      keyboardType: TextInputType.visiblePassword,
+                    const SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8.0,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8.0,
+                      ),
+                      child: GestionUhDefaultTextField(
+                        labelText: 'Repetir Contraseña*',
+                        validator: (value) {
+                          if (value != password.text) {
+                            return 'Las contraseñas deben coincidir';
+                          }
+                          return null;
+                        },
+                        autovalidateMode: AutovalidateMode.disabled,
+                        keyboardType: TextInputType.visiblePassword,
+                        autofillHints: const [AutofillHints.newPassword],
+                      ),
                     ),
-                    child: GestionUhDefaultTextField(
-                      labelText: 'Repetir Contraseña*',
-                      validator: (value) {
-                        if (value != password.text) {
-                          return 'Las contraseñas deben coincidir';
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    GestionUhDefaultButton(
+                      text: 'Continuar',
+                      onPressed: () {
+                        if (loading || !_formKey.currentState!.validate()) {
+                          return;
                         }
-                        return null;
+                        context
+                            .read<RecoverPasswordBloc>()
+                            .add(RecoverPasswordEvent.finalSubmit(
+                              ci,
+                              questions,
+                              answers,
+                              password,
+                            ));
                       },
-                      autovalidateMode: AutovalidateMode.disabled,
-                      keyboardType: TextInputType.visiblePassword,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  GestionUhDefaultButton(
-                    text: 'Continuar',
-                    onPressed: () {
-                      if (loading || !_formKey.currentState!.validate()) {
-                        return;
-                      }
-                      context
-                          .read<RecoverPasswordBloc>()
-                          .add(RecoverPasswordEvent.finalSubmit(
-                            ci,
-                            questions,
-                            answers,
-                            password,
-                          ));
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-          ],
+              const SizedBox(
+                height: 30,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -259,11 +264,22 @@ class RecoverPasswordPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          SelectableText(
             'Se ha cambiado correctamente la contraseña '
             'de la cuenta "$userId".',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.subtitle1,
+          ),
+          const SizedBox(height: 15),
+          GestionUhDefaultButton(
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: userId));
+              FlashHelper.successBar(
+                context,
+                message: 'Correo copiado correctamente.',
+              );
+            },
+            child: const Text('Copiar Correo'),
           ),
           const SizedBox(height: 30),
           GestionUhDefaultButton(

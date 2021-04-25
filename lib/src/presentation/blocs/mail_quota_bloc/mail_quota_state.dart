@@ -1,7 +1,7 @@
 part of 'mail_quota_bloc.dart';
 
 @freezed
-abstract class MailQuotaState with _$MailQuotaState {
+class MailQuotaState with _$MailQuotaState {
   const factory MailQuotaState.initial() = _$MailQuotaInitial;
   const factory MailQuotaState.loadInProgress() = _$LoadMailQuotaInProgress;
   const factory MailQuotaState.loadSuccess({required MailQuota quota}) =
