@@ -1,23 +1,14 @@
 part of 'register_bloc.dart';
 
-abstract class RegisterEvent {
-  const RegisterEvent();
-}
-
-class QuestionsRequestedRegister extends RegisterEvent {}
-
-class FormsEnteredRegister extends RegisterEvent {
-  final List<String> answers;
-  final String ci;
-  final String passwordFirst;
-  final String passwordSecond;
-  final List<String> questions;
-
-  const FormsEnteredRegister({
-    required this.answers,
-    required this.ci,
-    required this.passwordFirst,
-    required this.passwordSecond,
-    required this.questions,
-  });
+@freezed
+abstract class RegisterEvent with _$RegisterEvent {
+  const factory RegisterEvent.questionsRequested() =
+      _QuestionsRequestedRegister;
+  const factory RegisterEvent.formSubmitted({
+    required List<String> answers,
+    required String ci,
+    required String passwordFirst,
+    required String passwordSecond,
+    required List<String> questions,
+  }) = _FormSubmittedRegister;
 }
