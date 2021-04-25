@@ -34,3 +34,10 @@ String? answerValidator(String? value) {
   }
   return null;
 }
+
+String? currentPasswordValidator(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Debe escribir su antigua contraseña';
+  }
+  return null;
+}

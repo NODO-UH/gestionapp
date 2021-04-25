@@ -7,7 +7,9 @@ part of 'password_reset_user_id.dart';
 // **************************************************************************
 
 PasswordResetUserId _$PasswordResetUserIdFromJson(Map<String, dynamic> json) {
-  return PasswordResetUserId()..userId = json['userId'] as String?;
+  return PasswordResetUserId(
+    userId: json['userId'] as String?,
+  );
 }
 
 Map<String, dynamic> _$PasswordResetUserIdToJson(
