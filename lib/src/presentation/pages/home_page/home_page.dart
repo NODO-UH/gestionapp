@@ -7,16 +7,37 @@ import 'package:gestionuh/src/presentation/pages/home_page/sub_pages/sub_pages.d
 import 'package:gestionuh/src/presentation/widgets/widgets.dart';
 import 'package:gestionuh/src/utils/constants/constants.dart';
 import 'package:get_it/get_it.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<HomeBloc, HomeState>(
       listener: _buildListener,
-      child: Scaffold(
-        appBar: _buildAppBar(),
-        drawer: _buildDrawer(context),
-        body: _buildBody(context),
+      child: ResponsiveBuilder(
+        builder: (context, sizingInformation) {
+          if (sizingInformation.deviceScreenType == DeviceScreenType.watch ||
+              sizingInformation.deviceScreenType == DeviceScreenType.mobile) {
+            return Scaffold(
+              appBar: _buildAppBar(),
+              drawer: _buildDrawer(context),
+              body: _buildBody(context),
+            );
+          } else {
+            return Row(
+              children: [
+                _buildDrawer(context),
+                const VerticalDivider(width: 1),
+                Expanded(
+                  child: Scaffold(
+                    appBar: _buildAppBar(),
+                    body: _buildBody(context),
+                  ),
+                ),
+              ],
+            );
+          }
+        },
       ),
     );
   }
@@ -209,7 +230,7 @@ class HomePage extends StatelessWidget {
           text: 'Perfil',
           icon: Icons.person,
           onTap: () {
-            Navigator.of(context).pop();
+            _applyPopIfDrawerIsDialog(context);
             context.read<HomeBloc>().add(HomeEvent.goToProfile(profile));
           },
         );
@@ -219,7 +240,7 @@ class HomePage extends StatelessWidget {
           text: 'Mi Cuota',
           icon: Icons.data_usage,
           onTap: () {
-            Navigator.of(context).pop();
+            _applyPopIfDrawerIsDialog(context);
             context.read<HomeBloc>().add(HomeEvent.goToQuota(profile));
           },
         );
@@ -229,7 +250,7 @@ class HomePage extends StatelessWidget {
           text: 'Correo',
           icon: Icons.mail,
           onTap: () {
-            Navigator.of(context).pop();
+            _applyPopIfDrawerIsDialog(context);
             context.read<HomeBloc>().add(HomeEvent.goToMailQuota(profile));
           },
         );
@@ -239,7 +260,7 @@ class HomePage extends StatelessWidget {
           text: 'Cambiar Contraseña',
           icon: Icons.security_rounded,
           onTap: () {
-            Navigator.of(context).pop();
+            _applyPopIfDrawerIsDialog(context);
             context.read<HomeBloc>().add(HomeEvent.goToResetPassword(profile));
           },
         );
@@ -249,7 +270,7 @@ class HomePage extends StatelessWidget {
           text: 'Cerrar Sesión',
           icon: Icons.logout,
           onTap: () async {
-            Navigator.of(context).pop();
+            _applyPopIfDrawerIsDialog(context);
             final option = await showDialog<bool>(
               context: context,
               builder: (context) {
@@ -284,10 +305,22 @@ class HomePage extends StatelessWidget {
           text: 'Acerca de',
           icon: Icons.info_outline_rounded,
           onTap: () {
-            Navigator.of(context).pop();
+            _applyPopIfDrawerIsDialog(context);
             context.read<HomeBloc>().add(HomeEvent.goToAboutUs(profile));
           },
         );
+    }
+  }
+
+  void _applyPopIfDrawerIsDialog(BuildContext context) {
+    final deviceType = getDeviceType(MediaQuery.of(context).size);
+    switch (deviceType) {
+      case DeviceScreenType.mobile:
+      case DeviceScreenType.watch:
+        Navigator.of(context).pop();
+        break;
+      default:
+        break;
     }
   }
 
