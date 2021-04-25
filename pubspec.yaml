@@ -3,7 +3,7 @@ description: Aplicación para la gestión electrónica en la Universidad de La H
 
 publish_to: 'none'
 
-version: 1.0.0+2
+version: 1.0.1+2
 
 environment:
   sdk: '>=2.12.0 <3.0.0'

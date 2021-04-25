@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/presentation/blocs/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets/widgets.dart';
@@ -300,11 +301,22 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const TextSpan(
                   text: ', anótelo de ser necesario '
-                      'no se mostrará otra vez',
+                      'no se mostrará otra vez.',
                 ),
               ],
             ),
             textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 15),
+          GestionUhDefaultButton(
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: userEmail));
+              FlashHelper.successBar(
+                context,
+                message: 'Correo copiado correctamente.',
+              );
+            },
+            child: const Text('Copiar Correo'),
           ),
           const SizedBox(height: 30),
           GestionUhDefaultButton(

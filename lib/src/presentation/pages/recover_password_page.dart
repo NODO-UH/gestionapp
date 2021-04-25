@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/presentation/blocs/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets/widgets.dart';
@@ -268,6 +269,17 @@ class RecoverPasswordPage extends StatelessWidget {
             'de la cuenta "$userId".',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.subtitle1,
+          ),
+          const SizedBox(height: 15),
+          GestionUhDefaultButton(
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: userId));
+              FlashHelper.successBar(
+                context,
+                message: 'Correo copiado correctamente.',
+              );
+            },
+            child: const Text('Copiar Correo'),
           ),
           const SizedBox(height: 30),
           GestionUhDefaultButton(
