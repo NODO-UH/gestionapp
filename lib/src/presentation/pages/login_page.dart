@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestionuh/deps_injector.dart';
-import 'package:gestionuh/src/data/repository.dart';
-import 'package:gestionuh/src/presentation/blocs.dart';
-import 'package:gestionuh/src/presentation/widgets.dart';
-import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
-import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
-import 'package:gestionuh/src/utils/constants/routes.dart';
+import 'package:gestionuh/src/data/local/local_storage.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
+import 'package:gestionuh/src/presentation/blocs/blocs.dart';
+import 'package:gestionuh/src/presentation/widgets/widgets.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
+import 'package:gestionuh/src/utils/validators.dart';
+import 'package:get_it/get_it.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -16,18 +17,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _usernameController = TextEditingController();
+  final _userNameController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _rememberMe = false;
+  final _formLoginKey = GlobalKey<FormState>();
 
   void _loginAction(BuildContext context) {
-    context.read<LoginBloc>().add(
-          LoginAttempted(
-            username: _usernameController.text,
-            password: _passwordController.text,
-            rememberMe: _rememberMe,
-          ),
-        );
+    if (_formLoginKey.currentState?.validate() ?? false) {
+      context.read<LoginBloc>().add(
+            LoginEvent.loginAttempted(
+              userName: _userNameController.text,
+              password: _passwordController.text,
+              rememberMe: _rememberMe,
+            ),
+          );
+    }
   }
 
   void _recoverAction(BuildContext context) {
@@ -40,78 +44,102 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _userNameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final authRepo = di<AuthRepository>();
+    final authRepo = GetIt.I<AuthRepository>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Iniciar Sesión'),
+        title: const Text(Constants.appName),
         centerTitle: true,
       ),
       bottomSheet: const GestionUHBottomSheet(),
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (authRepo.logged) {
-            Navigator.of(context).pushReplacementNamed(PROFILE_ROUTE_NAME);
+            Navigator.of(context).pushReplacementNamed(HOME_ROUTE_NAME);
           }
-          if (state is LoginAttemptInitial) {
-            FlashHelper.errorBar(context, message: state.error);
-          }
+          state.maybeWhen(
+            failure: (error) => FlashHelper.errorBar(context, message: error),
+            orElse: () {},
+          );
         },
         builder: (context, state) {
-          if (state is LoginAttemptInitial) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 30, bottom: 9, left: 18, right: 18),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Image.asset(
-                      'assets/images/splash.png',
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    SizedBox(
-                      height: 40,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            flex: 7,
-                            child: GestionUhDefaultTextField(
-                              labelText: '\t\tUsuario',
-                              controller: _usernameController,
-                            ),
+          return state.maybeWhen(
+            inProgress: () => _buildLoadingIndicator(context),
+            orElse: () => _buildLoginForm(context),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildLoginForm(BuildContext context) {
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            width: getValueForScreenType<double>(
+              context: context,
+              mobile: MediaQuery.of(context).size.width,
+              tablet: MediaQuery.of(context).size.width * 0.5,
+            ),
+            padding: const EdgeInsets.only(
+              top: 30,
+              bottom: 9,
+              left: 18,
+              right: 18,
+            ),
+            child: Form(
+              key: _formLoginKey,
+              autovalidateMode: AutovalidateMode.disabled,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Image.asset(
+                    'assets/images/splash.png',
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  SizedBox(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 7,
+                          child: GestionUhDefaultTextField(
+                            labelText: 'Nombre de Usuario',
+                            controller: _userNameController,
+                            validator: userNameValidator,
+                            autovalidateMode: AutovalidateMode.disabled,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    GestionUhDefaultTextField(
-                      labelText: '\t\tContraseña',
-                      controller: _passwordController,
-                      keyboardType: TextInputType.visiblePassword,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        bottomLeft: Radius.circular(5),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  GestionUhDefaultTextField(
+                    labelText: 'Contraseña',
+                    controller: _passwordController,
+                    autovalidateMode: AutovalidateMode.disabled,
+                    validator: currentPasswordValidator,
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  if (GetIt.I<ILocalStorage>().isSecureStorageAvailable)
                     GestureDetector(
                       onTap: () => setState(() => _rememberMe = !_rememberMe),
                       child: Container(
@@ -142,44 +170,46 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    GestionUhDefaultButton(
-                      text: 'Iniciar Sesión',
-                      onPressed: () => _loginAction(context),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    GestionUhDefaultButton(
-                      text: 'Recuperar Contraseña',
-                      onPressed: () => _recoverAction(context),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    GestionUhDefaultButton(
-                      text: 'Registrarse',
-                      onPressed: () => _registerAction(context),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                  ],
-                ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  GestionUhDefaultButton(
+                    text: 'Iniciar Sesión',
+                    onPressed: () => _loginAction(context),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  GestionUhDefaultButton(
+                    text: 'Recuperar Contraseña',
+                    onPressed: () => _recoverAction(context),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  GestionUhDefaultButton(
+                    text: 'Registrarse',
+                    onPressed: () => _registerAction(context),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
               ),
-            );
-          }
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                GestionUhLoadingIndicator(),
-              ],
             ),
-          );
-        },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingIndicator(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          GestionUhLoadingIndicator(),
+        ],
       ),
     );
   }

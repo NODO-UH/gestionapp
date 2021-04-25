@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:gestionuh/src/data/models.dart';
+import 'package:gestionuh/src/data/models/models.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class QuotaGraph extends StatelessWidget {
   final Quota quota;
@@ -50,45 +50,36 @@ class QuotaGraph extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          'Consumo (en MB)',
-          style: Theme.of(context).textTheme.subtitle2,
-        ),
         Container(
-          margin: const EdgeInsets.all(20),
-          height: 250,
-          child: PieChart(
-            PieChartData(
-              borderData: FlBorderData(show: false),
-              sectionsSpace: 0,
-              centerSpaceRadius: MediaQuery.of(context).size.width / 6,
-              sections: data
-                  .where((x) => x.cant != 0)
-                  .map((item) => PieChartSectionData(
-                        radius: 50,
-                        color: item.color,
-                        value: item.cant.toDouble(),
-                        showTitle: false,
-                      ))
-                  .toList(),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          height: MediaQuery.of(context).size.height * 0.65,
+          child: SfCircularChart(
+            title: ChartTitle(
+              text: 'Consumo (en MB)',
+              textStyle: Theme.of(context).textTheme.subtitle2,
             ),
+            legend: Legend(
+              isVisible: true,
+              overflowMode: LegendItemOverflowMode.wrap,
+              position: LegendPosition.bottom,
+              textStyle: Theme.of(context).textTheme.subtitle2,
+            ),
+            tooltipBehavior: TooltipBehavior(enable: true),
+            series: [
+              DoughnutSeries<QuotaPart, String>(
+                dataSource: data,
+                xValueMapper: (data, _) => data.title,
+                yValueMapper: (data, _) => data.cant,
+                pointColorMapper: (data, _) => data.color,
+                dataLabelSettings: DataLabelSettings(
+                  isVisible: true,
+                  labelPosition: ChartDataLabelPosition.outside,
+                  useSeriesColor: true,
+                ),
+              ),
+            ],
           ),
         ),
-        for (var item in data)
-          ListTile(
-            leading: Icon(
-              Icons.circle,
-              color: item.color,
-            ),
-            title: Text(
-              item.title,
-              style: Theme.of(context).textTheme.subtitle2,
-            ),
-            trailing: Text(
-              '${item.cant} MB',
-              style: Theme.of(context).textTheme.subtitle2,
-            ),
-          ),
       ],
     );
   }

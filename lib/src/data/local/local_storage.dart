@@ -1,5 +1,8 @@
+import 'dart:io' show Platform;
+
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:gestionuh/src/utils/constants.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ILocalStorage {
@@ -7,6 +10,8 @@ abstract class ILocalStorage {
   Future<void> loadSession();
 
   bool isLogged();
+
+  bool get isSecureStorageAvailable;
 
   Future<Map<String, dynamic>?> getCredentials();
 
@@ -34,7 +39,14 @@ class LocalStorage implements ILocalStorage {
   });
 
   @override
+  bool get isSecureStorageAvailable =>
+      !kIsWeb && (Platform.isAndroid || Platform.isIOS || Platform.isLinux);
+
+  @override
   Future<void> loadSession() async {
+    if (!isSecureStorageAvailable) {
+      return;
+    }
     if (prefs.containsKey(USER_LOGGED_INTO) &&
         prefs.getBool(USER_LOGGED_INTO)!) {
       final info = await secureStorage.readAll();
@@ -71,7 +83,7 @@ class LocalStorage implements ILocalStorage {
     bool isLoggedInto = true,
     bool persist = false,
   }) async {
-    if (persist) {
+    if (persist && isSecureStorageAvailable) {
       await secureStorage.write(key: USER_NAME, value: userName);
       await secureStorage.write(key: USER_PASSWORD, value: password);
       await prefs.setBool(USER_LOGGED_INTO, isLoggedInto);
@@ -88,11 +100,13 @@ class LocalStorage implements ILocalStorage {
   Future<void> invalidateCredentials() async {
     await prefs.setBool(USER_LOGGED_INTO, false);
     await prefs.setBool(USER_REMEMBERME, false);
-    if (await secureStorage.containsKey(key: USER_NAME)) {
-      await secureStorage.delete(key: USER_NAME);
-    }
-    if (await secureStorage.containsKey(key: USER_PASSWORD)) {
-      await secureStorage.delete(key: USER_PASSWORD);
+    if (isSecureStorageAvailable) {
+      if (await secureStorage.containsKey(key: USER_NAME)) {
+        await secureStorage.delete(key: USER_NAME);
+      }
+      if (await secureStorage.containsKey(key: USER_PASSWORD)) {
+        await secureStorage.delete(key: USER_PASSWORD);
+      }
     }
     sessionData.isLoggedInto = false;
     sessionData.rememberMe = false;

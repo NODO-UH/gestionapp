@@ -1,58 +1,65 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gestionuh/src/data/models/password_edit_data.dart';
-import 'package:gestionuh/src/data/repository/auth_repository/auth_repository.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
+part 'register_bloc.freezed.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final AuthRepository repository;
 
-  RegisterBloc({required this.repository}) : super(RegisterInitial());
+  RegisterBloc({required this.repository})
+      : super(const RegisterState.initial());
 
   @override
   Stream<RegisterState> mapEventToState(
     RegisterEvent event,
   ) async* {
-    if (event is QuestionsRequestedRegister) {
-      yield* questionsRequestedRegisterHandler(event);
-    }
-    if (event is FormsEnteredRegister) {
-      yield* formsEnteredRegisterHandler(event);
-    }
+    yield* event.map(
+      questionsRequested: questionsRequestedRegisterHandler,
+      formSubmitted: formSubmittedRegisterHandler,
+    );
   }
 
   Stream<RegisterState> questionsRequestedRegisterHandler(
-      QuestionsRequestedRegister event) async* {
-    yield LoadInitialDataInProgress();
+      _$QuestionsRequestedRegister _) async* {
+    yield const RegisterState.initialLoadInProgress();
     final questions = await repository.getSecurityQuestions();
     if (questions.error != null) {
-      yield LoadInitialDataFailure(error: questions.error!);
+      yield RegisterState.initialLoadFailure(
+        error: questions.error ?? Errors.DefaultError,
+      );
     } else {
-      yield LoadInitialDataSuccess(questions: questions.questions!);
+      yield RegisterState.initialLoadSuccess(questions: questions.questions!);
     }
-    //
   }
 
-  Stream<RegisterState> formsEnteredRegisterHandler(
-      FormsEnteredRegister event) async* {
-    yield RegisterUserInProgress();
+  Stream<RegisterState> formSubmittedRegisterHandler(
+    _$FormSubmittedRegister event,
+  ) async* {
+    yield const RegisterState.registrationInProgress();
     if (event.passwordFirst != event.passwordSecond) {
-      yield const RegisterUserFailure(error: 'Las contraseñas no coinciden.');
+      yield const RegisterState.registrationFailure(
+          error: 'Las contraseñas no coinciden.');
       return;
     }
     final userId = await repository.sendRegistration(PasswordEditData(
-      answers: event.answers,
-      ci: event.ci,
-      password: event.passwordFirst,
+      answers: event.answers.map((e) => e.trim()).toList(),
+      ci: event.ci.trim(),
+      password: event.passwordFirst.trim(),
       questions: event.questions,
     ));
     if (userId.error != null) {
-      yield RegisterUserFailure(error: userId.error!);
+      yield RegisterState.registrationFailure(
+        error: userId.error ?? Errors.DefaultError,
+      );
     } else {
-      yield RegisterUserSuccess(userEmail: userId.userId!);
+      yield RegisterState.registrationSuccess(userEmail: userId.userId!);
     }
 
     //

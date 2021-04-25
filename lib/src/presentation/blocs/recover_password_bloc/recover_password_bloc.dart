@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:gestionuh/src/data/models.dart';
-import 'package:gestionuh/src/data/repository.dart';
-import 'package:meta/meta.dart';
-import 'package:gestionuh/src/utils/constants.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gestionuh/src/data/models/models.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 
+part 'recover_password_bloc.freezed.dart';
 part 'recover_password_event.dart';
 part 'recover_password_state.dart';
 
@@ -15,95 +16,85 @@ class RecoverPasswordBloc
   final RecoverPasswordRepository recoverPasswordRepository;
 
   RecoverPasswordBloc({required this.recoverPasswordRepository})
-      : super(RecoverPasswordInitial(ci: TextEditingController()));
+      : super(RecoverPasswordState.initial(TextEditingController()));
 
   @override
   Stream<RecoverPasswordState> mapEventToState(
     RecoverPasswordEvent event,
   ) async* {
-    if (event is RecoverPasswordCISubmit) {
-      yield* handleCISubmit(event);
-    }
-    if (event is RecoverPasswordFinalSubmit) {
-      yield* handleFinalSubmit(event);
-    }
+    yield* event.when(
+      ciSubmit: handleCISubmit,
+      finalSubmit: handleFinalSubmit,
+    );
   }
 
-  Stream<RecoverPasswordState> handleCISubmit(
-    RecoverPasswordCISubmit event,
-  ) async* {
-    yield RecoverPasswordCILoading(ci: event.state.ci);
+  Stream<RecoverPasswordState> handleCISubmit(TextEditingController ci) async* {
+    yield RecoverPasswordState.ciLoading(ci);
     final result = await recoverPasswordRepository.getUserSecurityQuestions(
-      event.state.ci.text.trim(),
+      ci.text.trim(),
     );
     if (result == null) {
-      yield RecoverPasswordCIError(
-        ci: event.state.ci,
-        error: Errors.DefaultError,
-      );
+      yield RecoverPasswordState.ciError(ci, Errors.DefaultError);
     } else if (result.error != null) {
-      yield RecoverPasswordCIError(
-        ci: event.state.ci,
-        error: result.error!,
-      );
+      yield RecoverPasswordState.ciError(ci, result.error!);
     } else if (result.questions == null) {
-      yield RecoverPasswordCIError(
-        ci: event.state.ci,
-        error: Errors.DefaultError,
-      );
+      yield RecoverPasswordState.ciError(ci, Errors.DefaultError);
     } else {
-      yield RecoverPasswordQuestions(
-        ci: event.state.ci.text.trim(),
-        questions: result.questions!,
-        answers: result.questions!.map((_) => TextEditingController()).toList(),
-        password: TextEditingController(),
+      yield RecoverPasswordState.questions(
+        ci.text.trim(),
+        result.questions!,
+        result.questions!.map((_) => TextEditingController()).toList(),
+        TextEditingController(),
       );
     }
   }
 
   Stream<RecoverPasswordState> handleFinalSubmit(
-    RecoverPasswordFinalSubmit event,
+    String ci,
+    List<String> questions,
+    List<TextEditingController> answers,
+    TextEditingController password,
   ) async* {
-    yield RecoverPasswordQuestionsLoading(
-      ci: event.state.ci,
-      questions: event.state.questions,
-      answers: event.state.answers,
-      password: event.state.password,
+    yield RecoverPasswordState.questionsLoading(
+      ci,
+      questions,
+      answers,
+      password,
     );
     final result = await recoverPasswordRepository.passwordRecovery(
       PasswordResetData(
-        ci: event.state.ci,
-        questions: event.state.questions,
-        answers: event.state.answers.map((e) => e.text.trim()).toList(),
-        newPassword: event.state.password.text.trim(),
+        ci: ci,
+        questions: questions,
+        answers: answers.map((e) => e.text.trim()).toList(),
+        newPassword: password.text.trim(),
       ),
     );
     if (result == null) {
-      yield RecoverPasswordQuestionsError(
-        ci: event.state.ci,
-        questions: event.state.questions,
-        answers: event.state.answers,
-        password: event.state.password,
-        error: Errors.DefaultError,
+      yield RecoverPasswordState.questionsError(
+        ci,
+        questions,
+        answers,
+        password,
+        Errors.DefaultError,
       );
     } else if (result.error != null) {
-      yield RecoverPasswordQuestionsError(
-        ci: event.state.ci,
-        questions: event.state.questions,
-        answers: event.state.answers,
-        password: event.state.password,
-        error: result.error!,
+      yield RecoverPasswordState.questionsError(
+        ci,
+        questions,
+        answers,
+        password,
+        result.error!,
       );
     } else if (result.userId == null) {
-      yield RecoverPasswordQuestionsError(
-        ci: event.state.ci,
-        questions: event.state.questions,
-        answers: event.state.answers,
-        password: event.state.password,
-        error: Errors.DefaultError,
+      yield RecoverPasswordState.questionsError(
+        ci,
+        questions,
+        answers,
+        password,
+        Errors.DefaultError,
       );
     } else {
-      yield RecoverPasswordSuccess(userId: result.userId!);
+      yield RecoverPasswordState.success(result.userId!);
     }
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gestionuh/src/presentation/theme.dart';
+import 'package:gestionuh/src/presentation/theme/theme.dart';
 
 class GestionUhDefaultButton extends StatelessWidget {
   final Widget? child;
@@ -47,7 +47,10 @@ class GestionUhDefaultButton extends StatelessWidget {
                 Text(text!,
                     textScaleFactor: 1.25,
                     style: isSecundary
-                        ? Theme.of(context).textTheme.bodyText2
+                        ? Theme.of(context)
+                            .primaryTextTheme
+                            .button
+                            ?.copyWith(color: Theme.of(context).primaryColor)
                         : Theme.of(context).primaryTextTheme.button),
               if (text != null && icon != null)
                 const SizedBox(
