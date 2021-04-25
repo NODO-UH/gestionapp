@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gestionuh/src/data/models/password_edit_data.dart';
 import 'package:gestionuh/src/data/repositories/repositories.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
@@ -31,7 +32,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     final questions = await repository.getSecurityQuestions();
     if (questions.error != null) {
       yield RegisterState.initialLoadFailure(
-        error: questions.error ?? 'Compruebe su conexión e intente de nuevo.',
+        error: questions.error ?? Errors.DefaultError,
       );
     } else {
       yield RegisterState.initialLoadSuccess(questions: questions.questions!);
@@ -55,7 +56,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     ));
     if (userId.error != null) {
       yield RegisterState.registrationFailure(
-        error: userId.error ?? 'Compruebe su conexión e intente de nuevo.',
+        error: userId.error ?? Errors.DefaultError,
       );
     } else {
       yield RegisterState.registrationSuccess(userEmail: userId.userId!);

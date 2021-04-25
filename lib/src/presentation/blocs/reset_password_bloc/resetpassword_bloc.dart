@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gestionuh/src/data/repositories/repositories.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 
 part 'resetpassword_event.dart';
 part 'resetpassword_state.dart';
@@ -39,7 +40,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       yield const ResetPasswordState.success();
     } else {
       yield ResetPasswordState.failure(
-        error: status.error ?? 'Ocurrió un error, intente de nuevo.',
+        error: status.error ?? Errors.DefaultError,
       );
     }
   }
