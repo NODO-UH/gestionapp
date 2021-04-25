@@ -44,15 +44,12 @@ String? userNameValidator(String? value) {
   if (value == null || value.isEmpty) {
     return 'Debe introducir su nombre de usuario';
   }
-  if (value.length != value.trim().length) {
-    return 'No puede contener espacios al inicio o al final';
-  }
   return null;
 }
 
 String? currentPasswordValidator(String? value) {
   if (value == null || value.isEmpty) {
-    return 'Debe escribir su antigua contraseña';
+    return 'Debe introducir su contraseña';
   }
   return null;
 }
