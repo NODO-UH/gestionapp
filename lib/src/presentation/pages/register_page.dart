@@ -81,23 +81,17 @@ class _RegisterPageState extends State<RegisterPage> {
     _questions.removeWhere((element) => element == null);
     _questions.sort((e1, e2) =>
         questionsTaken[e1!.second].compareTo(questionsTaken[e2!.second]));
-    context.read<RegisterBloc>().add(
-          FormsEnteredRegister(
-            ci: ciController.text,
-            passwordFirst: passwordFirstController.text,
-            passwordSecond: passwordSecondController.text,
-            questions: _questions.map((e) => e!.first).toList(),
-            answers: answersTextControllers.map((e) => e.text).toList(),
-          ),
-        );
+    context.read<RegisterBloc>().add(RegisterEvent.formSubmitted(
+          ci: ciController.text,
+          passwordFirst: passwordFirstController.text,
+          passwordSecond: passwordSecondController.text,
+          questions: _questions.map((e) => e!.first).toList(),
+          answers: answersTextControllers.map((e) => e.text).toList(),
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle headlineTextsTheme = Theme.of(context)
-        .textTheme
-        .headline6!
-        .copyWith(color: Theme.of(context).primaryColor, fontSize: 16);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registrarse'),
@@ -106,190 +100,210 @@ class _RegisterPageState extends State<RegisterPage> {
       bottomSheet: const GestionUHBottomSheet(),
       body: BlocConsumer<RegisterBloc, RegisterState>(
         listener: (context, state) async {
-          if (state is RegisterUserFailure) {
-            FlashHelper.errorBar(context, message: state.error);
-          } else if (state is LoadInitialDataFailure) {
-            await FlashHelper.errorBar(context, message: state.error);
-            Future.delayed(
-              const Duration(seconds: 1),
-              () => context
-                  .read<RegisterBloc>()
-                  .add(QuestionsRequestedRegister()),
-            );
-          } else if (state is RegisterUserSuccess) {
-            FlashHelper.successBar(context,
-                message: 'El usuario fue registrado correctamente.');
-          }
+          state.maybeWhen(
+            initialLoadFailure: (error) async {
+              await FlashHelper.errorBar(context, message: error);
+              Future.delayed(
+                const Duration(seconds: 1),
+                () => context
+                    .read<RegisterBloc>()
+                    .add(const RegisterEvent.questionsRequested()),
+              );
+            },
+            registrationFailure: (error) {
+              FlashHelper.errorBar(context, message: error);
+            },
+            registrationSuccess: (String email) {
+              FlashHelper.successBar(context,
+                  message: 'El usuario fue registrado correctamente.');
+            },
+            orElse: () {},
+          );
         },
         builder: (context, state) {
-          if (state is LoadInitialDataSuccess && questions.isEmpty) {
-            int i = 0;
-            questions = state.questions
-                .map((e) => Pair(first: e, second: i++))
-                .toList();
-            questionsTaken = List<int>.filled(questions.length, -1);
-          }
-          if (state is RegisterUserFailure ||
-              state is LoadInitialDataSuccess ||
-              state is LoadInitialDataInProgress ||
-              state is LoadInitialDataFailure) {
-            return Scrollbar(
-              child: SingleChildScrollView(
-                child: Center(
-                  child: Container(
-                    width: getValueForScreenType<double>(
-                      context: context,
-                      mobile: MediaQuery.of(context).size.width,
-                      tablet: MediaQuery.of(context).size.width * 0.5,
-                    ),
-                    padding: const EdgeInsets.only(
-                      top: 30,
-                      bottom: 9,
-                      left: 18,
-                      right: 18,
-                    ),
-                    child: Form(
-                      key: _formKey,
-                      autovalidateMode: AutovalidateMode.disabled,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          GestionUhDefaultTextField(
-                            labelText: 'Número de Carnet De Identidad',
-                            labelStyle: headlineTextsTheme,
-                            hintText: '###########',
-                            autovalidateMode: AutovalidateMode.disabled,
-                            controller: ciController,
-                            validator: identityNumberCIValidator,
-                            keyboardType: TextInputType.number,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          GestionUhDefaultTextField(
-                            labelText: 'Contraseña',
-                            labelStyle: headlineTextsTheme,
-                            hintText: '********',
-                            autovalidateMode: AutovalidateMode.disabled,
-                            controller: passwordFirstController,
-                            validator: safetyPasswordValidator,
-                            keyboardType: TextInputType.visiblePassword,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          GestionUhDefaultTextField(
-                            labelText: 'Repetir Contraseña',
-                            labelStyle: headlineTextsTheme,
-                            hintText: '********',
-                            autovalidateMode: AutovalidateMode.disabled,
-                            controller: passwordSecondController,
-                            validator: safetyPasswordValidator,
-                            keyboardType: TextInputType.visiblePassword,
-                          ),
-                          const SizedBox(height: 60),
-                          const Divider(
-                            color: Colors.black54,
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            'PREGUNTAS DE SEGURIDAD',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6!
-                                .copyWith(
-                                    fontSize: 14,
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
-                          Builder(
-                            builder: (BuildContext context) {
-                              final childrenQuest = <Widget>[];
-                              const length =
-                                  NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
-                              for (int i = 0; i < length; i++) {
-                                childrenQuest.add(buildQuestionZone(i));
-                              }
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: childrenQuest,
-                              );
-                            },
-                          ),
-                          CheckboxListTile(
-                              controlAffinity: ListTileControlAffinity.leading,
-                              dense: true,
-                              activeColor: Theme.of(context).primaryColor,
-                              value: termsAccepted,
-                              title: Text(
-                                'ACEPTO LOS TÉRMINOS Y CONDICIONES',
-                                overflow: TextOverflow.fade,
-                                softWrap: true,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle2
-                                    ?.copyWith(
-                                        color: Theme.of(context).primaryColor),
-                              ),
-                              onChanged: (value) =>
-                                  _showTermsAndConditionsDialog()),
-                          const SizedBox(height: 15),
-                          GestionUhDefaultButton(
-                            text: 'Finalizar',
-                            onPressed: termsAccepted ? _onRegisterAction : null,
-                          ),
-                          const SizedBox(height: 30),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            );
-          } else if (state is RegisterUserSuccess) {
-            return Container(
-              margin: const EdgeInsets.all(30),
+          return state.map(
+            initial: (_state) => _buildRegisterFormPage(context, _state),
+            initialLoadInProgress: (_state) =>
+                _buildRegisterFormPage(context, _state),
+            initialLoadFailure: (_state) =>
+                _buildRegisterFormPage(context, _state),
+            initialLoadSuccess: (_state) {
+              if (questions.isEmpty) {
+                int i = 0;
+                questions = _state.questions
+                    .map((e) => Pair(first: e, second: i++))
+                    .toList();
+                questionsTaken = List<int>.filled(questions.length, -1);
+              }
+              return _buildRegisterFormPage(
+                context,
+                _state,
+              );
+            },
+            registrationInProgress: (_state) =>
+                _buildRegisterFormPage(context, _state),
+            registrationFailure: (_state) =>
+                _buildRegisterFormPage(context, _state),
+            registrationSuccess: (_state) =>
+                _buildRegisterSuccessPage(context, _state),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildRegisterFormPage(BuildContext context, state) {
+    final TextStyle headlineTextsTheme = Theme.of(context)
+        .textTheme
+        .headline6!
+        .copyWith(color: Theme.of(context).primaryColor, fontSize: 16);
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            width: getValueForScreenType<double>(
+              context: context,
+              mobile: MediaQuery.of(context).size.width,
+              tablet: MediaQuery.of(context).size.width * 0.5,
+            ),
+            padding: const EdgeInsets.only(
+              top: 30,
+              bottom: 9,
+              left: 18,
+              right: 18,
+            ),
+            child: Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.disabled,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  RichText(
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  GestionUhDefaultTextField(
+                    labelText: 'Número de Carnet De Identidad',
+                    labelStyle: headlineTextsTheme,
+                    hintText: '###########',
+                    autovalidateMode: AutovalidateMode.disabled,
+                    controller: ciController,
+                    validator: identityNumberCIValidator,
+                    keyboardType: TextInputType.number,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  GestionUhDefaultTextField(
+                    labelText: 'Contraseña',
+                    labelStyle: headlineTextsTheme,
+                    hintText: '********',
+                    autovalidateMode: AutovalidateMode.disabled,
+                    controller: passwordFirstController,
+                    validator: safetyPasswordValidator,
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  GestionUhDefaultTextField(
+                    labelText: 'Repetir Contraseña',
+                    labelStyle: headlineTextsTheme,
+                    hintText: '********',
+                    autovalidateMode: AutovalidateMode.disabled,
+                    controller: passwordSecondController,
+                    validator: safetyPasswordValidator,
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
+                  const SizedBox(height: 60),
+                  const Divider(
+                    color: Colors.black54,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'PREGUNTAS DE SEGURIDAD',
+                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                        fontSize: 14,
+                        color: Colors.black54,
+                        fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
-                    text: TextSpan(
-                        style: Theme.of(context).textTheme.subtitle1,
-                        children: [
-                          const TextSpan(
-                            text: 'Se ha registrado correctamente '
-                                'su correo es ',
-                          ),
-                          TextSpan(
-                            text: '"${state.userEmail}"',
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle1
-                                ?.copyWith(color: Colors.red),
-                          ),
-                          const TextSpan(
-                            text: ', anótelo de ser necesario '
-                                'no se mostrará otra vez',
-                          ),
-                        ]),
+                  ),
+                  Builder(
+                    builder: (BuildContext context) {
+                      final childrenQuest = <Widget>[];
+                      const length = NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
+                      for (int i = 0; i < length; i++) {
+                        childrenQuest.add(buildQuestionZone(i));
+                      }
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: childrenQuest,
+                      );
+                    },
+                  ),
+                  CheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      dense: true,
+                      activeColor: Theme.of(context).primaryColor,
+                      value: termsAccepted,
+                      title: Text(
+                        'ACEPTO LOS TÉRMINOS Y CONDICIONES',
+                        overflow: TextOverflow.fade,
+                        softWrap: true,
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle2
+                            ?.copyWith(color: Theme.of(context).primaryColor),
+                      ),
+                      onChanged: (value) => _showTermsAndConditionsDialog()),
+                  const SizedBox(height: 15),
+                  GestionUhDefaultButton(
+                    text: 'Finalizar',
+                    onPressed: termsAccepted ? _onRegisterAction : null,
                   ),
                   const SizedBox(height: 30),
-                  GestionUhDefaultButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Ok'),
-                  ),
                 ],
               ),
-            );
-          } else {
-            return Container();
-          }
-        },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRegisterSuccessPage(BuildContext context, state) {
+    return Container(
+      margin: const EdgeInsets.all(30),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+                style: Theme.of(context).textTheme.subtitle1,
+                children: [
+                  const TextSpan(
+                    text: 'Se ha registrado correctamente '
+                        'su correo es ',
+                  ),
+                  TextSpan(
+                    text: '"${state.userEmail}"',
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle1
+                        ?.copyWith(color: Colors.red),
+                  ),
+                  const TextSpan(
+                    text: ', anótelo de ser necesario '
+                        'no se mostrará otra vez',
+                  ),
+                ]),
+          ),
+          const SizedBox(height: 30),
+          GestionUhDefaultButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Ok'),
+          ),
+        ],
       ),
     );
   }

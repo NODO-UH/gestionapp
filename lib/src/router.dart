@@ -34,7 +34,8 @@ class RouterNavigation {
             initialEntries: [
               OverlayEntry(builder: (context) {
                 return BlocProvider<RegisterBloc>(
-                  create: (_) => GetIt.I()..add(QuestionsRequestedRegister()),
+                  create: (_) =>
+                      GetIt.I()..add(const RegisterEvent.questionsRequested()),
                   child: const RegisterPage(),
                 );
               }),
