@@ -1,13 +1,9 @@
 part of 'login_bloc.dart';
 
-abstract class LoginState {}
-
-class LoginAttemptInitial extends LoginState {
-  final String error;
-
-  LoginAttemptInitial({required this.error});
+@freezed
+class LoginState with _$LoginState {
+  const factory LoginState.initial() = _Initial;
+  const factory LoginState.loading() = _Loading;
+  const factory LoginState.success() = _Success;
+  const factory LoginState.error(String error) = _Error;
 }
-
-class LoginAttemptInProgress extends LoginState {}
-
-class LoginAttemptSuccess extends LoginState {}

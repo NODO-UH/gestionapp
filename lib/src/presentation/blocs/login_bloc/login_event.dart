@@ -1,15 +1,10 @@
 part of 'login_bloc.dart';
 
-abstract class LoginEvent {}
-
-class LoginAttempted extends LoginEvent {
-  final String username;
-  final String password;
-  final bool rememberMe;
-
-  LoginAttempted({
-    required this.username,
-    required this.password,
-    required this.rememberMe,
-  });
+@freezed
+class LoginEvent with _$LoginEvent {
+  const factory LoginEvent.submit(
+    String username,
+    String password,
+    bool rememberMe,
+  ) = _Submit;
 }
