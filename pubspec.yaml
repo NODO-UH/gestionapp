@@ -16,6 +16,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^7.0.0
+  flutter_localizations:
+    sdk: flutter
   flutter_secure_storage: ^4.1.0
   flutter_web_plugins:
     sdk: flutter
