@@ -1,16 +1,14 @@
 part of 'recover_password_bloc.dart';
 
-@immutable
-abstract class RecoverPasswordEvent {}
-
-class RecoverPasswordCISubmit extends RecoverPasswordEvent {
-  final RecoverPasswordInitial state;
-
-  RecoverPasswordCISubmit({required this.state});
-}
-
-class RecoverPasswordFinalSubmit extends RecoverPasswordEvent {
-  final RecoverPasswordQuestions state;
-
-  RecoverPasswordFinalSubmit({required this.state});
+@freezed
+class RecoverPasswordEvent with _$RecoverPasswordEvent {
+  const factory RecoverPasswordEvent.ciSubmit(
+    TextEditingController ci,
+  ) = _CISubmit;
+  const factory RecoverPasswordEvent.finalSubmit(
+    String ci,
+    List<String> questions,
+    List<TextEditingController> answers,
+    TextEditingController password,
+  ) = _FinalSubmit;
 }
