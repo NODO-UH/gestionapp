@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/data/local/local_storage.dart';
 import 'package:gestionuh/src/data/repositories/repositories.dart';
 import 'package:gestionuh/src/presentation/blocs/blocs.dart';
-import 'package:gestionuh/src/presentation/widgets/bottom_sheet.dart';
-import 'package:gestionuh/src/presentation/widgets/flash_helper.dart';
 import 'package:gestionuh/src/presentation/widgets/widgets.dart';
-import 'package:gestionuh/src/utils/constants/routes.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 import 'package:gestionuh/src/utils/validators.dart';
 import 'package:get_it/get_it.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -56,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
     final authRepo = GetIt.I<AuthRepository>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Iniciar Sesión'),
+        title: const Text(Constants.appName),
         centerTitle: true,
       ),
       bottomSheet: const GestionUHBottomSheet(),
@@ -192,6 +190,9 @@ class _LoginPageState extends State<LoginPage> {
                   GestionUhDefaultButton(
                     text: 'Registrarse',
                     onPressed: () => _registerAction(context),
+                  ),
+                  const SizedBox(
+                    height: 30,
                   ),
                 ],
               ),
