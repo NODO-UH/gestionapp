@@ -405,6 +405,7 @@ class FlashHelper {
 
   static Future<bool?> aceptDeclineDialog(BuildContext context) {
     bool acceptAvailable = false;
+    bool disposedScrollController = false;
     final scrollController = ScrollController();
     return showFlash<bool>(
       context: context,
@@ -415,25 +416,27 @@ class FlashHelper {
 
         return StatefulBuilder(
           builder: (context, setState) {
-            scrollController.addListener(() {
-              final maxScroll = scrollController.position.maxScrollExtent;
-              final currentScroll = scrollController.position.pixels;
-              if (!acceptAvailable && maxScroll == currentScroll) {
-                setState(() {
-                  acceptAvailable = true;
-                });
-              }
-            });
-            WidgetsBinding.instance!.addPostFrameCallback((_) {
-              // in case that there is no need to scroll
-              if (!acceptAvailable &&
-                  scrollController.position.pixels ==
-                      scrollController.position.maxScrollExtent) {
-                setState(() {
-                  acceptAvailable = true;
-                });
-              }
-            });
+            if (!disposedScrollController) {
+              scrollController.addListener(() {
+                final maxScroll = scrollController.position.maxScrollExtent;
+                final currentScroll = scrollController.position.pixels;
+                if (!acceptAvailable && maxScroll == currentScroll) {
+                  setState(() {
+                    acceptAvailable = true;
+                  });
+                }
+              });
+              WidgetsBinding.instance!.addPostFrameCallback((_) {
+                // in case that there is no need to scroll
+                if (!acceptAvailable &&
+                    scrollController.position.pixels ==
+                        scrollController.position.maxScrollExtent) {
+                  setState(() {
+                    acceptAvailable = true;
+                  });
+                }
+              });
+            }
 
             return SafeArea(
               child: Flash<bool>.dialog(
@@ -458,7 +461,9 @@ class FlashHelper {
                     child: Stack(
                       children: [
                         SingleChildScrollView(
-                          controller: scrollController,
+                          controller: disposedScrollController
+                              ? ScrollController()
+                              : scrollController,
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -502,18 +507,26 @@ class FlashHelper {
                     GestionUhDefaultButton(
                       isSecundary: true,
                       onPressed: () {
-                        scrollController.dispose();
-                        controller.dismiss(false);
+                        if (!disposedScrollController) {
+                          setState(() {
+                            disposedScrollController = true;
+                            scrollController.dispose();
+                            controller.dismiss(false);
+                          });
+                        }
                       },
                       text: 'No Acepto',
                       // child: const Text('No acepto'),
                     ),
                     GestionUhDefaultButton(
                       onPressed: acceptAvailable
-                          ? () {
-                              scrollController.dispose();
-                              controller.dismiss(true);
-                            }
+                          ? () => disposedScrollController
+                              ? null
+                              : setState(() {
+                                  disposedScrollController = true;
+                                  scrollController.dispose();
+                                  controller.dismiss(true);
+                                })
                           : null,
                       text: 'Acepto',
                     ),
