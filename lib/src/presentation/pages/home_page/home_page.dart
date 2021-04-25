@@ -16,7 +16,6 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: _buildAppBar(),
         drawer: _buildDrawer(context),
-        bottomSheet: const GestionUHBottomSheet(),
         body: _buildBody(context),
       ),
     );
@@ -58,53 +57,63 @@ class HomePage extends StatelessWidget {
 
   Drawer _buildDrawer(BuildContext context) {
     return Drawer(
-      child: BlocBuilder<HomeBloc, HomeState>(
-        builder: (_, state) {
-          return ListView(
-            children: [
-              DrawerHeader(
-                child: Image.asset(
-                  'assets/images/logo-uh.png',
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-              ...state.when<List<Widget>>(
-                loading: () => [
-                  ListTile(
-                    leading: const GestionUhLoadingIndicator(),
-                    title: Text(
-                      'Cargando ...',
-                      style: Theme.of(context).textTheme.subtitle2,
+      child: Column(
+        children: [
+          Expanded(
+            child: BlocBuilder<HomeBloc, HomeState>(
+              builder: (_, state) {
+                return ListView(
+                  children: [
+                    DrawerHeader(
+                      child: Image.asset(
+                        'assets/images/logo-uh.png',
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
-                  ),
-                ],
-                error: (error) => [
-                  ListTile(
-                    leading: const Icon(Icons.error),
-                    title: Text(
-                      'Error',
-                      style: Theme.of(context).textTheme.subtitle2,
+                    ...state.when<List<Widget>>(
+                      loading: () => [
+                        ListTile(
+                          leading: const GestionUhLoadingIndicator(),
+                          title: Text(
+                            'Cargando ...',
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                        ),
+                      ],
+                      error: (error) => [
+                        ListTile(
+                          leading: const Icon(Icons.error),
+                          title: Text(
+                            'Error',
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                        ),
+                      ],
+                      profile: (p, x) => _getDrawerItems(context, p, x),
+                      quota: (p, x) => _getDrawerItems(context, p, x),
+                      mailQuota: (p, x) => _getDrawerItems(context, p, x),
+                      resetPassword: (p, x) => _getDrawerItems(context, p, x),
+                      aboutUs: (p, x) => _getDrawerItems(context, p, x),
+                      logout: () => [
+                        ListTile(
+                          leading: const GestionUhLoadingIndicator(),
+                          title: Text(
+                            'Cerrando Sesión ...',
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-                profile: (p, x) => _getDrawerItems(context, p, x),
-                quota: (p, x) => _getDrawerItems(context, p, x),
-                mailQuota: (p, x) => _getDrawerItems(context, p, x),
-                resetPassword: (p, x) => _getDrawerItems(context, p, x),
-                aboutUs: (p, x) => _getDrawerItems(context, p, x),
-                logout: () => [
-                  ListTile(
-                    leading: const GestionUhLoadingIndicator(),
-                    title: Text(
-                      'Cerrando Sesión ...',
-                      style: Theme.of(context).textTheme.subtitle2,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          );
-        },
+                  ],
+                );
+              },
+            ),
+          ),
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: GestionUHBottomSheet(),
+          ),
+        ],
       ),
     );
   }
