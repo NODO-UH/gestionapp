@@ -1,6 +1,8 @@
 String? safetyPasswordValidator(String? value) {
   if (value == null || value.length < 8) {
     return 'Debe contener al menos 8 caracteres';
+  } else if (value.length != value.trim().length) {
+    return 'No se permiten espacios al inicio o al final';
   } else if (!value.contains(RegExp(r'[!#$@\[\]\\.,%&*+/=?^_`{|}~-]'))) {
     return 'Debe contener al menos un caracter especial';
   } else if (!value.contains(RegExp('[0-9]'))) {
@@ -31,6 +33,19 @@ String? identityNumberCIValidator(String? value) {
 String? answerValidator(String? value) {
   if (value == null || value.isEmpty) {
     return 'Debe responder la pregunta seleccionada';
+  }
+  if (value.length != value.trim().length) {
+    return 'No puede contener espacios al inicio o al final';
+  }
+  return null;
+}
+
+String? userNameValidator(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Debe introducir su nombre de usuario';
+  }
+  if (value.length != value.trim().length) {
+    return 'No puede contener espacios al inicio o al final';
   }
   return null;
 }
