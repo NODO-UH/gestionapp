@@ -1,39 +1,37 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gestionuh/src/data/models/models.dart';
 import 'package:gestionuh/src/data/repositories/repositories.dart';
 import 'package:gestionuh/src/utils/constants/constants.dart';
 
 part 'mail_quota_event.dart';
 part 'mail_quota_state.dart';
+part 'mail_quota_bloc.freezed.dart';
 
 class MailQuotaBloc extends Bloc<MailQuotaEvent, MailQuotaState> {
   final MailQuotasRepository mailQuotasRepository;
 
   MailQuotaBloc({
     required this.mailQuotasRepository,
-  }) : super(MailQuotaInitial());
+  }) : super(const MailQuotaState.initial());
 
   @override
   Stream<MailQuotaState> mapEventToState(MailQuotaEvent event) async* {
-    if (event is MailQuotaInitialized) {
-      yield* handleProfileInitialized(event);
-    }
+    yield* event.map(
+      quotaRequested: quotaRequestedHandler,
+    );
   }
 
-  Stream<MailQuotaState> handleProfileInitialized(
-      MailQuotaInitialized event) async* {
-    yield MailQuotaLoadInProgress();
+  Stream<MailQuotaState> quotaRequestedHandler(
+      _$MailQuotaRequested event) async* {
+    yield const MailQuotaState.loadInProgress();
     final result = await mailQuotasRepository.getQuota();
-    if (result == null) {
-      yield MailQuotaLoadedFailure(
-        error: Errors.DefaultError,
-      );
-    } else if (result.error != null) {
-      yield MailQuotaLoadedFailure(
-        error: result.error,
+    if (result == null || result.error != null) {
+      yield MailQuotaState.loadFailure(
+        error: result?.error ?? Errors.DefaultError,
       );
     } else {
-      yield MailQuotaLoadedSuccess(
+      yield MailQuotaState.loadSuccess(
         quota: result,
       );
     }

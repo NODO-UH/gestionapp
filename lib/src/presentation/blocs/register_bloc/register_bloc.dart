@@ -27,7 +27,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   Stream<RegisterState> questionsRequestedRegisterHandler(
-      _QuestionsRequestedRegister _) async* {
+      _$QuestionsRequestedRegister _) async* {
     yield const RegisterState.initialLoadInProgress();
     final questions = await repository.getSecurityQuestions();
     if (questions.error != null) {
@@ -40,7 +40,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   Stream<RegisterState> formSubmittedRegisterHandler(
-    _FormSubmittedRegister event,
+    _$FormSubmittedRegister event,
   ) async* {
     yield const RegisterState.registrationInProgress();
     if (event.passwordFirst != event.passwordSecond) {

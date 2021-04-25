@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:gestionuh/src/data/api/api.dart';
 import 'package:gestionuh/src/data/models/models.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 
 class MailQuotasRepository {
   final GestionApi api;
@@ -21,6 +22,6 @@ class MailQuotasRepository {
     } catch (e) {
       log(e.toString());
     }
-    return null;
+    return MailQuota()..error = Errors.DefaultError;
   }
 }

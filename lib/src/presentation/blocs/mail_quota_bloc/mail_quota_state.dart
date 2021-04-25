@@ -1,23 +1,11 @@
 part of 'mail_quota_bloc.dart';
 
-abstract class MailQuotaState {}
-
-class MailQuotaInitial extends MailQuotaState {}
-
-class MailQuotaLoadInProgress extends MailQuotaState {}
-
-class MailQuotaLoadedSuccess extends MailQuotaState {
-  final MailQuota? quota;
-
-  MailQuotaLoadedSuccess({
-    this.quota,
-  });
-}
-
-class MailQuotaLoadedFailure extends MailQuotaState {
-  final String? error;
-
-  MailQuotaLoadedFailure({
-    this.error,
-  });
+@freezed
+abstract class MailQuotaState with _$MailQuotaState {
+  const factory MailQuotaState.initial() = _$MailQuotaInitial;
+  const factory MailQuotaState.loadInProgress() = _$LoadMailQuotaInProgress;
+  const factory MailQuotaState.loadSuccess({required MailQuota quota}) =
+      _$LoadMailQuotaSuccess;
+  const factory MailQuotaState.loadFailure({required String error}) =
+      _$LoadMailQuotaFailure;
 }
