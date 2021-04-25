@@ -77,7 +77,7 @@ class _QuotaPageState extends State<QuotaPage> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(state.error),
+                        SelectableText(state.error),
                         Padding(
                           padding: const EdgeInsets.all(5),
                           child: GestionUhDefaultButton(

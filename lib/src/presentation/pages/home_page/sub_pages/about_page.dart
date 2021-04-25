@@ -35,7 +35,7 @@ class AboutInformationPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
+                SelectableText(
                   About.shortDescription,
                   style: Theme.of(context)
                       .textTheme
@@ -45,7 +45,7 @@ class AboutInformationPage extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                Text(
+                SelectableText(
                   'Equipo de desarrollo:',
                   style: Theme.of(context).textTheme.headline5!.copyWith(),
                 ),
@@ -94,17 +94,17 @@ class AboutInformationPage extends StatelessWidget {
                       .toList(),
                 ),
                 const SizedBox(height: 50),
-                Text(
+                SelectableText(
                   'Nodo Central de Red - UH',
                   style: Theme.of(context).textTheme.headline6!.copyWith(),
                 ),
                 const SizedBox(height: 10),
-                Text(
+                SelectableText(
                   'MATCOM - UH',
                   style: Theme.of(context).textTheme.headline6!.copyWith(),
                 ),
                 const SizedBox(height: 10),
-                Text(
+                SelectableText(
                   'GRS - UH',
                   style: Theme.of(context).textTheme.headline6!.copyWith(),
                 ),

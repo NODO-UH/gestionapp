@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
     return AppBar(
       title: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
-          return Text(
+          return SelectableText(
             state.map(
               loading: (state) => 'Cargando',
               error: (state) => 'Error',
@@ -134,7 +134,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(state.message),
+                    SelectableText(state.message),
                     const SizedBox(height: 20),
                     GestionUhDefaultButton(
                       text: 'Reintentar',
@@ -254,7 +254,8 @@ class HomePage extends StatelessWidget {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  content: const Text('¿Está seguro que desea cerrar sesión?'),
+                  content: const SelectableText(
+                      '¿Está seguro que desea cerrar sesión?'),
                   actions: [
                     TextButton(
                       onPressed: () {

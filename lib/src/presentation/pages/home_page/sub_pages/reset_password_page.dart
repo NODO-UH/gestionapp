@@ -86,50 +86,55 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   // Password inputs
                   Form(
                     key: _formPasswordKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Current password input
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: GestionUhDefaultTextField(
-                            labelText: 'Contraseña Actual',
-                            hintText: '********',
-                            controller: _passwordCurrentController,
-                            validator: currentPasswordValidator,
-                            autovalidateMode: AutovalidateMode.disabled,
-                            keyboardType: TextInputType.visiblePassword,
+                    child: AutofillGroup(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Current password input
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: GestionUhDefaultTextField(
+                              labelText: 'Contraseña Actual',
+                              hintText: '********',
+                              controller: _passwordCurrentController,
+                              validator: currentPasswordValidator,
+                              autovalidateMode: AutovalidateMode.disabled,
+                              keyboardType: TextInputType.visiblePassword,
+                              autofillHints: const [AutofillHints.password],
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                            height: 30,
-                            child: Divider(
-                              color: Colors.black54,
-                            )),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: GestionUhDefaultTextField(
-                            labelText: 'Contraseña Nueva*',
-                            hintText: '********',
-                            controller: _passwordFirstController,
-                            validator: safetyPasswordValidator,
-                            autovalidateMode: AutovalidateMode.disabled,
-                            keyboardType: TextInputType.visiblePassword,
+                          const SizedBox(
+                              height: 30,
+                              child: Divider(
+                                color: Colors.black54,
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: GestionUhDefaultTextField(
+                              labelText: 'Contraseña Nueva*',
+                              hintText: '********',
+                              controller: _passwordFirstController,
+                              validator: safetyPasswordValidator,
+                              autovalidateMode: AutovalidateMode.disabled,
+                              keyboardType: TextInputType.visiblePassword,
+                              autofillHints: const [AutofillHints.newPassword],
+                            ),
                           ),
-                        ),
 
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: GestionUhDefaultTextField(
-                            labelText: 'Repetir Contraseña*',
-                            hintText: '********',
-                            controller: _passwordSecondController,
-                            validator: safetyPasswordValidator,
-                            autovalidateMode: AutovalidateMode.disabled,
-                            keyboardType: TextInputType.visiblePassword,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: GestionUhDefaultTextField(
+                              labelText: 'Repetir Contraseña*',
+                              hintText: '********',
+                              controller: _passwordSecondController,
+                              validator: safetyPasswordValidator,
+                              autovalidateMode: AutovalidateMode.disabled,
+                              keyboardType: TextInputType.visiblePassword,
+                              autofillHints: const [AutofillHints.newPassword],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 25),
