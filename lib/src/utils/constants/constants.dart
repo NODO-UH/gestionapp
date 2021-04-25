@@ -1,5 +1,6 @@
 export 'about.dart';
 export 'errors.dart';
+export 'helpful_links.dart';
 export 'messages.dart';
 export 'misc.dart';
 export 'routes.dart';

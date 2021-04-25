@@ -25,4 +25,8 @@ class HomeState with _$HomeState {
     UserData profile,
     List<HomeItemEnum> items,
   ) = _AboutUs;
+  const factory HomeState.helpfulLinks(
+    UserData profile,
+    List<HomeItemEnum> items,
+  ) = _HelpfulLinks;
 }
