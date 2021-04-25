@@ -159,7 +159,8 @@ class HomePage extends StatelessWidget {
           },
           mailQuota: (state) {
             return BlocProvider<MailQuotaBloc>(
-              create: (_) => GetIt.I()..add(MailQuotaInitialized()),
+              create: (_) =>
+                  GetIt.I()..add(const MailQuotaEvent.quotaRequested()),
               child: const MailQuotaPage(),
             );
           },

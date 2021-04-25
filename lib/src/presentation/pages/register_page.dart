@@ -23,9 +23,10 @@ class _RegisterPageState extends State<RegisterPage> {
   late bool termsAccepted;
 
   late List<TextEditingController> answersTextControllers;
-  TextEditingController ciController = TextEditingController();
-  TextEditingController passwordFirstController = TextEditingController();
-  TextEditingController passwordSecondController = TextEditingController();
+  final TextEditingController ciController = TextEditingController();
+  final TextEditingController passwordFirstController = TextEditingController();
+  final TextEditingController passwordSecondController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -113,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
             registrationFailure: (error) {
               FlashHelper.errorBar(context, message: error);
             },
-            registrationSuccess: (String email) {
+            registrationSuccess: (_) {
               FlashHelper.successBar(context,
                   message: 'El usuario fue registrado correctamente.');
             },
@@ -121,38 +122,32 @@ class _RegisterPageState extends State<RegisterPage> {
           );
         },
         builder: (context, state) {
-          return state.map(
-            initial: (_state) => _buildRegisterFormPage(context, _state),
-            initialLoadInProgress: (_state) =>
-                _buildRegisterFormPage(context, _state),
-            initialLoadFailure: (_state) =>
-                _buildRegisterFormPage(context, _state),
-            initialLoadSuccess: (_state) {
-              if (questions.isEmpty) {
-                int i = 0;
-                questions = _state.questions
-                    .map((e) => Pair(first: e, second: i++))
-                    .toList();
-                questionsTaken = List<int>.filled(questions.length, -1);
-              }
-              return _buildRegisterFormPage(
-                context,
-                _state,
-              );
-            },
-            registrationInProgress: (_state) =>
-                _buildRegisterFormPage(context, _state),
-            registrationFailure: (_state) =>
-                _buildRegisterFormPage(context, _state),
-            registrationSuccess: (_state) =>
-                _buildRegisterSuccessPage(context, _state),
+          return state.maybeWhen(
+            initialLoadSuccess: (List<String> loadedQuestions) =>
+                _buildRegisterFormPageAndLoadQuestion(context, loadedQuestions),
+            registrationSuccess: (String userEmail) =>
+                _buildRegisterSuccessPage(context, userEmail),
+            orElse: () => _buildRegisterFormPage(context),
           );
         },
       ),
     );
   }
 
-  Widget _buildRegisterFormPage(BuildContext context, state) {
+  Widget _buildRegisterFormPageAndLoadQuestion(
+    BuildContext context,
+    List<String> loadedQuestions,
+  ) {
+    if (questions.isEmpty) {
+      int i = 0;
+      questions =
+          loadedQuestions.map((e) => Pair(first: e, second: i++)).toList();
+      questionsTaken = List<int>.filled(questions.length, -1);
+    }
+    return _buildRegisterFormPage(context);
+  }
+
+  Widget _buildRegisterFormPage(BuildContext context) {
     final TextStyle headlineTextsTheme = Theme.of(context)
         .textTheme
         .headline6!
@@ -232,7 +227,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       final childrenQuest = <Widget>[];
                       const length = NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
                       for (int i = 0; i < length; i++) {
-                        childrenQuest.add(buildQuestionZone(i));
+                        childrenQuest.add(_buildQuestionZone(i));
                       }
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -270,7 +265,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buildRegisterSuccessPage(BuildContext context, state) {
+  Widget _buildRegisterSuccessPage(BuildContext context, String userEmail) {
     return Container(
       margin: const EdgeInsets.all(30),
       child: Column(
@@ -286,7 +281,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         'su correo es ',
                   ),
                   TextSpan(
-                    text: '"${state.userEmail}"',
+                    text: '"$userEmail"',
                     style: Theme.of(context)
                         .textTheme
                         .subtitle1
@@ -308,7 +303,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget buildQuestionZone(int index) {
+  Widget _buildQuestionZone(int index) {
     final TextStyle headlineTextsTheme = Theme.of(context)
         .textTheme
         .headline6!

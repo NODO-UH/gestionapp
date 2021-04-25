@@ -16,17 +16,17 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$RegisterEventTearOff {
   const _$RegisterEventTearOff();
 
-  _QuestionsRequestedRegister questionsRequested() {
-    return const _QuestionsRequestedRegister();
+  _$QuestionsRequestedRegister questionsRequested() {
+    return const _$QuestionsRequestedRegister();
   }
 
-  _FormSubmittedRegister formSubmitted(
+  _$FormSubmittedRegister formSubmitted(
       {required List<String> answers,
       required String ci,
       required String passwordFirst,
       required String passwordSecond,
       required List<String> questions}) {
-    return _FormSubmittedRegister(
+    return _$FormSubmittedRegister(
       answers: answers,
       ci: ci,
       passwordFirst: passwordFirst,
@@ -60,15 +60,15 @@ mixin _$RegisterEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionsRequestedRegister value)
+    required TResult Function(_$QuestionsRequestedRegister value)
         questionsRequested,
-    required TResult Function(_FormSubmittedRegister value) formSubmitted,
+    required TResult Function(_$FormSubmittedRegister value) formSubmitted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionsRequestedRegister value)? questionsRequested,
-    TResult Function(_FormSubmittedRegister value)? formSubmitted,
+    TResult Function(_$QuestionsRequestedRegister value)? questionsRequested,
+    TResult Function(_$FormSubmittedRegister value)? formSubmitted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -92,30 +92,31 @@ class _$RegisterEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$QuestionsRequestedRegisterCopyWith<$Res> {
-  factory _$QuestionsRequestedRegisterCopyWith(
-          _QuestionsRequestedRegister value,
-          $Res Function(_QuestionsRequestedRegister) then) =
-      __$QuestionsRequestedRegisterCopyWithImpl<$Res>;
+abstract class _$$QuestionsRequestedRegisterCopyWith<$Res> {
+  factory _$$QuestionsRequestedRegisterCopyWith(
+          _$QuestionsRequestedRegister value,
+          $Res Function(_$QuestionsRequestedRegister) then) =
+      __$$QuestionsRequestedRegisterCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$QuestionsRequestedRegisterCopyWithImpl<$Res>
+class __$$QuestionsRequestedRegisterCopyWithImpl<$Res>
     extends _$RegisterEventCopyWithImpl<$Res>
-    implements _$QuestionsRequestedRegisterCopyWith<$Res> {
-  __$QuestionsRequestedRegisterCopyWithImpl(_QuestionsRequestedRegister _value,
-      $Res Function(_QuestionsRequestedRegister) _then)
-      : super(_value, (v) => _then(v as _QuestionsRequestedRegister));
+    implements _$$QuestionsRequestedRegisterCopyWith<$Res> {
+  __$$QuestionsRequestedRegisterCopyWithImpl(
+      _$QuestionsRequestedRegister _value,
+      $Res Function(_$QuestionsRequestedRegister) _then)
+      : super(_value, (v) => _then(v as _$QuestionsRequestedRegister));
 
   @override
-  _QuestionsRequestedRegister get _value =>
-      super._value as _QuestionsRequestedRegister;
+  _$QuestionsRequestedRegister get _value =>
+      super._value as _$QuestionsRequestedRegister;
 }
 
 /// @nodoc
 
-class _$_QuestionsRequestedRegister implements _QuestionsRequestedRegister {
-  const _$_QuestionsRequestedRegister();
+class _$_$QuestionsRequestedRegister implements _$QuestionsRequestedRegister {
+  const _$_$QuestionsRequestedRegister();
 
   @override
   String toString() {
@@ -124,7 +125,7 @@ class _$_QuestionsRequestedRegister implements _QuestionsRequestedRegister {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _QuestionsRequestedRegister);
+    return identical(this, other) || (other is _$QuestionsRequestedRegister);
   }
 
   @override
@@ -159,9 +160,9 @@ class _$_QuestionsRequestedRegister implements _QuestionsRequestedRegister {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionsRequestedRegister value)
+    required TResult Function(_$QuestionsRequestedRegister value)
         questionsRequested,
-    required TResult Function(_FormSubmittedRegister value) formSubmitted,
+    required TResult Function(_$FormSubmittedRegister value) formSubmitted,
   }) {
     return questionsRequested(this);
   }
@@ -169,8 +170,8 @@ class _$_QuestionsRequestedRegister implements _QuestionsRequestedRegister {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionsRequestedRegister value)? questionsRequested,
-    TResult Function(_FormSubmittedRegister value)? formSubmitted,
+    TResult Function(_$QuestionsRequestedRegister value)? questionsRequested,
+    TResult Function(_$FormSubmittedRegister value)? formSubmitted,
     required TResult orElse(),
   }) {
     if (questionsRequested != null) {
@@ -180,15 +181,15 @@ class _$_QuestionsRequestedRegister implements _QuestionsRequestedRegister {
   }
 }
 
-abstract class _QuestionsRequestedRegister implements RegisterEvent {
-  const factory _QuestionsRequestedRegister() = _$_QuestionsRequestedRegister;
+abstract class _$QuestionsRequestedRegister implements RegisterEvent {
+  const factory _$QuestionsRequestedRegister() = _$_$QuestionsRequestedRegister;
 }
 
 /// @nodoc
-abstract class _$FormSubmittedRegisterCopyWith<$Res> {
-  factory _$FormSubmittedRegisterCopyWith(_FormSubmittedRegister value,
-          $Res Function(_FormSubmittedRegister) then) =
-      __$FormSubmittedRegisterCopyWithImpl<$Res>;
+abstract class _$$FormSubmittedRegisterCopyWith<$Res> {
+  factory _$$FormSubmittedRegisterCopyWith(_$FormSubmittedRegister value,
+          $Res Function(_$FormSubmittedRegister) then) =
+      __$$FormSubmittedRegisterCopyWithImpl<$Res>;
   $Res call(
       {List<String> answers,
       String ci,
@@ -198,15 +199,15 @@ abstract class _$FormSubmittedRegisterCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$FormSubmittedRegisterCopyWithImpl<$Res>
+class __$$FormSubmittedRegisterCopyWithImpl<$Res>
     extends _$RegisterEventCopyWithImpl<$Res>
-    implements _$FormSubmittedRegisterCopyWith<$Res> {
-  __$FormSubmittedRegisterCopyWithImpl(_FormSubmittedRegister _value,
-      $Res Function(_FormSubmittedRegister) _then)
-      : super(_value, (v) => _then(v as _FormSubmittedRegister));
+    implements _$$FormSubmittedRegisterCopyWith<$Res> {
+  __$$FormSubmittedRegisterCopyWithImpl(_$FormSubmittedRegister _value,
+      $Res Function(_$FormSubmittedRegister) _then)
+      : super(_value, (v) => _then(v as _$FormSubmittedRegister));
 
   @override
-  _FormSubmittedRegister get _value => super._value as _FormSubmittedRegister;
+  _$FormSubmittedRegister get _value => super._value as _$FormSubmittedRegister;
 
   @override
   $Res call({
@@ -216,7 +217,7 @@ class __$FormSubmittedRegisterCopyWithImpl<$Res>
     Object? passwordSecond = freezed,
     Object? questions = freezed,
   }) {
-    return _then(_FormSubmittedRegister(
+    return _then(_$FormSubmittedRegister(
       answers: answers == freezed
           ? _value.answers
           : answers // ignore: cast_nullable_to_non_nullable
@@ -243,8 +244,8 @@ class __$FormSubmittedRegisterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FormSubmittedRegister implements _FormSubmittedRegister {
-  const _$_FormSubmittedRegister(
+class _$_$FormSubmittedRegister implements _$FormSubmittedRegister {
+  const _$_$FormSubmittedRegister(
       {required this.answers,
       required this.ci,
       required this.passwordFirst,
@@ -270,7 +271,7 @@ class _$_FormSubmittedRegister implements _FormSubmittedRegister {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _FormSubmittedRegister &&
+        (other is _$FormSubmittedRegister &&
             (identical(other.answers, answers) ||
                 const DeepCollectionEquality()
                     .equals(other.answers, answers)) &&
@@ -298,8 +299,8 @@ class _$_FormSubmittedRegister implements _FormSubmittedRegister {
 
   @JsonKey(ignore: true)
   @override
-  _$FormSubmittedRegisterCopyWith<_FormSubmittedRegister> get copyWith =>
-      __$FormSubmittedRegisterCopyWithImpl<_FormSubmittedRegister>(
+  _$$FormSubmittedRegisterCopyWith<_$FormSubmittedRegister> get copyWith =>
+      __$$FormSubmittedRegisterCopyWithImpl<_$FormSubmittedRegister>(
           this, _$identity);
 
   @override
@@ -332,9 +333,9 @@ class _$_FormSubmittedRegister implements _FormSubmittedRegister {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionsRequestedRegister value)
+    required TResult Function(_$QuestionsRequestedRegister value)
         questionsRequested,
-    required TResult Function(_FormSubmittedRegister value) formSubmitted,
+    required TResult Function(_$FormSubmittedRegister value) formSubmitted,
   }) {
     return formSubmitted(this);
   }
@@ -342,8 +343,8 @@ class _$_FormSubmittedRegister implements _FormSubmittedRegister {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionsRequestedRegister value)? questionsRequested,
-    TResult Function(_FormSubmittedRegister value)? formSubmitted,
+    TResult Function(_$QuestionsRequestedRegister value)? questionsRequested,
+    TResult Function(_$FormSubmittedRegister value)? formSubmitted,
     required TResult orElse(),
   }) {
     if (formSubmitted != null) {
@@ -353,13 +354,13 @@ class _$_FormSubmittedRegister implements _FormSubmittedRegister {
   }
 }
 
-abstract class _FormSubmittedRegister implements RegisterEvent {
-  const factory _FormSubmittedRegister(
+abstract class _$FormSubmittedRegister implements RegisterEvent {
+  const factory _$FormSubmittedRegister(
       {required List<String> answers,
       required String ci,
       required String passwordFirst,
       required String passwordSecond,
-      required List<String> questions}) = _$_FormSubmittedRegister;
+      required List<String> questions}) = _$_$FormSubmittedRegister;
 
   List<String> get answers => throw _privateConstructorUsedError;
   String get ci => throw _privateConstructorUsedError;
@@ -367,7 +368,7 @@ abstract class _FormSubmittedRegister implements RegisterEvent {
   String get passwordSecond => throw _privateConstructorUsedError;
   List<String> get questions => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$FormSubmittedRegisterCopyWith<_FormSubmittedRegister> get copyWith =>
+  _$$FormSubmittedRegisterCopyWith<_$FormSubmittedRegister> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -375,39 +376,39 @@ abstract class _FormSubmittedRegister implements RegisterEvent {
 class _$RegisterStateTearOff {
   const _$RegisterStateTearOff();
 
-  _RegisterInitial initial() {
-    return const _RegisterInitial();
+  _$RegisterInitial initial() {
+    return const _$RegisterInitial();
   }
 
-  _RegisterLoadInitialDataInProgress initialLoadInProgress() {
-    return const _RegisterLoadInitialDataInProgress();
+  _$RegisterLoadInitialDataInProgress initialLoadInProgress() {
+    return const _$RegisterLoadInitialDataInProgress();
   }
 
-  _RegisterLoadInitialDataFailure initialLoadFailure({required String error}) {
-    return _RegisterLoadInitialDataFailure(
+  _$RegisterLoadInitialDataFailure initialLoadFailure({required String error}) {
+    return _$RegisterLoadInitialDataFailure(
       error: error,
     );
   }
 
-  _RegisterLoadInitialDataSuccess initialLoadSuccess(
+  _$RegisterLoadInitialDataSuccess initialLoadSuccess(
       {required List<String> questions}) {
-    return _RegisterLoadInitialDataSuccess(
+    return _$RegisterLoadInitialDataSuccess(
       questions: questions,
     );
   }
 
-  _RegisterUserInProgress registrationInProgress() {
-    return const _RegisterUserInProgress();
+  _$RegisterUserInProgress registrationInProgress() {
+    return const _$RegisterUserInProgress();
   }
 
-  _RegisterUserFailure registrationFailure({required String error}) {
-    return _RegisterUserFailure(
+  _$RegisterUserFailure registrationFailure({required String error}) {
+    return _$RegisterUserFailure(
       error: error,
     );
   }
 
-  _RegisterUserSuccess registrationSuccess({required String userEmail}) {
-    return _RegisterUserSuccess(
+  _$RegisterUserSuccess registrationSuccess({required String userEmail}) {
+    return _$RegisterUserSuccess(
       userEmail: userEmail,
     );
   }
@@ -443,29 +444,31 @@ mixin _$RegisterState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RegisterInitial value) initial,
-    required TResult Function(_RegisterLoadInitialDataInProgress value)
+    required TResult Function(_$RegisterInitial value) initial,
+    required TResult Function(_$RegisterLoadInitialDataInProgress value)
         initialLoadInProgress,
-    required TResult Function(_RegisterLoadInitialDataFailure value)
+    required TResult Function(_$RegisterLoadInitialDataFailure value)
         initialLoadFailure,
-    required TResult Function(_RegisterLoadInitialDataSuccess value)
+    required TResult Function(_$RegisterLoadInitialDataSuccess value)
         initialLoadSuccess,
-    required TResult Function(_RegisterUserInProgress value)
+    required TResult Function(_$RegisterUserInProgress value)
         registrationInProgress,
-    required TResult Function(_RegisterUserFailure value) registrationFailure,
-    required TResult Function(_RegisterUserSuccess value) registrationSuccess,
+    required TResult Function(_$RegisterUserFailure value) registrationFailure,
+    required TResult Function(_$RegisterUserSuccess value) registrationSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RegisterInitial value)? initial,
-    TResult Function(_RegisterLoadInitialDataInProgress value)?
+    TResult Function(_$RegisterInitial value)? initial,
+    TResult Function(_$RegisterLoadInitialDataInProgress value)?
         initialLoadInProgress,
-    TResult Function(_RegisterLoadInitialDataFailure value)? initialLoadFailure,
-    TResult Function(_RegisterLoadInitialDataSuccess value)? initialLoadSuccess,
-    TResult Function(_RegisterUserInProgress value)? registrationInProgress,
-    TResult Function(_RegisterUserFailure value)? registrationFailure,
-    TResult Function(_RegisterUserSuccess value)? registrationSuccess,
+    TResult Function(_$RegisterLoadInitialDataFailure value)?
+        initialLoadFailure,
+    TResult Function(_$RegisterLoadInitialDataSuccess value)?
+        initialLoadSuccess,
+    TResult Function(_$RegisterUserInProgress value)? registrationInProgress,
+    TResult Function(_$RegisterUserFailure value)? registrationFailure,
+    TResult Function(_$RegisterUserSuccess value)? registrationSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -489,28 +492,28 @@ class _$RegisterStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$RegisterInitialCopyWith<$Res> {
-  factory _$RegisterInitialCopyWith(
-          _RegisterInitial value, $Res Function(_RegisterInitial) then) =
-      __$RegisterInitialCopyWithImpl<$Res>;
+abstract class _$$RegisterInitialCopyWith<$Res> {
+  factory _$$RegisterInitialCopyWith(
+          _$RegisterInitial value, $Res Function(_$RegisterInitial) then) =
+      __$$RegisterInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$RegisterInitialCopyWithImpl<$Res>
+class __$$RegisterInitialCopyWithImpl<$Res>
     extends _$RegisterStateCopyWithImpl<$Res>
-    implements _$RegisterInitialCopyWith<$Res> {
-  __$RegisterInitialCopyWithImpl(
-      _RegisterInitial _value, $Res Function(_RegisterInitial) _then)
-      : super(_value, (v) => _then(v as _RegisterInitial));
+    implements _$$RegisterInitialCopyWith<$Res> {
+  __$$RegisterInitialCopyWithImpl(
+      _$RegisterInitial _value, $Res Function(_$RegisterInitial) _then)
+      : super(_value, (v) => _then(v as _$RegisterInitial));
 
   @override
-  _RegisterInitial get _value => super._value as _RegisterInitial;
+  _$RegisterInitial get _value => super._value as _$RegisterInitial;
 }
 
 /// @nodoc
 
-class _$_RegisterInitial implements _RegisterInitial {
-  const _$_RegisterInitial();
+class _$_$RegisterInitial implements _$RegisterInitial {
+  const _$_$RegisterInitial();
 
   @override
   String toString() {
@@ -519,7 +522,7 @@ class _$_RegisterInitial implements _RegisterInitial {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _RegisterInitial);
+    return identical(this, other) || (other is _$RegisterInitial);
   }
 
   @override
@@ -560,17 +563,17 @@ class _$_RegisterInitial implements _RegisterInitial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RegisterInitial value) initial,
-    required TResult Function(_RegisterLoadInitialDataInProgress value)
+    required TResult Function(_$RegisterInitial value) initial,
+    required TResult Function(_$RegisterLoadInitialDataInProgress value)
         initialLoadInProgress,
-    required TResult Function(_RegisterLoadInitialDataFailure value)
+    required TResult Function(_$RegisterLoadInitialDataFailure value)
         initialLoadFailure,
-    required TResult Function(_RegisterLoadInitialDataSuccess value)
+    required TResult Function(_$RegisterLoadInitialDataSuccess value)
         initialLoadSuccess,
-    required TResult Function(_RegisterUserInProgress value)
+    required TResult Function(_$RegisterUserInProgress value)
         registrationInProgress,
-    required TResult Function(_RegisterUserFailure value) registrationFailure,
-    required TResult Function(_RegisterUserSuccess value) registrationSuccess,
+    required TResult Function(_$RegisterUserFailure value) registrationFailure,
+    required TResult Function(_$RegisterUserSuccess value) registrationSuccess,
   }) {
     return initial(this);
   }
@@ -578,14 +581,16 @@ class _$_RegisterInitial implements _RegisterInitial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RegisterInitial value)? initial,
-    TResult Function(_RegisterLoadInitialDataInProgress value)?
+    TResult Function(_$RegisterInitial value)? initial,
+    TResult Function(_$RegisterLoadInitialDataInProgress value)?
         initialLoadInProgress,
-    TResult Function(_RegisterLoadInitialDataFailure value)? initialLoadFailure,
-    TResult Function(_RegisterLoadInitialDataSuccess value)? initialLoadSuccess,
-    TResult Function(_RegisterUserInProgress value)? registrationInProgress,
-    TResult Function(_RegisterUserFailure value)? registrationFailure,
-    TResult Function(_RegisterUserSuccess value)? registrationSuccess,
+    TResult Function(_$RegisterLoadInitialDataFailure value)?
+        initialLoadFailure,
+    TResult Function(_$RegisterLoadInitialDataSuccess value)?
+        initialLoadSuccess,
+    TResult Function(_$RegisterUserInProgress value)? registrationInProgress,
+    TResult Function(_$RegisterUserFailure value)? registrationFailure,
+    TResult Function(_$RegisterUserSuccess value)? registrationSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -595,37 +600,37 @@ class _$_RegisterInitial implements _RegisterInitial {
   }
 }
 
-abstract class _RegisterInitial implements RegisterState {
-  const factory _RegisterInitial() = _$_RegisterInitial;
+abstract class _$RegisterInitial implements RegisterState {
+  const factory _$RegisterInitial() = _$_$RegisterInitial;
 }
 
 /// @nodoc
-abstract class _$RegisterLoadInitialDataInProgressCopyWith<$Res> {
-  factory _$RegisterLoadInitialDataInProgressCopyWith(
-          _RegisterLoadInitialDataInProgress value,
-          $Res Function(_RegisterLoadInitialDataInProgress) then) =
-      __$RegisterLoadInitialDataInProgressCopyWithImpl<$Res>;
+abstract class _$$RegisterLoadInitialDataInProgressCopyWith<$Res> {
+  factory _$$RegisterLoadInitialDataInProgressCopyWith(
+          _$RegisterLoadInitialDataInProgress value,
+          $Res Function(_$RegisterLoadInitialDataInProgress) then) =
+      __$$RegisterLoadInitialDataInProgressCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$RegisterLoadInitialDataInProgressCopyWithImpl<$Res>
+class __$$RegisterLoadInitialDataInProgressCopyWithImpl<$Res>
     extends _$RegisterStateCopyWithImpl<$Res>
-    implements _$RegisterLoadInitialDataInProgressCopyWith<$Res> {
-  __$RegisterLoadInitialDataInProgressCopyWithImpl(
-      _RegisterLoadInitialDataInProgress _value,
-      $Res Function(_RegisterLoadInitialDataInProgress) _then)
-      : super(_value, (v) => _then(v as _RegisterLoadInitialDataInProgress));
+    implements _$$RegisterLoadInitialDataInProgressCopyWith<$Res> {
+  __$$RegisterLoadInitialDataInProgressCopyWithImpl(
+      _$RegisterLoadInitialDataInProgress _value,
+      $Res Function(_$RegisterLoadInitialDataInProgress) _then)
+      : super(_value, (v) => _then(v as _$RegisterLoadInitialDataInProgress));
 
   @override
-  _RegisterLoadInitialDataInProgress get _value =>
-      super._value as _RegisterLoadInitialDataInProgress;
+  _$RegisterLoadInitialDataInProgress get _value =>
+      super._value as _$RegisterLoadInitialDataInProgress;
 }
 
 /// @nodoc
 
-class _$_RegisterLoadInitialDataInProgress
-    implements _RegisterLoadInitialDataInProgress {
-  const _$_RegisterLoadInitialDataInProgress();
+class _$_$RegisterLoadInitialDataInProgress
+    implements _$RegisterLoadInitialDataInProgress {
+  const _$_$RegisterLoadInitialDataInProgress();
 
   @override
   String toString() {
@@ -635,7 +640,7 @@ class _$_RegisterLoadInitialDataInProgress
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _RegisterLoadInitialDataInProgress);
+        (other is _$RegisterLoadInitialDataInProgress);
   }
 
   @override
@@ -676,17 +681,17 @@ class _$_RegisterLoadInitialDataInProgress
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RegisterInitial value) initial,
-    required TResult Function(_RegisterLoadInitialDataInProgress value)
+    required TResult Function(_$RegisterInitial value) initial,
+    required TResult Function(_$RegisterLoadInitialDataInProgress value)
         initialLoadInProgress,
-    required TResult Function(_RegisterLoadInitialDataFailure value)
+    required TResult Function(_$RegisterLoadInitialDataFailure value)
         initialLoadFailure,
-    required TResult Function(_RegisterLoadInitialDataSuccess value)
+    required TResult Function(_$RegisterLoadInitialDataSuccess value)
         initialLoadSuccess,
-    required TResult Function(_RegisterUserInProgress value)
+    required TResult Function(_$RegisterUserInProgress value)
         registrationInProgress,
-    required TResult Function(_RegisterUserFailure value) registrationFailure,
-    required TResult Function(_RegisterUserSuccess value) registrationSuccess,
+    required TResult Function(_$RegisterUserFailure value) registrationFailure,
+    required TResult Function(_$RegisterUserSuccess value) registrationSuccess,
   }) {
     return initialLoadInProgress(this);
   }
@@ -694,14 +699,16 @@ class _$_RegisterLoadInitialDataInProgress
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RegisterInitial value)? initial,
-    TResult Function(_RegisterLoadInitialDataInProgress value)?
+    TResult Function(_$RegisterInitial value)? initial,
+    TResult Function(_$RegisterLoadInitialDataInProgress value)?
         initialLoadInProgress,
-    TResult Function(_RegisterLoadInitialDataFailure value)? initialLoadFailure,
-    TResult Function(_RegisterLoadInitialDataSuccess value)? initialLoadSuccess,
-    TResult Function(_RegisterUserInProgress value)? registrationInProgress,
-    TResult Function(_RegisterUserFailure value)? registrationFailure,
-    TResult Function(_RegisterUserSuccess value)? registrationSuccess,
+    TResult Function(_$RegisterLoadInitialDataFailure value)?
+        initialLoadFailure,
+    TResult Function(_$RegisterLoadInitialDataSuccess value)?
+        initialLoadSuccess,
+    TResult Function(_$RegisterUserInProgress value)? registrationInProgress,
+    TResult Function(_$RegisterUserFailure value)? registrationFailure,
+    TResult Function(_$RegisterUserSuccess value)? registrationSuccess,
     required TResult orElse(),
   }) {
     if (initialLoadInProgress != null) {
@@ -711,38 +718,38 @@ class _$_RegisterLoadInitialDataInProgress
   }
 }
 
-abstract class _RegisterLoadInitialDataInProgress implements RegisterState {
-  const factory _RegisterLoadInitialDataInProgress() =
-      _$_RegisterLoadInitialDataInProgress;
+abstract class _$RegisterLoadInitialDataInProgress implements RegisterState {
+  const factory _$RegisterLoadInitialDataInProgress() =
+      _$_$RegisterLoadInitialDataInProgress;
 }
 
 /// @nodoc
-abstract class _$RegisterLoadInitialDataFailureCopyWith<$Res> {
-  factory _$RegisterLoadInitialDataFailureCopyWith(
-          _RegisterLoadInitialDataFailure value,
-          $Res Function(_RegisterLoadInitialDataFailure) then) =
-      __$RegisterLoadInitialDataFailureCopyWithImpl<$Res>;
+abstract class _$$RegisterLoadInitialDataFailureCopyWith<$Res> {
+  factory _$$RegisterLoadInitialDataFailureCopyWith(
+          _$RegisterLoadInitialDataFailure value,
+          $Res Function(_$RegisterLoadInitialDataFailure) then) =
+      __$$RegisterLoadInitialDataFailureCopyWithImpl<$Res>;
   $Res call({String error});
 }
 
 /// @nodoc
-class __$RegisterLoadInitialDataFailureCopyWithImpl<$Res>
+class __$$RegisterLoadInitialDataFailureCopyWithImpl<$Res>
     extends _$RegisterStateCopyWithImpl<$Res>
-    implements _$RegisterLoadInitialDataFailureCopyWith<$Res> {
-  __$RegisterLoadInitialDataFailureCopyWithImpl(
-      _RegisterLoadInitialDataFailure _value,
-      $Res Function(_RegisterLoadInitialDataFailure) _then)
-      : super(_value, (v) => _then(v as _RegisterLoadInitialDataFailure));
+    implements _$$RegisterLoadInitialDataFailureCopyWith<$Res> {
+  __$$RegisterLoadInitialDataFailureCopyWithImpl(
+      _$RegisterLoadInitialDataFailure _value,
+      $Res Function(_$RegisterLoadInitialDataFailure) _then)
+      : super(_value, (v) => _then(v as _$RegisterLoadInitialDataFailure));
 
   @override
-  _RegisterLoadInitialDataFailure get _value =>
-      super._value as _RegisterLoadInitialDataFailure;
+  _$RegisterLoadInitialDataFailure get _value =>
+      super._value as _$RegisterLoadInitialDataFailure;
 
   @override
   $Res call({
     Object? error = freezed,
   }) {
-    return _then(_RegisterLoadInitialDataFailure(
+    return _then(_$RegisterLoadInitialDataFailure(
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -753,9 +760,9 @@ class __$RegisterLoadInitialDataFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RegisterLoadInitialDataFailure
-    implements _RegisterLoadInitialDataFailure {
-  const _$_RegisterLoadInitialDataFailure({required this.error});
+class _$_$RegisterLoadInitialDataFailure
+    implements _$RegisterLoadInitialDataFailure {
+  const _$_$RegisterLoadInitialDataFailure({required this.error});
 
   @override
   final String error;
@@ -768,7 +775,7 @@ class _$_RegisterLoadInitialDataFailure
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _RegisterLoadInitialDataFailure &&
+        (other is _$RegisterLoadInitialDataFailure &&
             (identical(other.error, error) ||
                 const DeepCollectionEquality().equals(other.error, error)));
   }
@@ -779,9 +786,9 @@ class _$_RegisterLoadInitialDataFailure
 
   @JsonKey(ignore: true)
   @override
-  _$RegisterLoadInitialDataFailureCopyWith<_RegisterLoadInitialDataFailure>
-      get copyWith => __$RegisterLoadInitialDataFailureCopyWithImpl<
-          _RegisterLoadInitialDataFailure>(this, _$identity);
+  _$$RegisterLoadInitialDataFailureCopyWith<_$RegisterLoadInitialDataFailure>
+      get copyWith => __$$RegisterLoadInitialDataFailureCopyWithImpl<
+          _$RegisterLoadInitialDataFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -818,17 +825,17 @@ class _$_RegisterLoadInitialDataFailure
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RegisterInitial value) initial,
-    required TResult Function(_RegisterLoadInitialDataInProgress value)
+    required TResult Function(_$RegisterInitial value) initial,
+    required TResult Function(_$RegisterLoadInitialDataInProgress value)
         initialLoadInProgress,
-    required TResult Function(_RegisterLoadInitialDataFailure value)
+    required TResult Function(_$RegisterLoadInitialDataFailure value)
         initialLoadFailure,
-    required TResult Function(_RegisterLoadInitialDataSuccess value)
+    required TResult Function(_$RegisterLoadInitialDataSuccess value)
         initialLoadSuccess,
-    required TResult Function(_RegisterUserInProgress value)
+    required TResult Function(_$RegisterUserInProgress value)
         registrationInProgress,
-    required TResult Function(_RegisterUserFailure value) registrationFailure,
-    required TResult Function(_RegisterUserSuccess value) registrationSuccess,
+    required TResult Function(_$RegisterUserFailure value) registrationFailure,
+    required TResult Function(_$RegisterUserSuccess value) registrationSuccess,
   }) {
     return initialLoadFailure(this);
   }
@@ -836,14 +843,16 @@ class _$_RegisterLoadInitialDataFailure
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RegisterInitial value)? initial,
-    TResult Function(_RegisterLoadInitialDataInProgress value)?
+    TResult Function(_$RegisterInitial value)? initial,
+    TResult Function(_$RegisterLoadInitialDataInProgress value)?
         initialLoadInProgress,
-    TResult Function(_RegisterLoadInitialDataFailure value)? initialLoadFailure,
-    TResult Function(_RegisterLoadInitialDataSuccess value)? initialLoadSuccess,
-    TResult Function(_RegisterUserInProgress value)? registrationInProgress,
-    TResult Function(_RegisterUserFailure value)? registrationFailure,
-    TResult Function(_RegisterUserSuccess value)? registrationSuccess,
+    TResult Function(_$RegisterLoadInitialDataFailure value)?
+        initialLoadFailure,
+    TResult Function(_$RegisterLoadInitialDataSuccess value)?
+        initialLoadSuccess,
+    TResult Function(_$RegisterUserInProgress value)? registrationInProgress,
+    TResult Function(_$RegisterUserFailure value)? registrationFailure,
+    TResult Function(_$RegisterUserSuccess value)? registrationSuccess,
     required TResult orElse(),
   }) {
     if (initialLoadFailure != null) {
@@ -853,43 +862,43 @@ class _$_RegisterLoadInitialDataFailure
   }
 }
 
-abstract class _RegisterLoadInitialDataFailure implements RegisterState {
-  const factory _RegisterLoadInitialDataFailure({required String error}) =
-      _$_RegisterLoadInitialDataFailure;
+abstract class _$RegisterLoadInitialDataFailure implements RegisterState {
+  const factory _$RegisterLoadInitialDataFailure({required String error}) =
+      _$_$RegisterLoadInitialDataFailure;
 
   String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$RegisterLoadInitialDataFailureCopyWith<_RegisterLoadInitialDataFailure>
+  _$$RegisterLoadInitialDataFailureCopyWith<_$RegisterLoadInitialDataFailure>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$RegisterLoadInitialDataSuccessCopyWith<$Res> {
-  factory _$RegisterLoadInitialDataSuccessCopyWith(
-          _RegisterLoadInitialDataSuccess value,
-          $Res Function(_RegisterLoadInitialDataSuccess) then) =
-      __$RegisterLoadInitialDataSuccessCopyWithImpl<$Res>;
+abstract class _$$RegisterLoadInitialDataSuccessCopyWith<$Res> {
+  factory _$$RegisterLoadInitialDataSuccessCopyWith(
+          _$RegisterLoadInitialDataSuccess value,
+          $Res Function(_$RegisterLoadInitialDataSuccess) then) =
+      __$$RegisterLoadInitialDataSuccessCopyWithImpl<$Res>;
   $Res call({List<String> questions});
 }
 
 /// @nodoc
-class __$RegisterLoadInitialDataSuccessCopyWithImpl<$Res>
+class __$$RegisterLoadInitialDataSuccessCopyWithImpl<$Res>
     extends _$RegisterStateCopyWithImpl<$Res>
-    implements _$RegisterLoadInitialDataSuccessCopyWith<$Res> {
-  __$RegisterLoadInitialDataSuccessCopyWithImpl(
-      _RegisterLoadInitialDataSuccess _value,
-      $Res Function(_RegisterLoadInitialDataSuccess) _then)
-      : super(_value, (v) => _then(v as _RegisterLoadInitialDataSuccess));
+    implements _$$RegisterLoadInitialDataSuccessCopyWith<$Res> {
+  __$$RegisterLoadInitialDataSuccessCopyWithImpl(
+      _$RegisterLoadInitialDataSuccess _value,
+      $Res Function(_$RegisterLoadInitialDataSuccess) _then)
+      : super(_value, (v) => _then(v as _$RegisterLoadInitialDataSuccess));
 
   @override
-  _RegisterLoadInitialDataSuccess get _value =>
-      super._value as _RegisterLoadInitialDataSuccess;
+  _$RegisterLoadInitialDataSuccess get _value =>
+      super._value as _$RegisterLoadInitialDataSuccess;
 
   @override
   $Res call({
     Object? questions = freezed,
   }) {
-    return _then(_RegisterLoadInitialDataSuccess(
+    return _then(_$RegisterLoadInitialDataSuccess(
       questions: questions == freezed
           ? _value.questions
           : questions // ignore: cast_nullable_to_non_nullable
@@ -900,9 +909,9 @@ class __$RegisterLoadInitialDataSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RegisterLoadInitialDataSuccess
-    implements _RegisterLoadInitialDataSuccess {
-  const _$_RegisterLoadInitialDataSuccess({required this.questions});
+class _$_$RegisterLoadInitialDataSuccess
+    implements _$RegisterLoadInitialDataSuccess {
+  const _$_$RegisterLoadInitialDataSuccess({required this.questions});
 
   @override
   final List<String> questions;
@@ -915,7 +924,7 @@ class _$_RegisterLoadInitialDataSuccess
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _RegisterLoadInitialDataSuccess &&
+        (other is _$RegisterLoadInitialDataSuccess &&
             (identical(other.questions, questions) ||
                 const DeepCollectionEquality()
                     .equals(other.questions, questions)));
@@ -927,9 +936,9 @@ class _$_RegisterLoadInitialDataSuccess
 
   @JsonKey(ignore: true)
   @override
-  _$RegisterLoadInitialDataSuccessCopyWith<_RegisterLoadInitialDataSuccess>
-      get copyWith => __$RegisterLoadInitialDataSuccessCopyWithImpl<
-          _RegisterLoadInitialDataSuccess>(this, _$identity);
+  _$$RegisterLoadInitialDataSuccessCopyWith<_$RegisterLoadInitialDataSuccess>
+      get copyWith => __$$RegisterLoadInitialDataSuccessCopyWithImpl<
+          _$RegisterLoadInitialDataSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -966,17 +975,17 @@ class _$_RegisterLoadInitialDataSuccess
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RegisterInitial value) initial,
-    required TResult Function(_RegisterLoadInitialDataInProgress value)
+    required TResult Function(_$RegisterInitial value) initial,
+    required TResult Function(_$RegisterLoadInitialDataInProgress value)
         initialLoadInProgress,
-    required TResult Function(_RegisterLoadInitialDataFailure value)
+    required TResult Function(_$RegisterLoadInitialDataFailure value)
         initialLoadFailure,
-    required TResult Function(_RegisterLoadInitialDataSuccess value)
+    required TResult Function(_$RegisterLoadInitialDataSuccess value)
         initialLoadSuccess,
-    required TResult Function(_RegisterUserInProgress value)
+    required TResult Function(_$RegisterUserInProgress value)
         registrationInProgress,
-    required TResult Function(_RegisterUserFailure value) registrationFailure,
-    required TResult Function(_RegisterUserSuccess value) registrationSuccess,
+    required TResult Function(_$RegisterUserFailure value) registrationFailure,
+    required TResult Function(_$RegisterUserSuccess value) registrationSuccess,
   }) {
     return initialLoadSuccess(this);
   }
@@ -984,14 +993,16 @@ class _$_RegisterLoadInitialDataSuccess
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RegisterInitial value)? initial,
-    TResult Function(_RegisterLoadInitialDataInProgress value)?
+    TResult Function(_$RegisterInitial value)? initial,
+    TResult Function(_$RegisterLoadInitialDataInProgress value)?
         initialLoadInProgress,
-    TResult Function(_RegisterLoadInitialDataFailure value)? initialLoadFailure,
-    TResult Function(_RegisterLoadInitialDataSuccess value)? initialLoadSuccess,
-    TResult Function(_RegisterUserInProgress value)? registrationInProgress,
-    TResult Function(_RegisterUserFailure value)? registrationFailure,
-    TResult Function(_RegisterUserSuccess value)? registrationSuccess,
+    TResult Function(_$RegisterLoadInitialDataFailure value)?
+        initialLoadFailure,
+    TResult Function(_$RegisterLoadInitialDataSuccess value)?
+        initialLoadSuccess,
+    TResult Function(_$RegisterUserInProgress value)? registrationInProgress,
+    TResult Function(_$RegisterUserFailure value)? registrationFailure,
+    TResult Function(_$RegisterUserSuccess value)? registrationSuccess,
     required TResult orElse(),
   }) {
     if (initialLoadSuccess != null) {
@@ -1001,39 +1012,40 @@ class _$_RegisterLoadInitialDataSuccess
   }
 }
 
-abstract class _RegisterLoadInitialDataSuccess implements RegisterState {
-  const factory _RegisterLoadInitialDataSuccess(
-      {required List<String> questions}) = _$_RegisterLoadInitialDataSuccess;
+abstract class _$RegisterLoadInitialDataSuccess implements RegisterState {
+  const factory _$RegisterLoadInitialDataSuccess(
+      {required List<String> questions}) = _$_$RegisterLoadInitialDataSuccess;
 
   List<String> get questions => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$RegisterLoadInitialDataSuccessCopyWith<_RegisterLoadInitialDataSuccess>
+  _$$RegisterLoadInitialDataSuccessCopyWith<_$RegisterLoadInitialDataSuccess>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$RegisterUserInProgressCopyWith<$Res> {
-  factory _$RegisterUserInProgressCopyWith(_RegisterUserInProgress value,
-          $Res Function(_RegisterUserInProgress) then) =
-      __$RegisterUserInProgressCopyWithImpl<$Res>;
+abstract class _$$RegisterUserInProgressCopyWith<$Res> {
+  factory _$$RegisterUserInProgressCopyWith(_$RegisterUserInProgress value,
+          $Res Function(_$RegisterUserInProgress) then) =
+      __$$RegisterUserInProgressCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$RegisterUserInProgressCopyWithImpl<$Res>
+class __$$RegisterUserInProgressCopyWithImpl<$Res>
     extends _$RegisterStateCopyWithImpl<$Res>
-    implements _$RegisterUserInProgressCopyWith<$Res> {
-  __$RegisterUserInProgressCopyWithImpl(_RegisterUserInProgress _value,
-      $Res Function(_RegisterUserInProgress) _then)
-      : super(_value, (v) => _then(v as _RegisterUserInProgress));
+    implements _$$RegisterUserInProgressCopyWith<$Res> {
+  __$$RegisterUserInProgressCopyWithImpl(_$RegisterUserInProgress _value,
+      $Res Function(_$RegisterUserInProgress) _then)
+      : super(_value, (v) => _then(v as _$RegisterUserInProgress));
 
   @override
-  _RegisterUserInProgress get _value => super._value as _RegisterUserInProgress;
+  _$RegisterUserInProgress get _value =>
+      super._value as _$RegisterUserInProgress;
 }
 
 /// @nodoc
 
-class _$_RegisterUserInProgress implements _RegisterUserInProgress {
-  const _$_RegisterUserInProgress();
+class _$_$RegisterUserInProgress implements _$RegisterUserInProgress {
+  const _$_$RegisterUserInProgress();
 
   @override
   String toString() {
@@ -1042,7 +1054,7 @@ class _$_RegisterUserInProgress implements _RegisterUserInProgress {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _RegisterUserInProgress);
+    return identical(this, other) || (other is _$RegisterUserInProgress);
   }
 
   @override
@@ -1083,17 +1095,17 @@ class _$_RegisterUserInProgress implements _RegisterUserInProgress {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RegisterInitial value) initial,
-    required TResult Function(_RegisterLoadInitialDataInProgress value)
+    required TResult Function(_$RegisterInitial value) initial,
+    required TResult Function(_$RegisterLoadInitialDataInProgress value)
         initialLoadInProgress,
-    required TResult Function(_RegisterLoadInitialDataFailure value)
+    required TResult Function(_$RegisterLoadInitialDataFailure value)
         initialLoadFailure,
-    required TResult Function(_RegisterLoadInitialDataSuccess value)
+    required TResult Function(_$RegisterLoadInitialDataSuccess value)
         initialLoadSuccess,
-    required TResult Function(_RegisterUserInProgress value)
+    required TResult Function(_$RegisterUserInProgress value)
         registrationInProgress,
-    required TResult Function(_RegisterUserFailure value) registrationFailure,
-    required TResult Function(_RegisterUserSuccess value) registrationSuccess,
+    required TResult Function(_$RegisterUserFailure value) registrationFailure,
+    required TResult Function(_$RegisterUserSuccess value) registrationSuccess,
   }) {
     return registrationInProgress(this);
   }
@@ -1101,14 +1113,16 @@ class _$_RegisterUserInProgress implements _RegisterUserInProgress {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RegisterInitial value)? initial,
-    TResult Function(_RegisterLoadInitialDataInProgress value)?
+    TResult Function(_$RegisterInitial value)? initial,
+    TResult Function(_$RegisterLoadInitialDataInProgress value)?
         initialLoadInProgress,
-    TResult Function(_RegisterLoadInitialDataFailure value)? initialLoadFailure,
-    TResult Function(_RegisterLoadInitialDataSuccess value)? initialLoadSuccess,
-    TResult Function(_RegisterUserInProgress value)? registrationInProgress,
-    TResult Function(_RegisterUserFailure value)? registrationFailure,
-    TResult Function(_RegisterUserSuccess value)? registrationSuccess,
+    TResult Function(_$RegisterLoadInitialDataFailure value)?
+        initialLoadFailure,
+    TResult Function(_$RegisterLoadInitialDataSuccess value)?
+        initialLoadSuccess,
+    TResult Function(_$RegisterUserInProgress value)? registrationInProgress,
+    TResult Function(_$RegisterUserFailure value)? registrationFailure,
+    TResult Function(_$RegisterUserSuccess value)? registrationSuccess,
     required TResult orElse(),
   }) {
     if (registrationInProgress != null) {
@@ -1118,34 +1132,34 @@ class _$_RegisterUserInProgress implements _RegisterUserInProgress {
   }
 }
 
-abstract class _RegisterUserInProgress implements RegisterState {
-  const factory _RegisterUserInProgress() = _$_RegisterUserInProgress;
+abstract class _$RegisterUserInProgress implements RegisterState {
+  const factory _$RegisterUserInProgress() = _$_$RegisterUserInProgress;
 }
 
 /// @nodoc
-abstract class _$RegisterUserFailureCopyWith<$Res> {
-  factory _$RegisterUserFailureCopyWith(_RegisterUserFailure value,
-          $Res Function(_RegisterUserFailure) then) =
-      __$RegisterUserFailureCopyWithImpl<$Res>;
+abstract class _$$RegisterUserFailureCopyWith<$Res> {
+  factory _$$RegisterUserFailureCopyWith(_$RegisterUserFailure value,
+          $Res Function(_$RegisterUserFailure) then) =
+      __$$RegisterUserFailureCopyWithImpl<$Res>;
   $Res call({String error});
 }
 
 /// @nodoc
-class __$RegisterUserFailureCopyWithImpl<$Res>
+class __$$RegisterUserFailureCopyWithImpl<$Res>
     extends _$RegisterStateCopyWithImpl<$Res>
-    implements _$RegisterUserFailureCopyWith<$Res> {
-  __$RegisterUserFailureCopyWithImpl(
-      _RegisterUserFailure _value, $Res Function(_RegisterUserFailure) _then)
-      : super(_value, (v) => _then(v as _RegisterUserFailure));
+    implements _$$RegisterUserFailureCopyWith<$Res> {
+  __$$RegisterUserFailureCopyWithImpl(
+      _$RegisterUserFailure _value, $Res Function(_$RegisterUserFailure) _then)
+      : super(_value, (v) => _then(v as _$RegisterUserFailure));
 
   @override
-  _RegisterUserFailure get _value => super._value as _RegisterUserFailure;
+  _$RegisterUserFailure get _value => super._value as _$RegisterUserFailure;
 
   @override
   $Res call({
     Object? error = freezed,
   }) {
-    return _then(_RegisterUserFailure(
+    return _then(_$RegisterUserFailure(
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -1156,8 +1170,8 @@ class __$RegisterUserFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RegisterUserFailure implements _RegisterUserFailure {
-  const _$_RegisterUserFailure({required this.error});
+class _$_$RegisterUserFailure implements _$RegisterUserFailure {
+  const _$_$RegisterUserFailure({required this.error});
 
   @override
   final String error;
@@ -1170,7 +1184,7 @@ class _$_RegisterUserFailure implements _RegisterUserFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _RegisterUserFailure &&
+        (other is _$RegisterUserFailure &&
             (identical(other.error, error) ||
                 const DeepCollectionEquality().equals(other.error, error)));
   }
@@ -1181,8 +1195,8 @@ class _$_RegisterUserFailure implements _RegisterUserFailure {
 
   @JsonKey(ignore: true)
   @override
-  _$RegisterUserFailureCopyWith<_RegisterUserFailure> get copyWith =>
-      __$RegisterUserFailureCopyWithImpl<_RegisterUserFailure>(
+  _$$RegisterUserFailureCopyWith<_$RegisterUserFailure> get copyWith =>
+      __$$RegisterUserFailureCopyWithImpl<_$RegisterUserFailure>(
           this, _$identity);
 
   @override
@@ -1220,17 +1234,17 @@ class _$_RegisterUserFailure implements _RegisterUserFailure {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RegisterInitial value) initial,
-    required TResult Function(_RegisterLoadInitialDataInProgress value)
+    required TResult Function(_$RegisterInitial value) initial,
+    required TResult Function(_$RegisterLoadInitialDataInProgress value)
         initialLoadInProgress,
-    required TResult Function(_RegisterLoadInitialDataFailure value)
+    required TResult Function(_$RegisterLoadInitialDataFailure value)
         initialLoadFailure,
-    required TResult Function(_RegisterLoadInitialDataSuccess value)
+    required TResult Function(_$RegisterLoadInitialDataSuccess value)
         initialLoadSuccess,
-    required TResult Function(_RegisterUserInProgress value)
+    required TResult Function(_$RegisterUserInProgress value)
         registrationInProgress,
-    required TResult Function(_RegisterUserFailure value) registrationFailure,
-    required TResult Function(_RegisterUserSuccess value) registrationSuccess,
+    required TResult Function(_$RegisterUserFailure value) registrationFailure,
+    required TResult Function(_$RegisterUserSuccess value) registrationSuccess,
   }) {
     return registrationFailure(this);
   }
@@ -1238,14 +1252,16 @@ class _$_RegisterUserFailure implements _RegisterUserFailure {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RegisterInitial value)? initial,
-    TResult Function(_RegisterLoadInitialDataInProgress value)?
+    TResult Function(_$RegisterInitial value)? initial,
+    TResult Function(_$RegisterLoadInitialDataInProgress value)?
         initialLoadInProgress,
-    TResult Function(_RegisterLoadInitialDataFailure value)? initialLoadFailure,
-    TResult Function(_RegisterLoadInitialDataSuccess value)? initialLoadSuccess,
-    TResult Function(_RegisterUserInProgress value)? registrationInProgress,
-    TResult Function(_RegisterUserFailure value)? registrationFailure,
-    TResult Function(_RegisterUserSuccess value)? registrationSuccess,
+    TResult Function(_$RegisterLoadInitialDataFailure value)?
+        initialLoadFailure,
+    TResult Function(_$RegisterLoadInitialDataSuccess value)?
+        initialLoadSuccess,
+    TResult Function(_$RegisterUserInProgress value)? registrationInProgress,
+    TResult Function(_$RegisterUserFailure value)? registrationFailure,
+    TResult Function(_$RegisterUserSuccess value)? registrationSuccess,
     required TResult orElse(),
   }) {
     if (registrationFailure != null) {
@@ -1255,40 +1271,40 @@ class _$_RegisterUserFailure implements _RegisterUserFailure {
   }
 }
 
-abstract class _RegisterUserFailure implements RegisterState {
-  const factory _RegisterUserFailure({required String error}) =
-      _$_RegisterUserFailure;
+abstract class _$RegisterUserFailure implements RegisterState {
+  const factory _$RegisterUserFailure({required String error}) =
+      _$_$RegisterUserFailure;
 
   String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$RegisterUserFailureCopyWith<_RegisterUserFailure> get copyWith =>
+  _$$RegisterUserFailureCopyWith<_$RegisterUserFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$RegisterUserSuccessCopyWith<$Res> {
-  factory _$RegisterUserSuccessCopyWith(_RegisterUserSuccess value,
-          $Res Function(_RegisterUserSuccess) then) =
-      __$RegisterUserSuccessCopyWithImpl<$Res>;
+abstract class _$$RegisterUserSuccessCopyWith<$Res> {
+  factory _$$RegisterUserSuccessCopyWith(_$RegisterUserSuccess value,
+          $Res Function(_$RegisterUserSuccess) then) =
+      __$$RegisterUserSuccessCopyWithImpl<$Res>;
   $Res call({String userEmail});
 }
 
 /// @nodoc
-class __$RegisterUserSuccessCopyWithImpl<$Res>
+class __$$RegisterUserSuccessCopyWithImpl<$Res>
     extends _$RegisterStateCopyWithImpl<$Res>
-    implements _$RegisterUserSuccessCopyWith<$Res> {
-  __$RegisterUserSuccessCopyWithImpl(
-      _RegisterUserSuccess _value, $Res Function(_RegisterUserSuccess) _then)
-      : super(_value, (v) => _then(v as _RegisterUserSuccess));
+    implements _$$RegisterUserSuccessCopyWith<$Res> {
+  __$$RegisterUserSuccessCopyWithImpl(
+      _$RegisterUserSuccess _value, $Res Function(_$RegisterUserSuccess) _then)
+      : super(_value, (v) => _then(v as _$RegisterUserSuccess));
 
   @override
-  _RegisterUserSuccess get _value => super._value as _RegisterUserSuccess;
+  _$RegisterUserSuccess get _value => super._value as _$RegisterUserSuccess;
 
   @override
   $Res call({
     Object? userEmail = freezed,
   }) {
-    return _then(_RegisterUserSuccess(
+    return _then(_$RegisterUserSuccess(
       userEmail: userEmail == freezed
           ? _value.userEmail
           : userEmail // ignore: cast_nullable_to_non_nullable
@@ -1299,8 +1315,8 @@ class __$RegisterUserSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RegisterUserSuccess implements _RegisterUserSuccess {
-  const _$_RegisterUserSuccess({required this.userEmail});
+class _$_$RegisterUserSuccess implements _$RegisterUserSuccess {
+  const _$_$RegisterUserSuccess({required this.userEmail});
 
   @override
   final String userEmail;
@@ -1313,7 +1329,7 @@ class _$_RegisterUserSuccess implements _RegisterUserSuccess {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _RegisterUserSuccess &&
+        (other is _$RegisterUserSuccess &&
             (identical(other.userEmail, userEmail) ||
                 const DeepCollectionEquality()
                     .equals(other.userEmail, userEmail)));
@@ -1325,8 +1341,8 @@ class _$_RegisterUserSuccess implements _RegisterUserSuccess {
 
   @JsonKey(ignore: true)
   @override
-  _$RegisterUserSuccessCopyWith<_RegisterUserSuccess> get copyWith =>
-      __$RegisterUserSuccessCopyWithImpl<_RegisterUserSuccess>(
+  _$$RegisterUserSuccessCopyWith<_$RegisterUserSuccess> get copyWith =>
+      __$$RegisterUserSuccessCopyWithImpl<_$RegisterUserSuccess>(
           this, _$identity);
 
   @override
@@ -1364,17 +1380,17 @@ class _$_RegisterUserSuccess implements _RegisterUserSuccess {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RegisterInitial value) initial,
-    required TResult Function(_RegisterLoadInitialDataInProgress value)
+    required TResult Function(_$RegisterInitial value) initial,
+    required TResult Function(_$RegisterLoadInitialDataInProgress value)
         initialLoadInProgress,
-    required TResult Function(_RegisterLoadInitialDataFailure value)
+    required TResult Function(_$RegisterLoadInitialDataFailure value)
         initialLoadFailure,
-    required TResult Function(_RegisterLoadInitialDataSuccess value)
+    required TResult Function(_$RegisterLoadInitialDataSuccess value)
         initialLoadSuccess,
-    required TResult Function(_RegisterUserInProgress value)
+    required TResult Function(_$RegisterUserInProgress value)
         registrationInProgress,
-    required TResult Function(_RegisterUserFailure value) registrationFailure,
-    required TResult Function(_RegisterUserSuccess value) registrationSuccess,
+    required TResult Function(_$RegisterUserFailure value) registrationFailure,
+    required TResult Function(_$RegisterUserSuccess value) registrationSuccess,
   }) {
     return registrationSuccess(this);
   }
@@ -1382,14 +1398,16 @@ class _$_RegisterUserSuccess implements _RegisterUserSuccess {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RegisterInitial value)? initial,
-    TResult Function(_RegisterLoadInitialDataInProgress value)?
+    TResult Function(_$RegisterInitial value)? initial,
+    TResult Function(_$RegisterLoadInitialDataInProgress value)?
         initialLoadInProgress,
-    TResult Function(_RegisterLoadInitialDataFailure value)? initialLoadFailure,
-    TResult Function(_RegisterLoadInitialDataSuccess value)? initialLoadSuccess,
-    TResult Function(_RegisterUserInProgress value)? registrationInProgress,
-    TResult Function(_RegisterUserFailure value)? registrationFailure,
-    TResult Function(_RegisterUserSuccess value)? registrationSuccess,
+    TResult Function(_$RegisterLoadInitialDataFailure value)?
+        initialLoadFailure,
+    TResult Function(_$RegisterLoadInitialDataSuccess value)?
+        initialLoadSuccess,
+    TResult Function(_$RegisterUserInProgress value)? registrationInProgress,
+    TResult Function(_$RegisterUserFailure value)? registrationFailure,
+    TResult Function(_$RegisterUserSuccess value)? registrationSuccess,
     required TResult orElse(),
   }) {
     if (registrationSuccess != null) {
@@ -1399,12 +1417,12 @@ class _$_RegisterUserSuccess implements _RegisterUserSuccess {
   }
 }
 
-abstract class _RegisterUserSuccess implements RegisterState {
-  const factory _RegisterUserSuccess({required String userEmail}) =
-      _$_RegisterUserSuccess;
+abstract class _$RegisterUserSuccess implements RegisterState {
+  const factory _$RegisterUserSuccess({required String userEmail}) =
+      _$_$RegisterUserSuccess;
 
   String get userEmail => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$RegisterUserSuccessCopyWith<_RegisterUserSuccess> get copyWith =>
+  _$$RegisterUserSuccessCopyWith<_$RegisterUserSuccess> get copyWith =>
       throw _privateConstructorUsedError;
 }

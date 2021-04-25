@@ -4,6 +4,7 @@ import 'package:gestionuh/src/data/api/api.dart';
 import 'package:gestionuh/src/data/local/local_storage.dart';
 import 'package:gestionuh/src/data/models/models.dart';
 import 'package:gestionuh/src/data/models/status.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 import 'package:gestionuh/src/utils/constants/storage_keys.dart';
 
 class AuthRepository {
@@ -50,8 +51,8 @@ class AuthRepository {
       return result;
     } catch (e) {
       log(e.toString());
+      return Auth()..error = e.toString();
     }
-    return null;
   }
 
   Future<void> logout() async {
@@ -85,7 +86,7 @@ class AuthRepository {
       return status;
     } catch (e) {
       log(e.toString());
-      return Status(status: false);
+      return Status(status: false)..error = e.toString();
     }
   }
 

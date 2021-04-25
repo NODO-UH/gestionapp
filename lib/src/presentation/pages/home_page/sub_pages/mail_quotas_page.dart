@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestionuh/src/data/models/mail_quota.dart';
 import 'package:gestionuh/src/presentation/blocs/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets/widgets.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -17,95 +18,107 @@ class _MailQuotaPageState extends State<MailQuotaPage> {
     return BlocConsumer<MailQuotaBloc, MailQuotaState>(
       listener: (context, state) {},
       builder: (context, state) {
-        if (state is MailQuotaLoadedSuccess) {
-          return RefreshIndicator(
-            onRefresh: () async {
-              context.read<MailQuotaBloc>().add(MailQuotaInitialized());
-            },
-            child: Scrollbar(
-              child: ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
+        return state.maybeWhen(
+          loadFailure: (String error) => _buildFailurePage(context, error),
+          loadSuccess: (MailQuota quota) => _buildQuotaPage(context, quota),
+          orElse: () => _buildLoadingIndicator(context),
+        );
+      },
+    );
+  }
+
+  Widget _buildQuotaPage(BuildContext context, MailQuota quota) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        context
+            .read<MailQuotaBloc>()
+            .add(const MailQuotaEvent.quotaRequested());
+      },
+      child: Scrollbar(
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          children: [
+            Center(
+              child: Container(
+                width: getValueForScreenType<double>(
+                  context: context,
+                  mobile: MediaQuery.of(context).size.width,
+                  tablet: MediaQuery.of(context).size.width * 0.5,
+                ),
+                padding: const EdgeInsets.only(
+                  top: 30,
+                  bottom: 9,
+                  left: 18,
+                  right: 18,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: MailQuotaGraph(
+                        quota: quota,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFailurePage(BuildContext context, String error) {
+    return Scrollbar(
+      child: ListView(
+        children: [
+          Center(
+            child: Container(
+              width: getValueForScreenType<double>(
+                context: context,
+                mobile: MediaQuery.of(context).size.width,
+                tablet: MediaQuery.of(context).size.width * 0.5,
+              ),
+              padding: const EdgeInsets.only(
+                top: 30,
+                bottom: 9,
+                left: 18,
+                right: 18,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Center(
-                    child: Container(
-                      width: getValueForScreenType<double>(
-                        context: context,
-                        mobile: MediaQuery.of(context).size.width,
-                        tablet: MediaQuery.of(context).size.width * 0.5,
-                      ),
-                      padding: const EdgeInsets.only(
-                        top: 30,
-                        bottom: 9,
-                        left: 18,
-                        right: 18,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Center(
-                            child: MailQuotaGraph(
-                              quota: state.quota!,
-                            ),
-                          ),
-                        ],
-                      ),
+                  Text(error),
+                  Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: GestionUhDefaultButton(
+                      text: 'Reintentar',
+                      onPressed: () {
+                        context.read<MailQuotaBloc>().add(
+                              const MailQuotaEvent.quotaRequested(),
+                            );
+                      },
                     ),
                   ),
                 ],
               ),
             ),
-          );
-        }
-        if (state is MailQuotaLoadedFailure) {
-          return Scrollbar(
-            child: ListView(
-              children: [
-                Center(
-                  child: Container(
-                    width: getValueForScreenType<double>(
-                      context: context,
-                      mobile: MediaQuery.of(context).size.width,
-                      tablet: MediaQuery.of(context).size.width * 0.5,
-                    ),
-                    padding: const EdgeInsets.only(
-                      top: 30,
-                      bottom: 9,
-                      left: 18,
-                      right: 18,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(state.error!),
-                        Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: GestionUhDefaultButton(
-                            text: 'Reintentar',
-                            onPressed: () {
-                              context.read<MailQuotaBloc>().add(
-                                    MailQuotaInitialized(),
-                                  );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              GestionUhLoadingIndicator(),
-            ],
           ),
-        );
-      },
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLoadingIndicator(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          GestionUhLoadingIndicator(),
+        ],
+      ),
     );
   }
 }
