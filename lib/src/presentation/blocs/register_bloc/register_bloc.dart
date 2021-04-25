@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:gestionuh/src/data/models/password_edit_data.dart';
-import 'package:gestionuh/src/data/repository/auth_repository/auth_repository.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
@@ -44,9 +44,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       return;
     }
     final userId = await repository.sendRegistration(PasswordEditData(
-      answers: event.answers,
-      ci: event.ci,
-      password: event.passwordFirst,
+      answers: event.answers.map((e) => e.trim()).toList(),
+      ci: event.ci.trim(),
+      password: event.passwordFirst.trim(),
       questions: event.questions,
     ));
     if (userId.error != null) {

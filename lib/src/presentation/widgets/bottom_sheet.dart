@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gestionuh/src/utils/constants.dart';
+import 'package:gestionuh/src/data/repositories/repositories.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
+import 'package:get_it/get_it.dart';
 
 class GestionUHBottomSheet extends StatelessWidget {
   const GestionUHBottomSheet({
@@ -12,21 +14,35 @@ class GestionUHBottomSheet extends StatelessWidget {
       minimum: const EdgeInsets.only(bottom: 3),
       child: Center(
         heightFactor: 2.2,
-        child: RichText(
-          text: TextSpan(
-            style:
-                Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 11),
-            children: [
-              const TextSpan(text: '\u00a9 2021'),
-              TextSpan(
-                  text: Constants.copyRight,
+        child: FutureBuilder<String>(
+          future: GetIt.I<VersionRepository>().getVersion(),
+          builder: (context, snapshot) {
+            final textSpans = [
+              TextSpan(text: '\u00a9 ${DateTime.now().year}'),
+            ];
+            if (snapshot.hasData) {
+              textSpans.addAll([
+                const TextSpan(text: ' '),
+                TextSpan(
+                  text: '${Constants.appName} v${snapshot.data}',
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         fontSize: 11,
                         color: Theme.of(context).primaryColor,
-                      ))
-            ],
-          ),
-          textAlign: TextAlign.center,
+                      ),
+                ),
+              ]);
+            }
+            return RichText(
+              text: TextSpan(
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(fontSize: 11),
+                children: textSpans,
+              ),
+              textAlign: TextAlign.center,
+            );
+          },
         ),
       ),
     );

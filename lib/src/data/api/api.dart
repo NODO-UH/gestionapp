@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:gestionuh/src/data/models.dart';
-import 'package:gestionuh/src/utils/constants.dart';
+import 'package:gestionuh/src/data/models/base_model.dart';
+import 'package:gestionuh/src/data/models/models.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 
 typedef ClassBuilder<T extends BaseModel> = T Function(
     Map<String, dynamic> json);
@@ -27,7 +28,7 @@ class GestionApi {
     final Auth response = Auth();
 
     if (userName == null || password == null) {
-      response.error = 'Missing User Name or Password';
+      response.error = 'Missing User Name or Password'; // dead code
       return response;
     }
 
@@ -138,7 +139,7 @@ class GestionApi {
     );
   }
 
-  Future<Status> resetPassword(String newPassw) async {
+  Future<Status> resetPassword(String currentPassw, String newPassw) async {
     if (Constants.testMode) return Status(status: true);
 
     Status response;
@@ -251,7 +252,7 @@ class GestionApi {
         queryParameters: queryParams,
       );
     } catch (error) {
-      target.error = Errors.retrieveError(error.toString());
+      target.error = Errors.ConnectionError;
       return target;
     }
 
@@ -265,7 +266,7 @@ class GestionApi {
           target = builder(jsonDecode(response.data!) as Map<String, dynamic>);
         }
       } catch (e) {
-        target.error = e.toString();
+        target.error = Errors.DefaultError;
       }
     }
 

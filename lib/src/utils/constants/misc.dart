@@ -1,5 +1,5 @@
 class Constants {
-  static const appName = 'Gestion UH';
+  static const appName = 'Gestión UH';
   static const testMode = false;
   static const authUrl = '/auth/login';
   static const quotaUrl = '/proxy/quota';
@@ -11,7 +11,6 @@ class Constants {
   static const passwordRecoveryUrl = '/auth/resetpassword';
   static const userSecurityQuestionsUrl = '/user/securityquestions';
   static const baseUrl = 'https://identity.sic.uh.cu';
-  static const copyRight = ' GestiónUH version 0.1.0 Beta';
   static const objectClassTranslations = {
     'student': 'Estudiante',
     'worker': 'Trabajador'

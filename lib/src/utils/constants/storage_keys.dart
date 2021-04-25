@@ -1,4 +1,4 @@
-const STORAGE_PREFIX = 'gestion_uh-';
+const STORAGE_PREFIX = 'gestionuh.';
 
 const USER_NAME = '${STORAGE_PREFIX}username';
 const USER_PASSWORD = '${STORAGE_PREFIX}password';

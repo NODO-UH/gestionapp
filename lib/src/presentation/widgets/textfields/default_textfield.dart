@@ -57,95 +57,75 @@ class GestionUhDefaultTextFieldState extends State<GestionUhDefaultTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: TextFormField(
-            validator: widget.validator,
-            inputFormatters: widget.inputFormatters ?? [],
-            autovalidateMode:
-                widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
-            style: widget.style ?? const TextStyle(fontSize: 17),
-            onChanged: widget.onChanged,
-            onTap: widget.onTap as void Function()?,
-            controller: widget.controller,
-            keyboardType: widget.keyboardType,
-            textAlignVertical: TextAlignVertical.center,
-            textInputAction: TextInputAction.done,
-            textAlign: TextAlign.justify,
-            cursorColor: Theme.of(context).accentColor,
-            obscureText: _obscureText,
-            decoration: InputDecoration(
-              fillColor: Theme.of(context).cardColor,
-              filled: true,
-              contentPadding: const EdgeInsets.only(left: 10),
-              labelStyle: widget.labelStyle ??
-                  Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Theme.of(context).primaryColor),
-              hintStyle:
-                  widget.hintStyle ?? Theme.of(context).textTheme.bodyText1,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: widget.borderRadius ??
-                    const BorderRadius.all(Radius.circular(5)),
-                borderSide: BorderSide(
-                  color: Colors.grey[300]!,
-                ),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: widget.borderRadius ??
-                    const BorderRadius.all(
-                      Radius.circular(5),
-                    ),
-                borderSide: BorderSide(
-                  color: Colors.grey[300]!,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: widget.borderRadius ??
-                    const BorderRadius.all(
-                      Radius.circular(5),
-                    ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: widget.borderRadius ??
-                    const BorderRadius.all(
-                      Radius.circular(5),
-                    ),
-                borderSide: BorderSide(
-                  color: Colors.red.withOpacity(.5),
-                ),
-              ),
-              labelText: widget.labelText,
-              hintText: widget.hintText,
-            ),
+    return TextFormField(
+      validator: widget.validator,
+      inputFormatters: widget.inputFormatters ?? [],
+      autovalidateMode:
+          widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
+      style: widget.style ?? const TextStyle(fontSize: 17),
+      onChanged: widget.onChanged,
+      onTap: widget.onTap as void Function()?,
+      controller: widget.controller,
+      keyboardType: widget.keyboardType,
+      textAlignVertical: TextAlignVertical.center,
+      textInputAction: TextInputAction.done,
+      textAlign: TextAlign.justify,
+      cursorColor: Theme.of(context).accentColor,
+      obscureText: _obscureText,
+      decoration: InputDecoration(
+        fillColor: Theme.of(context).cardColor,
+        filled: true,
+        contentPadding: const EdgeInsets.only(left: 10),
+        labelStyle: widget.labelStyle ??
+            Theme.of(context)
+                .textTheme
+                .bodyText1!
+                .copyWith(color: Theme.of(context).primaryColor),
+        hintStyle: widget.hintStyle ?? Theme.of(context).textTheme.bodyText1,
+        enabledBorder: OutlineInputBorder(
+          borderRadius:
+              widget.borderRadius ?? const BorderRadius.all(Radius.circular(5)),
+          borderSide: BorderSide(
+            color: Colors.grey[300]!,
           ),
         ),
-        if (widget.keyboardType == TextInputType.visiblePassword)
-          SizedBox(
-            width: 40,
-            child: Material(
-              color: Theme.of(context).primaryColor,
-              clipBehavior: Clip.antiAlias,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(5),
-                  bottomRight: Radius.circular(20),
-                ),
+        border: OutlineInputBorder(
+          borderRadius: widget.borderRadius ??
+              const BorderRadius.all(
+                Radius.circular(5),
               ),
-              child: IconButton(
+          borderSide: BorderSide(
+            color: Colors.grey[300]!,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: widget.borderRadius ??
+              const BorderRadius.all(
+                Radius.circular(5),
+              ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: widget.borderRadius ??
+              const BorderRadius.all(
+                Radius.circular(5),
+              ),
+          borderSide: BorderSide(
+            color: Colors.red.withOpacity(.5),
+          ),
+        ),
+        labelText: widget.labelText,
+        hintText: widget.hintText,
+        suffixIcon: widget.keyboardType == TextInputType.visiblePassword
+            ? IconButton(
                 color: Colors.red,
                 icon: Icon(
                   _obscureText ? Icons.visibility : Icons.visibility_off,
-                  color: Theme.of(context).cardColor,
+                  color: Theme.of(context).primaryColor,
                 ),
                 onPressed: _toggleVisible,
-              ),
-            ),
-          ),
-      ],
+              )
+            : null,
+      ),
     );
   }
 }
