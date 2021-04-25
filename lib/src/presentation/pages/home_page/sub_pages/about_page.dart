@@ -58,6 +58,9 @@ class AboutInformationPage extends StatelessWidget {
                             title: Text(key),
                             children: Developers.teams[key]!
                                 .map((e) => ListTile(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
                                       title: Text(
                                         e.name,
                                         style: Theme.of(context)

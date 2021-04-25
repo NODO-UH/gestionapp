@@ -53,6 +53,12 @@ class _$HomeEventTearOff {
       profile,
     );
   }
+
+  _GoToHelpfulLinks goToHelpfulLinks(UserData profile) {
+    return _GoToHelpfulLinks(
+      profile,
+    );
+  }
 }
 
 /// @nodoc
@@ -69,6 +75,7 @@ mixin _$HomeEvent {
     required TResult Function(UserData profile) goToMailQuota,
     required TResult Function(UserData profile) goToResetPassword,
     required TResult Function(UserData profile) goToAboutUs,
+    required TResult Function(UserData profile) goToHelpfulLinks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,6 +87,7 @@ mixin _$HomeEvent {
     TResult Function(UserData profile)? goToMailQuota,
     TResult Function(UserData profile)? goToResetPassword,
     TResult Function(UserData profile)? goToAboutUs,
+    TResult Function(UserData profile)? goToHelpfulLinks,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -92,6 +100,7 @@ mixin _$HomeEvent {
     required TResult Function(_GoToMailQuota value) goToMailQuota,
     required TResult Function(_GoToResetPassword value) goToResetPassword,
     required TResult Function(_GoToAboutUs value) goToAboutUs,
+    required TResult Function(_GoToHelpfulLinks value) goToHelpfulLinks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -103,6 +112,7 @@ mixin _$HomeEvent {
     TResult Function(_GoToMailQuota value)? goToMailQuota,
     TResult Function(_GoToResetPassword value)? goToResetPassword,
     TResult Function(_GoToAboutUs value)? goToAboutUs,
+    TResult Function(_GoToHelpfulLinks value)? goToHelpfulLinks,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -175,6 +185,7 @@ class _$_LoadProfile with DiagnosticableTreeMixin implements _LoadProfile {
     required TResult Function(UserData profile) goToMailQuota,
     required TResult Function(UserData profile) goToResetPassword,
     required TResult Function(UserData profile) goToAboutUs,
+    required TResult Function(UserData profile) goToHelpfulLinks,
   }) {
     return loadProfile();
   }
@@ -189,6 +200,7 @@ class _$_LoadProfile with DiagnosticableTreeMixin implements _LoadProfile {
     TResult Function(UserData profile)? goToMailQuota,
     TResult Function(UserData profile)? goToResetPassword,
     TResult Function(UserData profile)? goToAboutUs,
+    TResult Function(UserData profile)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (loadProfile != null) {
@@ -207,6 +219,7 @@ class _$_LoadProfile with DiagnosticableTreeMixin implements _LoadProfile {
     required TResult Function(_GoToMailQuota value) goToMailQuota,
     required TResult Function(_GoToResetPassword value) goToResetPassword,
     required TResult Function(_GoToAboutUs value) goToAboutUs,
+    required TResult Function(_GoToHelpfulLinks value) goToHelpfulLinks,
   }) {
     return loadProfile(this);
   }
@@ -221,6 +234,7 @@ class _$_LoadProfile with DiagnosticableTreeMixin implements _LoadProfile {
     TResult Function(_GoToMailQuota value)? goToMailQuota,
     TResult Function(_GoToResetPassword value)? goToResetPassword,
     TResult Function(_GoToAboutUs value)? goToAboutUs,
+    TResult Function(_GoToHelpfulLinks value)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (loadProfile != null) {
@@ -286,6 +300,7 @@ class _$_SendLogout with DiagnosticableTreeMixin implements _SendLogout {
     required TResult Function(UserData profile) goToMailQuota,
     required TResult Function(UserData profile) goToResetPassword,
     required TResult Function(UserData profile) goToAboutUs,
+    required TResult Function(UserData profile) goToHelpfulLinks,
   }) {
     return logout();
   }
@@ -300,6 +315,7 @@ class _$_SendLogout with DiagnosticableTreeMixin implements _SendLogout {
     TResult Function(UserData profile)? goToMailQuota,
     TResult Function(UserData profile)? goToResetPassword,
     TResult Function(UserData profile)? goToAboutUs,
+    TResult Function(UserData profile)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -318,6 +334,7 @@ class _$_SendLogout with DiagnosticableTreeMixin implements _SendLogout {
     required TResult Function(_GoToMailQuota value) goToMailQuota,
     required TResult Function(_GoToResetPassword value) goToResetPassword,
     required TResult Function(_GoToAboutUs value) goToAboutUs,
+    required TResult Function(_GoToHelpfulLinks value) goToHelpfulLinks,
   }) {
     return logout(this);
   }
@@ -332,6 +349,7 @@ class _$_SendLogout with DiagnosticableTreeMixin implements _SendLogout {
     TResult Function(_GoToMailQuota value)? goToMailQuota,
     TResult Function(_GoToResetPassword value)? goToResetPassword,
     TResult Function(_GoToAboutUs value)? goToAboutUs,
+    TResult Function(_GoToHelpfulLinks value)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -424,6 +442,7 @@ class _$_GoToProfile with DiagnosticableTreeMixin implements _GoToProfile {
     required TResult Function(UserData profile) goToMailQuota,
     required TResult Function(UserData profile) goToResetPassword,
     required TResult Function(UserData profile) goToAboutUs,
+    required TResult Function(UserData profile) goToHelpfulLinks,
   }) {
     return goToProfile(profile);
   }
@@ -438,6 +457,7 @@ class _$_GoToProfile with DiagnosticableTreeMixin implements _GoToProfile {
     TResult Function(UserData profile)? goToMailQuota,
     TResult Function(UserData profile)? goToResetPassword,
     TResult Function(UserData profile)? goToAboutUs,
+    TResult Function(UserData profile)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (goToProfile != null) {
@@ -456,6 +476,7 @@ class _$_GoToProfile with DiagnosticableTreeMixin implements _GoToProfile {
     required TResult Function(_GoToMailQuota value) goToMailQuota,
     required TResult Function(_GoToResetPassword value) goToResetPassword,
     required TResult Function(_GoToAboutUs value) goToAboutUs,
+    required TResult Function(_GoToHelpfulLinks value) goToHelpfulLinks,
   }) {
     return goToProfile(this);
   }
@@ -470,6 +491,7 @@ class _$_GoToProfile with DiagnosticableTreeMixin implements _GoToProfile {
     TResult Function(_GoToMailQuota value)? goToMailQuota,
     TResult Function(_GoToResetPassword value)? goToResetPassword,
     TResult Function(_GoToAboutUs value)? goToAboutUs,
+    TResult Function(_GoToHelpfulLinks value)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (goToProfile != null) {
@@ -566,6 +588,7 @@ class _$_GoToQuota with DiagnosticableTreeMixin implements _GoToQuota {
     required TResult Function(UserData profile) goToMailQuota,
     required TResult Function(UserData profile) goToResetPassword,
     required TResult Function(UserData profile) goToAboutUs,
+    required TResult Function(UserData profile) goToHelpfulLinks,
   }) {
     return goToQuota(profile);
   }
@@ -580,6 +603,7 @@ class _$_GoToQuota with DiagnosticableTreeMixin implements _GoToQuota {
     TResult Function(UserData profile)? goToMailQuota,
     TResult Function(UserData profile)? goToResetPassword,
     TResult Function(UserData profile)? goToAboutUs,
+    TResult Function(UserData profile)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (goToQuota != null) {
@@ -598,6 +622,7 @@ class _$_GoToQuota with DiagnosticableTreeMixin implements _GoToQuota {
     required TResult Function(_GoToMailQuota value) goToMailQuota,
     required TResult Function(_GoToResetPassword value) goToResetPassword,
     required TResult Function(_GoToAboutUs value) goToAboutUs,
+    required TResult Function(_GoToHelpfulLinks value) goToHelpfulLinks,
   }) {
     return goToQuota(this);
   }
@@ -612,6 +637,7 @@ class _$_GoToQuota with DiagnosticableTreeMixin implements _GoToQuota {
     TResult Function(_GoToMailQuota value)? goToMailQuota,
     TResult Function(_GoToResetPassword value)? goToResetPassword,
     TResult Function(_GoToAboutUs value)? goToAboutUs,
+    TResult Function(_GoToHelpfulLinks value)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (goToQuota != null) {
@@ -709,6 +735,7 @@ class _$_GoToMailQuota with DiagnosticableTreeMixin implements _GoToMailQuota {
     required TResult Function(UserData profile) goToMailQuota,
     required TResult Function(UserData profile) goToResetPassword,
     required TResult Function(UserData profile) goToAboutUs,
+    required TResult Function(UserData profile) goToHelpfulLinks,
   }) {
     return goToMailQuota(profile);
   }
@@ -723,6 +750,7 @@ class _$_GoToMailQuota with DiagnosticableTreeMixin implements _GoToMailQuota {
     TResult Function(UserData profile)? goToMailQuota,
     TResult Function(UserData profile)? goToResetPassword,
     TResult Function(UserData profile)? goToAboutUs,
+    TResult Function(UserData profile)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (goToMailQuota != null) {
@@ -741,6 +769,7 @@ class _$_GoToMailQuota with DiagnosticableTreeMixin implements _GoToMailQuota {
     required TResult Function(_GoToMailQuota value) goToMailQuota,
     required TResult Function(_GoToResetPassword value) goToResetPassword,
     required TResult Function(_GoToAboutUs value) goToAboutUs,
+    required TResult Function(_GoToHelpfulLinks value) goToHelpfulLinks,
   }) {
     return goToMailQuota(this);
   }
@@ -755,6 +784,7 @@ class _$_GoToMailQuota with DiagnosticableTreeMixin implements _GoToMailQuota {
     TResult Function(_GoToMailQuota value)? goToMailQuota,
     TResult Function(_GoToResetPassword value)? goToResetPassword,
     TResult Function(_GoToAboutUs value)? goToAboutUs,
+    TResult Function(_GoToHelpfulLinks value)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (goToMailQuota != null) {
@@ -855,6 +885,7 @@ class _$_GoToResetPassword
     required TResult Function(UserData profile) goToMailQuota,
     required TResult Function(UserData profile) goToResetPassword,
     required TResult Function(UserData profile) goToAboutUs,
+    required TResult Function(UserData profile) goToHelpfulLinks,
   }) {
     return goToResetPassword(profile);
   }
@@ -869,6 +900,7 @@ class _$_GoToResetPassword
     TResult Function(UserData profile)? goToMailQuota,
     TResult Function(UserData profile)? goToResetPassword,
     TResult Function(UserData profile)? goToAboutUs,
+    TResult Function(UserData profile)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (goToResetPassword != null) {
@@ -887,6 +919,7 @@ class _$_GoToResetPassword
     required TResult Function(_GoToMailQuota value) goToMailQuota,
     required TResult Function(_GoToResetPassword value) goToResetPassword,
     required TResult Function(_GoToAboutUs value) goToAboutUs,
+    required TResult Function(_GoToHelpfulLinks value) goToHelpfulLinks,
   }) {
     return goToResetPassword(this);
   }
@@ -901,6 +934,7 @@ class _$_GoToResetPassword
     TResult Function(_GoToMailQuota value)? goToMailQuota,
     TResult Function(_GoToResetPassword value)? goToResetPassword,
     TResult Function(_GoToAboutUs value)? goToAboutUs,
+    TResult Function(_GoToHelpfulLinks value)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (goToResetPassword != null) {
@@ -998,6 +1032,7 @@ class _$_GoToAboutUs with DiagnosticableTreeMixin implements _GoToAboutUs {
     required TResult Function(UserData profile) goToMailQuota,
     required TResult Function(UserData profile) goToResetPassword,
     required TResult Function(UserData profile) goToAboutUs,
+    required TResult Function(UserData profile) goToHelpfulLinks,
   }) {
     return goToAboutUs(profile);
   }
@@ -1012,6 +1047,7 @@ class _$_GoToAboutUs with DiagnosticableTreeMixin implements _GoToAboutUs {
     TResult Function(UserData profile)? goToMailQuota,
     TResult Function(UserData profile)? goToResetPassword,
     TResult Function(UserData profile)? goToAboutUs,
+    TResult Function(UserData profile)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (goToAboutUs != null) {
@@ -1030,6 +1066,7 @@ class _$_GoToAboutUs with DiagnosticableTreeMixin implements _GoToAboutUs {
     required TResult Function(_GoToMailQuota value) goToMailQuota,
     required TResult Function(_GoToResetPassword value) goToResetPassword,
     required TResult Function(_GoToAboutUs value) goToAboutUs,
+    required TResult Function(_GoToHelpfulLinks value) goToHelpfulLinks,
   }) {
     return goToAboutUs(this);
   }
@@ -1044,6 +1081,7 @@ class _$_GoToAboutUs with DiagnosticableTreeMixin implements _GoToAboutUs {
     TResult Function(_GoToMailQuota value)? goToMailQuota,
     TResult Function(_GoToResetPassword value)? goToResetPassword,
     TResult Function(_GoToAboutUs value)? goToAboutUs,
+    TResult Function(_GoToHelpfulLinks value)? goToHelpfulLinks,
     required TResult orElse(),
   }) {
     if (goToAboutUs != null) {
@@ -1059,6 +1097,156 @@ abstract class _GoToAboutUs implements HomeEvent {
   UserData get profile => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$GoToAboutUsCopyWith<_GoToAboutUs> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$GoToHelpfulLinksCopyWith<$Res> {
+  factory _$GoToHelpfulLinksCopyWith(
+          _GoToHelpfulLinks value, $Res Function(_GoToHelpfulLinks) then) =
+      __$GoToHelpfulLinksCopyWithImpl<$Res>;
+  $Res call({UserData profile});
+}
+
+/// @nodoc
+class __$GoToHelpfulLinksCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res>
+    implements _$GoToHelpfulLinksCopyWith<$Res> {
+  __$GoToHelpfulLinksCopyWithImpl(
+      _GoToHelpfulLinks _value, $Res Function(_GoToHelpfulLinks) _then)
+      : super(_value, (v) => _then(v as _GoToHelpfulLinks));
+
+  @override
+  _GoToHelpfulLinks get _value => super._value as _GoToHelpfulLinks;
+
+  @override
+  $Res call({
+    Object? profile = freezed,
+  }) {
+    return _then(_GoToHelpfulLinks(
+      profile == freezed
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as UserData,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GoToHelpfulLinks
+    with DiagnosticableTreeMixin
+    implements _GoToHelpfulLinks {
+  const _$_GoToHelpfulLinks(this.profile);
+
+  @override
+  final UserData profile;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeEvent.goToHelpfulLinks(profile: $profile)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeEvent.goToHelpfulLinks'))
+      ..add(DiagnosticsProperty('profile', profile));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _GoToHelpfulLinks &&
+            (identical(other.profile, profile) ||
+                const DeepCollectionEquality().equals(other.profile, profile)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(profile);
+
+  @JsonKey(ignore: true)
+  @override
+  _$GoToHelpfulLinksCopyWith<_GoToHelpfulLinks> get copyWith =>
+      __$GoToHelpfulLinksCopyWithImpl<_GoToHelpfulLinks>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadProfile,
+    required TResult Function() logout,
+    required TResult Function(UserData profile) goToProfile,
+    required TResult Function(UserData profile) goToQuota,
+    required TResult Function(UserData profile) goToMailQuota,
+    required TResult Function(UserData profile) goToResetPassword,
+    required TResult Function(UserData profile) goToAboutUs,
+    required TResult Function(UserData profile) goToHelpfulLinks,
+  }) {
+    return goToHelpfulLinks(profile);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadProfile,
+    TResult Function()? logout,
+    TResult Function(UserData profile)? goToProfile,
+    TResult Function(UserData profile)? goToQuota,
+    TResult Function(UserData profile)? goToMailQuota,
+    TResult Function(UserData profile)? goToResetPassword,
+    TResult Function(UserData profile)? goToAboutUs,
+    TResult Function(UserData profile)? goToHelpfulLinks,
+    required TResult orElse(),
+  }) {
+    if (goToHelpfulLinks != null) {
+      return goToHelpfulLinks(profile);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadProfile value) loadProfile,
+    required TResult Function(_SendLogout value) logout,
+    required TResult Function(_GoToProfile value) goToProfile,
+    required TResult Function(_GoToQuota value) goToQuota,
+    required TResult Function(_GoToMailQuota value) goToMailQuota,
+    required TResult Function(_GoToResetPassword value) goToResetPassword,
+    required TResult Function(_GoToAboutUs value) goToAboutUs,
+    required TResult Function(_GoToHelpfulLinks value) goToHelpfulLinks,
+  }) {
+    return goToHelpfulLinks(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadProfile value)? loadProfile,
+    TResult Function(_SendLogout value)? logout,
+    TResult Function(_GoToProfile value)? goToProfile,
+    TResult Function(_GoToQuota value)? goToQuota,
+    TResult Function(_GoToMailQuota value)? goToMailQuota,
+    TResult Function(_GoToResetPassword value)? goToResetPassword,
+    TResult Function(_GoToAboutUs value)? goToAboutUs,
+    TResult Function(_GoToHelpfulLinks value)? goToHelpfulLinks,
+    required TResult orElse(),
+  }) {
+    if (goToHelpfulLinks != null) {
+      return goToHelpfulLinks(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GoToHelpfulLinks implements HomeEvent {
+  const factory _GoToHelpfulLinks(UserData profile) = _$_GoToHelpfulLinks;
+
+  UserData get profile => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$GoToHelpfulLinksCopyWith<_GoToHelpfulLinks> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1114,6 +1302,13 @@ class _$HomeStateTearOff {
       items,
     );
   }
+
+  _HelpfulLinks helpfulLinks(UserData profile, List<HomeItemEnum> items) {
+    return _HelpfulLinks(
+      profile,
+      items,
+    );
+  }
 }
 
 /// @nodoc
@@ -1135,6 +1330,8 @@ mixin _$HomeState {
         resetPassword,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         aboutUs,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        helpfulLinks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1147,6 +1344,7 @@ mixin _$HomeState {
     TResult Function(UserData profile, List<HomeItemEnum> items)? mailQuota,
     TResult Function(UserData profile, List<HomeItemEnum> items)? resetPassword,
     TResult Function(UserData profile, List<HomeItemEnum> items)? aboutUs,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? helpfulLinks,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1160,6 +1358,7 @@ mixin _$HomeState {
     required TResult Function(_MailQuota value) mailQuota,
     required TResult Function(_ResetPassword value) resetPassword,
     required TResult Function(_AboutUs value) aboutUs,
+    required TResult Function(_HelpfulLinks value) helpfulLinks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1172,6 +1371,7 @@ mixin _$HomeState {
     TResult Function(_MailQuota value)? mailQuota,
     TResult Function(_ResetPassword value)? resetPassword,
     TResult Function(_AboutUs value)? aboutUs,
+    TResult Function(_HelpfulLinks value)? helpfulLinks,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1247,6 +1447,8 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
         resetPassword,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         aboutUs,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        helpfulLinks,
   }) {
     return loading();
   }
@@ -1262,6 +1464,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     TResult Function(UserData profile, List<HomeItemEnum> items)? mailQuota,
     TResult Function(UserData profile, List<HomeItemEnum> items)? resetPassword,
     TResult Function(UserData profile, List<HomeItemEnum> items)? aboutUs,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1281,6 +1484,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     required TResult Function(_MailQuota value) mailQuota,
     required TResult Function(_ResetPassword value) resetPassword,
     required TResult Function(_AboutUs value) aboutUs,
+    required TResult Function(_HelpfulLinks value) helpfulLinks,
   }) {
     return loading(this);
   }
@@ -1296,6 +1500,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     TResult Function(_MailQuota value)? mailQuota,
     TResult Function(_ResetPassword value)? resetPassword,
     TResult Function(_AboutUs value)? aboutUs,
+    TResult Function(_HelpfulLinks value)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1391,6 +1596,8 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
         resetPassword,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         aboutUs,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        helpfulLinks,
   }) {
     return error(message);
   }
@@ -1406,6 +1613,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     TResult Function(UserData profile, List<HomeItemEnum> items)? mailQuota,
     TResult Function(UserData profile, List<HomeItemEnum> items)? resetPassword,
     TResult Function(UserData profile, List<HomeItemEnum> items)? aboutUs,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1425,6 +1633,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     required TResult Function(_MailQuota value) mailQuota,
     required TResult Function(_ResetPassword value) resetPassword,
     required TResult Function(_AboutUs value) aboutUs,
+    required TResult Function(_HelpfulLinks value) helpfulLinks,
   }) {
     return error(this);
   }
@@ -1440,6 +1649,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     TResult Function(_MailQuota value)? mailQuota,
     TResult Function(_ResetPassword value)? resetPassword,
     TResult Function(_AboutUs value)? aboutUs,
+    TResult Function(_HelpfulLinks value)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1512,6 +1722,8 @@ class _$_Logout with DiagnosticableTreeMixin implements _Logout {
         resetPassword,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         aboutUs,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        helpfulLinks,
   }) {
     return logout();
   }
@@ -1527,6 +1739,7 @@ class _$_Logout with DiagnosticableTreeMixin implements _Logout {
     TResult Function(UserData profile, List<HomeItemEnum> items)? mailQuota,
     TResult Function(UserData profile, List<HomeItemEnum> items)? resetPassword,
     TResult Function(UserData profile, List<HomeItemEnum> items)? aboutUs,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -1546,6 +1759,7 @@ class _$_Logout with DiagnosticableTreeMixin implements _Logout {
     required TResult Function(_MailQuota value) mailQuota,
     required TResult Function(_ResetPassword value) resetPassword,
     required TResult Function(_AboutUs value) aboutUs,
+    required TResult Function(_HelpfulLinks value) helpfulLinks,
   }) {
     return logout(this);
   }
@@ -1561,6 +1775,7 @@ class _$_Logout with DiagnosticableTreeMixin implements _Logout {
     TResult Function(_MailQuota value)? mailQuota,
     TResult Function(_ResetPassword value)? resetPassword,
     TResult Function(_AboutUs value)? aboutUs,
+    TResult Function(_HelpfulLinks value)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -1669,6 +1884,8 @@ class _$_Profile with DiagnosticableTreeMixin implements _Profile {
         resetPassword,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         aboutUs,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        helpfulLinks,
   }) {
     return profile(this.profile, items);
   }
@@ -1684,6 +1901,7 @@ class _$_Profile with DiagnosticableTreeMixin implements _Profile {
     TResult Function(UserData profile, List<HomeItemEnum> items)? mailQuota,
     TResult Function(UserData profile, List<HomeItemEnum> items)? resetPassword,
     TResult Function(UserData profile, List<HomeItemEnum> items)? aboutUs,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (profile != null) {
@@ -1703,6 +1921,7 @@ class _$_Profile with DiagnosticableTreeMixin implements _Profile {
     required TResult Function(_MailQuota value) mailQuota,
     required TResult Function(_ResetPassword value) resetPassword,
     required TResult Function(_AboutUs value) aboutUs,
+    required TResult Function(_HelpfulLinks value) helpfulLinks,
   }) {
     return profile(this);
   }
@@ -1718,6 +1937,7 @@ class _$_Profile with DiagnosticableTreeMixin implements _Profile {
     TResult Function(_MailQuota value)? mailQuota,
     TResult Function(_ResetPassword value)? resetPassword,
     TResult Function(_AboutUs value)? aboutUs,
+    TResult Function(_HelpfulLinks value)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (profile != null) {
@@ -1833,6 +2053,8 @@ class _$_Quota with DiagnosticableTreeMixin implements _Quota {
         resetPassword,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         aboutUs,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        helpfulLinks,
   }) {
     return quota(this.profile, items);
   }
@@ -1848,6 +2070,7 @@ class _$_Quota with DiagnosticableTreeMixin implements _Quota {
     TResult Function(UserData profile, List<HomeItemEnum> items)? mailQuota,
     TResult Function(UserData profile, List<HomeItemEnum> items)? resetPassword,
     TResult Function(UserData profile, List<HomeItemEnum> items)? aboutUs,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (quota != null) {
@@ -1867,6 +2090,7 @@ class _$_Quota with DiagnosticableTreeMixin implements _Quota {
     required TResult Function(_MailQuota value) mailQuota,
     required TResult Function(_ResetPassword value) resetPassword,
     required TResult Function(_AboutUs value) aboutUs,
+    required TResult Function(_HelpfulLinks value) helpfulLinks,
   }) {
     return quota(this);
   }
@@ -1882,6 +2106,7 @@ class _$_Quota with DiagnosticableTreeMixin implements _Quota {
     TResult Function(_MailQuota value)? mailQuota,
     TResult Function(_ResetPassword value)? resetPassword,
     TResult Function(_AboutUs value)? aboutUs,
+    TResult Function(_HelpfulLinks value)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (quota != null) {
@@ -1996,6 +2221,8 @@ class _$_MailQuota with DiagnosticableTreeMixin implements _MailQuota {
         resetPassword,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         aboutUs,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        helpfulLinks,
   }) {
     return mailQuota(this.profile, items);
   }
@@ -2011,6 +2238,7 @@ class _$_MailQuota with DiagnosticableTreeMixin implements _MailQuota {
     TResult Function(UserData profile, List<HomeItemEnum> items)? mailQuota,
     TResult Function(UserData profile, List<HomeItemEnum> items)? resetPassword,
     TResult Function(UserData profile, List<HomeItemEnum> items)? aboutUs,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (mailQuota != null) {
@@ -2030,6 +2258,7 @@ class _$_MailQuota with DiagnosticableTreeMixin implements _MailQuota {
     required TResult Function(_MailQuota value) mailQuota,
     required TResult Function(_ResetPassword value) resetPassword,
     required TResult Function(_AboutUs value) aboutUs,
+    required TResult Function(_HelpfulLinks value) helpfulLinks,
   }) {
     return mailQuota(this);
   }
@@ -2045,6 +2274,7 @@ class _$_MailQuota with DiagnosticableTreeMixin implements _MailQuota {
     TResult Function(_MailQuota value)? mailQuota,
     TResult Function(_ResetPassword value)? resetPassword,
     TResult Function(_AboutUs value)? aboutUs,
+    TResult Function(_HelpfulLinks value)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (mailQuota != null) {
@@ -2162,6 +2392,8 @@ class _$_ResetPassword with DiagnosticableTreeMixin implements _ResetPassword {
         resetPassword,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         aboutUs,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        helpfulLinks,
   }) {
     return resetPassword(this.profile, items);
   }
@@ -2177,6 +2409,7 @@ class _$_ResetPassword with DiagnosticableTreeMixin implements _ResetPassword {
     TResult Function(UserData profile, List<HomeItemEnum> items)? mailQuota,
     TResult Function(UserData profile, List<HomeItemEnum> items)? resetPassword,
     TResult Function(UserData profile, List<HomeItemEnum> items)? aboutUs,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (resetPassword != null) {
@@ -2196,6 +2429,7 @@ class _$_ResetPassword with DiagnosticableTreeMixin implements _ResetPassword {
     required TResult Function(_MailQuota value) mailQuota,
     required TResult Function(_ResetPassword value) resetPassword,
     required TResult Function(_AboutUs value) aboutUs,
+    required TResult Function(_HelpfulLinks value) helpfulLinks,
   }) {
     return resetPassword(this);
   }
@@ -2211,6 +2445,7 @@ class _$_ResetPassword with DiagnosticableTreeMixin implements _ResetPassword {
     TResult Function(_MailQuota value)? mailQuota,
     TResult Function(_ResetPassword value)? resetPassword,
     TResult Function(_AboutUs value)? aboutUs,
+    TResult Function(_HelpfulLinks value)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (resetPassword != null) {
@@ -2326,6 +2561,8 @@ class _$_AboutUs with DiagnosticableTreeMixin implements _AboutUs {
         resetPassword,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         aboutUs,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        helpfulLinks,
   }) {
     return aboutUs(this.profile, items);
   }
@@ -2341,6 +2578,7 @@ class _$_AboutUs with DiagnosticableTreeMixin implements _AboutUs {
     TResult Function(UserData profile, List<HomeItemEnum> items)? mailQuota,
     TResult Function(UserData profile, List<HomeItemEnum> items)? resetPassword,
     TResult Function(UserData profile, List<HomeItemEnum> items)? aboutUs,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (aboutUs != null) {
@@ -2360,6 +2598,7 @@ class _$_AboutUs with DiagnosticableTreeMixin implements _AboutUs {
     required TResult Function(_MailQuota value) mailQuota,
     required TResult Function(_ResetPassword value) resetPassword,
     required TResult Function(_AboutUs value) aboutUs,
+    required TResult Function(_HelpfulLinks value) helpfulLinks,
   }) {
     return aboutUs(this);
   }
@@ -2375,6 +2614,7 @@ class _$_AboutUs with DiagnosticableTreeMixin implements _AboutUs {
     TResult Function(_MailQuota value)? mailQuota,
     TResult Function(_ResetPassword value)? resetPassword,
     TResult Function(_AboutUs value)? aboutUs,
+    TResult Function(_HelpfulLinks value)? helpfulLinks,
     required TResult orElse(),
   }) {
     if (aboutUs != null) {
@@ -2392,5 +2632,176 @@ abstract class _AboutUs implements HomeState {
   List<HomeItemEnum> get items => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$AboutUsCopyWith<_AboutUs> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$HelpfulLinksCopyWith<$Res> {
+  factory _$HelpfulLinksCopyWith(
+          _HelpfulLinks value, $Res Function(_HelpfulLinks) then) =
+      __$HelpfulLinksCopyWithImpl<$Res>;
+  $Res call({UserData profile, List<HomeItemEnum> items});
+}
+
+/// @nodoc
+class __$HelpfulLinksCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
+    implements _$HelpfulLinksCopyWith<$Res> {
+  __$HelpfulLinksCopyWithImpl(
+      _HelpfulLinks _value, $Res Function(_HelpfulLinks) _then)
+      : super(_value, (v) => _then(v as _HelpfulLinks));
+
+  @override
+  _HelpfulLinks get _value => super._value as _HelpfulLinks;
+
+  @override
+  $Res call({
+    Object? profile = freezed,
+    Object? items = freezed,
+  }) {
+    return _then(_HelpfulLinks(
+      profile == freezed
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as UserData,
+      items == freezed
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<HomeItemEnum>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_HelpfulLinks with DiagnosticableTreeMixin implements _HelpfulLinks {
+  const _$_HelpfulLinks(this.profile, this.items);
+
+  @override
+  final UserData profile;
+  @override
+  final List<HomeItemEnum> items;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeState.helpfulLinks(profile: $profile, items: $items)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.helpfulLinks'))
+      ..add(DiagnosticsProperty('profile', profile))
+      ..add(DiagnosticsProperty('items', items));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _HelpfulLinks &&
+            (identical(other.profile, profile) ||
+                const DeepCollectionEquality()
+                    .equals(other.profile, profile)) &&
+            (identical(other.items, items) ||
+                const DeepCollectionEquality().equals(other.items, items)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(profile) ^
+      const DeepCollectionEquality().hash(items);
+
+  @JsonKey(ignore: true)
+  @override
+  _$HelpfulLinksCopyWith<_HelpfulLinks> get copyWith =>
+      __$HelpfulLinksCopyWithImpl<_HelpfulLinks>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(String message) error,
+    required TResult Function() logout,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        profile,
+    required TResult Function(UserData profile, List<HomeItemEnum> items) quota,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        mailQuota,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        resetPassword,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        aboutUs,
+    required TResult Function(UserData profile, List<HomeItemEnum> items)
+        helpfulLinks,
+  }) {
+    return helpfulLinks(this.profile, items);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(String message)? error,
+    TResult Function()? logout,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? profile,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? quota,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? mailQuota,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? resetPassword,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? aboutUs,
+    TResult Function(UserData profile, List<HomeItemEnum> items)? helpfulLinks,
+    required TResult orElse(),
+  }) {
+    if (helpfulLinks != null) {
+      return helpfulLinks(this.profile, items);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Logout value) logout,
+    required TResult Function(_Profile value) profile,
+    required TResult Function(_Quota value) quota,
+    required TResult Function(_MailQuota value) mailQuota,
+    required TResult Function(_ResetPassword value) resetPassword,
+    required TResult Function(_AboutUs value) aboutUs,
+    required TResult Function(_HelpfulLinks value) helpfulLinks,
+  }) {
+    return helpfulLinks(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
+    TResult Function(_Logout value)? logout,
+    TResult Function(_Profile value)? profile,
+    TResult Function(_Quota value)? quota,
+    TResult Function(_MailQuota value)? mailQuota,
+    TResult Function(_ResetPassword value)? resetPassword,
+    TResult Function(_AboutUs value)? aboutUs,
+    TResult Function(_HelpfulLinks value)? helpfulLinks,
+    required TResult orElse(),
+  }) {
+    if (helpfulLinks != null) {
+      return helpfulLinks(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HelpfulLinks implements HomeState {
+  const factory _HelpfulLinks(UserData profile, List<HomeItemEnum> items) =
+      _$_HelpfulLinks;
+
+  UserData get profile => throw _privateConstructorUsedError;
+  List<HomeItemEnum> get items => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$HelpfulLinksCopyWith<_HelpfulLinks> get copyWith =>
       throw _privateConstructorUsedError;
 }

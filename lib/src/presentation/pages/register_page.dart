@@ -243,6 +243,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                     ),
                     CheckboxListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       controlAffinity: ListTileControlAffinity.leading,
                       dense: true,
                       activeColor: Theme.of(context).primaryColor,

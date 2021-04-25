@@ -68,6 +68,7 @@ class HomePage extends StatelessWidget {
               mailQuota: (state) => 'Correo',
               resetPassword: (state) => 'Cambiar Contraseña',
               aboutUs: (state) => 'Acerca de ${Constants.appName}',
+              helpfulLinks: (state) => 'Enlaces Útiles',
             ),
           );
         },
@@ -115,6 +116,7 @@ class HomePage extends StatelessWidget {
                       mailQuota: (p, x) => _getDrawerItems(context, p, x),
                       resetPassword: (p, x) => _getDrawerItems(context, p, x),
                       aboutUs: (p, x) => _getDrawerItems(context, p, x),
+                      helpfulLinks: (p, x) => _getDrawerItems(context, p, x),
                       logout: () => [
                         ListTile(
                           leading: const GestionUhLoadingIndicator(),
@@ -202,6 +204,9 @@ class HomePage extends StatelessWidget {
           },
           aboutUs: (state) {
             return const AboutInformationPage();
+          },
+          helpfulLinks: (state) {
+            return const HelpfulLinksPage();
           },
         );
       },
@@ -307,6 +312,16 @@ class HomePage extends StatelessWidget {
           onTap: () {
             _applyPopIfDrawerIsDialog(context);
             context.read<HomeBloc>().add(HomeEvent.goToAboutUs(profile));
+          },
+        );
+      case HomeItemEnum.HelpfulLinks:
+        return _buildDrawerItem(
+          context: context,
+          text: 'Enlaces Útiles',
+          icon: Icons.link,
+          onTap: () {
+            _applyPopIfDrawerIsDialog(context);
+            context.read<HomeBloc>().add(HomeEvent.goToHelpfulLinks(profile));
           },
         );
     }

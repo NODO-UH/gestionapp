@@ -10,4 +10,6 @@ class HomeEvent with _$HomeEvent {
   const factory HomeEvent.goToResetPassword(UserData profile) =
       _GoToResetPassword;
   const factory HomeEvent.goToAboutUs(UserData profile) = _GoToAboutUs;
+  const factory HomeEvent.goToHelpfulLinks(UserData profile) =
+      _GoToHelpfulLinks;
 }
