@@ -1,4 +1,4 @@
-part of 'resetpassword_bloc.dart';
+part of 'reset_password_bloc.dart';
 
 @freezed
 class ResetPasswordState with _$ResetPasswordState {
