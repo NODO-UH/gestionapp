@@ -103,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(state.error),
+                        SelectableText(state.error),
                         Padding(
                           padding: const EdgeInsets.all(5),
                           child: GestionUhDefaultButton(
@@ -147,11 +147,11 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title),
+          SelectableText(title),
           const SizedBox(
             height: 3,
           ),
-          Text(
+          SelectableText(
             body,
             style: const TextStyle(
               color: Colors.black,
@@ -186,7 +186,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           buildToogleFiled(
             icon: Icons.cloud,
-            text: 'Acceso a Nube',
+            text: 'Acceso a Mi Nube',
             value: cloud,
           ),
           const SizedBox(
@@ -211,7 +211,7 @@ class _ProfilePageState extends State<ProfilePage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Text(
+          child: SelectableText(
             text,
             style: const TextStyle(
               color: Colors.black,

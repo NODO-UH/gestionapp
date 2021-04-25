@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:gestionuh/src/presentation/widgets/widgets.dart';
 import 'package:gestionuh/src/utils/constants/constants.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -34,7 +35,7 @@ class AboutInformationPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
+                SelectableText(
                   About.shortDescription,
                   style: Theme.of(context)
                       .textTheme
@@ -44,7 +45,7 @@ class AboutInformationPage extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                Text(
+                SelectableText(
                   'Equipo de desarrollo:',
                   style: Theme.of(context).textTheme.headline5!.copyWith(),
                 ),
@@ -84,69 +85,72 @@ class AboutInformationPage extends StatelessWidget {
                                                 );
                                               }
                                             },
-                                      trailing: e.link != null
-                                          ? const Icon(Icons.link_off_outlined)
-                                          : null,
+                                      trailing: Icon(e.link != null
+                                          ? Icons.link
+                                          : Icons.link_off_outlined),
                                     ))
                                 .toList(),
                           ))
                       .toList(),
                 ),
                 const SizedBox(height: 50),
-                Text(
+                SelectableText(
                   'Nodo Central de Red - UH',
                   style: Theme.of(context).textTheme.headline6!.copyWith(),
                 ),
                 const SizedBox(height: 10),
-                Text(
+                SelectableText(
                   'MATCOM - UH',
                   style: Theme.of(context).textTheme.headline6!.copyWith(),
                 ),
                 const SizedBox(height: 10),
-                Text(
+                SelectableText(
                   'GRS - UH',
                   style: Theme.of(context).textTheme.headline6!.copyWith(),
                 ),
-                GestureDetector(
-                  onTap: () async {
-                    const url =
-                        'https://raw.githubusercontent.com/covid19cuba/covid19cuba-app/master/LICENSE';
-                    if (await canLaunch(url)) {
-                      await launch(url);
-                    } else {
-                      FlashHelper.errorBar(
-                        context,
-                        message: 'No puede acceder a $url',
-                      );
-                    }
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Copyright 2021',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.subtitle2,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(2),
-                        ),
-                        Icon(
-                          Icons.copyright,
-                          color: Theme.of(context).textTheme.subtitle2!.color,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(2),
-                        ),
-                        Text(
-                          'GPL-3.0',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.subtitle2,
-                        ),
-                      ],
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () async {
+                      const url =
+                          'https://github.com/NODO-UH/gestionapp/blob/master/LICENSE';
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        FlashHelper.errorBar(
+                          context,
+                          message: 'No puede acceder a $url',
+                        );
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Copyright 2021',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(2),
+                          ),
+                          Icon(
+                            Icons.copyright,
+                            color: Theme.of(context).textTheme.subtitle2!.color,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(2),
+                          ),
+                          Text(
+                            'GPL-3.0',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 )
