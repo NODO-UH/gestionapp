@@ -12,7 +12,6 @@ dependencies:
   collection: ^1.15.0-nullsafety.4
   cupertino_icons: ^1.0.2
   dio: ^4.0.0
-  fl_chart: ^0.35.0
   flash: ^1.5.1
   flutter:
     sdk: flutter
@@ -27,6 +26,7 @@ dependencies:
   page_transition: ^2.0.1-nullsafety.0
   responsive_builder: ^0.4.1
   shared_preferences: ^2.0.5
+  syncfusion_flutter_charts: ^19.1.57+1
   url_launcher: ^6.0.3
 
 dev_dependencies:
