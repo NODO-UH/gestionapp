@@ -1,5 +1,6 @@
 part of 'quota_bloc.dart';
 
-abstract class QuotaEvent {}
-
-class QuotaInitialized extends QuotaEvent {}
+@freezed
+class QuotaEvent with _$QuotaEvent {
+  const factory QuotaEvent.load() = _Load;
+}

@@ -177,13 +177,13 @@ class HomePage extends StatelessWidget {
           },
           profile: (state) {
             return BlocProvider<ProfileBloc>(
-              create: (_) => GetIt.I()..add(ProfileInitialized()),
+              create: (_) => GetIt.I()..add(const ProfileEvent.load()),
               child: const ProfilePage(),
             );
           },
           quota: (state) {
             return BlocProvider<QuotaBloc>(
-              create: (_) => GetIt.I()..add(QuotaInitialized()),
+              create: (_) => GetIt.I()..add(const QuotaEvent.load()),
               child: const QuotaPage(),
             );
           },

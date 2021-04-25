@@ -17,14 +17,59 @@ class _QuotaPageState extends State<QuotaPage> {
     return BlocConsumer<QuotaBloc, QuotaState>(
       listener: (context, state) {},
       builder: (context, state) {
-        if (state is QuotaLoadedSuccess) {
-          return RefreshIndicator(
-            onRefresh: () async {
-              context.read<QuotaBloc>().add(QuotaInitialized());
-            },
-            child: Scrollbar(
+        return state.when(
+          loading: () {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  GestionUhLoadingIndicator(),
+                ],
+              ),
+            );
+          },
+          success: (quota) {
+            return RefreshIndicator(
+              onRefresh: () async {
+                context.read<QuotaBloc>().add(const QuotaEvent.load());
+              },
+              child: Scrollbar(
+                child: ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  children: [
+                    Center(
+                      child: Container(
+                        width: getValueForScreenType<double>(
+                          context: context,
+                          mobile: MediaQuery.of(context).size.width,
+                          tablet: MediaQuery.of(context).size.width * 0.5,
+                        ),
+                        padding: const EdgeInsets.only(
+                          top: 30,
+                          bottom: 9,
+                          left: 18,
+                          right: 18,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Center(
+                              child: QuotaGraph(
+                                quota: quota,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+          error: (error) {
+            return Scrollbar(
               child: ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
                 children: [
                   Center(
                     child: Container(
@@ -40,11 +85,19 @@ class _QuotaPageState extends State<QuotaPage> {
                         right: 18,
                       ),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Center(
-                            child: QuotaGraph(
-                              quota: state.quota,
+                          SelectableText(error),
+                          Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: GestionUhDefaultButton(
+                              text: 'Reintentar',
+                              onPressed: () {
+                                context
+                                    .read<QuotaBloc>()
+                                    .add(const QuotaEvent.load());
+                              },
                             ),
                           ),
                         ],
@@ -53,57 +106,8 @@ class _QuotaPageState extends State<QuotaPage> {
                   ),
                 ],
               ),
-            ),
-          );
-        }
-        if (state is QuotaLoadedFailure) {
-          return Scrollbar(
-            child: ListView(
-              children: [
-                Center(
-                  child: Container(
-                    width: getValueForScreenType<double>(
-                      context: context,
-                      mobile: MediaQuery.of(context).size.width,
-                      tablet: MediaQuery.of(context).size.width * 0.5,
-                    ),
-                    padding: const EdgeInsets.only(
-                      top: 30,
-                      bottom: 9,
-                      left: 18,
-                      right: 18,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SelectableText(state.error),
-                        Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: GestionUhDefaultButton(
-                            text: 'Reintentar',
-                            onPressed: () {
-                              context.read<QuotaBloc>().add(
-                                    QuotaInitialized(),
-                                  );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              GestionUhLoadingIndicator(),
-            ],
-          ),
+            );
+          },
         );
       },
     );
