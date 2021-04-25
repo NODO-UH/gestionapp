@@ -10,11 +10,9 @@ class Errors {
   static const ConnectionError = 'Conexión fallida. Verifique su conectividad.';
 
   static String? retrieveError(String message) {
-    try {
-      final index = int.parse(message);
-      return Messages[index];
-    } catch (_) {}
-
-    return DefaultError;
+    final index = int.tryParse(message);
+    return index != null && Messages.containsKey(index)
+        ? Messages[index]
+        : DefaultError;
   }
 }
