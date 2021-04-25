@@ -1,5 +1,9 @@
 class Errors {
-  static const Messages = {1: 'Datos inválidos.', 2: 'Credenciales inválidas.'};
+  static const Messages = {
+    1: 'Datos inválidos.',
+    2: 'Credenciales inválidas.',
+    20: 'Datos inválidos.',
+  };
 
   static const DefaultError = 'Ha ocurrido un error.';
 

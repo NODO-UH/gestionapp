@@ -32,7 +32,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       listener: (context, state) {
         state.maybeWhen(
           success: () {
-            FlashHelper.errorBar(
+            FlashHelper.successBar(
               context,
               message: 'La contraseña ha sido actualizada correctamente.',
             );
