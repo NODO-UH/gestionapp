@@ -1,7 +1,7 @@
 part of 'register_bloc.dart';
 
 @freezed
-abstract class RegisterState with _$RegisterState {
+class RegisterState with _$RegisterState {
   const factory RegisterState.initial() = _$RegisterInitial;
   const factory RegisterState.initialLoadInProgress() =
       _$RegisterLoadInitialDataInProgress;

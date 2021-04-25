@@ -67,6 +67,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           _getItemsByProfile(profile),
         );
       },
+      goToHelpfulLinks: (profile) async* {
+        yield HomeState.helpfulLinks(
+          profile,
+          _getItemsByProfile(profile),
+        );
+      },
       logout: () async* {
         yield const HomeState.loading();
         await authRepository.logout();
@@ -81,9 +87,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (profile.hasInternet ?? false) HomeItemEnum.Quota,
       if (profile.hasEmail ?? false) HomeItemEnum.MailQuota,
       HomeItemEnum.ResetPassword,
-      HomeItemEnum.Logout,
-      HomeItemEnum.Separator,
+      HomeItemEnum.HelpfulLinks,
       HomeItemEnum.AboutUs,
+      HomeItemEnum.Separator,
+      HomeItemEnum.Logout,
     ];
   }
 }

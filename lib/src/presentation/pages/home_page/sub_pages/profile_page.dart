@@ -17,14 +17,85 @@ class _ProfilePageState extends State<ProfilePage> {
     return BlocConsumer<ProfileBloc, ProfileState>(
       listener: (context, state) {},
       builder: (context, state) {
-        if (state is ProfileLoadedSuccess) {
-          return RefreshIndicator(
-            onRefresh: () async {
-              context.read<ProfileBloc>().add(ProfileInitialized());
-            },
-            child: Scrollbar(
+        return state.when(
+          loading: () {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  GestionUhLoadingIndicator(),
+                ],
+              ),
+            );
+          },
+          success: (profile) {
+            return RefreshIndicator(
+              onRefresh: () async {
+                context.read<ProfileBloc>().add(const ProfileEvent.load());
+              },
+              child: Scrollbar(
+                child: ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  children: [
+                    Center(
+                      child: Container(
+                        width: getValueForScreenType<double>(
+                          context: context,
+                          mobile: MediaQuery.of(context).size.width,
+                          tablet: MediaQuery.of(context).size.width * 0.5,
+                        ),
+                        padding: const EdgeInsets.only(
+                          top: 30,
+                          bottom: 9,
+                          left: 18,
+                          right: 18,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if ((profile.name ?? '').isNotEmpty)
+                              buildProfileField(
+                                title: 'Nombre',
+                                body: profile.name ?? '',
+                              ),
+                            if ((profile.email ?? '').isNotEmpty)
+                              buildProfileField(
+                                title: 'Correo',
+                                body: profile.email ?? '',
+                              ),
+                            if ((profile.careerName ?? '').isNotEmpty)
+                              buildProfileField(
+                                title: 'Carrera',
+                                body: profile.careerName ?? '',
+                              ),
+                            if ((profile.position ?? '').isNotEmpty)
+                              buildProfileField(
+                                title: 'Ocupación',
+                                body: profile.position ?? '',
+                              ),
+                            if ((profile.objectClass ?? '').isNotEmpty)
+                              buildProfileField(
+                                title: 'Clase',
+                                body: profile.objectClass ?? '',
+                              ),
+                            buildAccessFields(
+                              mail: profile.hasEmail ?? false,
+                              cloud: profile.hasCloud ?? false,
+                              internet: profile.hasInternet ?? false,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+          error: (error) {
+            return Scrollbar(
               child: ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
                 children: [
                   Center(
                     child: Container(
@@ -40,38 +111,20 @@ class _ProfilePageState extends State<ProfilePage> {
                         right: 18,
                       ),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if ((state.profile.name ?? '').isNotEmpty)
-                            buildProfileField(
-                              title: 'Nombre',
-                              body: state.profile.name ?? '',
+                          SelectableText(error),
+                          Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: GestionUhDefaultButton(
+                              text: 'Reintentar',
+                              onPressed: () {
+                                context
+                                    .read<ProfileBloc>()
+                                    .add(const ProfileEvent.load());
+                              },
                             ),
-                          if ((state.profile.email ?? '').isNotEmpty)
-                            buildProfileField(
-                              title: 'Correo',
-                              body: state.profile.email ?? '',
-                            ),
-                          if ((state.profile.careerName ?? '').isNotEmpty)
-                            buildProfileField(
-                              title: 'Carrera',
-                              body: state.profile.careerName ?? '',
-                            ),
-                          if ((state.profile.position ?? '').isNotEmpty)
-                            buildProfileField(
-                              title: 'Ocupación',
-                              body: state.profile.position ?? '',
-                            ),
-                          if ((state.profile.objectClass ?? '').isNotEmpty)
-                            buildProfileField(
-                              title: 'Clase',
-                              body: state.profile.objectClass ?? '',
-                            ),
-                          buildAccessFields(
-                            mail: state.profile.hasEmail ?? false,
-                            cloud: state.profile.hasCloud ?? false,
-                            internet: state.profile.hasInternet ?? false,
                           ),
                         ],
                       ),
@@ -79,57 +132,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ],
               ),
-            ),
-          );
-        }
-        if (state is ProfileLoadedFailure) {
-          return Scrollbar(
-            child: ListView(
-              children: [
-                Center(
-                  child: Container(
-                    width: getValueForScreenType<double>(
-                      context: context,
-                      mobile: MediaQuery.of(context).size.width,
-                      tablet: MediaQuery.of(context).size.width * 0.5,
-                    ),
-                    padding: const EdgeInsets.only(
-                      top: 30,
-                      bottom: 9,
-                      left: 18,
-                      right: 18,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(state.error),
-                        Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: GestionUhDefaultButton(
-                            text: 'Reintentar',
-                            onPressed: () {
-                              context
-                                  .read<ProfileBloc>()
-                                  .add(ProfileInitialized());
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              GestionUhLoadingIndicator(),
-            ],
-          ),
+            );
+          },
         );
       },
     );
@@ -147,11 +151,11 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title),
+          SelectableText(title),
           const SizedBox(
             height: 3,
           ),
-          Text(
+          SelectableText(
             body,
             style: const TextStyle(
               color: Colors.black,
@@ -186,7 +190,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           buildToogleFiled(
             icon: Icons.cloud,
-            text: 'Acceso a Nube',
+            text: 'Acceso a Mi Nube',
             value: cloud,
           ),
           const SizedBox(
@@ -211,7 +215,7 @@ class _ProfilePageState extends State<ProfilePage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Text(
+          child: SelectableText(
             text,
             style: const TextStyle(
               color: Colors.black,

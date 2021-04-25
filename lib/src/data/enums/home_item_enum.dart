@@ -4,6 +4,7 @@ enum HomeItemEnum {
   Quota,
   MailQuota,
   ResetPassword,
-  Logout,
   AboutUs,
+  HelpfulLinks,
+  Logout,
 }

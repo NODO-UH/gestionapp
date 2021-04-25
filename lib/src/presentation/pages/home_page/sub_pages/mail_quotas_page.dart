@@ -90,7 +90,7 @@ class _MailQuotaPageState extends State<MailQuotaPage> {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(error),
+                  SelectableText(error),
                   Padding(
                     padding: const EdgeInsets.all(5),
                     child: GestionUhDefaultButton(
