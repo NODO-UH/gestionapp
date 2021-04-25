@@ -59,7 +59,9 @@ class _RegisterPageState extends State<RegisterPage> {
     );
     if (qFree == null) return null;
     questionsTaken[qFree.second] = index;
-    answersTextControllers[index].clear();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      answersTextControllers[index].clear();
+    });
     return qFree;
   }
 
@@ -98,7 +100,6 @@ class _RegisterPageState extends State<RegisterPage> {
         title: const Text('Registrarse'),
         centerTitle: true,
       ),
-      bottomSheet: const GestionUHBottomSheet(),
       body: BlocConsumer<RegisterBloc, RegisterState>(
         listener: (context, state) async {
           state.maybeWhen(
@@ -227,7 +228,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       final childrenQuest = <Widget>[];
                       const length = NUMBER_OF_SECURITY_QUESTIONS_NEEDED;
                       for (int i = 0; i < length; i++) {
-                        childrenQuest.add(_buildQuestionZone(i));
+                        final pairValue = questionsTaken.contains(i)
+                            ? questions[questionsTaken.indexOf(i)]
+                            : getFirstQuestionNotOccupeid(i);
+                        childrenQuest.add(_buildQuestionZone(i, pairValue));
                       }
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -303,7 +307,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buildQuestionZone(int index) {
+  Widget _buildQuestionZone(int index, Pair<String, int>? valueSelected) {
     final TextStyle headlineTextsTheme = Theme.of(context)
         .textTheme
         .headline6!
@@ -333,16 +337,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ))
                 .toList(),
-            value: questionsTaken.contains(index)
-                ? questions[questionsTaken.indexOf(index)]
-                : getFirstQuestionNotOccupeid(index),
+            value: valueSelected,
             onChanged: (Pair<String, int>? value) {
               setState(() {
                 if (questionsTaken.contains(index)) {
                   // clean text boxs
                   final oldIndex = questionsTaken.indexOf(index);
                   questionsTaken[oldIndex] = -1;
-                  answersTextControllers[oldIndex].clear();
                 }
                 questionsTaken[value!.second] = index;
                 answersTextControllers[index].clear();
