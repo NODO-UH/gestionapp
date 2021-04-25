@@ -22,8 +22,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> handleLoginAttempted(LoginAttempted event) async* {
     yield LoginAttemptInProgress();
     final result = await authRepository.login(
-      event.username,
-      event.password,
+      event.username.trim(),
+      event.password.trim(),
       event.rememberMe,
     );
     if (result == null) {

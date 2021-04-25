@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (authRepo.logged) {
-            Navigator.of(context).pushReplacementNamed(PROFILE_ROUTE_NAME);
+            Navigator.of(context).pushReplacementNamed(HOME_ROUTE_NAME);
           }
           if (state is LoginAttemptInitial) {
             FlashHelper.errorBar(context, message: state.error);
