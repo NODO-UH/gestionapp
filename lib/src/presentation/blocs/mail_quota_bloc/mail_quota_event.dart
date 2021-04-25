@@ -1,5 +1,6 @@
 part of 'mail_quota_bloc.dart';
 
-abstract class MailQuotaEvent {}
-
-class MailQuotaInitialized extends MailQuotaEvent {}
+@freezed
+abstract class MailQuotaEvent with _$MailQuotaEvent {
+  const factory MailQuotaEvent.quotaRequested() = _$MailQuotaRequested;
+}
