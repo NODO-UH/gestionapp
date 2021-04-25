@@ -16,11 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ResetPasswordEventTearOff {
   const _$ResetPasswordEventTearOff();
 
-  _ResetPasswordAttempted resetPasswordAttempted(
+  _$ResetPasswordAttempted resetPasswordAttempted(
       {required String currentPassword,
       required String passwordFirst,
       required String passwordSecond}) {
-    return _ResetPasswordAttempted(
+    return _$ResetPasswordAttempted(
       currentPassword: currentPassword,
       passwordFirst: passwordFirst,
       passwordSecond: passwordSecond,
@@ -54,13 +54,13 @@ mixin _$ResetPasswordEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ResetPasswordAttempted value)
+    required TResult Function(_$ResetPasswordAttempted value)
         resetPasswordAttempted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ResetPasswordAttempted value)? resetPasswordAttempted,
+    TResult Function(_$ResetPasswordAttempted value)? resetPasswordAttempted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,26 +112,27 @@ class _$ResetPasswordEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ResetPasswordAttemptedCopyWith<$Res>
+abstract class _$$ResetPasswordAttemptedCopyWith<$Res>
     implements $ResetPasswordEventCopyWith<$Res> {
-  factory _$ResetPasswordAttemptedCopyWith(_ResetPasswordAttempted value,
-          $Res Function(_ResetPasswordAttempted) then) =
-      __$ResetPasswordAttemptedCopyWithImpl<$Res>;
+  factory _$$ResetPasswordAttemptedCopyWith(_$ResetPasswordAttempted value,
+          $Res Function(_$ResetPasswordAttempted) then) =
+      __$$ResetPasswordAttemptedCopyWithImpl<$Res>;
   @override
   $Res call(
       {String currentPassword, String passwordFirst, String passwordSecond});
 }
 
 /// @nodoc
-class __$ResetPasswordAttemptedCopyWithImpl<$Res>
+class __$$ResetPasswordAttemptedCopyWithImpl<$Res>
     extends _$ResetPasswordEventCopyWithImpl<$Res>
-    implements _$ResetPasswordAttemptedCopyWith<$Res> {
-  __$ResetPasswordAttemptedCopyWithImpl(_ResetPasswordAttempted _value,
-      $Res Function(_ResetPasswordAttempted) _then)
-      : super(_value, (v) => _then(v as _ResetPasswordAttempted));
+    implements _$$ResetPasswordAttemptedCopyWith<$Res> {
+  __$$ResetPasswordAttemptedCopyWithImpl(_$ResetPasswordAttempted _value,
+      $Res Function(_$ResetPasswordAttempted) _then)
+      : super(_value, (v) => _then(v as _$ResetPasswordAttempted));
 
   @override
-  _ResetPasswordAttempted get _value => super._value as _ResetPasswordAttempted;
+  _$ResetPasswordAttempted get _value =>
+      super._value as _$ResetPasswordAttempted;
 
   @override
   $Res call({
@@ -139,7 +140,7 @@ class __$ResetPasswordAttemptedCopyWithImpl<$Res>
     Object? passwordFirst = freezed,
     Object? passwordSecond = freezed,
   }) {
-    return _then(_ResetPasswordAttempted(
+    return _then(_$ResetPasswordAttempted(
       currentPassword: currentPassword == freezed
           ? _value.currentPassword
           : currentPassword // ignore: cast_nullable_to_non_nullable
@@ -158,8 +159,8 @@ class __$ResetPasswordAttemptedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ResetPasswordAttempted implements _ResetPasswordAttempted {
-  const _$_ResetPasswordAttempted(
+class _$_$ResetPasswordAttempted implements _$ResetPasswordAttempted {
+  const _$_$ResetPasswordAttempted(
       {required this.currentPassword,
       required this.passwordFirst,
       required this.passwordSecond});
@@ -179,7 +180,7 @@ class _$_ResetPasswordAttempted implements _ResetPasswordAttempted {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ResetPasswordAttempted &&
+        (other is _$ResetPasswordAttempted &&
             (identical(other.currentPassword, currentPassword) ||
                 const DeepCollectionEquality()
                     .equals(other.currentPassword, currentPassword)) &&
@@ -200,8 +201,8 @@ class _$_ResetPasswordAttempted implements _ResetPasswordAttempted {
 
   @JsonKey(ignore: true)
   @override
-  _$ResetPasswordAttemptedCopyWith<_ResetPasswordAttempted> get copyWith =>
-      __$ResetPasswordAttemptedCopyWithImpl<_ResetPasswordAttempted>(
+  _$$ResetPasswordAttemptedCopyWith<_$ResetPasswordAttempted> get copyWith =>
+      __$$ResetPasswordAttemptedCopyWithImpl<_$ResetPasswordAttempted>(
           this, _$identity);
 
   @override
@@ -233,7 +234,7 @@ class _$_ResetPasswordAttempted implements _ResetPasswordAttempted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ResetPasswordAttempted value)
+    required TResult Function(_$ResetPasswordAttempted value)
         resetPasswordAttempted,
   }) {
     return resetPasswordAttempted(this);
@@ -242,7 +243,7 @@ class _$_ResetPasswordAttempted implements _ResetPasswordAttempted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ResetPasswordAttempted value)? resetPasswordAttempted,
+    TResult Function(_$ResetPasswordAttempted value)? resetPasswordAttempted,
     required TResult orElse(),
   }) {
     if (resetPasswordAttempted != null) {
@@ -252,11 +253,11 @@ class _$_ResetPasswordAttempted implements _ResetPasswordAttempted {
   }
 }
 
-abstract class _ResetPasswordAttempted implements ResetPasswordEvent {
-  const factory _ResetPasswordAttempted(
+abstract class _$ResetPasswordAttempted implements ResetPasswordEvent {
+  const factory _$ResetPasswordAttempted(
       {required String currentPassword,
       required String passwordFirst,
-      required String passwordSecond}) = _$_ResetPasswordAttempted;
+      required String passwordSecond}) = _$_$ResetPasswordAttempted;
 
   @override
   String get currentPassword => throw _privateConstructorUsedError;
@@ -266,7 +267,7 @@ abstract class _ResetPasswordAttempted implements ResetPasswordEvent {
   String get passwordSecond => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ResetPasswordAttemptedCopyWith<_ResetPasswordAttempted> get copyWith =>
+  _$$ResetPasswordAttemptedCopyWith<_$ResetPasswordAttempted> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -274,20 +275,20 @@ abstract class _ResetPasswordAttempted implements ResetPasswordEvent {
 class _$ResetPasswordStateTearOff {
   const _$ResetPasswordStateTearOff();
 
-  _ResetPasswordInitialState initial() {
-    return const _ResetPasswordInitialState();
+  _$ResetPasswordInitialState initial() {
+    return const _$ResetPasswordInitialState();
   }
 
-  _ResetPasswordInProgress inProgress() {
-    return const _ResetPasswordInProgress();
+  _$ResetPasswordInProgress inProgress() {
+    return const _$ResetPasswordInProgress();
   }
 
-  _ResetPasswordSuccess success() {
-    return const _ResetPasswordSuccess();
+  _$ResetPasswordSuccess success() {
+    return const _$ResetPasswordSuccess();
   }
 
-  _ResetPasswordFailure failure({required String error}) {
-    return _ResetPasswordFailure(
+  _$ResetPasswordFailure failure({required String error}) {
+    return _$ResetPasswordFailure(
       error: error,
     );
   }
@@ -317,18 +318,18 @@ mixin _$ResetPasswordState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ResetPasswordInitialState value) initial,
-    required TResult Function(_ResetPasswordInProgress value) inProgress,
-    required TResult Function(_ResetPasswordSuccess value) success,
-    required TResult Function(_ResetPasswordFailure value) failure,
+    required TResult Function(_$ResetPasswordInitialState value) initial,
+    required TResult Function(_$ResetPasswordInProgress value) inProgress,
+    required TResult Function(_$ResetPasswordSuccess value) success,
+    required TResult Function(_$ResetPasswordFailure value) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ResetPasswordInitialState value)? initial,
-    TResult Function(_ResetPasswordInProgress value)? inProgress,
-    TResult Function(_ResetPasswordSuccess value)? success,
-    TResult Function(_ResetPasswordFailure value)? failure,
+    TResult Function(_$ResetPasswordInitialState value)? initial,
+    TResult Function(_$ResetPasswordInProgress value)? inProgress,
+    TResult Function(_$ResetPasswordSuccess value)? success,
+    TResult Function(_$ResetPasswordFailure value)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -352,29 +353,30 @@ class _$ResetPasswordStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ResetPasswordInitialStateCopyWith<$Res> {
-  factory _$ResetPasswordInitialStateCopyWith(_ResetPasswordInitialState value,
-          $Res Function(_ResetPasswordInitialState) then) =
-      __$ResetPasswordInitialStateCopyWithImpl<$Res>;
+abstract class _$$ResetPasswordInitialStateCopyWith<$Res> {
+  factory _$$ResetPasswordInitialStateCopyWith(
+          _$ResetPasswordInitialState value,
+          $Res Function(_$ResetPasswordInitialState) then) =
+      __$$ResetPasswordInitialStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$ResetPasswordInitialStateCopyWithImpl<$Res>
+class __$$ResetPasswordInitialStateCopyWithImpl<$Res>
     extends _$ResetPasswordStateCopyWithImpl<$Res>
-    implements _$ResetPasswordInitialStateCopyWith<$Res> {
-  __$ResetPasswordInitialStateCopyWithImpl(_ResetPasswordInitialState _value,
-      $Res Function(_ResetPasswordInitialState) _then)
-      : super(_value, (v) => _then(v as _ResetPasswordInitialState));
+    implements _$$ResetPasswordInitialStateCopyWith<$Res> {
+  __$$ResetPasswordInitialStateCopyWithImpl(_$ResetPasswordInitialState _value,
+      $Res Function(_$ResetPasswordInitialState) _then)
+      : super(_value, (v) => _then(v as _$ResetPasswordInitialState));
 
   @override
-  _ResetPasswordInitialState get _value =>
-      super._value as _ResetPasswordInitialState;
+  _$ResetPasswordInitialState get _value =>
+      super._value as _$ResetPasswordInitialState;
 }
 
 /// @nodoc
 
-class _$_ResetPasswordInitialState implements _ResetPasswordInitialState {
-  const _$_ResetPasswordInitialState();
+class _$_$ResetPasswordInitialState implements _$ResetPasswordInitialState {
+  const _$_$ResetPasswordInitialState();
 
   @override
   String toString() {
@@ -383,7 +385,7 @@ class _$_ResetPasswordInitialState implements _ResetPasswordInitialState {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _ResetPasswordInitialState);
+    return identical(this, other) || (other is _$ResetPasswordInitialState);
   }
 
   @override
@@ -418,10 +420,10 @@ class _$_ResetPasswordInitialState implements _ResetPasswordInitialState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ResetPasswordInitialState value) initial,
-    required TResult Function(_ResetPasswordInProgress value) inProgress,
-    required TResult Function(_ResetPasswordSuccess value) success,
-    required TResult Function(_ResetPasswordFailure value) failure,
+    required TResult Function(_$ResetPasswordInitialState value) initial,
+    required TResult Function(_$ResetPasswordInProgress value) inProgress,
+    required TResult Function(_$ResetPasswordSuccess value) success,
+    required TResult Function(_$ResetPasswordFailure value) failure,
   }) {
     return initial(this);
   }
@@ -429,10 +431,10 @@ class _$_ResetPasswordInitialState implements _ResetPasswordInitialState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ResetPasswordInitialState value)? initial,
-    TResult Function(_ResetPasswordInProgress value)? inProgress,
-    TResult Function(_ResetPasswordSuccess value)? success,
-    TResult Function(_ResetPasswordFailure value)? failure,
+    TResult Function(_$ResetPasswordInitialState value)? initial,
+    TResult Function(_$ResetPasswordInProgress value)? inProgress,
+    TResult Function(_$ResetPasswordSuccess value)? success,
+    TResult Function(_$ResetPasswordFailure value)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -442,34 +444,34 @@ class _$_ResetPasswordInitialState implements _ResetPasswordInitialState {
   }
 }
 
-abstract class _ResetPasswordInitialState implements ResetPasswordState {
-  const factory _ResetPasswordInitialState() = _$_ResetPasswordInitialState;
+abstract class _$ResetPasswordInitialState implements ResetPasswordState {
+  const factory _$ResetPasswordInitialState() = _$_$ResetPasswordInitialState;
 }
 
 /// @nodoc
-abstract class _$ResetPasswordInProgressCopyWith<$Res> {
-  factory _$ResetPasswordInProgressCopyWith(_ResetPasswordInProgress value,
-          $Res Function(_ResetPasswordInProgress) then) =
-      __$ResetPasswordInProgressCopyWithImpl<$Res>;
+abstract class _$$ResetPasswordInProgressCopyWith<$Res> {
+  factory _$$ResetPasswordInProgressCopyWith(_$ResetPasswordInProgress value,
+          $Res Function(_$ResetPasswordInProgress) then) =
+      __$$ResetPasswordInProgressCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$ResetPasswordInProgressCopyWithImpl<$Res>
+class __$$ResetPasswordInProgressCopyWithImpl<$Res>
     extends _$ResetPasswordStateCopyWithImpl<$Res>
-    implements _$ResetPasswordInProgressCopyWith<$Res> {
-  __$ResetPasswordInProgressCopyWithImpl(_ResetPasswordInProgress _value,
-      $Res Function(_ResetPasswordInProgress) _then)
-      : super(_value, (v) => _then(v as _ResetPasswordInProgress));
+    implements _$$ResetPasswordInProgressCopyWith<$Res> {
+  __$$ResetPasswordInProgressCopyWithImpl(_$ResetPasswordInProgress _value,
+      $Res Function(_$ResetPasswordInProgress) _then)
+      : super(_value, (v) => _then(v as _$ResetPasswordInProgress));
 
   @override
-  _ResetPasswordInProgress get _value =>
-      super._value as _ResetPasswordInProgress;
+  _$ResetPasswordInProgress get _value =>
+      super._value as _$ResetPasswordInProgress;
 }
 
 /// @nodoc
 
-class _$_ResetPasswordInProgress implements _ResetPasswordInProgress {
-  const _$_ResetPasswordInProgress();
+class _$_$ResetPasswordInProgress implements _$ResetPasswordInProgress {
+  const _$_$ResetPasswordInProgress();
 
   @override
   String toString() {
@@ -478,7 +480,7 @@ class _$_ResetPasswordInProgress implements _ResetPasswordInProgress {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _ResetPasswordInProgress);
+    return identical(this, other) || (other is _$ResetPasswordInProgress);
   }
 
   @override
@@ -513,10 +515,10 @@ class _$_ResetPasswordInProgress implements _ResetPasswordInProgress {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ResetPasswordInitialState value) initial,
-    required TResult Function(_ResetPasswordInProgress value) inProgress,
-    required TResult Function(_ResetPasswordSuccess value) success,
-    required TResult Function(_ResetPasswordFailure value) failure,
+    required TResult Function(_$ResetPasswordInitialState value) initial,
+    required TResult Function(_$ResetPasswordInProgress value) inProgress,
+    required TResult Function(_$ResetPasswordSuccess value) success,
+    required TResult Function(_$ResetPasswordFailure value) failure,
   }) {
     return inProgress(this);
   }
@@ -524,10 +526,10 @@ class _$_ResetPasswordInProgress implements _ResetPasswordInProgress {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ResetPasswordInitialState value)? initial,
-    TResult Function(_ResetPasswordInProgress value)? inProgress,
-    TResult Function(_ResetPasswordSuccess value)? success,
-    TResult Function(_ResetPasswordFailure value)? failure,
+    TResult Function(_$ResetPasswordInitialState value)? initial,
+    TResult Function(_$ResetPasswordInProgress value)? inProgress,
+    TResult Function(_$ResetPasswordSuccess value)? success,
+    TResult Function(_$ResetPasswordFailure value)? failure,
     required TResult orElse(),
   }) {
     if (inProgress != null) {
@@ -537,33 +539,33 @@ class _$_ResetPasswordInProgress implements _ResetPasswordInProgress {
   }
 }
 
-abstract class _ResetPasswordInProgress implements ResetPasswordState {
-  const factory _ResetPasswordInProgress() = _$_ResetPasswordInProgress;
+abstract class _$ResetPasswordInProgress implements ResetPasswordState {
+  const factory _$ResetPasswordInProgress() = _$_$ResetPasswordInProgress;
 }
 
 /// @nodoc
-abstract class _$ResetPasswordSuccessCopyWith<$Res> {
-  factory _$ResetPasswordSuccessCopyWith(_ResetPasswordSuccess value,
-          $Res Function(_ResetPasswordSuccess) then) =
-      __$ResetPasswordSuccessCopyWithImpl<$Res>;
+abstract class _$$ResetPasswordSuccessCopyWith<$Res> {
+  factory _$$ResetPasswordSuccessCopyWith(_$ResetPasswordSuccess value,
+          $Res Function(_$ResetPasswordSuccess) then) =
+      __$$ResetPasswordSuccessCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$ResetPasswordSuccessCopyWithImpl<$Res>
+class __$$ResetPasswordSuccessCopyWithImpl<$Res>
     extends _$ResetPasswordStateCopyWithImpl<$Res>
-    implements _$ResetPasswordSuccessCopyWith<$Res> {
-  __$ResetPasswordSuccessCopyWithImpl(
-      _ResetPasswordSuccess _value, $Res Function(_ResetPasswordSuccess) _then)
-      : super(_value, (v) => _then(v as _ResetPasswordSuccess));
+    implements _$$ResetPasswordSuccessCopyWith<$Res> {
+  __$$ResetPasswordSuccessCopyWithImpl(_$ResetPasswordSuccess _value,
+      $Res Function(_$ResetPasswordSuccess) _then)
+      : super(_value, (v) => _then(v as _$ResetPasswordSuccess));
 
   @override
-  _ResetPasswordSuccess get _value => super._value as _ResetPasswordSuccess;
+  _$ResetPasswordSuccess get _value => super._value as _$ResetPasswordSuccess;
 }
 
 /// @nodoc
 
-class _$_ResetPasswordSuccess implements _ResetPasswordSuccess {
-  const _$_ResetPasswordSuccess();
+class _$_$ResetPasswordSuccess implements _$ResetPasswordSuccess {
+  const _$_$ResetPasswordSuccess();
 
   @override
   String toString() {
@@ -572,7 +574,7 @@ class _$_ResetPasswordSuccess implements _ResetPasswordSuccess {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _ResetPasswordSuccess);
+    return identical(this, other) || (other is _$ResetPasswordSuccess);
   }
 
   @override
@@ -607,10 +609,10 @@ class _$_ResetPasswordSuccess implements _ResetPasswordSuccess {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ResetPasswordInitialState value) initial,
-    required TResult Function(_ResetPasswordInProgress value) inProgress,
-    required TResult Function(_ResetPasswordSuccess value) success,
-    required TResult Function(_ResetPasswordFailure value) failure,
+    required TResult Function(_$ResetPasswordInitialState value) initial,
+    required TResult Function(_$ResetPasswordInProgress value) inProgress,
+    required TResult Function(_$ResetPasswordSuccess value) success,
+    required TResult Function(_$ResetPasswordFailure value) failure,
   }) {
     return success(this);
   }
@@ -618,10 +620,10 @@ class _$_ResetPasswordSuccess implements _ResetPasswordSuccess {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ResetPasswordInitialState value)? initial,
-    TResult Function(_ResetPasswordInProgress value)? inProgress,
-    TResult Function(_ResetPasswordSuccess value)? success,
-    TResult Function(_ResetPasswordFailure value)? failure,
+    TResult Function(_$ResetPasswordInitialState value)? initial,
+    TResult Function(_$ResetPasswordInProgress value)? inProgress,
+    TResult Function(_$ResetPasswordSuccess value)? success,
+    TResult Function(_$ResetPasswordFailure value)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -631,34 +633,34 @@ class _$_ResetPasswordSuccess implements _ResetPasswordSuccess {
   }
 }
 
-abstract class _ResetPasswordSuccess implements ResetPasswordState {
-  const factory _ResetPasswordSuccess() = _$_ResetPasswordSuccess;
+abstract class _$ResetPasswordSuccess implements ResetPasswordState {
+  const factory _$ResetPasswordSuccess() = _$_$ResetPasswordSuccess;
 }
 
 /// @nodoc
-abstract class _$ResetPasswordFailureCopyWith<$Res> {
-  factory _$ResetPasswordFailureCopyWith(_ResetPasswordFailure value,
-          $Res Function(_ResetPasswordFailure) then) =
-      __$ResetPasswordFailureCopyWithImpl<$Res>;
+abstract class _$$ResetPasswordFailureCopyWith<$Res> {
+  factory _$$ResetPasswordFailureCopyWith(_$ResetPasswordFailure value,
+          $Res Function(_$ResetPasswordFailure) then) =
+      __$$ResetPasswordFailureCopyWithImpl<$Res>;
   $Res call({String error});
 }
 
 /// @nodoc
-class __$ResetPasswordFailureCopyWithImpl<$Res>
+class __$$ResetPasswordFailureCopyWithImpl<$Res>
     extends _$ResetPasswordStateCopyWithImpl<$Res>
-    implements _$ResetPasswordFailureCopyWith<$Res> {
-  __$ResetPasswordFailureCopyWithImpl(
-      _ResetPasswordFailure _value, $Res Function(_ResetPasswordFailure) _then)
-      : super(_value, (v) => _then(v as _ResetPasswordFailure));
+    implements _$$ResetPasswordFailureCopyWith<$Res> {
+  __$$ResetPasswordFailureCopyWithImpl(_$ResetPasswordFailure _value,
+      $Res Function(_$ResetPasswordFailure) _then)
+      : super(_value, (v) => _then(v as _$ResetPasswordFailure));
 
   @override
-  _ResetPasswordFailure get _value => super._value as _ResetPasswordFailure;
+  _$ResetPasswordFailure get _value => super._value as _$ResetPasswordFailure;
 
   @override
   $Res call({
     Object? error = freezed,
   }) {
-    return _then(_ResetPasswordFailure(
+    return _then(_$ResetPasswordFailure(
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -669,8 +671,8 @@ class __$ResetPasswordFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ResetPasswordFailure implements _ResetPasswordFailure {
-  const _$_ResetPasswordFailure({required this.error});
+class _$_$ResetPasswordFailure implements _$ResetPasswordFailure {
+  const _$_$ResetPasswordFailure({required this.error});
 
   @override
   final String error;
@@ -683,7 +685,7 @@ class _$_ResetPasswordFailure implements _ResetPasswordFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ResetPasswordFailure &&
+        (other is _$ResetPasswordFailure &&
             (identical(other.error, error) ||
                 const DeepCollectionEquality().equals(other.error, error)));
   }
@@ -694,8 +696,8 @@ class _$_ResetPasswordFailure implements _ResetPasswordFailure {
 
   @JsonKey(ignore: true)
   @override
-  _$ResetPasswordFailureCopyWith<_ResetPasswordFailure> get copyWith =>
-      __$ResetPasswordFailureCopyWithImpl<_ResetPasswordFailure>(
+  _$$ResetPasswordFailureCopyWith<_$ResetPasswordFailure> get copyWith =>
+      __$$ResetPasswordFailureCopyWithImpl<_$ResetPasswordFailure>(
           this, _$identity);
 
   @override
@@ -727,10 +729,10 @@ class _$_ResetPasswordFailure implements _ResetPasswordFailure {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ResetPasswordInitialState value) initial,
-    required TResult Function(_ResetPasswordInProgress value) inProgress,
-    required TResult Function(_ResetPasswordSuccess value) success,
-    required TResult Function(_ResetPasswordFailure value) failure,
+    required TResult Function(_$ResetPasswordInitialState value) initial,
+    required TResult Function(_$ResetPasswordInProgress value) inProgress,
+    required TResult Function(_$ResetPasswordSuccess value) success,
+    required TResult Function(_$ResetPasswordFailure value) failure,
   }) {
     return failure(this);
   }
@@ -738,10 +740,10 @@ class _$_ResetPasswordFailure implements _ResetPasswordFailure {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ResetPasswordInitialState value)? initial,
-    TResult Function(_ResetPasswordInProgress value)? inProgress,
-    TResult Function(_ResetPasswordSuccess value)? success,
-    TResult Function(_ResetPasswordFailure value)? failure,
+    TResult Function(_$ResetPasswordInitialState value)? initial,
+    TResult Function(_$ResetPasswordInProgress value)? inProgress,
+    TResult Function(_$ResetPasswordSuccess value)? success,
+    TResult Function(_$ResetPasswordFailure value)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -751,12 +753,12 @@ class _$_ResetPasswordFailure implements _ResetPasswordFailure {
   }
 }
 
-abstract class _ResetPasswordFailure implements ResetPasswordState {
-  const factory _ResetPasswordFailure({required String error}) =
-      _$_ResetPasswordFailure;
+abstract class _$ResetPasswordFailure implements ResetPasswordState {
+  const factory _$ResetPasswordFailure({required String error}) =
+      _$_$ResetPasswordFailure;
 
   String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$ResetPasswordFailureCopyWith<_ResetPasswordFailure> get copyWith =>
+  _$$ResetPasswordFailureCopyWith<_$ResetPasswordFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }

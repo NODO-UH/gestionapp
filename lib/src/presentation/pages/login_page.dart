@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _usernameController = TextEditingController();
+  final _userNameController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _rememberMe = false;
 
@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _userNameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -61,139 +61,149 @@ class _LoginPageState extends State<LoginPage> {
           if (authRepo.logged) {
             Navigator.of(context).pushReplacementNamed(HOME_ROUTE_NAME);
           }
-          if (state is LoginAttemptInitial) {
-            FlashHelper.errorBar(context, message: state.error);
-          }
+          state.maybeWhen(
+            failure: (error) => FlashHelper.errorBar(context, message: error),
+            orElse: () {},
+          );
         },
         builder: (context, state) {
-          if (state is LoginAttemptInitial) {
-            return Scrollbar(
-              child: SingleChildScrollView(
-                child: Center(
-                  child: Container(
-                    width: getValueForScreenType<double>(
-                      context: context,
-                      mobile: MediaQuery.of(context).size.width,
-                      tablet: MediaQuery.of(context).size.width * 0.5,
-                    ),
-                    padding: const EdgeInsets.only(
-                      top: 30,
-                      bottom: 9,
-                      left: 18,
-                      right: 18,
-                    ),
-                    child: Column(
+          return state.maybeWhen(
+            inProgress: () => _buildLoadingIndicator(context),
+            orElse: () => _buildLoginForm(context),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildLoginForm(BuildContext context) {
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            width: getValueForScreenType<double>(
+              context: context,
+              mobile: MediaQuery.of(context).size.width,
+              tablet: MediaQuery.of(context).size.width * 0.5,
+            ),
+            padding: const EdgeInsets.only(
+              top: 30,
+              bottom: 9,
+              left: 18,
+              right: 18,
+            ),
+            child: Form(
+              key: _formLoginKey,
+              autovalidateMode: AutovalidateMode.disabled,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Image.asset(
+                    'assets/images/splash.png',
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  SizedBox(
+                    height: 40,
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Image.asset(
-                          'assets/images/splash.png',
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        SizedBox(
-                          height: 40,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 7,
-                                child: GestionUhDefaultTextField(
-                                  labelText: 'Usuario',
-                                  controller: _usernameController,
-                                ),
-                              ),
-                            ],
+                        Expanded(
+                          flex: 7,
+                          child: GestionUhDefaultTextField(
+                            labelText: 'Usuario',
+                            controller: _userNameController,
+                            validator: null,
+                            autovalidateMode: AutovalidateMode.disabled,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        GestionUhDefaultTextField(
-                          labelText: 'Contraseña',
-                          controller: _passwordController,
-                          keyboardType: TextInputType.visiblePassword,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        if (GetIt.I<ILocalStorage>().isSecureStorageAvailable)
-                          GestureDetector(
-                            onTap: () =>
-                                setState(() => _rememberMe = !_rememberMe),
-                            child: Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      '¿Desea recordar la sesión?',
-                                      style:
-                                          Theme.of(context).textTheme.subtitle1,
-                                    ),
-                                  ),
-                                  Text(
-                                    'No',
-                                    style:
-                                        Theme.of(context).textTheme.subtitle1,
-                                  ),
-                                  Switch(
-                                    value: _rememberMe,
-                                    activeColor: Theme.of(context).primaryColor,
-                                    onChanged: (value) =>
-                                        setState(() => _rememberMe = value),
-                                  ),
-                                  Text(
-                                    'Si',
-                                    style:
-                                        Theme.of(context).textTheme.subtitle1,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        GestionUhDefaultButton(
-                          text: 'Iniciar Sesión',
-                          onPressed: () => _loginAction(context),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        GestionUhDefaultButton(
-                          text: 'Recuperar Contraseña',
-                          onPressed: () => _recoverAction(context),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        GestionUhDefaultButton(
-                          text: 'Registrarse',
-                          onPressed: () => _registerAction(context),
                         ),
                       ],
                     ),
                   ),
-                ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  GestionUhDefaultTextField(
+                    labelText: 'Contraseña',
+                    controller: _passwordController,
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  if (GetIt.I<ILocalStorage>().isSecureStorageAvailable)
+                    GestureDetector(
+                      onTap: () => setState(() => _rememberMe = !_rememberMe),
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '¿Desea recordar la sesión?',
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
+                            ),
+                            Text(
+                              'No',
+                              style: Theme.of(context).textTheme.subtitle1,
+                            ),
+                            Switch(
+                              value: _rememberMe,
+                              activeColor: Theme.of(context).primaryColor,
+                              onChanged: (value) =>
+                                  setState(() => _rememberMe = value),
+                            ),
+                            Text(
+                              'Si',
+                              style: Theme.of(context).textTheme.subtitle1,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  GestionUhDefaultButton(
+                    text: 'Iniciar Sesión',
+                    onPressed: () => _loginAction(context),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  GestionUhDefaultButton(
+                    text: 'Recuperar Contraseña',
+                    onPressed: () => _recoverAction(context),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  GestionUhDefaultButton(
+                    text: 'Registrarse',
+                    onPressed: () => _registerAction(context),
+                  ),
+                ],
               ),
-            );
-          }
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                GestionUhLoadingIndicator(),
-              ],
             ),
-          );
-        },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingIndicator(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          GestionUhLoadingIndicator(),
+        ],
       ),
     );
   }

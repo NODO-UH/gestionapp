@@ -6,5 +6,5 @@ class ResetPasswordEvent with _$ResetPasswordEvent {
     required String currentPassword,
     required String passwordFirst,
     required String passwordSecond,
-  }) = _ResetPasswordAttempted;
+  }) = _$ResetPasswordAttempted;
 }

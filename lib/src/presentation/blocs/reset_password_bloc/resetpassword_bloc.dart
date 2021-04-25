@@ -24,7 +24,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   }
 
   Stream<ResetPasswordState> resetPasswordAttemptedHandler(
-    _ResetPasswordAttempted event,
+    _$ResetPasswordAttempted event,
   ) async* {
     yield const ResetPasswordState.inProgress();
     if (event.passwordFirst != event.passwordSecond) {
