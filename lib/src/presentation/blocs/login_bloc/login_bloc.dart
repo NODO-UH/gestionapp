@@ -3,9 +3,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gestionuh/src/data/repositories/repositories.dart';
 import 'package:gestionuh/src/utils/constants/constants.dart';
 
-part 'login_bloc.freezed.dart';
 part 'login_event.dart';
 part 'login_state.dart';
+part 'login_bloc.freezed.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository authRepository;
@@ -16,26 +16,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    yield* event.when(
-      submit: handleLoginAttempted,
+    yield* event.map(
+      loginAttempted: loginAttemptedHandler,
     );
   }
 
-  Stream<LoginState> handleLoginAttempted(
-    String username,
-    String password,
-    bool rememberMe,
-  ) async* {
-    yield const LoginState.loading();
+  Stream<LoginState> loginAttemptedHandler(_$LoginAttempted event) async* {
+    yield const LoginState.inProgress();
     final result = await authRepository.login(
-      username.trim(),
-      password.trim(),
-      rememberMe,
+      event.userName.trim(),
+      event.password.trim(),
+      event.rememberMe,
     );
-    if (result == null) {
-      yield const LoginState.error(Errors.DefaultError);
-    } else if (result.error != null) {
-      yield LoginState.error(result.error!);
+    if (result == null || result.error != null) {
+      yield LoginState.failure(
+        error: result?.error ?? Errors.DefaultError,
+      );
     } else {
       yield const LoginState.success();
     }

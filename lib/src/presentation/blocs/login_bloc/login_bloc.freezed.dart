@@ -16,11 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$LoginEventTearOff {
   const _$LoginEventTearOff();
 
-  _Submit submit(String username, String password, bool rememberMe) {
-    return _Submit(
-      username,
-      password,
-      rememberMe,
+  _$LoginAttempted loginAttempted(
+      {required String userName,
+      required String password,
+      required bool rememberMe}) {
+    return _$LoginAttempted(
+      userName: userName,
+      password: password,
+      rememberMe: rememberMe,
     );
   }
 }
@@ -30,30 +33,31 @@ const $LoginEvent = _$LoginEventTearOff();
 
 /// @nodoc
 mixin _$LoginEvent {
-  String get username => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   bool get rememberMe => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String username, String password, bool rememberMe)
-        submit,
+    required TResult Function(String userName, String password, bool rememberMe)
+        loginAttempted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String username, String password, bool rememberMe)? submit,
+    TResult Function(String userName, String password, bool rememberMe)?
+        loginAttempted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_$LoginAttempted value) loginAttempted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Submit value)? submit,
+    TResult Function(_$LoginAttempted value)? loginAttempted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -68,7 +72,7 @@ abstract class $LoginEventCopyWith<$Res> {
   factory $LoginEventCopyWith(
           LoginEvent value, $Res Function(LoginEvent) then) =
       _$LoginEventCopyWithImpl<$Res>;
-  $Res call({String username, String password, bool rememberMe});
+  $Res call({String userName, String password, bool rememberMe});
 }
 
 /// @nodoc
@@ -81,14 +85,14 @@ class _$LoginEventCopyWithImpl<$Res> implements $LoginEventCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? username = freezed,
+    Object? userName = freezed,
     Object? password = freezed,
     Object? rememberMe = freezed,
   }) {
     return _then(_value.copyWith(
-      username: username == freezed
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       password: password == freezed
           ? _value.password
@@ -103,38 +107,42 @@ class _$LoginEventCopyWithImpl<$Res> implements $LoginEventCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$SubmitCopyWith<$Res> implements $LoginEventCopyWith<$Res> {
-  factory _$SubmitCopyWith(_Submit value, $Res Function(_Submit) then) =
-      __$SubmitCopyWithImpl<$Res>;
+abstract class _$$LoginAttemptedCopyWith<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  factory _$$LoginAttemptedCopyWith(
+          _$LoginAttempted value, $Res Function(_$LoginAttempted) then) =
+      __$$LoginAttemptedCopyWithImpl<$Res>;
   @override
-  $Res call({String username, String password, bool rememberMe});
+  $Res call({String userName, String password, bool rememberMe});
 }
 
 /// @nodoc
-class __$SubmitCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
-    implements _$SubmitCopyWith<$Res> {
-  __$SubmitCopyWithImpl(_Submit _value, $Res Function(_Submit) _then)
-      : super(_value, (v) => _then(v as _Submit));
+class __$$LoginAttemptedCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res>
+    implements _$$LoginAttemptedCopyWith<$Res> {
+  __$$LoginAttemptedCopyWithImpl(
+      _$LoginAttempted _value, $Res Function(_$LoginAttempted) _then)
+      : super(_value, (v) => _then(v as _$LoginAttempted));
 
   @override
-  _Submit get _value => super._value as _Submit;
+  _$LoginAttempted get _value => super._value as _$LoginAttempted;
 
   @override
   $Res call({
-    Object? username = freezed,
+    Object? userName = freezed,
     Object? password = freezed,
     Object? rememberMe = freezed,
   }) {
-    return _then(_Submit(
-      username == freezed
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+    return _then(_$LoginAttempted(
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
-      password == freezed
+      password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      rememberMe == freezed
+      rememberMe: rememberMe == freezed
           ? _value.rememberMe
           : rememberMe // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -144,11 +152,14 @@ class __$SubmitCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Submit implements _Submit {
-  const _$_Submit(this.username, this.password, this.rememberMe);
+class _$_$LoginAttempted implements _$LoginAttempted {
+  const _$_$LoginAttempted(
+      {required this.userName,
+      required this.password,
+      required this.rememberMe});
 
   @override
-  final String username;
+  final String userName;
   @override
   final String password;
   @override
@@ -156,16 +167,16 @@ class _$_Submit implements _Submit {
 
   @override
   String toString() {
-    return 'LoginEvent.submit(username: $username, password: $password, rememberMe: $rememberMe)';
+    return 'LoginEvent.loginAttempted(userName: $userName, password: $password, rememberMe: $rememberMe)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Submit &&
-            (identical(other.username, username) ||
+        (other is _$LoginAttempted &&
+            (identical(other.userName, userName) ||
                 const DeepCollectionEquality()
-                    .equals(other.username, username)) &&
+                    .equals(other.userName, userName)) &&
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
                     .equals(other.password, password)) &&
@@ -177,32 +188,33 @@ class _$_Submit implements _Submit {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(username) ^
+      const DeepCollectionEquality().hash(userName) ^
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(rememberMe);
 
   @JsonKey(ignore: true)
   @override
-  _$SubmitCopyWith<_Submit> get copyWith =>
-      __$SubmitCopyWithImpl<_Submit>(this, _$identity);
+  _$$LoginAttemptedCopyWith<_$LoginAttempted> get copyWith =>
+      __$$LoginAttemptedCopyWithImpl<_$LoginAttempted>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String username, String password, bool rememberMe)
-        submit,
+    required TResult Function(String userName, String password, bool rememberMe)
+        loginAttempted,
   }) {
-    return submit(username, password, rememberMe);
+    return loginAttempted(userName, password, rememberMe);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String username, String password, bool rememberMe)? submit,
+    TResult Function(String userName, String password, bool rememberMe)?
+        loginAttempted,
     required TResult orElse(),
   }) {
-    if (submit != null) {
-      return submit(username, password, rememberMe);
+    if (loginAttempted != null) {
+      return loginAttempted(userName, password, rememberMe);
     }
     return orElse();
   }
@@ -210,58 +222,61 @@ class _$_Submit implements _Submit {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_$LoginAttempted value) loginAttempted,
   }) {
-    return submit(this);
+    return loginAttempted(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Submit value)? submit,
+    TResult Function(_$LoginAttempted value)? loginAttempted,
     required TResult orElse(),
   }) {
-    if (submit != null) {
-      return submit(this);
+    if (loginAttempted != null) {
+      return loginAttempted(this);
     }
     return orElse();
   }
 }
 
-abstract class _Submit implements LoginEvent {
-  const factory _Submit(String username, String password, bool rememberMe) =
-      _$_Submit;
+abstract class _$LoginAttempted implements LoginEvent {
+  const factory _$LoginAttempted(
+      {required String userName,
+      required String password,
+      required bool rememberMe}) = _$_$LoginAttempted;
 
   @override
-  String get username => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
   @override
   String get password => throw _privateConstructorUsedError;
   @override
   bool get rememberMe => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SubmitCopyWith<_Submit> get copyWith => throw _privateConstructorUsedError;
+  _$$LoginAttemptedCopyWith<_$LoginAttempted> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 class _$LoginStateTearOff {
   const _$LoginStateTearOff();
 
-  _Initial initial() {
-    return const _Initial();
+  _$LoginInitial initial() {
+    return const _$LoginInitial();
   }
 
-  _Loading loading() {
-    return const _Loading();
+  _$LoginAttemptInProgress inProgress() {
+    return const _$LoginAttemptInProgress();
   }
 
-  _Success success() {
-    return const _Success();
+  _$LoginAttemptSuccess success() {
+    return const _$LoginAttemptSuccess();
   }
 
-  _Error error(String error) {
-    return _Error(
-      error,
+  _$LoginAttemptFailure failure({required String error}) {
+    return _$LoginAttemptFailure(
+      error: error,
     );
   }
 }
@@ -274,34 +289,34 @@ mixin _$LoginState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function() inProgress,
     required TResult Function() success,
-    required TResult Function(String error) error,
+    required TResult Function(String error) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function()? inProgress,
     TResult Function()? success,
-    TResult Function(String error)? error,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(_$LoginInitial value) initial,
+    required TResult Function(_$LoginAttemptInProgress value) inProgress,
+    required TResult Function(_$LoginAttemptSuccess value) success,
+    required TResult Function(_$LoginAttemptFailure value) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(_$LoginInitial value)? initial,
+    TResult Function(_$LoginAttemptInProgress value)? inProgress,
+    TResult Function(_$LoginAttemptSuccess value)? success,
+    TResult Function(_$LoginAttemptFailure value)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -324,25 +339,27 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$InitialCopyWith<$Res> {
-  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
-      __$InitialCopyWithImpl<$Res>;
+abstract class _$$LoginInitialCopyWith<$Res> {
+  factory _$$LoginInitialCopyWith(
+          _$LoginInitial value, $Res Function(_$LoginInitial) then) =
+      __$$LoginInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$InitialCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
-    implements _$InitialCopyWith<$Res> {
-  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
-      : super(_value, (v) => _then(v as _Initial));
+class __$$LoginInitialCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
+    implements _$$LoginInitialCopyWith<$Res> {
+  __$$LoginInitialCopyWithImpl(
+      _$LoginInitial _value, $Res Function(_$LoginInitial) _then)
+      : super(_value, (v) => _then(v as _$LoginInitial));
 
   @override
-  _Initial get _value => super._value as _Initial;
+  _$LoginInitial get _value => super._value as _$LoginInitial;
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$_$LoginInitial implements _$LoginInitial {
+  const _$_$LoginInitial();
 
   @override
   String toString() {
@@ -351,7 +368,7 @@ class _$_Initial implements _Initial {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Initial);
+    return identical(this, other) || (other is _$LoginInitial);
   }
 
   @override
@@ -361,9 +378,9 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function() inProgress,
     required TResult Function() success,
-    required TResult Function(String error) error,
+    required TResult Function(String error) failure,
   }) {
     return initial();
   }
@@ -372,9 +389,9 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function()? inProgress,
     TResult Function()? success,
-    TResult Function(String error)? error,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -386,10 +403,10 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(_$LoginInitial value) initial,
+    required TResult Function(_$LoginAttemptInProgress value) inProgress,
+    required TResult Function(_$LoginAttemptSuccess value) success,
+    required TResult Function(_$LoginAttemptFailure value) failure,
   }) {
     return initial(this);
   }
@@ -397,10 +414,10 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(_$LoginInitial value)? initial,
+    TResult Function(_$LoginAttemptInProgress value)? inProgress,
+    TResult Function(_$LoginAttemptSuccess value)? success,
+    TResult Function(_$LoginAttemptFailure value)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -410,39 +427,43 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements LoginState {
-  const factory _Initial() = _$_Initial;
+abstract class _$LoginInitial implements LoginState {
+  const factory _$LoginInitial() = _$_$LoginInitial;
 }
 
 /// @nodoc
-abstract class _$LoadingCopyWith<$Res> {
-  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) then) =
-      __$LoadingCopyWithImpl<$Res>;
+abstract class _$$LoginAttemptInProgressCopyWith<$Res> {
+  factory _$$LoginAttemptInProgressCopyWith(_$LoginAttemptInProgress value,
+          $Res Function(_$LoginAttemptInProgress) then) =
+      __$$LoginAttemptInProgressCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$LoadingCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
-    implements _$LoadingCopyWith<$Res> {
-  __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
-      : super(_value, (v) => _then(v as _Loading));
+class __$$LoginAttemptInProgressCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res>
+    implements _$$LoginAttemptInProgressCopyWith<$Res> {
+  __$$LoginAttemptInProgressCopyWithImpl(_$LoginAttemptInProgress _value,
+      $Res Function(_$LoginAttemptInProgress) _then)
+      : super(_value, (v) => _then(v as _$LoginAttemptInProgress));
 
   @override
-  _Loading get _value => super._value as _Loading;
+  _$LoginAttemptInProgress get _value =>
+      super._value as _$LoginAttemptInProgress;
 }
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
-  const _$_Loading();
+class _$_$LoginAttemptInProgress implements _$LoginAttemptInProgress {
+  const _$_$LoginAttemptInProgress();
 
   @override
   String toString() {
-    return 'LoginState.loading()';
+    return 'LoginState.inProgress()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Loading);
+    return identical(this, other) || (other is _$LoginAttemptInProgress);
   }
 
   @override
@@ -452,24 +473,24 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function() inProgress,
     required TResult Function() success,
-    required TResult Function(String error) error,
+    required TResult Function(String error) failure,
   }) {
-    return loading();
+    return inProgress();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function()? inProgress,
     TResult Function()? success,
-    TResult Function(String error)? error,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading();
+    if (inProgress != null) {
+      return inProgress();
     }
     return orElse();
   }
@@ -477,54 +498,57 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(_$LoginInitial value) initial,
+    required TResult Function(_$LoginAttemptInProgress value) inProgress,
+    required TResult Function(_$LoginAttemptSuccess value) success,
+    required TResult Function(_$LoginAttemptFailure value) failure,
   }) {
-    return loading(this);
+    return inProgress(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(_$LoginInitial value)? initial,
+    TResult Function(_$LoginAttemptInProgress value)? inProgress,
+    TResult Function(_$LoginAttemptSuccess value)? success,
+    TResult Function(_$LoginAttemptFailure value)? failure,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    if (inProgress != null) {
+      return inProgress(this);
     }
     return orElse();
   }
 }
 
-abstract class _Loading implements LoginState {
-  const factory _Loading() = _$_Loading;
+abstract class _$LoginAttemptInProgress implements LoginState {
+  const factory _$LoginAttemptInProgress() = _$_$LoginAttemptInProgress;
 }
 
 /// @nodoc
-abstract class _$SuccessCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) then) =
-      __$SuccessCopyWithImpl<$Res>;
+abstract class _$$LoginAttemptSuccessCopyWith<$Res> {
+  factory _$$LoginAttemptSuccessCopyWith(_$LoginAttemptSuccess value,
+          $Res Function(_$LoginAttemptSuccess) then) =
+      __$$LoginAttemptSuccessCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$SuccessCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
-    implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(_Success _value, $Res Function(_Success) _then)
-      : super(_value, (v) => _then(v as _Success));
+class __$$LoginAttemptSuccessCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res>
+    implements _$$LoginAttemptSuccessCopyWith<$Res> {
+  __$$LoginAttemptSuccessCopyWithImpl(
+      _$LoginAttemptSuccess _value, $Res Function(_$LoginAttemptSuccess) _then)
+      : super(_value, (v) => _then(v as _$LoginAttemptSuccess));
 
   @override
-  _Success get _value => super._value as _Success;
+  _$LoginAttemptSuccess get _value => super._value as _$LoginAttemptSuccess;
 }
 
 /// @nodoc
 
-class _$_Success implements _Success {
-  const _$_Success();
+class _$_$LoginAttemptSuccess implements _$LoginAttemptSuccess {
+  const _$_$LoginAttemptSuccess();
 
   @override
   String toString() {
@@ -533,7 +557,7 @@ class _$_Success implements _Success {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Success);
+    return identical(this, other) || (other is _$LoginAttemptSuccess);
   }
 
   @override
@@ -543,9 +567,9 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function() inProgress,
     required TResult Function() success,
-    required TResult Function(String error) error,
+    required TResult Function(String error) failure,
   }) {
     return success();
   }
@@ -554,9 +578,9 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function()? inProgress,
     TResult Function()? success,
-    TResult Function(String error)? error,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -568,10 +592,10 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(_$LoginInitial value) initial,
+    required TResult Function(_$LoginAttemptInProgress value) inProgress,
+    required TResult Function(_$LoginAttemptSuccess value) success,
+    required TResult Function(_$LoginAttemptFailure value) failure,
   }) {
     return success(this);
   }
@@ -579,10 +603,10 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(_$LoginInitial value)? initial,
+    TResult Function(_$LoginAttemptInProgress value)? inProgress,
+    TResult Function(_$LoginAttemptSuccess value)? success,
+    TResult Function(_$LoginAttemptFailure value)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -592,32 +616,35 @@ class _$_Success implements _Success {
   }
 }
 
-abstract class _Success implements LoginState {
-  const factory _Success() = _$_Success;
+abstract class _$LoginAttemptSuccess implements LoginState {
+  const factory _$LoginAttemptSuccess() = _$_$LoginAttemptSuccess;
 }
 
 /// @nodoc
-abstract class _$ErrorCopyWith<$Res> {
-  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
-      __$ErrorCopyWithImpl<$Res>;
+abstract class _$$LoginAttemptFailureCopyWith<$Res> {
+  factory _$$LoginAttemptFailureCopyWith(_$LoginAttemptFailure value,
+          $Res Function(_$LoginAttemptFailure) then) =
+      __$$LoginAttemptFailureCopyWithImpl<$Res>;
   $Res call({String error});
 }
 
 /// @nodoc
-class __$ErrorCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
-    implements _$ErrorCopyWith<$Res> {
-  __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
-      : super(_value, (v) => _then(v as _Error));
+class __$$LoginAttemptFailureCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res>
+    implements _$$LoginAttemptFailureCopyWith<$Res> {
+  __$$LoginAttemptFailureCopyWithImpl(
+      _$LoginAttemptFailure _value, $Res Function(_$LoginAttemptFailure) _then)
+      : super(_value, (v) => _then(v as _$LoginAttemptFailure));
 
   @override
-  _Error get _value => super._value as _Error;
+  _$LoginAttemptFailure get _value => super._value as _$LoginAttemptFailure;
 
   @override
   $Res call({
     Object? error = freezed,
   }) {
-    return _then(_Error(
-      error == freezed
+    return _then(_$LoginAttemptFailure(
+      error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
@@ -627,21 +654,21 @@ class __$ErrorCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Error implements _Error {
-  const _$_Error(this.error);
+class _$_$LoginAttemptFailure implements _$LoginAttemptFailure {
+  const _$_$LoginAttemptFailure({required this.error});
 
   @override
   final String error;
 
   @override
   String toString() {
-    return 'LoginState.error(error: $error)';
+    return 'LoginState.failure(error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Error &&
+        (other is _$LoginAttemptFailure &&
             (identical(other.error, error) ||
                 const DeepCollectionEquality().equals(other.error, error)));
   }
@@ -652,31 +679,32 @@ class _$_Error implements _Error {
 
   @JsonKey(ignore: true)
   @override
-  _$ErrorCopyWith<_Error> get copyWith =>
-      __$ErrorCopyWithImpl<_Error>(this, _$identity);
+  _$$LoginAttemptFailureCopyWith<_$LoginAttemptFailure> get copyWith =>
+      __$$LoginAttemptFailureCopyWithImpl<_$LoginAttemptFailure>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function() inProgress,
     required TResult Function() success,
-    required TResult Function(String error) error,
+    required TResult Function(String error) failure,
   }) {
-    return error(this.error);
+    return failure(error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function()? inProgress,
     TResult Function()? success,
-    TResult Function(String error)? error,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this.error);
+    if (failure != null) {
+      return failure(error);
     }
     return orElse();
   }
@@ -684,34 +712,36 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(_$LoginInitial value) initial,
+    required TResult Function(_$LoginAttemptInProgress value) inProgress,
+    required TResult Function(_$LoginAttemptSuccess value) success,
+    required TResult Function(_$LoginAttemptFailure value) failure,
   }) {
-    return error(this);
+    return failure(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(_$LoginInitial value)? initial,
+    TResult Function(_$LoginAttemptInProgress value)? inProgress,
+    TResult Function(_$LoginAttemptSuccess value)? success,
+    TResult Function(_$LoginAttemptFailure value)? failure,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this);
+    if (failure != null) {
+      return failure(this);
     }
     return orElse();
   }
 }
 
-abstract class _Error implements LoginState {
-  const factory _Error(String error) = _$_Error;
+abstract class _$LoginAttemptFailure implements LoginState {
+  const factory _$LoginAttemptFailure({required String error}) =
+      _$_$LoginAttemptFailure;
 
   String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
+  _$$LoginAttemptFailureCopyWith<_$LoginAttemptFailure> get copyWith =>
+      throw _privateConstructorUsedError;
 }
