@@ -3,9 +3,9 @@
     "short_name": "Gestión UH",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#2EAADC",
-    "theme_color": "#2EAADC",
-    "description": "Una aplicación para la gestión de variadas cosas en la UH.",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "description": "Aplicación para la gestión electrónica en la Universidad de La Habana.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

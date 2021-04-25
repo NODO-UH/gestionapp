@@ -1,5 +1,5 @@
 name: gestionuh
-description: A UH managment app
+description: Aplicación para la gestión electrónica en la Universidad de La Habana.
 
 publish_to: 'none'
 
@@ -52,4 +52,4 @@ flutter_native_splash:
 flutter_icons:
   android: 'launcher_icon'
   ios: true
-  image_path: 'assets/images/ico.png'
+  image_path: 'assets/images/icon.png'
