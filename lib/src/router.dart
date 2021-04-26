@@ -14,7 +14,7 @@ class RouterNavigation {
         final authRepo = GetIt.I<AuthRepository>();
         if (authRepo.logged) {
           return _buildPage(
-            builder: BlocProvider<HomeBloc>(
+            child: BlocProvider<HomeBloc>(
               create: (_) => GetIt.I()..add(const HomeEvent.loadProfile()),
               child: HomePage(),
             ),
@@ -22,15 +22,15 @@ class RouterNavigation {
           );
         }
         return _buildPage(
-          builder: BlocProvider<LoginBloc>(
-            create: (_) => GetIt.I(),
+          child: BlocProvider<LoginBloc>(
+            create: (_) => GetIt.I()..add(const LoginEvent.start()),
             child: const LoginPage(),
           ),
           settings: settings,
         );
       case REGISTER_ROUTE_NAME:
         return _buildPage(
-          builder: Overlay(
+          child: Overlay(
             initialEntries: [
               OverlayEntry(builder: (context) {
                 return BlocProvider<RegisterBloc>(
@@ -45,10 +45,15 @@ class RouterNavigation {
         );
       case RECOVER_PASSWORD_ROUTE_NAME:
         return _buildPage(
-          builder: BlocProvider<RecoverPasswordBloc>(
+          child: BlocProvider<RecoverPasswordBloc>(
             create: (_) => GetIt.I(),
             child: RecoverPasswordPage(),
           ),
+          settings: settings,
+        );
+      case FAQS_ROUTE_NAME:
+        return _buildPage(
+          child: const FaqsPage(),
           settings: settings,
         );
       case HOME_ROUTE_NAME:
@@ -56,7 +61,7 @@ class RouterNavigation {
         final authRepo = GetIt.I<AuthRepository>();
         if (authRepo.logged) {
           return _buildPage(
-            builder: BlocProvider<HomeBloc>(
+            child: BlocProvider<HomeBloc>(
               create: (_) => GetIt.I()..add(const HomeEvent.loadProfile()),
               child: HomePage(),
             ),
@@ -64,8 +69,8 @@ class RouterNavigation {
           );
         }
         return _buildPage(
-          builder: BlocProvider<LoginBloc>(
-            create: (_) => GetIt.I(),
+          child: BlocProvider<LoginBloc>(
+            create: (_) => GetIt.I()..add(const LoginEvent.start()),
             child: const LoginPage(),
           ),
           settings: settings,
@@ -74,11 +79,11 @@ class RouterNavigation {
   }
 
   static PageRoute _buildPage({
-    required Widget builder,
+    required Widget child,
     required RouteSettings settings,
   }) {
     return PageTransition(
-      child: builder,
+      child: child,
       settings: settings,
       type: PageTransitionType.fade,
     );

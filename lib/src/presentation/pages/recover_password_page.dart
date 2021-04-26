@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/presentation/blocs/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets/widgets.dart';
+import 'package:gestionuh/src/utils/constants/constants.dart';
 import 'package:gestionuh/src/utils/validators.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -15,6 +16,14 @@ class RecoverPasswordPage extends StatelessWidget {
       appBar: AppBar(
         title: const SelectableText('Recuperar Contraseña'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help),
+            onPressed: () {
+              Navigator.of(context).pushNamed(FAQS_ROUTE_NAME);
+            },
+          ),
+        ],
       ),
       bottomSheet: const GestionUHBottomSheet(),
       body: Scrollbar(
@@ -284,7 +293,7 @@ class RecoverPasswordPage extends StatelessWidget {
           const SizedBox(height: 30),
           GestionUhDefaultButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Ok'),
+            child: const Text('Entendido'),
           ),
         ],
       ),

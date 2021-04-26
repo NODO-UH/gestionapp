@@ -29,3 +29,13 @@ const TERMS_AND_CONDITIONS_OF_USE_ENUM_TERMS =
     '\nLas cuentas asignadas a los usuarios serán auditadas con vistas a verificar el cumplimiento de la ética.  '
     '\n'
     '\nAcepto cumplir con todo lo antes expuesto.';
+
+const INITIAL_MESSAGE =
+    'En caso de confrontar alguna dificultad en el momento de la matrícula debe '
+    'comunicarse con la Universidad de La Habana, a través de los teléfonos 78734251 '
+    'y 78788115, en días laborables, entre las 9:00AM y 1:00PM.\n\n'
+    'El proceso de recuperar la contraseña solo esta disponible para los usuarios nuevos. '
+    'Para los antiguos usuarios se encuentra en desarrollo aún.\n\n'
+    'Puede volver a leer estos mensajes en la sección de "Preguntas Frecuentes" '
+    'accesible desde el menú lateral o desde el botón de ayuda en la esquina superior '
+    'derecha en los casos donde no haya un menú lateral.';

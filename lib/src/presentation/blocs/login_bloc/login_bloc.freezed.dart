@@ -16,6 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$LoginEventTearOff {
   const _$LoginEventTearOff();
 
+  _$LoginStart start() {
+    return const _$LoginStart();
+  }
+
   _$LoginAttempted loginAttempted(
       {required String userName,
       required String password,
@@ -33,18 +37,16 @@ const $LoginEvent = _$LoginEventTearOff();
 
 /// @nodoc
 mixin _$LoginEvent {
-  String get userName => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
-  bool get rememberMe => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() start,
     required TResult Function(String userName, String password, bool rememberMe)
         loginAttempted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? start,
     TResult Function(String userName, String password, bool rememberMe)?
         loginAttempted,
     required TResult orElse(),
@@ -52,18 +54,16 @@ mixin _$LoginEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_$LoginStart value) start,
     required TResult Function(_$LoginAttempted value) loginAttempted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_$LoginStart value)? start,
     TResult Function(_$LoginAttempted value)? loginAttempted,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $LoginEventCopyWith<LoginEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -72,7 +72,6 @@ abstract class $LoginEventCopyWith<$Res> {
   factory $LoginEventCopyWith(
           LoginEvent value, $Res Function(LoginEvent) then) =
       _$LoginEventCopyWithImpl<$Res>;
-  $Res call({String userName, String password, bool rememberMe});
 }
 
 /// @nodoc
@@ -82,37 +81,100 @@ class _$LoginEventCopyWithImpl<$Res> implements $LoginEventCopyWith<$Res> {
   final LoginEvent _value;
   // ignore: unused_field
   final $Res Function(LoginEvent) _then;
-
-  @override
-  $Res call({
-    Object? userName = freezed,
-    Object? password = freezed,
-    Object? rememberMe = freezed,
-  }) {
-    return _then(_value.copyWith(
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      rememberMe: rememberMe == freezed
-          ? _value.rememberMe
-          : rememberMe // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$$LoginAttemptedCopyWith<$Res>
-    implements $LoginEventCopyWith<$Res> {
+abstract class _$$LoginStartCopyWith<$Res> {
+  factory _$$LoginStartCopyWith(
+          _$LoginStart value, $Res Function(_$LoginStart) then) =
+      __$$LoginStartCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoginStartCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
+    implements _$$LoginStartCopyWith<$Res> {
+  __$$LoginStartCopyWithImpl(
+      _$LoginStart _value, $Res Function(_$LoginStart) _then)
+      : super(_value, (v) => _then(v as _$LoginStart));
+
+  @override
+  _$LoginStart get _value => super._value as _$LoginStart;
+}
+
+/// @nodoc
+
+class _$_$LoginStart implements _$LoginStart {
+  const _$_$LoginStart();
+
+  @override
+  String toString() {
+    return 'LoginEvent.start()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _$LoginStart);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() start,
+    required TResult Function(String userName, String password, bool rememberMe)
+        loginAttempted,
+  }) {
+    return start();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? start,
+    TResult Function(String userName, String password, bool rememberMe)?
+        loginAttempted,
+    required TResult orElse(),
+  }) {
+    if (start != null) {
+      return start();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_$LoginStart value) start,
+    required TResult Function(_$LoginAttempted value) loginAttempted,
+  }) {
+    return start(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_$LoginStart value)? start,
+    TResult Function(_$LoginAttempted value)? loginAttempted,
+    required TResult orElse(),
+  }) {
+    if (start != null) {
+      return start(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _$LoginStart implements LoginEvent {
+  const factory _$LoginStart() = _$_$LoginStart;
+}
+
+/// @nodoc
+abstract class _$$LoginAttemptedCopyWith<$Res> {
   factory _$$LoginAttemptedCopyWith(
           _$LoginAttempted value, $Res Function(_$LoginAttempted) then) =
       __$$LoginAttemptedCopyWithImpl<$Res>;
-  @override
   $Res call({String userName, String password, bool rememberMe});
 }
 
@@ -200,6 +262,7 @@ class _$_$LoginAttempted implements _$LoginAttempted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() start,
     required TResult Function(String userName, String password, bool rememberMe)
         loginAttempted,
   }) {
@@ -209,6 +272,7 @@ class _$_$LoginAttempted implements _$LoginAttempted {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? start,
     TResult Function(String userName, String password, bool rememberMe)?
         loginAttempted,
     required TResult orElse(),
@@ -222,6 +286,7 @@ class _$_$LoginAttempted implements _$LoginAttempted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_$LoginStart value) start,
     required TResult Function(_$LoginAttempted value) loginAttempted,
   }) {
     return loginAttempted(this);
@@ -230,6 +295,7 @@ class _$_$LoginAttempted implements _$LoginAttempted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_$LoginStart value)? start,
     TResult Function(_$LoginAttempted value)? loginAttempted,
     required TResult orElse(),
   }) {
@@ -246,13 +312,9 @@ abstract class _$LoginAttempted implements LoginEvent {
       required String password,
       required bool rememberMe}) = _$_$LoginAttempted;
 
-  @override
   String get userName => throw _privateConstructorUsedError;
-  @override
   String get password => throw _privateConstructorUsedError;
-  @override
   bool get rememberMe => throw _privateConstructorUsedError;
-  @override
   @JsonKey(ignore: true)
   _$$LoginAttemptedCopyWith<_$LoginAttempted> get copyWith =>
       throw _privateConstructorUsedError;
@@ -264,6 +326,10 @@ class _$LoginStateTearOff {
 
   _$LoginInitial initial() {
     return const _$LoginInitial();
+  }
+
+  _$LoginFirstTime firstTime() {
+    return const _$LoginFirstTime();
   }
 
   _$LoginAttemptInProgress inProgress() {
@@ -289,6 +355,7 @@ mixin _$LoginState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() firstTime,
     required TResult Function() inProgress,
     required TResult Function() success,
     required TResult Function(String error) failure,
@@ -297,6 +364,7 @@ mixin _$LoginState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? firstTime,
     TResult Function()? inProgress,
     TResult Function()? success,
     TResult Function(String error)? failure,
@@ -306,6 +374,7 @@ mixin _$LoginState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_$LoginInitial value) initial,
+    required TResult Function(_$LoginFirstTime value) firstTime,
     required TResult Function(_$LoginAttemptInProgress value) inProgress,
     required TResult Function(_$LoginAttemptSuccess value) success,
     required TResult Function(_$LoginAttemptFailure value) failure,
@@ -314,6 +383,7 @@ mixin _$LoginState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_$LoginInitial value)? initial,
+    TResult Function(_$LoginFirstTime value)? firstTime,
     TResult Function(_$LoginAttemptInProgress value)? inProgress,
     TResult Function(_$LoginAttemptSuccess value)? success,
     TResult Function(_$LoginAttemptFailure value)? failure,
@@ -378,6 +448,7 @@ class _$_$LoginInitial implements _$LoginInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() firstTime,
     required TResult Function() inProgress,
     required TResult Function() success,
     required TResult Function(String error) failure,
@@ -389,6 +460,7 @@ class _$_$LoginInitial implements _$LoginInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? firstTime,
     TResult Function()? inProgress,
     TResult Function()? success,
     TResult Function(String error)? failure,
@@ -404,6 +476,7 @@ class _$_$LoginInitial implements _$LoginInitial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_$LoginInitial value) initial,
+    required TResult Function(_$LoginFirstTime value) firstTime,
     required TResult Function(_$LoginAttemptInProgress value) inProgress,
     required TResult Function(_$LoginAttemptSuccess value) success,
     required TResult Function(_$LoginAttemptFailure value) failure,
@@ -415,6 +488,7 @@ class _$_$LoginInitial implements _$LoginInitial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_$LoginInitial value)? initial,
+    TResult Function(_$LoginFirstTime value)? firstTime,
     TResult Function(_$LoginAttemptInProgress value)? inProgress,
     TResult Function(_$LoginAttemptSuccess value)? success,
     TResult Function(_$LoginAttemptFailure value)? failure,
@@ -429,6 +503,104 @@ class _$_$LoginInitial implements _$LoginInitial {
 
 abstract class _$LoginInitial implements LoginState {
   const factory _$LoginInitial() = _$_$LoginInitial;
+}
+
+/// @nodoc
+abstract class _$$LoginFirstTimeCopyWith<$Res> {
+  factory _$$LoginFirstTimeCopyWith(
+          _$LoginFirstTime value, $Res Function(_$LoginFirstTime) then) =
+      __$$LoginFirstTimeCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoginFirstTimeCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res>
+    implements _$$LoginFirstTimeCopyWith<$Res> {
+  __$$LoginFirstTimeCopyWithImpl(
+      _$LoginFirstTime _value, $Res Function(_$LoginFirstTime) _then)
+      : super(_value, (v) => _then(v as _$LoginFirstTime));
+
+  @override
+  _$LoginFirstTime get _value => super._value as _$LoginFirstTime;
+}
+
+/// @nodoc
+
+class _$_$LoginFirstTime implements _$LoginFirstTime {
+  const _$_$LoginFirstTime();
+
+  @override
+  String toString() {
+    return 'LoginState.firstTime()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _$LoginFirstTime);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() firstTime,
+    required TResult Function() inProgress,
+    required TResult Function() success,
+    required TResult Function(String error) failure,
+  }) {
+    return firstTime();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? firstTime,
+    TResult Function()? inProgress,
+    TResult Function()? success,
+    TResult Function(String error)? failure,
+    required TResult orElse(),
+  }) {
+    if (firstTime != null) {
+      return firstTime();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_$LoginInitial value) initial,
+    required TResult Function(_$LoginFirstTime value) firstTime,
+    required TResult Function(_$LoginAttemptInProgress value) inProgress,
+    required TResult Function(_$LoginAttemptSuccess value) success,
+    required TResult Function(_$LoginAttemptFailure value) failure,
+  }) {
+    return firstTime(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_$LoginInitial value)? initial,
+    TResult Function(_$LoginFirstTime value)? firstTime,
+    TResult Function(_$LoginAttemptInProgress value)? inProgress,
+    TResult Function(_$LoginAttemptSuccess value)? success,
+    TResult Function(_$LoginAttemptFailure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (firstTime != null) {
+      return firstTime(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _$LoginFirstTime implements LoginState {
+  const factory _$LoginFirstTime() = _$_$LoginFirstTime;
 }
 
 /// @nodoc
@@ -473,6 +645,7 @@ class _$_$LoginAttemptInProgress implements _$LoginAttemptInProgress {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() firstTime,
     required TResult Function() inProgress,
     required TResult Function() success,
     required TResult Function(String error) failure,
@@ -484,6 +657,7 @@ class _$_$LoginAttemptInProgress implements _$LoginAttemptInProgress {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? firstTime,
     TResult Function()? inProgress,
     TResult Function()? success,
     TResult Function(String error)? failure,
@@ -499,6 +673,7 @@ class _$_$LoginAttemptInProgress implements _$LoginAttemptInProgress {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_$LoginInitial value) initial,
+    required TResult Function(_$LoginFirstTime value) firstTime,
     required TResult Function(_$LoginAttemptInProgress value) inProgress,
     required TResult Function(_$LoginAttemptSuccess value) success,
     required TResult Function(_$LoginAttemptFailure value) failure,
@@ -510,6 +685,7 @@ class _$_$LoginAttemptInProgress implements _$LoginAttemptInProgress {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_$LoginInitial value)? initial,
+    TResult Function(_$LoginFirstTime value)? firstTime,
     TResult Function(_$LoginAttemptInProgress value)? inProgress,
     TResult Function(_$LoginAttemptSuccess value)? success,
     TResult Function(_$LoginAttemptFailure value)? failure,
@@ -567,6 +743,7 @@ class _$_$LoginAttemptSuccess implements _$LoginAttemptSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() firstTime,
     required TResult Function() inProgress,
     required TResult Function() success,
     required TResult Function(String error) failure,
@@ -578,6 +755,7 @@ class _$_$LoginAttemptSuccess implements _$LoginAttemptSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? firstTime,
     TResult Function()? inProgress,
     TResult Function()? success,
     TResult Function(String error)? failure,
@@ -593,6 +771,7 @@ class _$_$LoginAttemptSuccess implements _$LoginAttemptSuccess {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_$LoginInitial value) initial,
+    required TResult Function(_$LoginFirstTime value) firstTime,
     required TResult Function(_$LoginAttemptInProgress value) inProgress,
     required TResult Function(_$LoginAttemptSuccess value) success,
     required TResult Function(_$LoginAttemptFailure value) failure,
@@ -604,6 +783,7 @@ class _$_$LoginAttemptSuccess implements _$LoginAttemptSuccess {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_$LoginInitial value)? initial,
+    TResult Function(_$LoginFirstTime value)? firstTime,
     TResult Function(_$LoginAttemptInProgress value)? inProgress,
     TResult Function(_$LoginAttemptSuccess value)? success,
     TResult Function(_$LoginAttemptFailure value)? failure,
@@ -687,6 +867,7 @@ class _$_$LoginAttemptFailure implements _$LoginAttemptFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() firstTime,
     required TResult Function() inProgress,
     required TResult Function() success,
     required TResult Function(String error) failure,
@@ -698,6 +879,7 @@ class _$_$LoginAttemptFailure implements _$LoginAttemptFailure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? firstTime,
     TResult Function()? inProgress,
     TResult Function()? success,
     TResult Function(String error)? failure,
@@ -713,6 +895,7 @@ class _$_$LoginAttemptFailure implements _$LoginAttemptFailure {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_$LoginInitial value) initial,
+    required TResult Function(_$LoginFirstTime value) firstTime,
     required TResult Function(_$LoginAttemptInProgress value) inProgress,
     required TResult Function(_$LoginAttemptSuccess value) success,
     required TResult Function(_$LoginAttemptFailure value) failure,
@@ -724,6 +907,7 @@ class _$_$LoginAttemptFailure implements _$LoginAttemptFailure {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_$LoginInitial value)? initial,
+    TResult Function(_$LoginFirstTime value)? firstTime,
     TResult Function(_$LoginAttemptInProgress value)? inProgress,
     TResult Function(_$LoginAttemptSuccess value)? success,
     TResult Function(_$LoginAttemptFailure value)? failure,
