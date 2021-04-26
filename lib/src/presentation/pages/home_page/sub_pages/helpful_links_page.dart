@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gestionuh/src/presentation/widgets/widgets.dart';
 import 'package:gestionuh/src/utils/constants/constants.dart';
+import 'package:gestionuh/src/utils/open_url.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HelpfulLinksPage extends StatelessWidget {
   const HelpfulLinksPage({Key? key}) : super(key: key);
@@ -29,14 +28,7 @@ class HelpfulLinksPage extends StatelessWidget {
                   subtitle: Text(helpfulLink.url),
                   trailing: const Icon(Icons.link),
                   onTap: () async {
-                    if (await canLaunch(helpfulLink.url)) {
-                      await launch(helpfulLink.url);
-                    } else {
-                      FlashHelper.errorBar(
-                        context,
-                        message: 'No puede acceder a ${helpfulLink.url}',
-                      );
-                    }
+                    await openUrl(context, helpfulLink.url);
                   },
                 );
               }).toList(),

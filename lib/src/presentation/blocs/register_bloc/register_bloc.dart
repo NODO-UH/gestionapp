@@ -6,9 +6,9 @@ import 'package:gestionuh/src/data/models/password_edit_data.dart';
 import 'package:gestionuh/src/data/repositories/repositories.dart';
 import 'package:gestionuh/src/utils/constants/constants.dart';
 
+part 'register_bloc.freezed.dart';
 part 'register_event.dart';
 part 'register_state.dart';
-part 'register_bloc.freezed.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final AuthRepository repository;

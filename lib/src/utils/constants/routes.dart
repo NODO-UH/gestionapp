@@ -2,6 +2,7 @@ const LOGIN_ROUTE_NAME = '/login';
 const REGISTER_ROUTE_NAME = '/register';
 const HOME_ROUTE_NAME = '/';
 const RECOVER_PASSWORD_ROUTE_NAME = '/recover-password';
+const FAQS_ROUTE_NAME = '/faqs';
 // const QUOTA_ROUTE_NAME = '/quota';
 // const PROFILE_ROUTE_NAME = '/profile';
 // const MAIL_ROUTE_NAME = '/mail';

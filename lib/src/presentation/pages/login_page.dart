@@ -57,6 +57,14 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: const SelectableText(Constants.appName),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help),
+            onPressed: () {
+              Navigator.of(context).pushNamed(FAQS_ROUTE_NAME);
+            },
+          ),
+        ],
       ),
       bottomSheet: const GestionUHBottomSheet(),
       body: BlocConsumer<LoginBloc, LoginState>(
@@ -65,15 +73,38 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).pushReplacementNamed(HOME_ROUTE_NAME);
           }
           state.maybeWhen(
+            firstTime: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('¡Bienvenido a ${Constants.appName}!'),
+                    content: const Scrollbar(
+                      child: SelectableText(INITIAL_MESSAGE),
+                    ),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Entendido'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
             failure: (error) => FlashHelper.errorBar(context, message: error),
             orElse: () {},
           );
         },
         builder: (context, state) {
-          return state.maybeWhen(
+          return state.when(
             inProgress: () => _buildLoadingIndicator(context),
             success: () => _buildLoadingIndicator(context),
-            orElse: () => _buildLoginForm(context),
+            failure: (String error) => _buildLoginForm(context),
+            firstTime: () => _buildLoginForm(context),
+            initial: () => _buildLoginForm(context),
           );
         },
       ),
@@ -103,14 +134,11 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
                     Image.asset(
                       'assets/images/splash.png',
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 20,
                     ),
                     SizedBox(
                       child: Row(
@@ -205,7 +233,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () => _registerAction(context),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 50,
                     ),
                   ],
                 ),
