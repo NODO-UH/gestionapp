@@ -23,6 +23,10 @@ abstract class ILocalStorage {
   });
 
   Future<void> invalidateCredentials();
+
+  Future<bool> isFirstTime();
+
+  Future<void> useFirstTime();
 }
 
 class LocalStorage implements ILocalStorage {
@@ -110,6 +114,16 @@ class LocalStorage implements ILocalStorage {
     }
     sessionData.isLoggedInto = false;
     sessionData.rememberMe = false;
+  }
+
+  @override
+  Future<bool> isFirstTime() async {
+    return prefs.getBool(APP_FIRST_TIME) ?? true;
+  }
+
+  @override
+  Future<void> useFirstTime() async {
+    await prefs.setBool(APP_FIRST_TIME, false);
   }
 }
 

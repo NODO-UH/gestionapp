@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestionuh/src/presentation/blocs/blocs.dart';
 import 'package:gestionuh/src/presentation/widgets/widgets.dart';
 import 'package:gestionuh/src/utils/constants/constants.dart';
+import 'package:gestionuh/src/utils/open_url.dart';
 import 'package:gestionuh/src/utils/pair.dart';
 import 'package:gestionuh/src/utils/validators.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -98,6 +99,14 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: AppBar(
         title: const SelectableText('Registrarse'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help),
+            onPressed: () {
+              Navigator.of(context).pushNamed(FAQS_ROUTE_NAME);
+            },
+          ),
+        ],
       ),
       body: BlocConsumer<RegisterBloc, RegisterState>(
         listener: (context, state) async {
@@ -279,51 +288,85 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget _buildRegisterSuccessPage(BuildContext context, String userEmail) {
-    return Container(
-      margin: const EdgeInsets.all(30),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SelectableText.rich(
-            TextSpan(
-              style: Theme.of(context).textTheme.subtitle1,
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            width: getValueForScreenType<double>(
+              context: context,
+              mobile: MediaQuery.of(context).size.width,
+              tablet: MediaQuery.of(context).size.width * 0.5,
+            ),
+            padding: const EdgeInsets.only(
+              top: 30,
+              bottom: 9,
+              left: 18,
+              right: 18,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const TextSpan(
-                  text: 'Se ha registrado correctamente '
-                      'su correo es ',
+                SelectableText.rich(
+                  TextSpan(
+                    style: Theme.of(context).textTheme.subtitle1,
+                    children: [
+                      const TextSpan(
+                        text: 'Se ha registrado correctamente, '
+                            'su correo es ',
+                      ),
+                      TextSpan(
+                        text: '"$userEmail"',
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle1
+                            ?.copyWith(color: Colors.red),
+                      ),
+                      const TextSpan(
+                        text: ', anótelo de ser necesario '
+                            'no se mostrará otra vez.',
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                TextSpan(
-                  text: '"$userEmail"',
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1
-                      ?.copyWith(color: Colors.red),
+                const SizedBox(height: 15),
+                GestionUhDefaultButton(
+                  onPressed: () {
+                    Clipboard.setData(ClipboardData(text: userEmail));
+                    FlashHelper.successBar(
+                      context,
+                      message: 'Correo copiado correctamente.',
+                    );
+                  },
+                  child: const Text('Copiar Correo'),
                 ),
-                const TextSpan(
-                  text: ', anótelo de ser necesario '
-                      'no se mostrará otra vez.',
+                const SizedBox(height: 15),
+                SelectableText(
+                  'Se le ha enviado un correo electrónico, a continuación '
+                  'vaya a la bandeja de correos para recibarlo.',
+                  style: Theme.of(context).textTheme.subtitle1,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 15),
+                GestionUhDefaultButton(
+                  onPressed: () =>
+                      openUrl(context, 'https://correo.estudiantes.uh.cu'),
+                  child: const Text('Ir al correo para "Estudiantes"'),
+                ),
+                const SizedBox(height: 10),
+                GestionUhDefaultButton(
+                  onPressed: () => openUrl(context, 'https://correo.uh.cu'),
+                  child: const Text('Ir al correo para "Profesores"'),
+                ),
+                const SizedBox(height: 30),
+                GestionUhDefaultButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Entendido'),
                 ),
               ],
             ),
-            textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 15),
-          GestionUhDefaultButton(
-            onPressed: () {
-              Clipboard.setData(ClipboardData(text: userEmail));
-              FlashHelper.successBar(
-                context,
-                message: 'Correo copiado correctamente.',
-              );
-            },
-            child: const Text('Copiar Correo'),
-          ),
-          const SizedBox(height: 30),
-          GestionUhDefaultButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Ok'),
-          ),
-        ],
+        ),
       ),
     );
   }

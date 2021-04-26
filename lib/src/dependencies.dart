@@ -74,6 +74,7 @@ class DependencyInjection {
     I.registerFactory<LoginBloc>(
       () => LoginBloc(
         authRepository: I(),
+        localStorage: I(),
       ),
     );
 

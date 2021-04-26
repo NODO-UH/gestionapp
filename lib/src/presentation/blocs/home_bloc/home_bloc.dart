@@ -94,6 +94,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (profile.hasEmail ?? false) HomeItemEnum.MailQuota,
       HomeItemEnum.ResetPassword,
       HomeItemEnum.HelpfulLinks,
+      HomeItemEnum.Faqs,
       HomeItemEnum.AboutUs,
       HomeItemEnum.Separator,
       HomeItemEnum.Logout,
