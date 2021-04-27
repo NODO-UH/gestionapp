@@ -1,1 +1,0 @@
-flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart -S assets/i18n -O lib/src/core/i18n & flutter pub run easy_localization:generate -f json -o codegen_loader.g.dart -S assets/i18n -O lib/src/core/i18n
