@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:gestionuh/src/presentation/widgets/widgets.dart';
 import 'package:gestionuh/src/utils/constants/constants.dart';
+import 'package:gestionuh/src/utils/open_url.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AboutInformationPage extends StatelessWidget {
   const AboutInformationPage({Key? key}) : super(key: key);
@@ -78,15 +77,7 @@ class AboutInformationPage extends StatelessWidget {
                                       onTap: e.link == null
                                           ? null
                                           : () async {
-                                              if (await canLaunch(e.link!)) {
-                                                await launch(e.link!);
-                                              } else {
-                                                FlashHelper.errorBar(
-                                                  context,
-                                                  message:
-                                                      'No puede acceder a ${e.link}',
-                                                );
-                                              }
+                                              await openUrl(context, e.link!);
                                             },
                                       trailing: Icon(e.link != null
                                           ? Icons.link
@@ -117,14 +108,7 @@ class AboutInformationPage extends StatelessWidget {
                     onTap: () async {
                       const url =
                           'https://github.com/NODO-UH/gestionapp/blob/master/LICENSE';
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        FlashHelper.errorBar(
-                          context,
-                          message: 'No puede acceder a $url',
-                        );
-                      }
+                      await openUrl(context, url);
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(

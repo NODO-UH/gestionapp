@@ -8,6 +8,8 @@ analyzer:
     - lib/**/*.freezed.dart
   strong-mode:
     implicit-casts: false
+  errors:
+    todo: warning
 
 linter:
   rules:

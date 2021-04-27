@@ -102,7 +102,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                       ],
-                      error: (error) => [
+                      error: (error, items) => [
                         ListTile(
                           leading: const Icon(Icons.error),
                           title: Text(
@@ -110,6 +110,43 @@ class HomePage extends StatelessWidget {
                             style: Theme.of(context).textTheme.subtitle2,
                           ),
                         ),
+                        if (items.contains(HomeItemEnum.Logout))
+                          _buildDrawerItem(
+                            context: context,
+                            text: 'Cerrar Sesión',
+                            icon: Icons.logout,
+                            onTap: () async {
+                              _applyPopIfDrawerIsDialog(context);
+                              final option = await showDialog<bool>(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    content: const SelectableText(
+                                        '¿Está seguro que desea cerrar sesión?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop(true);
+                                        },
+                                        child: const Text('Si'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () async {
+                                          Navigator.of(context).pop(false);
+                                        },
+                                        child: const Text('No'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                              if (option ?? false) {
+                                context
+                                    .read<HomeBloc>()
+                                    .add(const HomeEvent.logout());
+                              }
+                            },
+                          ),
                       ],
                       profile: (p, x) => _getDrawerItems(context, p, x),
                       quota: (p, x) => _getDrawerItems(context, p, x),
@@ -233,7 +270,7 @@ class HomePage extends StatelessWidget {
         return _buildDrawerItem(
           context: context,
           text: 'Perfil',
-          icon: Icons.person,
+          icon: Icons.person_outline,
           onTap: () {
             _applyPopIfDrawerIsDialog(context);
             context.read<HomeBloc>().add(HomeEvent.goToProfile(profile));
@@ -253,7 +290,7 @@ class HomePage extends StatelessWidget {
         return _buildDrawerItem(
           context: context,
           text: 'Correo',
-          icon: Icons.mail,
+          icon: Icons.mail_outline,
           onTap: () {
             _applyPopIfDrawerIsDialog(context);
             context.read<HomeBloc>().add(HomeEvent.goToMailQuota(profile));
@@ -263,7 +300,7 @@ class HomePage extends StatelessWidget {
         return _buildDrawerItem(
           context: context,
           text: 'Cambiar Contraseña',
-          icon: Icons.security_rounded,
+          icon: Icons.security_outlined,
           onTap: () {
             _applyPopIfDrawerIsDialog(context);
             context.read<HomeBloc>().add(HomeEvent.goToResetPassword(profile));
@@ -283,13 +320,13 @@ class HomePage extends StatelessWidget {
                   content: const SelectableText(
                       '¿Está seguro que desea cerrar sesión?'),
                   actions: [
-                    TextButton(
+                    ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pop(true);
                       },
                       child: const Text('Si'),
                     ),
-                    TextButton(
+                    ElevatedButton(
                       onPressed: () async {
                         Navigator.of(context).pop(false);
                       },
@@ -322,6 +359,16 @@ class HomePage extends StatelessWidget {
           onTap: () {
             _applyPopIfDrawerIsDialog(context);
             context.read<HomeBloc>().add(HomeEvent.goToHelpfulLinks(profile));
+          },
+        );
+      case HomeItemEnum.Faqs:
+        return _buildDrawerItem(
+          context: context,
+          text: 'Preguntas Frecuentes',
+          icon: Icons.help_outline,
+          onTap: () {
+            _applyPopIfDrawerIsDialog(context);
+            Navigator.of(context).pushNamed(FAQS_ROUTE_NAME);
           },
         );
     }

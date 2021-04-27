@@ -6,5 +6,6 @@ enum HomeItemEnum {
   ResetPassword,
   AboutUs,
   HelpfulLinks,
+  Faqs,
   Logout,
 }

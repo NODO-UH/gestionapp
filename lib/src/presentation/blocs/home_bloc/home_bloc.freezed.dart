@@ -1258,9 +1258,10 @@ class _$HomeStateTearOff {
     return const _Loading();
   }
 
-  _Error error(String message) {
+  _Error error(String message, List<HomeItemEnum> items) {
     return _Error(
       message,
+      items,
     );
   }
 
@@ -1319,7 +1320,7 @@ mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String message) error,
+    required TResult Function(String message, List<HomeItemEnum> items) error,
     required TResult Function() logout,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         profile,
@@ -1337,7 +1338,7 @@ mixin _$HomeState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String message)? error,
+    TResult Function(String message, List<HomeItemEnum> items)? error,
     TResult Function()? logout,
     TResult Function(UserData profile, List<HomeItemEnum> items)? profile,
     TResult Function(UserData profile, List<HomeItemEnum> items)? quota,
@@ -1436,7 +1437,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String message) error,
+    required TResult Function(String message, List<HomeItemEnum> items) error,
     required TResult Function() logout,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         profile,
@@ -1457,7 +1458,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String message)? error,
+    TResult Function(String message, List<HomeItemEnum> items)? error,
     TResult Function()? logout,
     TResult Function(UserData profile, List<HomeItemEnum> items)? profile,
     TResult Function(UserData profile, List<HomeItemEnum> items)? quota,
@@ -1518,7 +1519,7 @@ abstract class _Loading implements HomeState {
 abstract class _$ErrorCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
       __$ErrorCopyWithImpl<$Res>;
-  $Res call({String message});
+  $Res call({String message, List<HomeItemEnum> items});
 }
 
 /// @nodoc
@@ -1533,12 +1534,17 @@ class __$ErrorCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = freezed,
+    Object? items = freezed,
   }) {
     return _then(_Error(
       message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      items == freezed
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<HomeItemEnum>,
     ));
   }
 }
@@ -1546,14 +1552,16 @@ class __$ErrorCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Error with DiagnosticableTreeMixin implements _Error {
-  const _$_Error(this.message);
+  const _$_Error(this.message, this.items);
 
   @override
   final String message;
+  @override
+  final List<HomeItemEnum> items;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState.error(message: $message)';
+    return 'HomeState.error(message: $message, items: $items)';
   }
 
   @override
@@ -1561,7 +1569,8 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'HomeState.error'))
-      ..add(DiagnosticsProperty('message', message));
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('items', items));
   }
 
   @override
@@ -1569,12 +1578,17 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     return identical(this, other) ||
         (other is _Error &&
             (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
+                const DeepCollectionEquality()
+                    .equals(other.message, message)) &&
+            (identical(other.items, items) ||
+                const DeepCollectionEquality().equals(other.items, items)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(message) ^
+      const DeepCollectionEquality().hash(items);
 
   @JsonKey(ignore: true)
   @override
@@ -1585,7 +1599,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String message) error,
+    required TResult Function(String message, List<HomeItemEnum> items) error,
     required TResult Function() logout,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         profile,
@@ -1599,14 +1613,14 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         helpfulLinks,
   }) {
-    return error(message);
+    return error(message, items);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String message)? error,
+    TResult Function(String message, List<HomeItemEnum> items)? error,
     TResult Function()? logout,
     TResult Function(UserData profile, List<HomeItemEnum> items)? profile,
     TResult Function(UserData profile, List<HomeItemEnum> items)? quota,
@@ -1617,7 +1631,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(message);
+      return error(message, items);
     }
     return orElse();
   }
@@ -1660,9 +1674,10 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
 }
 
 abstract class _Error implements HomeState {
-  const factory _Error(String message) = _$_Error;
+  const factory _Error(String message, List<HomeItemEnum> items) = _$_Error;
 
   String get message => throw _privateConstructorUsedError;
+  List<HomeItemEnum> get items => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
 }
@@ -1711,7 +1726,7 @@ class _$_Logout with DiagnosticableTreeMixin implements _Logout {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String message) error,
+    required TResult Function(String message, List<HomeItemEnum> items) error,
     required TResult Function() logout,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         profile,
@@ -1732,7 +1747,7 @@ class _$_Logout with DiagnosticableTreeMixin implements _Logout {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String message)? error,
+    TResult Function(String message, List<HomeItemEnum> items)? error,
     TResult Function()? logout,
     TResult Function(UserData profile, List<HomeItemEnum> items)? profile,
     TResult Function(UserData profile, List<HomeItemEnum> items)? quota,
@@ -1873,7 +1888,7 @@ class _$_Profile with DiagnosticableTreeMixin implements _Profile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String message) error,
+    required TResult Function(String message, List<HomeItemEnum> items) error,
     required TResult Function() logout,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         profile,
@@ -1894,7 +1909,7 @@ class _$_Profile with DiagnosticableTreeMixin implements _Profile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String message)? error,
+    TResult Function(String message, List<HomeItemEnum> items)? error,
     TResult Function()? logout,
     TResult Function(UserData profile, List<HomeItemEnum> items)? profile,
     TResult Function(UserData profile, List<HomeItemEnum> items)? quota,
@@ -2042,7 +2057,7 @@ class _$_Quota with DiagnosticableTreeMixin implements _Quota {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String message) error,
+    required TResult Function(String message, List<HomeItemEnum> items) error,
     required TResult Function() logout,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         profile,
@@ -2063,7 +2078,7 @@ class _$_Quota with DiagnosticableTreeMixin implements _Quota {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String message)? error,
+    TResult Function(String message, List<HomeItemEnum> items)? error,
     TResult Function()? logout,
     TResult Function(UserData profile, List<HomeItemEnum> items)? profile,
     TResult Function(UserData profile, List<HomeItemEnum> items)? quota,
@@ -2210,7 +2225,7 @@ class _$_MailQuota with DiagnosticableTreeMixin implements _MailQuota {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String message) error,
+    required TResult Function(String message, List<HomeItemEnum> items) error,
     required TResult Function() logout,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         profile,
@@ -2231,7 +2246,7 @@ class _$_MailQuota with DiagnosticableTreeMixin implements _MailQuota {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String message)? error,
+    TResult Function(String message, List<HomeItemEnum> items)? error,
     TResult Function()? logout,
     TResult Function(UserData profile, List<HomeItemEnum> items)? profile,
     TResult Function(UserData profile, List<HomeItemEnum> items)? quota,
@@ -2381,7 +2396,7 @@ class _$_ResetPassword with DiagnosticableTreeMixin implements _ResetPassword {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String message) error,
+    required TResult Function(String message, List<HomeItemEnum> items) error,
     required TResult Function() logout,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         profile,
@@ -2402,7 +2417,7 @@ class _$_ResetPassword with DiagnosticableTreeMixin implements _ResetPassword {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String message)? error,
+    TResult Function(String message, List<HomeItemEnum> items)? error,
     TResult Function()? logout,
     TResult Function(UserData profile, List<HomeItemEnum> items)? profile,
     TResult Function(UserData profile, List<HomeItemEnum> items)? quota,
@@ -2550,7 +2565,7 @@ class _$_AboutUs with DiagnosticableTreeMixin implements _AboutUs {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String message) error,
+    required TResult Function(String message, List<HomeItemEnum> items) error,
     required TResult Function() logout,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         profile,
@@ -2571,7 +2586,7 @@ class _$_AboutUs with DiagnosticableTreeMixin implements _AboutUs {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String message)? error,
+    TResult Function(String message, List<HomeItemEnum> items)? error,
     TResult Function()? logout,
     TResult Function(UserData profile, List<HomeItemEnum> items)? profile,
     TResult Function(UserData profile, List<HomeItemEnum> items)? quota,
@@ -2721,7 +2736,7 @@ class _$_HelpfulLinks with DiagnosticableTreeMixin implements _HelpfulLinks {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String message) error,
+    required TResult Function(String message, List<HomeItemEnum> items) error,
     required TResult Function() logout,
     required TResult Function(UserData profile, List<HomeItemEnum> items)
         profile,
@@ -2742,7 +2757,7 @@ class _$_HelpfulLinks with DiagnosticableTreeMixin implements _HelpfulLinks {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String message)? error,
+    TResult Function(String message, List<HomeItemEnum> items)? error,
     TResult Function()? logout,
     TResult Function(UserData profile, List<HomeItemEnum> items)? profile,
     TResult Function(UserData profile, List<HomeItemEnum> items)? quota,

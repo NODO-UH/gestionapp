@@ -64,7 +64,7 @@ class AuthRepository {
       String currentPassword, String newPassword) async {
     try {
       final status = await api.resetPassword(currentPassword, newPassword);
-      if (status.status == false) {
+      if (status.status != true) {
         return status;
       }
 

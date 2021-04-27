@@ -30,9 +30,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         yield const HomeState.loading();
         final result = await profileRepository.getUserData();
         if (result == null) {
-          yield const HomeState.error(Errors.DefaultError);
+          yield const HomeState.error(
+            Errors.DefaultError,
+            [HomeItemEnum.Logout],
+          );
         } else if (result.error != null) {
-          yield HomeState.error(result.error!);
+          yield HomeState.error(
+            result.error!,
+            const [HomeItemEnum.Logout],
+          );
         } else {
           add(HomeEvent.goToProfile(result));
         }
@@ -88,6 +94,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (profile.hasEmail ?? false) HomeItemEnum.MailQuota,
       HomeItemEnum.ResetPassword,
       HomeItemEnum.HelpfulLinks,
+      HomeItemEnum.Faqs,
       HomeItemEnum.AboutUs,
       HomeItemEnum.Separator,
       HomeItemEnum.Logout,
