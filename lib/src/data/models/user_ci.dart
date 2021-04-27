@@ -1,14 +1,14 @@
-import 'package:json_annotation/json_annotation.dart';
-
 import 'package:gestionuh/src/data/models/base_model.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'user_ci.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class UserCi extends BaseModel {
   String? ci;
+  String? email;
 
-  UserCi({this.ci});
+  UserCi({this.ci, this.email});
 
   static UserCi fromJson(Map<String, dynamic> json) => _$UserCiFromJson(json);
 
