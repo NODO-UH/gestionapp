@@ -119,16 +119,17 @@ class GestionApi {
     );
   }
 
-  Future<SecurityQuestions> getUserSecurityQuestions(String ci) async {
+  Future<SecurityQuestions> getUserSecurityQuestions(
+      String ci, String email) async {
     if (Constants.testMode) {
       return SecurityQuestions(
         questions: SampleData.userSecurityQuestions,
       );
     }
 
-    final UserCi user = UserCi(ci: ci);
+    final UserCi user = UserCi(ci: ci, email: email);
 
-    final params = {'ci': user.ci};
+    final params = user.toJson();
 
     return apiRequest<SecurityQuestions, UserCi>(
       Constants.userSecurityQuestionsUrl,

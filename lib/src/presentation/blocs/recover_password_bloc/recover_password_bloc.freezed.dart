@@ -16,16 +16,18 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$RecoverPasswordEventTearOff {
   const _$RecoverPasswordEventTearOff();
 
-  _CISubmit ciSubmit(TextEditingController ci) {
+  _CISubmit ciSubmit(TextEditingController ci, TextEditingController email) {
     return _CISubmit(
       ci,
+      email,
     );
   }
 
-  _FinalSubmit finalSubmit(String ci, List<String> questions,
+  _FinalSubmit finalSubmit(String ci, String email, List<String> questions,
       List<TextEditingController> answers, TextEditingController password) {
     return _FinalSubmit(
       ci,
+      email,
       questions,
       answers,
       password,
@@ -40,17 +42,21 @@ const $RecoverPasswordEvent = _$RecoverPasswordEventTearOff();
 mixin _$RecoverPasswordEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TextEditingController ci) ciSubmit,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        ciSubmit,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         finalSubmit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TextEditingController ci)? ciSubmit,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        ciSubmit,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
@@ -94,7 +100,7 @@ class _$RecoverPasswordEventCopyWithImpl<$Res>
 abstract class _$CISubmitCopyWith<$Res> {
   factory _$CISubmitCopyWith(_CISubmit value, $Res Function(_CISubmit) then) =
       __$CISubmitCopyWithImpl<$Res>;
-  $Res call({TextEditingController ci});
+  $Res call({TextEditingController ci, TextEditingController email});
 }
 
 /// @nodoc
@@ -110,11 +116,16 @@ class __$CISubmitCopyWithImpl<$Res>
   @override
   $Res call({
     Object? ci = freezed,
+    Object? email = freezed,
   }) {
     return _then(_CISubmit(
       ci == freezed
           ? _value.ci
           : ci // ignore: cast_nullable_to_non_nullable
+              as TextEditingController,
+      email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
     ));
   }
@@ -123,14 +134,16 @@ class __$CISubmitCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CISubmit implements _CISubmit {
-  const _$_CISubmit(this.ci);
+  const _$_CISubmit(this.ci, this.email);
 
   @override
   final TextEditingController ci;
+  @override
+  final TextEditingController email;
 
   @override
   String toString() {
-    return 'RecoverPasswordEvent.ciSubmit(ci: $ci)';
+    return 'RecoverPasswordEvent.ciSubmit(ci: $ci, email: $email)';
   }
 
   @override
@@ -138,12 +151,16 @@ class _$_CISubmit implements _CISubmit {
     return identical(this, other) ||
         (other is _CISubmit &&
             (identical(other.ci, ci) ||
-                const DeepCollectionEquality().equals(other.ci, ci)));
+                const DeepCollectionEquality().equals(other.ci, ci)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(ci);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(ci) ^
+      const DeepCollectionEquality().hash(email);
 
   @JsonKey(ignore: true)
   @override
@@ -153,20 +170,24 @@ class _$_CISubmit implements _CISubmit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TextEditingController ci) ciSubmit,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        ciSubmit,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         finalSubmit,
   }) {
-    return ciSubmit(ci);
+    return ciSubmit(ci, email);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TextEditingController ci)? ciSubmit,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        ciSubmit,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
@@ -174,7 +195,7 @@ class _$_CISubmit implements _CISubmit {
     required TResult orElse(),
   }) {
     if (ciSubmit != null) {
-      return ciSubmit(ci);
+      return ciSubmit(ci, email);
     }
     return orElse();
   }
@@ -203,9 +224,11 @@ class _$_CISubmit implements _CISubmit {
 }
 
 abstract class _CISubmit implements RecoverPasswordEvent {
-  const factory _CISubmit(TextEditingController ci) = _$_CISubmit;
+  const factory _CISubmit(
+      TextEditingController ci, TextEditingController email) = _$_CISubmit;
 
   TextEditingController get ci => throw _privateConstructorUsedError;
+  TextEditingController get email => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$CISubmitCopyWith<_CISubmit> get copyWith =>
       throw _privateConstructorUsedError;
@@ -218,6 +241,7 @@ abstract class _$FinalSubmitCopyWith<$Res> {
       __$FinalSubmitCopyWithImpl<$Res>;
   $Res call(
       {String ci,
+      String email,
       List<String> questions,
       List<TextEditingController> answers,
       TextEditingController password});
@@ -237,6 +261,7 @@ class __$FinalSubmitCopyWithImpl<$Res>
   @override
   $Res call({
     Object? ci = freezed,
+    Object? email = freezed,
     Object? questions = freezed,
     Object? answers = freezed,
     Object? password = freezed,
@@ -245,6 +270,10 @@ class __$FinalSubmitCopyWithImpl<$Res>
       ci == freezed
           ? _value.ci
           : ci // ignore: cast_nullable_to_non_nullable
+              as String,
+      email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       questions == freezed
           ? _value.questions
@@ -265,10 +294,13 @@ class __$FinalSubmitCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FinalSubmit implements _FinalSubmit {
-  const _$_FinalSubmit(this.ci, this.questions, this.answers, this.password);
+  const _$_FinalSubmit(
+      this.ci, this.email, this.questions, this.answers, this.password);
 
   @override
   final String ci;
+  @override
+  final String email;
   @override
   final List<String> questions;
   @override
@@ -278,7 +310,7 @@ class _$_FinalSubmit implements _FinalSubmit {
 
   @override
   String toString() {
-    return 'RecoverPasswordEvent.finalSubmit(ci: $ci, questions: $questions, answers: $answers, password: $password)';
+    return 'RecoverPasswordEvent.finalSubmit(ci: $ci, email: $email, questions: $questions, answers: $answers, password: $password)';
   }
 
   @override
@@ -287,6 +319,8 @@ class _$_FinalSubmit implements _FinalSubmit {
         (other is _FinalSubmit &&
             (identical(other.ci, ci) ||
                 const DeepCollectionEquality().equals(other.ci, ci)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.questions, questions) ||
                 const DeepCollectionEquality()
                     .equals(other.questions, questions)) &&
@@ -302,6 +336,7 @@ class _$_FinalSubmit implements _FinalSubmit {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(ci) ^
+      const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(questions) ^
       const DeepCollectionEquality().hash(answers) ^
       const DeepCollectionEquality().hash(password);
@@ -314,20 +349,24 @@ class _$_FinalSubmit implements _FinalSubmit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TextEditingController ci) ciSubmit,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        ciSubmit,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         finalSubmit,
   }) {
-    return finalSubmit(ci, questions, answers, password);
+    return finalSubmit(ci, email, questions, answers, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TextEditingController ci)? ciSubmit,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        ciSubmit,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
@@ -335,7 +374,7 @@ class _$_FinalSubmit implements _FinalSubmit {
     required TResult orElse(),
   }) {
     if (finalSubmit != null) {
-      return finalSubmit(ci, questions, answers, password);
+      return finalSubmit(ci, email, questions, answers, password);
     }
     return orElse();
   }
@@ -366,11 +405,13 @@ class _$_FinalSubmit implements _FinalSubmit {
 abstract class _FinalSubmit implements RecoverPasswordEvent {
   const factory _FinalSubmit(
       String ci,
+      String email,
       List<String> questions,
       List<TextEditingController> answers,
       TextEditingController password) = _$_FinalSubmit;
 
   String get ci => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   List<String> get questions => throw _privateConstructorUsedError;
   List<TextEditingController> get answers => throw _privateConstructorUsedError;
   TextEditingController get password => throw _privateConstructorUsedError;
@@ -383,39 +424,49 @@ abstract class _FinalSubmit implements RecoverPasswordEvent {
 class _$RecoverPasswordStateTearOff {
   const _$RecoverPasswordStateTearOff();
 
-  _Initial initial(TextEditingController ci) {
+  _Initial initial(TextEditingController ci, TextEditingController email) {
     return _Initial(
       ci,
+      email,
     );
   }
 
-  _CILoading ciLoading(TextEditingController ci) {
+  _CILoading ciLoading(TextEditingController ci, TextEditingController email) {
     return _CILoading(
       ci,
+      email,
     );
   }
 
-  _CIError ciError(TextEditingController ci, String error) {
+  _CIError ciError(
+      TextEditingController ci, TextEditingController email, String error) {
     return _CIError(
       ci,
+      email,
       error,
     );
   }
 
-  _Questions questions(String ci, List<String> questions,
+  _Questions questions(String ci, String email, List<String> questions,
       List<TextEditingController> answers, TextEditingController password) {
     return _Questions(
       ci,
+      email,
       questions,
       answers,
       password,
     );
   }
 
-  _QuestionsLoading questionsLoading(String ci, List<String> questions,
-      List<TextEditingController> answers, TextEditingController password) {
+  _QuestionsLoading questionsLoading(
+      String ci,
+      String email,
+      List<String> questions,
+      List<TextEditingController> answers,
+      TextEditingController password) {
     return _QuestionsLoading(
       ci,
+      email,
       questions,
       answers,
       password,
@@ -424,12 +475,14 @@ class _$RecoverPasswordStateTearOff {
 
   _QuestionsError questionsError(
       String ci,
+      String email,
       List<String> questions,
       List<TextEditingController> answers,
       TextEditingController password,
       String error) {
     return _QuestionsError(
       ci,
+      email,
       questions,
       answers,
       password,
@@ -451,17 +504,24 @@ const $RecoverPasswordState = _$RecoverPasswordStateTearOff();
 mixin _$RecoverPasswordState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TextEditingController ci) initial,
-    required TResult Function(TextEditingController ci) ciLoading,
-    required TResult Function(TextEditingController ci, String error) ciError,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        initial,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        ciLoading,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email, String error)
+        ciError,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questions,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questionsLoading,
     required TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -472,23 +532,30 @@ mixin _$RecoverPasswordState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TextEditingController ci)? initial,
-    TResult Function(TextEditingController ci)? ciLoading,
-    TResult Function(TextEditingController ci, String error)? ciError,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        initial,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        ciLoading,
+    TResult Function(TextEditingController ci, TextEditingController email,
+            String error)?
+        ciError,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questions,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questionsLoading,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -544,7 +611,7 @@ class _$RecoverPasswordStateCopyWithImpl<$Res>
 abstract class _$InitialCopyWith<$Res> {
   factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
       __$InitialCopyWithImpl<$Res>;
-  $Res call({TextEditingController ci});
+  $Res call({TextEditingController ci, TextEditingController email});
 }
 
 /// @nodoc
@@ -560,11 +627,16 @@ class __$InitialCopyWithImpl<$Res>
   @override
   $Res call({
     Object? ci = freezed,
+    Object? email = freezed,
   }) {
     return _then(_Initial(
       ci == freezed
           ? _value.ci
           : ci // ignore: cast_nullable_to_non_nullable
+              as TextEditingController,
+      email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
     ));
   }
@@ -573,14 +645,16 @@ class __$InitialCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Initial implements _Initial {
-  const _$_Initial(this.ci);
+  const _$_Initial(this.ci, this.email);
 
   @override
   final TextEditingController ci;
+  @override
+  final TextEditingController email;
 
   @override
   String toString() {
-    return 'RecoverPasswordState.initial(ci: $ci)';
+    return 'RecoverPasswordState.initial(ci: $ci, email: $email)';
   }
 
   @override
@@ -588,12 +662,16 @@ class _$_Initial implements _Initial {
     return identical(this, other) ||
         (other is _Initial &&
             (identical(other.ci, ci) ||
-                const DeepCollectionEquality().equals(other.ci, ci)));
+                const DeepCollectionEquality().equals(other.ci, ci)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(ci);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(ci) ^
+      const DeepCollectionEquality().hash(email);
 
   @JsonKey(ignore: true)
   @override
@@ -603,17 +681,24 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TextEditingController ci) initial,
-    required TResult Function(TextEditingController ci) ciLoading,
-    required TResult Function(TextEditingController ci, String error) ciError,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        initial,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        ciLoading,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email, String error)
+        ciError,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questions,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questionsLoading,
     required TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -621,29 +706,36 @@ class _$_Initial implements _Initial {
         questionsError,
     required TResult Function(String userId) success,
   }) {
-    return initial(ci);
+    return initial(ci, email);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TextEditingController ci)? initial,
-    TResult Function(TextEditingController ci)? ciLoading,
-    TResult Function(TextEditingController ci, String error)? ciError,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        initial,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        ciLoading,
+    TResult Function(TextEditingController ci, TextEditingController email,
+            String error)?
+        ciError,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questions,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questionsLoading,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -653,7 +745,7 @@ class _$_Initial implements _Initial {
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(ci);
+      return initial(ci, email);
     }
     return orElse();
   }
@@ -692,9 +784,11 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements RecoverPasswordState {
-  const factory _Initial(TextEditingController ci) = _$_Initial;
+  const factory _Initial(
+      TextEditingController ci, TextEditingController email) = _$_Initial;
 
   TextEditingController get ci => throw _privateConstructorUsedError;
+  TextEditingController get email => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$InitialCopyWith<_Initial> get copyWith =>
       throw _privateConstructorUsedError;
@@ -705,7 +799,7 @@ abstract class _$CILoadingCopyWith<$Res> {
   factory _$CILoadingCopyWith(
           _CILoading value, $Res Function(_CILoading) then) =
       __$CILoadingCopyWithImpl<$Res>;
-  $Res call({TextEditingController ci});
+  $Res call({TextEditingController ci, TextEditingController email});
 }
 
 /// @nodoc
@@ -721,11 +815,16 @@ class __$CILoadingCopyWithImpl<$Res>
   @override
   $Res call({
     Object? ci = freezed,
+    Object? email = freezed,
   }) {
     return _then(_CILoading(
       ci == freezed
           ? _value.ci
           : ci // ignore: cast_nullable_to_non_nullable
+              as TextEditingController,
+      email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
     ));
   }
@@ -734,14 +833,16 @@ class __$CILoadingCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CILoading implements _CILoading {
-  const _$_CILoading(this.ci);
+  const _$_CILoading(this.ci, this.email);
 
   @override
   final TextEditingController ci;
+  @override
+  final TextEditingController email;
 
   @override
   String toString() {
-    return 'RecoverPasswordState.ciLoading(ci: $ci)';
+    return 'RecoverPasswordState.ciLoading(ci: $ci, email: $email)';
   }
 
   @override
@@ -749,12 +850,16 @@ class _$_CILoading implements _CILoading {
     return identical(this, other) ||
         (other is _CILoading &&
             (identical(other.ci, ci) ||
-                const DeepCollectionEquality().equals(other.ci, ci)));
+                const DeepCollectionEquality().equals(other.ci, ci)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(ci);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(ci) ^
+      const DeepCollectionEquality().hash(email);
 
   @JsonKey(ignore: true)
   @override
@@ -764,17 +869,24 @@ class _$_CILoading implements _CILoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TextEditingController ci) initial,
-    required TResult Function(TextEditingController ci) ciLoading,
-    required TResult Function(TextEditingController ci, String error) ciError,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        initial,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        ciLoading,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email, String error)
+        ciError,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questions,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questionsLoading,
     required TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -782,29 +894,36 @@ class _$_CILoading implements _CILoading {
         questionsError,
     required TResult Function(String userId) success,
   }) {
-    return ciLoading(ci);
+    return ciLoading(ci, email);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TextEditingController ci)? initial,
-    TResult Function(TextEditingController ci)? ciLoading,
-    TResult Function(TextEditingController ci, String error)? ciError,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        initial,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        ciLoading,
+    TResult Function(TextEditingController ci, TextEditingController email,
+            String error)?
+        ciError,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questions,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questionsLoading,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -814,7 +933,7 @@ class _$_CILoading implements _CILoading {
     required TResult orElse(),
   }) {
     if (ciLoading != null) {
-      return ciLoading(ci);
+      return ciLoading(ci, email);
     }
     return orElse();
   }
@@ -853,9 +972,11 @@ class _$_CILoading implements _CILoading {
 }
 
 abstract class _CILoading implements RecoverPasswordState {
-  const factory _CILoading(TextEditingController ci) = _$_CILoading;
+  const factory _CILoading(
+      TextEditingController ci, TextEditingController email) = _$_CILoading;
 
   TextEditingController get ci => throw _privateConstructorUsedError;
+  TextEditingController get email => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$CILoadingCopyWith<_CILoading> get copyWith =>
       throw _privateConstructorUsedError;
@@ -865,7 +986,8 @@ abstract class _CILoading implements RecoverPasswordState {
 abstract class _$CIErrorCopyWith<$Res> {
   factory _$CIErrorCopyWith(_CIError value, $Res Function(_CIError) then) =
       __$CIErrorCopyWithImpl<$Res>;
-  $Res call({TextEditingController ci, String error});
+  $Res call(
+      {TextEditingController ci, TextEditingController email, String error});
 }
 
 /// @nodoc
@@ -881,12 +1003,17 @@ class __$CIErrorCopyWithImpl<$Res>
   @override
   $Res call({
     Object? ci = freezed,
+    Object? email = freezed,
     Object? error = freezed,
   }) {
     return _then(_CIError(
       ci == freezed
           ? _value.ci
           : ci // ignore: cast_nullable_to_non_nullable
+              as TextEditingController,
+      email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
       error == freezed
           ? _value.error
@@ -899,16 +1026,18 @@ class __$CIErrorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CIError implements _CIError {
-  const _$_CIError(this.ci, this.error);
+  const _$_CIError(this.ci, this.email, this.error);
 
   @override
   final TextEditingController ci;
+  @override
+  final TextEditingController email;
   @override
   final String error;
 
   @override
   String toString() {
-    return 'RecoverPasswordState.ciError(ci: $ci, error: $error)';
+    return 'RecoverPasswordState.ciError(ci: $ci, email: $email, error: $error)';
   }
 
   @override
@@ -917,6 +1046,8 @@ class _$_CIError implements _CIError {
         (other is _CIError &&
             (identical(other.ci, ci) ||
                 const DeepCollectionEquality().equals(other.ci, ci)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.error, error) ||
                 const DeepCollectionEquality().equals(other.error, error)));
   }
@@ -925,6 +1056,7 @@ class _$_CIError implements _CIError {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(ci) ^
+      const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(error);
 
   @JsonKey(ignore: true)
@@ -935,17 +1067,24 @@ class _$_CIError implements _CIError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TextEditingController ci) initial,
-    required TResult Function(TextEditingController ci) ciLoading,
-    required TResult Function(TextEditingController ci, String error) ciError,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        initial,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        ciLoading,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email, String error)
+        ciError,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questions,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questionsLoading,
     required TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -953,29 +1092,36 @@ class _$_CIError implements _CIError {
         questionsError,
     required TResult Function(String userId) success,
   }) {
-    return ciError(ci, error);
+    return ciError(ci, email, error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TextEditingController ci)? initial,
-    TResult Function(TextEditingController ci)? ciLoading,
-    TResult Function(TextEditingController ci, String error)? ciError,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        initial,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        ciLoading,
+    TResult Function(TextEditingController ci, TextEditingController email,
+            String error)?
+        ciError,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questions,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questionsLoading,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -985,7 +1131,7 @@ class _$_CIError implements _CIError {
     required TResult orElse(),
   }) {
     if (ciError != null) {
-      return ciError(ci, error);
+      return ciError(ci, email, error);
     }
     return orElse();
   }
@@ -1024,9 +1170,12 @@ class _$_CIError implements _CIError {
 }
 
 abstract class _CIError implements RecoverPasswordState {
-  const factory _CIError(TextEditingController ci, String error) = _$_CIError;
+  const factory _CIError(
+          TextEditingController ci, TextEditingController email, String error) =
+      _$_CIError;
 
   TextEditingController get ci => throw _privateConstructorUsedError;
+  TextEditingController get email => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$CIErrorCopyWith<_CIError> get copyWith =>
@@ -1040,6 +1189,7 @@ abstract class _$QuestionsCopyWith<$Res> {
       __$QuestionsCopyWithImpl<$Res>;
   $Res call(
       {String ci,
+      String email,
       List<String> questions,
       List<TextEditingController> answers,
       TextEditingController password});
@@ -1058,6 +1208,7 @@ class __$QuestionsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? ci = freezed,
+    Object? email = freezed,
     Object? questions = freezed,
     Object? answers = freezed,
     Object? password = freezed,
@@ -1066,6 +1217,10 @@ class __$QuestionsCopyWithImpl<$Res>
       ci == freezed
           ? _value.ci
           : ci // ignore: cast_nullable_to_non_nullable
+              as String,
+      email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       questions == freezed
           ? _value.questions
@@ -1086,10 +1241,13 @@ class __$QuestionsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Questions implements _Questions {
-  const _$_Questions(this.ci, this.questions, this.answers, this.password);
+  const _$_Questions(
+      this.ci, this.email, this.questions, this.answers, this.password);
 
   @override
   final String ci;
+  @override
+  final String email;
   @override
   final List<String> questions;
   @override
@@ -1099,7 +1257,7 @@ class _$_Questions implements _Questions {
 
   @override
   String toString() {
-    return 'RecoverPasswordState.questions(ci: $ci, questions: $questions, answers: $answers, password: $password)';
+    return 'RecoverPasswordState.questions(ci: $ci, email: $email, questions: $questions, answers: $answers, password: $password)';
   }
 
   @override
@@ -1108,6 +1266,8 @@ class _$_Questions implements _Questions {
         (other is _Questions &&
             (identical(other.ci, ci) ||
                 const DeepCollectionEquality().equals(other.ci, ci)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.questions, questions) ||
                 const DeepCollectionEquality()
                     .equals(other.questions, questions)) &&
@@ -1123,6 +1283,7 @@ class _$_Questions implements _Questions {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(ci) ^
+      const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(questions) ^
       const DeepCollectionEquality().hash(answers) ^
       const DeepCollectionEquality().hash(password);
@@ -1135,17 +1296,24 @@ class _$_Questions implements _Questions {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TextEditingController ci) initial,
-    required TResult Function(TextEditingController ci) ciLoading,
-    required TResult Function(TextEditingController ci, String error) ciError,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        initial,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        ciLoading,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email, String error)
+        ciError,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questions,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questionsLoading,
     required TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -1153,29 +1321,36 @@ class _$_Questions implements _Questions {
         questionsError,
     required TResult Function(String userId) success,
   }) {
-    return questions(ci, this.questions, answers, password);
+    return questions(ci, email, this.questions, answers, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TextEditingController ci)? initial,
-    TResult Function(TextEditingController ci)? ciLoading,
-    TResult Function(TextEditingController ci, String error)? ciError,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        initial,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        ciLoading,
+    TResult Function(TextEditingController ci, TextEditingController email,
+            String error)?
+        ciError,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questions,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questionsLoading,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -1185,7 +1360,7 @@ class _$_Questions implements _Questions {
     required TResult orElse(),
   }) {
     if (questions != null) {
-      return questions(ci, this.questions, answers, password);
+      return questions(ci, email, this.questions, answers, password);
     }
     return orElse();
   }
@@ -1226,11 +1401,13 @@ class _$_Questions implements _Questions {
 abstract class _Questions implements RecoverPasswordState {
   const factory _Questions(
       String ci,
+      String email,
       List<String> questions,
       List<TextEditingController> answers,
       TextEditingController password) = _$_Questions;
 
   String get ci => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   List<String> get questions => throw _privateConstructorUsedError;
   List<TextEditingController> get answers => throw _privateConstructorUsedError;
   TextEditingController get password => throw _privateConstructorUsedError;
@@ -1246,6 +1423,7 @@ abstract class _$QuestionsLoadingCopyWith<$Res> {
       __$QuestionsLoadingCopyWithImpl<$Res>;
   $Res call(
       {String ci,
+      String email,
       List<String> questions,
       List<TextEditingController> answers,
       TextEditingController password});
@@ -1265,6 +1443,7 @@ class __$QuestionsLoadingCopyWithImpl<$Res>
   @override
   $Res call({
     Object? ci = freezed,
+    Object? email = freezed,
     Object? questions = freezed,
     Object? answers = freezed,
     Object? password = freezed,
@@ -1273,6 +1452,10 @@ class __$QuestionsLoadingCopyWithImpl<$Res>
       ci == freezed
           ? _value.ci
           : ci // ignore: cast_nullable_to_non_nullable
+              as String,
+      email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       questions == freezed
           ? _value.questions
@@ -1294,10 +1477,12 @@ class __$QuestionsLoadingCopyWithImpl<$Res>
 
 class _$_QuestionsLoading implements _QuestionsLoading {
   const _$_QuestionsLoading(
-      this.ci, this.questions, this.answers, this.password);
+      this.ci, this.email, this.questions, this.answers, this.password);
 
   @override
   final String ci;
+  @override
+  final String email;
   @override
   final List<String> questions;
   @override
@@ -1307,7 +1492,7 @@ class _$_QuestionsLoading implements _QuestionsLoading {
 
   @override
   String toString() {
-    return 'RecoverPasswordState.questionsLoading(ci: $ci, questions: $questions, answers: $answers, password: $password)';
+    return 'RecoverPasswordState.questionsLoading(ci: $ci, email: $email, questions: $questions, answers: $answers, password: $password)';
   }
 
   @override
@@ -1316,6 +1501,8 @@ class _$_QuestionsLoading implements _QuestionsLoading {
         (other is _QuestionsLoading &&
             (identical(other.ci, ci) ||
                 const DeepCollectionEquality().equals(other.ci, ci)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.questions, questions) ||
                 const DeepCollectionEquality()
                     .equals(other.questions, questions)) &&
@@ -1331,6 +1518,7 @@ class _$_QuestionsLoading implements _QuestionsLoading {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(ci) ^
+      const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(questions) ^
       const DeepCollectionEquality().hash(answers) ^
       const DeepCollectionEquality().hash(password);
@@ -1343,17 +1531,24 @@ class _$_QuestionsLoading implements _QuestionsLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TextEditingController ci) initial,
-    required TResult Function(TextEditingController ci) ciLoading,
-    required TResult Function(TextEditingController ci, String error) ciError,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        initial,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        ciLoading,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email, String error)
+        ciError,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questions,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questionsLoading,
     required TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -1361,29 +1556,36 @@ class _$_QuestionsLoading implements _QuestionsLoading {
         questionsError,
     required TResult Function(String userId) success,
   }) {
-    return questionsLoading(ci, this.questions, answers, password);
+    return questionsLoading(ci, email, this.questions, answers, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TextEditingController ci)? initial,
-    TResult Function(TextEditingController ci)? ciLoading,
-    TResult Function(TextEditingController ci, String error)? ciError,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        initial,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        ciLoading,
+    TResult Function(TextEditingController ci, TextEditingController email,
+            String error)?
+        ciError,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questions,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questionsLoading,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -1393,7 +1595,7 @@ class _$_QuestionsLoading implements _QuestionsLoading {
     required TResult orElse(),
   }) {
     if (questionsLoading != null) {
-      return questionsLoading(ci, this.questions, answers, password);
+      return questionsLoading(ci, email, this.questions, answers, password);
     }
     return orElse();
   }
@@ -1434,11 +1636,13 @@ class _$_QuestionsLoading implements _QuestionsLoading {
 abstract class _QuestionsLoading implements RecoverPasswordState {
   const factory _QuestionsLoading(
       String ci,
+      String email,
       List<String> questions,
       List<TextEditingController> answers,
       TextEditingController password) = _$_QuestionsLoading;
 
   String get ci => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   List<String> get questions => throw _privateConstructorUsedError;
   List<TextEditingController> get answers => throw _privateConstructorUsedError;
   TextEditingController get password => throw _privateConstructorUsedError;
@@ -1454,6 +1658,7 @@ abstract class _$QuestionsErrorCopyWith<$Res> {
       __$QuestionsErrorCopyWithImpl<$Res>;
   $Res call(
       {String ci,
+      String email,
       List<String> questions,
       List<TextEditingController> answers,
       TextEditingController password,
@@ -1474,6 +1679,7 @@ class __$QuestionsErrorCopyWithImpl<$Res>
   @override
   $Res call({
     Object? ci = freezed,
+    Object? email = freezed,
     Object? questions = freezed,
     Object? answers = freezed,
     Object? password = freezed,
@@ -1483,6 +1689,10 @@ class __$QuestionsErrorCopyWithImpl<$Res>
       ci == freezed
           ? _value.ci
           : ci // ignore: cast_nullable_to_non_nullable
+              as String,
+      email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       questions == freezed
           ? _value.questions
@@ -1507,11 +1717,13 @@ class __$QuestionsErrorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_QuestionsError implements _QuestionsError {
-  const _$_QuestionsError(
-      this.ci, this.questions, this.answers, this.password, this.error);
+  const _$_QuestionsError(this.ci, this.email, this.questions, this.answers,
+      this.password, this.error);
 
   @override
   final String ci;
+  @override
+  final String email;
   @override
   final List<String> questions;
   @override
@@ -1523,7 +1735,7 @@ class _$_QuestionsError implements _QuestionsError {
 
   @override
   String toString() {
-    return 'RecoverPasswordState.questionsError(ci: $ci, questions: $questions, answers: $answers, password: $password, error: $error)';
+    return 'RecoverPasswordState.questionsError(ci: $ci, email: $email, questions: $questions, answers: $answers, password: $password, error: $error)';
   }
 
   @override
@@ -1532,6 +1744,8 @@ class _$_QuestionsError implements _QuestionsError {
         (other is _QuestionsError &&
             (identical(other.ci, ci) ||
                 const DeepCollectionEquality().equals(other.ci, ci)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.questions, questions) ||
                 const DeepCollectionEquality()
                     .equals(other.questions, questions)) &&
@@ -1549,6 +1763,7 @@ class _$_QuestionsError implements _QuestionsError {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(ci) ^
+      const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(questions) ^
       const DeepCollectionEquality().hash(answers) ^
       const DeepCollectionEquality().hash(password) ^
@@ -1562,17 +1777,24 @@ class _$_QuestionsError implements _QuestionsError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TextEditingController ci) initial,
-    required TResult Function(TextEditingController ci) ciLoading,
-    required TResult Function(TextEditingController ci, String error) ciError,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        initial,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        ciLoading,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email, String error)
+        ciError,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questions,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questionsLoading,
     required TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -1580,29 +1802,36 @@ class _$_QuestionsError implements _QuestionsError {
         questionsError,
     required TResult Function(String userId) success,
   }) {
-    return questionsError(ci, this.questions, answers, password, error);
+    return questionsError(ci, email, this.questions, answers, password, error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TextEditingController ci)? initial,
-    TResult Function(TextEditingController ci)? ciLoading,
-    TResult Function(TextEditingController ci, String error)? ciError,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        initial,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        ciLoading,
+    TResult Function(TextEditingController ci, TextEditingController email,
+            String error)?
+        ciError,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questions,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questionsLoading,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -1612,7 +1841,8 @@ class _$_QuestionsError implements _QuestionsError {
     required TResult orElse(),
   }) {
     if (questionsError != null) {
-      return questionsError(ci, this.questions, answers, password, error);
+      return questionsError(
+          ci, email, this.questions, answers, password, error);
     }
     return orElse();
   }
@@ -1653,12 +1883,14 @@ class _$_QuestionsError implements _QuestionsError {
 abstract class _QuestionsError implements RecoverPasswordState {
   const factory _QuestionsError(
       String ci,
+      String email,
       List<String> questions,
       List<TextEditingController> answers,
       TextEditingController password,
       String error) = _$_QuestionsError;
 
   String get ci => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   List<String> get questions => throw _privateConstructorUsedError;
   List<TextEditingController> get answers => throw _privateConstructorUsedError;
   TextEditingController get password => throw _privateConstructorUsedError;
@@ -1731,17 +1963,24 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TextEditingController ci) initial,
-    required TResult Function(TextEditingController ci) ciLoading,
-    required TResult Function(TextEditingController ci, String error) ciError,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        initial,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email)
+        ciLoading,
+    required TResult Function(
+            TextEditingController ci, TextEditingController email, String error)
+        ciError,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questions,
-    required TResult Function(String ci, List<String> questions,
+    required TResult Function(String ci, String email, List<String> questions,
             List<TextEditingController> answers, TextEditingController password)
         questionsLoading,
     required TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,
@@ -1755,23 +1994,30 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TextEditingController ci)? initial,
-    TResult Function(TextEditingController ci)? ciLoading,
-    TResult Function(TextEditingController ci, String error)? ciError,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        initial,
+    TResult Function(TextEditingController ci, TextEditingController email)?
+        ciLoading,
+    TResult Function(TextEditingController ci, TextEditingController email,
+            String error)?
+        ciError,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questions,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password)?
         questionsLoading,
     TResult Function(
             String ci,
+            String email,
             List<String> questions,
             List<TextEditingController> answers,
             TextEditingController password,

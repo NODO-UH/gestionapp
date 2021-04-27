@@ -48,33 +48,51 @@ class RecoverPasswordPage extends StatelessWidget {
               },
               builder: (context, state) {
                 return state.when(
-                  initial: (ci) => _buildInitial(context, ci, false),
-                  ciLoading: (ci) => _buildInitial(context, ci, true),
-                  ciError: (ci, _) => _buildInitial(context, ci, false),
-                  questions: (ci, questions, answers, password) {
+                  initial: (ci, email) => _buildInitial(
+                    context,
+                    ci,
+                    email,
+                    false,
+                  ),
+                  ciLoading: (ci, email) => _buildInitial(
+                    context,
+                    ci,
+                    email,
+                    true,
+                  ),
+                  ciError: (ci, email, _) => _buildInitial(
+                    context,
+                    ci,
+                    email,
+                    false,
+                  ),
+                  questions: (ci, email, questions, answers, password) {
                     return _buildQuestions(
                       context,
                       ci,
+                      email,
                       questions,
                       answers,
                       password,
                       false,
                     );
                   },
-                  questionsLoading: (ci, questions, answers, password) {
+                  questionsLoading: (ci, email, questions, answers, password) {
                     return _buildQuestions(
                       context,
                       ci,
+                      email,
                       questions,
                       answers,
                       password,
                       true,
                     );
                   },
-                  questionsError: (ci, questions, answers, password, _) {
+                  questionsError: (ci, email, questions, answers, password, _) {
                     return _buildQuestions(
                       context,
                       ci,
+                      email,
                       questions,
                       answers,
                       password,
@@ -94,6 +112,7 @@ class RecoverPasswordPage extends StatelessWidget {
   Widget _buildInitial(
     BuildContext context,
     TextEditingController ci,
+    TextEditingController email,
     bool loading,
   ) {
     return Form(
@@ -119,6 +138,21 @@ class RecoverPasswordPage extends StatelessWidget {
                     vertical: 8.0,
                   ),
                   child: GestionUhDefaultTextField(
+                    labelText: 'Nombre de Usuario',
+                    controller: email,
+                    validator: userNameValidator,
+                    autovalidateMode: AutovalidateMode.disabled,
+                    autofillHints: const [
+                      AutofillHints.username,
+                      AutofillHints.email
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8.0,
+                  ),
+                  child: GestionUhDefaultTextField(
                     labelText: 'Número de Carnet de Identidad*',
                     controller: ci,
                     validator: identityNumberCIValidator,
@@ -137,7 +171,7 @@ class RecoverPasswordPage extends StatelessWidget {
                     }
                     context
                         .read<RecoverPasswordBloc>()
-                        .add(RecoverPasswordEvent.ciSubmit(ci));
+                        .add(RecoverPasswordEvent.ciSubmit(ci, email));
                   },
                 ),
               ],
@@ -151,6 +185,7 @@ class RecoverPasswordPage extends StatelessWidget {
   Widget _buildQuestions(
     BuildContext context,
     String ci,
+    String email,
     List<String> questions,
     List<TextEditingController> answers,
     TextEditingController password,
@@ -248,6 +283,7 @@ class RecoverPasswordPage extends StatelessWidget {
                             .read<RecoverPasswordBloc>()
                             .add(RecoverPasswordEvent.finalSubmit(
                               ci,
+                              email,
                               questions,
                               answers,
                               password,

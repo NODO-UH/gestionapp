@@ -14,6 +14,7 @@ PasswordResetData _$PasswordResetDataFromJson(Map<String, dynamic> json) {
     newPassword: json['newPassword'] as String?,
     questions:
         (json['questions'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    email: json['email'] as String?,
   );
 }
 
@@ -23,4 +24,5 @@ Map<String, dynamic> _$PasswordResetDataToJson(PasswordResetData instance) =>
       'ci': instance.ci,
       'newPassword': instance.newPassword,
       'questions': instance.questions,
+      'email': instance.email,
     };
