@@ -343,7 +343,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 15),
                 SelectableText(
                   'Se le ha enviado un correo electrónico, a continuación '
-                  'vaya a la bandeja de correos para recibarlo.',
+                  'vaya a la bandeja de correos para recibirlo.',
                   style: Theme.of(context).textTheme.subtitle1,
                   textAlign: TextAlign.center,
                 ),
