@@ -8,9 +8,10 @@ class RecoverPasswordRepository {
 
   RecoverPasswordRepository({required this.api});
 
-  Future<SecurityQuestions?> getUserSecurityQuestions(String ci) async {
+  Future<SecurityQuestions?> getUserSecurityQuestions(
+      String ci, String email) async {
     try {
-      final result = await api.getUserSecurityQuestions(ci);
+      final result = await api.getUserSecurityQuestions(ci, email);
       if (result.error != null) {
         log(result.error!);
       }

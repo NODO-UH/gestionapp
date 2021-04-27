@@ -9,9 +9,11 @@ part of 'user_ci.dart';
 UserCi _$UserCiFromJson(Map<String, dynamic> json) {
   return UserCi(
     ci: json['ci'] as String?,
+    email: json['email'] as String?,
   );
 }
 
 Map<String, dynamic> _$UserCiToJson(UserCi instance) => <String, dynamic>{
       'ci': instance.ci,
+      'email': instance.email,
     };

@@ -12,7 +12,7 @@ const helpfulLinks = [
     url: 'https://correo.uh.cu',
   ),
   HelpfulLink(
-    name: 'Plataforma digital de enseñanza',
+    name: 'Entorno Virtual de Enseñanza Aprendizaje',
     url: 'https://evea.uh.cu',
   ),
 ];

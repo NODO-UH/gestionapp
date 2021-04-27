@@ -16,7 +16,10 @@ class RecoverPasswordBloc
   final RecoverPasswordRepository recoverPasswordRepository;
 
   RecoverPasswordBloc({required this.recoverPasswordRepository})
-      : super(RecoverPasswordState.initial(TextEditingController()));
+      : super(RecoverPasswordState.initial(
+          TextEditingController(),
+          TextEditingController(),
+        ));
 
   @override
   Stream<RecoverPasswordState> mapEventToState(
@@ -28,20 +31,25 @@ class RecoverPasswordBloc
     );
   }
 
-  Stream<RecoverPasswordState> handleCISubmit(TextEditingController ci) async* {
-    yield RecoverPasswordState.ciLoading(ci);
+  Stream<RecoverPasswordState> handleCISubmit(
+    TextEditingController ci,
+    TextEditingController email,
+  ) async* {
+    yield RecoverPasswordState.ciLoading(ci, email);
     final result = await recoverPasswordRepository.getUserSecurityQuestions(
       ci.text.trim(),
+      email.text.trim(),
     );
     if (result == null) {
-      yield RecoverPasswordState.ciError(ci, Errors.DefaultError);
+      yield RecoverPasswordState.ciError(ci, email, Errors.DefaultError);
     } else if (result.error != null) {
-      yield RecoverPasswordState.ciError(ci, result.error!);
+      yield RecoverPasswordState.ciError(ci, email, result.error!);
     } else if (result.questions == null) {
-      yield RecoverPasswordState.ciError(ci, Errors.DefaultError);
+      yield RecoverPasswordState.ciError(ci, email, Errors.DefaultError);
     } else {
       yield RecoverPasswordState.questions(
         ci.text.trim(),
+        email.text.trim(),
         result.questions!,
         result.questions!.map((_) => TextEditingController()).toList(),
         TextEditingController(),
@@ -51,12 +59,14 @@ class RecoverPasswordBloc
 
   Stream<RecoverPasswordState> handleFinalSubmit(
     String ci,
+    String email,
     List<String> questions,
     List<TextEditingController> answers,
     TextEditingController password,
   ) async* {
     yield RecoverPasswordState.questionsLoading(
       ci,
+      email,
       questions,
       answers,
       password,
@@ -67,11 +77,13 @@ class RecoverPasswordBloc
         questions: questions,
         answers: answers.map((e) => e.text.trim()).toList(),
         newPassword: password.text.trim(),
+        email: email,
       ),
     );
     if (result == null) {
       yield RecoverPasswordState.questionsError(
         ci,
+        email,
         questions,
         answers,
         password,
@@ -80,6 +92,7 @@ class RecoverPasswordBloc
     } else if (result.error != null) {
       yield RecoverPasswordState.questionsError(
         ci,
+        email,
         questions,
         answers,
         password,
@@ -88,6 +101,7 @@ class RecoverPasswordBloc
     } else if (result.userId == null) {
       yield RecoverPasswordState.questionsError(
         ci,
+        email,
         questions,
         answers,
         password,
